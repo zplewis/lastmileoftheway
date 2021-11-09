@@ -31,7 +31,7 @@
         // "--user=${localEnv:USER}",
         "--env-file=${localWorkspaceFolder}/.env",
         // Automatically remove the container when it exits
-        "--rm",
+        // "--rm",
         // Container host name
         "--hostname=${localEnv:COMPUTERNAME}"
     ],
