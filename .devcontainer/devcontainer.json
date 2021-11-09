@@ -7,7 +7,9 @@
 			// Use bullseye when on local arm64/Apple Silicon.
 			"VARIANT": "bullseye",
 			// Enable Node.js: pick the latest LTS version
-			"NODE_VERSION": "lts/*"
+			"NODE_VERSION": "lts/*",
+            // GitHub API personal access token
+            "JEKYLL_GITHUB_TOKEN": "${localEnv:JEKYLL_GITHUB_TOKEN}"
 		}
 	},
 
@@ -29,9 +31,9 @@
     "runArgs": [
         "--name=jekyll",
         // "--user=${localEnv:USER}",
-        "--env-file=${localWorkspaceFolder}/.env",
+        // "--env-file=${localWorkspaceFolder}/.env",
         // Automatically remove the container when it exits
-        // "--rm",
+        "--rm",
         // Container host name
         "--hostname=${localEnv:COMPUTERNAME}"
     ],
@@ -48,7 +50,7 @@
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sh .devcontainer/post-create.sh",
+	"postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"

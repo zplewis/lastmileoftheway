@@ -16,4 +16,5 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 ENV LANG=en_US.UTF-8 \
 LANGUAGE=en_US:en \
 TZ=America/New_York \
-LC_ALL=en_US.UTF-8
+LC_ALL=en_US.UTF-8 \
+JEKYLL_GITHUB_TOKEN=${JEKYLL_GITHUB_TOKEN}
