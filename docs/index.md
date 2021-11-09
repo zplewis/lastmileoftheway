@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Last Mile of the Way
 
 You can use the [editor on GitHub](https://github.com/tap52384/mac-settings/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 

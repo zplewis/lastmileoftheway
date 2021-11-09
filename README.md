@@ -45,7 +45,9 @@ mkdir -p ~/code/lastmileoftheway/docs
 
 You can get GitHub's `.gitignore` for Jekyll sites [from here](https://github.com/github/gitignore/blob/master/Jekyll.gitignore).
 
-
+This page is using the [Cayman theme](https://github.com/pages-themes/cayman) to start with. There,
+you can see the files and folders used to create this theme. Then, you can create your own versions
+that would overwrite these assets.
 
 To disable Jekyll static page generation to use standard HTML, add the empty
 file `docs/.nojekyll`. It may take a few seconds for GitHub to notice the change
