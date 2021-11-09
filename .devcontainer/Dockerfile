@@ -13,6 +13,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+ARG JEKYLL_GITHUB_TOKEN=${JEKYLL_GITHUB_TOKEN}
+
 ENV LANG=en_US.UTF-8 \
 LANGUAGE=en_US:en \
 TZ=America/New_York \

@@ -272,7 +272,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  github-pages
+  github-pages (~> 221)
   jekyll-feed (~> 0.12)
   jekyll-theme-cayman
   tzinfo (~> 1.2)
