@@ -40,3 +40,7 @@ if command -V "bundle" &> /dev/null; then
     cd "${folder}"
     bundle exec jekyll serve --watch --incremental
 fi
+
+if [ -f "${folder}/package.json" ]; then
+    npm run assets:install
+fi

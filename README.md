@@ -49,6 +49,20 @@ This page is using the [Cayman theme](https://github.com/pages-themes/cayman) to
 you can see the files and folders used to create this theme. Then, you can create your own versions
 that would overwrite these assets.
 
+This unofficial [jekyll-bootstrap-theme](https://github.com/jonaharagon/jekyll-bootstrap-theme)
+seems to be a good example of how to use the various folders with `sass` support. Jekyll
+looks like you can basically create a site like you do with Laravel, just with no server-side code.
+There are `npm` scripts that can install all Bootstrap assets for you easily:
+
+```bash
+cd /workspace/lastmileoftheway/docs/
+# These scripts do not delete custom code in /docs/assets/css, so they should
+# be safe to use.
+npm run assets:reinstall
+```
+
+
+
 To disable Jekyll static page generation to use standard HTML, add the empty
 file `docs/.nojekyll`. It may take a few seconds for GitHub to notice the change
 after using `git push` and show the content accordingly.
