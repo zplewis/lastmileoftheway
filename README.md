@@ -61,7 +61,18 @@ cd /workspace/lastmileoftheway/docs/
 npm run assets:reinstall
 ```
 
+### SCSS
 
+Please note that for `.scss` files to be processed during the `jekyll build` or
+`jekyll watch` processes, you must start off your files like the following:
+
+```sass
+---
+---
+```
+
+Without this at the beginning of the file, the output files of the build process are not
+generated properly. The `_site` folder has the files that emerge from the build process.
 
 To disable Jekyll static page generation to use standard HTML, add the empty
 file `docs/.nojekyll`. It may take a few seconds for GitHub to notice the change

@@ -1,6 +1,6 @@
 ---
 permalink: /second/
-title: The Second Page
+title: Second comparison page
 ---
 
-{% include components/comparison.html %}
+{% include components/comparison2.html %}
