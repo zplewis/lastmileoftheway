@@ -1,18 +1,33 @@
-<nav class="py-2 bg-light border-bottom">
-    <div class="container d-flex flex-wrap">
-      <ul class="nav me-auto">
-        <li>Overwhelmed? Get started planning your service <a href="#">here</a></li>
+<nav class="py-2 border-bottom bg-charcoal">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <ul class="nav">
+        <li class="text-center">
+            <!-- https://icons.getbootstrap.com/icons/info-circle-fill/ -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+              </svg>
+            Not sure where to start? Get started planning your service <a href="#">here</a>.
+        </li>
       </ul>
     </div>
   </nav>
-<header class="py-3 mb-4 border-bottom">
-    <div class="container d-flex flex-wrap justify-content-center">
-      <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-4">Double header</span>
+  <header>
+    <div class="container-fluid d-flex flex-column flex-md-row align-items-center pb-3 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16" role="img">
+            <title>Last Mile of the Way</title>
+            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+          </svg> -->
+        <img src="{{ 'assets/images/leaf-logo-1.png' | absolute_url }}" class="header-leaf-logo"></img>
+        <span class="fs-4">Last Mile of the Way</span>
       </a>
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-      </form>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">About</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">FAQs</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Glossary</a>
+        <a class="py-2 text-dark text-decoration-none" href="#">Support</a>
+      </nav>
     </div>
   </header>

@@ -104,3 +104,15 @@ variables are [listed in the Jekyll documentation](https://jekyllrb.com/docs/var
 
 Jekyll also provides a number of useful Liquid additions like [some filters](https://jekyllrb.com/docs/liquid/filters/)
 and [tags](https://jekyllrb.com/docs/liquid/tags/).
+
+### Color Palette
+
+The fall color palette used for this website came from [coolors.co](https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51).
+
+Here are the actual colors:
+
+- <div style="background-color:#264653; color: #fff">Charcoal (#264653)</div>
+- <div style="background-color:#2a9d8f; color: #fff">Persian Green (#2a9d8f)</div>
+- <div style="background-color:#e9c46a; color: #000">Orange Yellow Crayola (#e9c46a)</div>
+- <div style="background-color:#f4a261; color: #000">Sandy Brown (#f4a261)</div>
+- <div style="background-color:#e76f51; color: #fff">Burnt Sienna (#e76f51)</div>
