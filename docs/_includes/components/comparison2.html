@@ -1,5 +1,11 @@
 <main>
 
+    <p>site.url: {{ site.url }}</p>
+
+    <p>the actual url: /assets/styles/main.css</p>
+    <p>relative_url: {{ '/assets/styles/main.css' | relative_url }}</p>
+    <p>absolute_url: {{ '/assets/styles/main.css' | absolute_url }}</p>
+
     {% include components/services-cards.html %}
 
     {% include components/services-table.html %}

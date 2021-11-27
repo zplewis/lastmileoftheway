@@ -95,3 +95,12 @@ as [listed in the documentation](https://docs.github.com/en/pages/setting-up-a-g
 
 You can enable additional plugins by adding the plugin's gem to the `plugins`
 setting in your `_config.yml` file. Make sure to check which plugins are supported.
+
+### Liquid Templating Engine
+
+The templating engine used by Jekyll is called [Liquid](https://shopify.github.io/liquid/)
+and limited but similar to that used by Django and Laravel. The available global
+variables are [listed in the Jekyll documentation](https://jekyllrb.com/docs/variables/).
+
+Jekyll also provides a number of useful Liquid additions like [some filters](https://jekyllrb.com/docs/liquid/filters/)
+and [tags](https://jekyllrb.com/docs/liquid/tags/).
