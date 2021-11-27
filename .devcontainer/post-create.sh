@@ -38,8 +38,7 @@ fi
 # Attempt to serve the Jekyll site with livereloading
 if command -V "bundle" &> /dev/null; then
     cd "${folder}"
-    # bundle exec jekyll serve --watch --incremental
-    bundle exec jekyll serve --watch
+    bundle exec jekyll serve --watch --incremental
 fi
 
 if [ -f "${folder}/package.json" ]; then
