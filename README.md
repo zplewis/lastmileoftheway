@@ -105,6 +105,12 @@ variables are [listed in the Jekyll documentation](https://jekyllrb.com/docs/var
 Jekyll also provides a number of useful Liquid additions like [some filters](https://jekyllrb.com/docs/liquid/filters/)
 and [tags](https://jekyllrb.com/docs/liquid/tags/).
 
+#### Navigation
+
+It's possible to read from YAML files in the `_data` folder and loop through
+that data to create HTML elements. We use this for `/glossary` and `/faqs`. Documentation
+for how to load data to create navigation [is available here](https://jekyllrb.com/tutorials/navigation/).
+
 ### Color Palette
 
 The fall color palette used for this website came from [coolors.co](https://coolors.co/264653-2a9d8f-e9c46a-f4a261-e76f51).
