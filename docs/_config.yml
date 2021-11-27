@@ -19,11 +19,11 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Last Mile of the Way
-email: your-email@example.com
+email: tap52384@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Bringing life into perspective
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: https://tap52384.github.io/lastmileoftheway/ # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
