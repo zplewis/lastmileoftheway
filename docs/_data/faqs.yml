@@ -1,17 +1,16 @@
 faqs:
   - title: social distancing
     questions:
-      - question: How many people can attend in-person?
-        answer: "If there are social distancing concerns, the number of attendees
-        may be limited."
-      - question: Will personal protective equipment (masks, sanitizer) be provided?
-        answer: Make sure to check who is responsible for providing this equipment.
-      - question: Are temperature checks required for entry?
-        answer: Depending on the protocols in the state, temperature checks may be required.
-      - question: "Is video conferencing available for those who cannot attend in-person?"
-        answer: "If the venue does not provide it, see if it's possible to use your phone or your own
-        equipment once you have permission."
+      - question: "How many people can attend in-person"
+        answer: "If there are social distancing concerns, the number of attendees may be limited."
+      - question: "Will personal protective equipment (masks, sanitizer) be provided"
+        answer: "Make sure to check who is responsible for providing this equipment."
+      - question: "Are temperature checks required for entry"
+        answer: "Depending on the protocols in the state, temperature checks may be required."
+      - question: "Is video conferencing available for those who cannot attend in-person"
+        answer: "If the venue does not provide it, see if it's possible to use your own
+        equipment like your phone or camera once you have permission."
   - title: video conferencing
     questions:
-      - question: What platforms are available?
+      - question: "What platforms are available"
         answer: Facebook, Zoom, YouTube

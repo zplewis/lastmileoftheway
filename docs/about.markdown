@@ -1,4 +1,5 @@
 ---
+layout: lastmileoftheway2
 title: About
 permalink: /about/
 ---

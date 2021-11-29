@@ -19,9 +19,8 @@ permalink: /glossary/
                     <a class="nav-link" href="#{{ item.title | downcase }}" title="{{ item.title }}">{{ item.title }}</a>
                 {% endfor %}
             </nav>
-          </nav>
+        </nav> <!-- /#navbar-example3 -->
     </div>
-
     <div class="col-9">
         <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0">
             {% for item in site.data.glossary.glossary %}
@@ -30,6 +29,6 @@ permalink: /glossary/
                 <p>{{ term.definition }}</p>
                 {% endfor %}
             {% endfor %}
-          </div>
+        </div>
     </div>
 </div>
