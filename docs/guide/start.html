@@ -1,0 +1,62 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+# available layouts:
+# bootstrap, default
+
+layout: lastmileoftheway2
+permalink: /start/
+---
+
+<div class="row">
+    <div class="col-12 col-md-4">
+<aside class="bd-aside sticky-xl-top text-muted align-self-start mb-3 mb-xl-5 px-2">
+    <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">You are here:</h2>
+    <nav class="small" id="toc">
+      <ul class="list-unstyled">
+        <li class="my-2">
+          <button class="btn d-inline-flex align-items-center" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#contents-collapse" aria-controls="contents-collapse">Demographics</button>
+          <ul class="list-unstyled ps-3 collapse show" id="contents-collapse">
+            <li><a class="d-inline-flex align-items-center rounded fw-bold" href="#">Your Name and Name of Deceased</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Birth, Death, and Service Dates</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Venue Location</a></li>
+          </ul>
+        </li>
+        <li class="my-2">
+          <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse" aria-controls="forms-collapse">Customize Service</button>
+          <ul class="list-unstyled ps-3 collapse" id="forms-collapse">
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Flow of Service</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Call to Worship</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Invocation</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Hymn</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Old Testament Reading</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">New Testament Reading</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Prayer of Comfort</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Musical Selection</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Two Minute Reflections</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Acknowledgments</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Reading of Obituary</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Musical Selection</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Eulogy or Words of Comfort</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Mortician's Brief</a></li>
+          </ul>
+        </li>
+        <li class="my-2">
+          <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#components-collapse" aria-controls="components-collapse">Summary &amp; Next Steps</button>
+          <ul class="list-unstyled ps-3 collapse" id="components-collapse">
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Summary</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Additional Questions</a></li>
+            <li><a class="d-inline-flex align-items-center rounded" href="#">Feedback Survey</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<div class="col-12 col-md-8">
+    <div class="container-fluid">
+        {% include lastmileoftheway/guide.html %}
+        </div>
+</div>
+</div> <!-- /.row -->

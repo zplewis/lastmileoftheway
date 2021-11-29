@@ -1,0 +1,45 @@
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-touch="false" data-bs-interval="false" data-bs-wrap="false">
+    <div class="carousel-inner">
+
+            {% assign outer_counter = 0 %}
+            {% assign inner_counter = 0 %}
+
+            {% for item in site.data.guide.guide.groups %}
+
+                {% assign outer_counter = outer_counter | plus: 1 %}
+
+                {% for item2 in item.sections %}
+
+                    {% for question in item2.questions %}
+
+                        {% assign inner_counter = inner_counter | plus: 1 %}
+
+                            <div id="{{ question.component }}"
+                            class="carousel-item {% if outer_counter == 1 and inner_counter == 1 %}active{% endif %}">
+                                {% assign path = "questions/" | append: question.component %}
+                                {% assign path = path | append: ".html" %}
+                                {% include {{ path }} %}
+                            </div>
+
+                    {% endfor %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+    </div> <!-- /.carousel-inner -->
+
+  </div> <!-- /#carouselExampleFade -->
+
+  <div class="text-end">
+  <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    <span class="align-text-top">Previous</span>
+  </button>
+  <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    Next
+  </button>
+</div>

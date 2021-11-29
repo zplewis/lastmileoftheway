@@ -1,0 +1,22 @@
+guide:
+  groups:
+    - group: demographics
+      sections:
+        - section: "Your Name and Name of Deceased"
+          questions:
+            - name: "What is your first and last name?"
+              component: demographics0a
+            - name: "What is the name of the deceased?"
+              component: demographics0b
+        - section: "Birth, Death, and Service Dates"
+          questions:
+            - name: "When were they born?"
+              component: demographics1a
+            - name: "When did they pass?"
+              component: demographics1b
+            - name: "When will you have the service?"
+              component: demographics1c
+        - section: "Venue Location"
+          questions:
+            - name: "Do you want to have your service at a church or funeral home?"
+              component: demographics2a
