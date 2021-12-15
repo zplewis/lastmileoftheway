@@ -35,12 +35,13 @@ if [ -f "${folder}/Gemfile" ]; then
     bundle install --gemfile="${folder}/Gemfile"
 fi
 
+if [ -f "${folder}/package.json" ]; then
+    cd "${folder}"
+    npm run assets:install
+fi
+
 # Attempt to serve the Jekyll site with livereloading
 if command -V "bundle" &> /dev/null; then
     cd "${folder}"
-    bundle exec jekyll serve --watch --incremental
-fi
-
-if [ -f "${folder}/package.json" ]; then
-    npm run assets:install
+    # bundle exec jekyll serve --watch --incremental
 fi

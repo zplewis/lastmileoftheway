@@ -2,25 +2,35 @@ glossary:
   - title: A
     terms:
       - name: acknowledgements
-        definition: definition text here
+        definition: "This is where a family member or someone chosen to speak on behalf of the family offers a word of thanks for kindness and support shown to the family during their time of grief. The person may also want to acknowledge cards, resolutions, or gifts they have received. Examples include obituaries, acknowledgments may be written on the program."
   - title: B
     terms:
       - name: benediction
-        definition: definition text here
+        definition: The concluding words. Unlike prayers, the benediction is not directed towards God, but rather people. This final blessing, which often includes dismissal, is pronounced by the officiant after the committal. It generally ends with everyone saying 'Amen,' as a way of affirming and acknowledging that the parting blessing has been received. Two popular Scriptural benedictions include Numbers 6:24-26 and Jude 24-25.
   - title: C
     terms:
       - name: call to worship
-        definition: Official start of the service, usually led by the pastor or another minister.
+        definition: "The opening words of the service usually spoken by the officiating minister. This is where the officiant will get listener's attention by stating the purpose of the gathering and reminding congregants of the sacredness of the occasion. These words are often coupled with a Scripture. For example: 'I lift up my eyes to the hills – from where will my help come? My help comes from the LORD, who made heaven and earth' Psalm 121:1-2. We greet you all in the majestic name of Jesus, our Lord and Savior. We gather today to worship, to proclaim Christ crucified and resurrected, and to remember before God our sister/brother, [INSERT NAME]. We gather (both in person and virtually) to give thanks for this life; to entrust [INSERT NAME] to Christ, the pioneer and perfector of our faith; and to comfort one another in our grief, as we are reminded of what is the substance of our hope: Death does not have the final word."
       - name: committal
-        definition: definition text here
+        definition: A brief service performed by the officiating minister whereby the body is actually committed to the ground (in the case of traditional burials). The committal most often happens at the cemetery, except for extenuating circumstances.
   - title: D
     terms:
   - title: E
     terms:
       - name: eulogy
+        definition: See Words of Comfort.
+      - name: eulogist
         definition: definition text here
   - title: F
     terms:
+      - name: flower bearers
+        definition: Persons designated to help carry and stage floral arrangements as mourners move from the church to the cemetery. The number of flower bearers is contingent on the number and type of arrangements being moved.
+      - name: funeral
+        definition: definition text here
+  - title: G
+    terms:
+      - name: graveside rites
+        definition: definition text here
   - title: H
     terms:
       - name: hymn
@@ -28,7 +38,7 @@ glossary:
   - title: I
     terms:
       - name: invocation
-        definition: When the service leader invites the Holy Spirit into the service before continuing.
+        definition: The opening prayer. A number of prayers will be prayed throughout the service, each with a unique purpose. The purpose of the invocation is to acknowledge and affirm the Lord’s presence (Matthew 18:20), and to ask the Lord’s blessing upon all the happenings of the day. Though much planning and thought has gone into the service, still we yield to the superintending movement of the Holy Spirit.
   - title: J
     terms:
   - title: K
@@ -49,24 +59,34 @@ glossary:
         definition: definition text here
   - title: O
     terms:
+      - name: officiant
+        definition: The clergy person who presides over the service. In most cases, the service is carried out by the pastor or some other official delegate of the church.
       - name: obituary
         definition: definition text here
       - name: old testament reading
         definition: definition text here
   - title: P
     terms:
+      - name: pallbearers
+        definition: Persons designated to help escort or carry the casket as mourners move from the church to the cemetery. Loading the body in and out of the hearse usually requires at least 6 people.
       - name: plot
         definition: Land purchased for burying a casket.
+      - name: postlude
+        definition: Instrumental music at the end of the service that is often played after the dismissal as persons make their exit.
       - name: prayer of comfort
-        definition: A prayer
+        definition: A prayer that is prayed mid-service, usually following the Old and New Testament readings. As the name suggests, the purpose of this prayer is to intercede on behalf of the family, friends, and all those left to mourn the passing of the deceased. As part of his Sermon on The Mount, Jesus said, “Blessed are those who mourn, for they will be comforted” (Matthew 5:4).
+      - name: prelude
+        definition: Instrumental music at the beginning of the service. It’s often played as persons get seated and situated just before the 'call to worship'.
       - name: processional
-        definition: The beginning of service where the preacher and ministers walk in.
+        definition: The formal entrance. This is when the officiating minister leads the family into the sanctuary or chapel.
   - title: Q
     terms:
   - title: R
     terms:
-      - name: repass
-        definition: Usually a meal that is served after a funeral service; attendance may be limited
+      - name: recessional
+        definition: The formal exit. There is generally an order to exiting the sanctuary or chapel. In most cases, it is directed by the funeral home. It is usually clergy followed by the floral bearers, paul bearers (with the casket), then the family.
+      - name: repast
+        definition: A meal served after the service. It is commonplace in the Black church tradition to have families and friends of the deceased return to the church for a meal prepared by the church; however, with COVID-19 and other changing circumstances, this custom is being rethought.
   - title: S
     terms:
       - name: solo
@@ -77,8 +97,15 @@ glossary:
     terms:
   - title: V
     terms:
+      - name: viewing
+        definition: The time set aside for mourners to offer their condolences to the family and pay their last respects. This is sometimes referred to as the visitation and is often an hour or so prior to the service.
+        see: wake
   - title: W
     terms:
+      - name: wake
+        definition: Similar to the viewing, a wake is the time set aside for mourners to offer their condolences to the family and pay their last respects. Wakes are usually held a day or so before the actual funeral and will sometimes include a program (prayer, scripture reading, remarks, and benediction. (See Viewing)
+        see: viewing
+        summary:
       - name: words of comfort
         definition: definition text here
   - title: X
