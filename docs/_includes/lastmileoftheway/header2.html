@@ -24,7 +24,15 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{ 'about/' | absolute_url }}">About</a>
+        <a class="px-1 nav-link dropdown-toggle link-dark" href="{{ 'about/' | absolute_url }}" title="about" id="about-dropdown"
+        role="button" data-bs-toggle="dropdown" aria-expanded="false">About
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="about-dropdown">
+            <li><a class="dropdown-item" href="{{ 'about/why-lastmileoftheway/' | absolute_url }}">Why Last Mile of the Way?</a></li>
+            <li><a class="dropdown-item" href="{{ 'support/' | absolute_url }}">About this site</a></li>
+            <li><a class="dropdown-item" href="{{ 'support/' | absolute_url }}">About Pastor Farrow</a></li>
+          </ul>
+
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{ 'faqs/' | absolute_url }}">FAQs</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{ 'glossary/' | absolute_url }}">Glossary</a>
         <a class="px-0 nav-link dropdown-toggle link-dark" href="#" title="support" id="support-dropdown"
