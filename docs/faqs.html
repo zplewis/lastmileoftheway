@@ -9,6 +9,8 @@ layout: lastmileoftheway2
 permalink: /faqs/
 ---
 
+{% assign faqlist = site.data.faqs.faqs | sort: 'title' %}
+
 <!-- the entire page is divided into two columns inside a row; this example comes from https://getbootstrap.com/docs/5.1/components/scrollspy/#example-with-nested-nav -->
 <div class="row">
     <div class="col col-md-3">
@@ -20,7 +22,7 @@ permalink: /faqs/
               </div>
 
             <nav class="nav nav-pills flex-column">
-                {% for item in site.data.faqs.faqs %}
+                {% for item in faqlist %}
                     <a class="nav-link" href="#{{ item.title | slugify }}" title="{{ item.title | capitalize }}">{{ item.title | capitalize }}</a>
                 {% endfor %}
             </nav>
@@ -28,10 +30,11 @@ permalink: /faqs/
     </div>
     <div class="col col-md-9">
         <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0">
-            {% for item in site.data.faqs.faqs %}
+            {% for item in faqlist %}
                 <h2 id="{{ item.title | slugify }}">{{ item.title | capitalize }}</h2>
+
                 {% for question in item.questions %}
-                    <h4 id="{{ item.title | slugify }}{% increment my_counter %}">{{ question.question }}?</h4>
+                    <h4 id="{{ item.title | slugify }}{% increment my_counter %}">{{ question.question }}</h4>
                     <p>{{ question.answer }}</p>
                 {% endfor %}
             {% endfor %}

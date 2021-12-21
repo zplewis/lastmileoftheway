@@ -1,26 +1,50 @@
 faqs:
-  - title: new testament readings
-    questions:
-      - question: John 11:25-26
-      - question: John 14:1-6
-      - question: Romans 8:28-39
-      - question: 1 Corinthians 13:1-13
-      - question: 1 Corinthians 15
-      - question: 2 Corinthians 1:3-7
-      - question: 2 Corinthians 4:16-18
-      - question: 2 Corinthians 5:1
   - title: social distancing
     questions:
-      - question: "How many people can attend in-person"
+      - question: "How many people can attend in-person?"
         answer: "If there are social distancing concerns, the number of attendees may be limited."
-      - question: "Will personal protective equipment (masks, sanitizer) be provided"
+      - question: "Will personal protective equipment (masks, sanitizer) be provided?"
         answer: "Make sure to check who is responsible for providing this equipment."
-      - question: "Are temperature checks required for entry"
+      - question: "Are temperature checks required for entry?"
         answer: "Depending on the protocols in the state, temperature checks may be required."
-      - question: "Is video conferencing available for those who cannot attend in-person"
+      - question: "Is video conferencing available for those who cannot attend in-person?"
         answer: "If the venue does not provide it, see if it's possible to use your own
         equipment like your phone or camera once you have permission."
-  - title: video conferencing
+  - title: suggested new testament readings
     questions:
-      - question: "What platforms are available"
+      - question: Matthew 11:28-30 - Rest For Our Soul
+        answer: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls. For my yoke is easy, and my burden is light."
+      - question: John 10:27-29 - The Good Shepherd Gives Eternal Life
+        answer: "My sheep hear my voice, and I know them, and they follow me: and I give unto them eternal life; and they shall never perish, neither shall any man pluck them out of my hand. My Father, which gave them me, is greater than all; and no man is able to pluck them out of my Father's hand."
+      - question: John 11:17-26 - Jesus, the Resurrection
+        answer: "Then when Jesus came, he found that he had lain in the grave four days already. Now Bethany was nigh unto Jerusalem, about fifteen furlongs off: and many of the Jews came to Martha and Mary, to comfort them concerning their brother. Then Martha, as soon as she heard that Jesus was coming, went and met him: but Mary sat still in the house. Then said Martha unto Jesus, Lord, if thou hadst been here, my brother had not died. But I know, that even now, whatsoever thou wilt ask of God, God will give it thee. Jesus saith unto her, Thy brother shall rise again. Martha saith unto him, I know that he shall rise again in the resurrection at the last day. Jesus said unto her, I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live: and whosoever liveth and believeth in me shall never die. Believest thou this?"
+      - question: Romans 8:31-39 - God's Love
+        answer: "What shall we then say to these things? If God be for us, who can be against us? He that spared not his own Son, but delivered him up for us all, how shall he not with him also freely give us all things? Who shall lay any thing to the charge of God's elect? It is God that justifieth. Who is he that condemneth? It is Christ that died, yea rather, that is risen again, who is even at the right hand of God, who also maketh intercession for us. Who shall separate us from the love of Christ? shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword? As it is written, For thy sake we are killed all the day long; We are accounted as sheep for the slaughter. Nay, in all these things we are more than conquerors through him that loved us. For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."
+      - question: Romans 14:7-9 - We Are the Lord's
+        answer: "For none of us liveth to himself, and no man dieth to himself. For whether we live, we live unto the Lord; and whether we die, we die unto the Lord: whether we live therefore, or die, we are the Lord's. For to this end Christ both died, and rose, and revived, that he might be Lord both of the dead and living."
+      - question: 1 Corinthians 13:1-13 - Love
+        answer: "Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal. And though I have the gift of prophecy, and understand all mysteries, and all knowledge; and though I have all faith, so that I could remove mountains, and have not charity, I am nothing. And though I bestow all my goods to feed the poor, and though I give my body to be burned, and have not charity, it profiteth me nothing. Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil; rejoiceth not in iniquity, but rejoiceth in the truth; beareth all things, believeth all things, hopeth all things, endureth all things. Charity never faileth: but whether there be prophecies, they shall fail; whether there be tongues, they shall cease; whether there be knowledge, it shall vanish away. For we know in part, and we prophesy in part. But when that which is perfect is come, then that which is in part shall be done away. When I was a child, I spake as a child, I understood as a child, I thought as a child: but when I became a man, I put away childish things. For now we see through a glass, darkly; but then face to face: now I know in part; but then shall I know even as also I am known. And now abideth faith, hope, charity, these three; but the greatest of these is charity."
+      - question: 1 Corinthians 15:51-56 - We Will All Be Changed
+        answer:
+      - question: 2 Corinthians 1:3-7 - God of All Consolation
+        answer:
+      - question: 2 Corinthians 4:16-18 - We Do Not Lose Heart
+        answer:
+      - question: 2 Corinthians 5:1-5 - Our Building from God
+        answer:
+      - question: 1 Thessalonians 4:13-18 - Words of Comfort
+        answer:
+      - question: 2 Timothy 4:6-8 A Fought Fight, Finished Course, and Kept Faith
+        answer:
+      - question: Revelation 7:15-17 God Will Wipe Tears Away
+        answer:
+      - question: Revelation 21:1-6 A New Heaven and Earth
+        answer:
+  - title: suggested old testament readings
+    questions:
+      question: "Job 19:23-27 - My Redeemer Lives"
+      answer: "Oh that my words were now written! Oh that they were printed in a book! That they were graven with an iron pen and lead In the rock for ever! For I know that my redeemer liveth, And that he shall stand at the latter day upon the earth: And though after my skin worms destroy this body, Yet in my flesh shall I see God: Whom I shall see for myself, And mine eyes shall behold, and not another; Though my reins be consumed within me."
+  - title: video Conferencing
+    questions:
+      - question: "What platforms are available?"
         answer: Facebook, Zoom, YouTube
