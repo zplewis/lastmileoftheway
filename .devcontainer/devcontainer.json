@@ -1,57 +1,22 @@
+// https://aka.ms/devcontainer.json
 {
-	"name": "Jekyll",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update 'VARIANT' to pick a Debian OS version: bullseye, buster
-			// Use bullseye when on local arm64/Apple Silicon.
-			"VARIANT": "bullseye",
-			// Enable Node.js: pick the latest LTS version
-			"NODE_VERSION": "lts/*",
-            // GitHub API personal access token
-            "JEKYLL_GITHUB_TOKEN": "${localEnv:JEKYLL_GITHUB_TOKEN}"
-		}
-	},
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-        "terminal.integrated.profiles.linux":{
-            "bash": {
-                "path": "/usr/bin/bash"
-            }
-        },
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "files.trimFinalNewlines": true,
-        "files.insertFinalNewline": true,
-        "shellcheck.customArgs": [
-            "-x"
-        ],
-    },
-
-    "runArgs": [
-        "--name=jekyll",
-        // "--user=${localEnv:USER}",
-        // "--env-file=${localWorkspaceFolder}/.env",
-        // Automatically remove the container when it exits
-        "--rm",
-        // Container host name
-        "--hostname=${localEnv:COMPUTERNAME}"
-    ],
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		// Jekyll server
-		4000,
-		// Live reload server
-		35729
+	"name": "Existing Docker Compose (Extend)",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
 	],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
-
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"service": "laravel.test",
+	"workspaceFolder": "/var/www/html",
+	"settings": {},
+	"extensions": [
+		// "mikestead.dotenv",
+		// "amiralizadeh9480.laravel-extra-intellisense",
+		// "ryannaddy.laravel-artisan",
+		// "onecentlin.laravel5-snippets",
+		// "onecentlin.laravel-blade"
+	],
+	"remoteUser": "sail",
+	// "forwardPorts": [],
+	// "runServices": [],
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+	// "shutdownAction": "none",
 }
