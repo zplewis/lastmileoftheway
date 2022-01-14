@@ -15,6 +15,74 @@ configure the DNS settings there from the cPanel on A2Hosting.
   The current PHP version selected is 8.1 to match what is used for Laravel Sail
   unless A2Hosting doesn't have what I need.
 
+### How to update site on A2Hosting with the latest code
+
+```bash
+# SSH into A2Hosting's servers
+# Reference URL: https://blog.netgloo.com/2015/08/06/configuring-godaddys-shared-hosting-for-laravel-and-git/
+#
+ssh lastmileoftheway.com
+
+# Clone the code repo then rename the folder
+mkdir -p ~/code/
+cd ~/code/
+git clone https://github.com/tap52384/lastmileoftheway.git
+git clone https://github.com/tap52384/lastmileoftheway.git test
+cp -nv  ~/code/lastmileoftheway/.env.example ~/code/lastmileoftheway/.env
+cp -nv  ~/code/test/.env.example ~/code/test/.env
+
+# Rename the original public_html folder
+mv ~/public_html ~/public_html_original
+# Create a symbolic link to the ~/code/lastmileoftheway/ folder
+ln -s ~/code/lastmileoftheway/public public_html
+
+# Download Composer and install packages
+cd ~/code
+curl -sS https://getcomposer.org/installer | php
+composer install
+# Generate application key for Laravel
+# https://laravel.com/docs/6.x/installation#configuration
+php artisan key:generate
+
+# See if node.js is already installed on the system first
+command -v node
+command -v npm
+
+# Use Node Version Manager (nvm) to install NPM without root access
+# https://ferugi.com/blog/nodejs-on-godaddy-shared-cpanel/
+# https://github.com/nvm-sh/nvm
+# Use nvm to install Node.js (npm, node)
+cd ~
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+# Reload the PATH
+source ~/.bash_profile
+# Verify the installation
+nvm --version
+
+
+# GoDaddy instructions (may be different depending on host):
+# Due to missing requirements (like GLIBCXX_3.4.14), you have to install an
+# older version of node, but hopefully not too old:
+# https://stackoverflow.com/a/57798787/1620794
+# https://nodejs.org/en/download/releases/
+# nvm install 8.17.0
+
+
+# Verify node and npm are installed
+node -v
+npm -v
+# Install Laravel packages via npm, update site CSS and JavaScript
+cd ~/code
+npm install
+npm run production
+
+# Update the code by pulling the latest changes
+cd ~/code
+git checkout master
+git pull --rebase
+npm run production
+```
+
 ## Laravel
 
 ## Jekyll
