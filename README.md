@@ -28,13 +28,18 @@ mkdir -p ~/code/
 cd ~/code/
 git clone https://github.com/tap52384/lastmileoftheway.git
 git clone https://github.com/tap52384/lastmileoftheway.git test
-cp -nv  ~/code/lastmileoftheway/.env.example ~/code/lastmileoftheway/.env
-cp -nv  ~/code/test/.env.example ~/code/test/.env
+cp -nv ~/code/lastmileoftheway/.env.example ~/code/lastmileoftheway/.env
+cp -nv ~/code/test/.env.example ~/code/test/.env
 
 # Rename the original public_html folder
 mv ~/public_html ~/public_html_original
 # Create a symbolic link to the ~/code/lastmileoftheway/ folder
 ln -s ~/code/lastmileoftheway/public public_html
+# Make sure you have created the subdomain "test"
+mv ~/public_html_test ~/public_html_test_original
+# Create a symbolic link to the ~/code/test/ folder
+# The public/ folder is where Laravel services its files from
+ln -s ~/code/test/public public_html_test
 
 # Download Composer and install packages
 cd ~/code
