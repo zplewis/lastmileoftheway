@@ -90,6 +90,51 @@ npm run production
 
 ## Laravel
 
+To start a new Laravel project, even without a Docker container ready, you can use the following
+command [from the documentation](https://laravel.com/docs/8.x/installation#getting-started-on-macos):
+
+```bash
+curl -s "https://laravel.build/example-app" | bash
+```
+
+To access the app, you would go to <http://localhost>, with no port number required.
+
+Local development uses [Laravel Sail](https://laravel.com/docs/8.x/sail#installing-sail-into-existing-applications)
+with Visual Studio Code and works quite well. Laravel Sail is installed via Composer:
+
+```bash
+# Add Laravel Sail to your Laravel project
+composer require laravel/sail --dev
+
+# Actually install Laravel Sail using artisan and include the
+# .devcontainer/devcontainer.json file needed for VS Code
+php artisan sail:install --devcontainer
+
+# Add a Bash/zsh alias so that you don't have to repeatedly type ./vendor/bin/sail to execute
+# Sail commands (which is just a wrapper around the docker executable)
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+
+# Build the containers, then once they are built, you can try opening them in VS Code
+sail up
+```
+
+The MySQL database files are installed to a volume so that the database can persist even after the
+container has been destroyed. You may have to destroy the volumes in order to recreate the database.
+The `docker-compose.yml` file used to create the Sail Docker containers and build the MySQL database
+uses the `.env` file to get the environment variables needed. The `docker-compose.yml` file has been
+modified so that the name of the database will be appended with the environment name, like
+`laravel_test`, `laravel_local`, or `laravel_prd` to avoid accidentally overwriting data.
+
+This app uses a MySQL database and can be set up quickly using migrations and seeders.
+
+```bash
+# Create a model, database migration (creates tables), and seeder (adds data to tables) all at once:
+php artisan make:model --controller --migration --seed -- FAQCategories
+
+# Perform a dry-run of the migrations that will be run
+php artisan migrate --pretend --seed
+```
+
 ## Jekyll
 
 GitHub Pages utilitize [Jekyll](https://jekyllrb.com/) for static page generation

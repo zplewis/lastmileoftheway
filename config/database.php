@@ -48,7 +48,10 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
+            // Append _test to the database name to prevent inadvertedly modifying
+            // the production database
+            'database' => env('DB_DATABASE', 'forge') .
+            (in_array(env('APP_ENV'), ['local', 'test'], true) ? '_test' : ''),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
