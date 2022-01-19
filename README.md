@@ -133,6 +133,15 @@ php artisan make:model --controller --migration --seed -- FAQCategories
 
 # Perform a dry-run of the migrations that will be run
 php artisan migrate --pretend --seed
+
+# To create the tables without seeding them
+php artisan migrate
+
+# To just seed the database
+php artisan db:seed
+
+# To completely refresh the database (drop all tables, recreate and seed them)
+php artisan migrate:fresh --seed
 ```
 
 ## Jekyll

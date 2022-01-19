@@ -16,7 +16,7 @@ class CreateTestamentsTable extends Migration
         Schema::create('testaments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('description');
+            $table->string('name');
         });
     }
 
