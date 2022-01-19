@@ -31,6 +31,10 @@
 
         @include('nav')
 
+        <main class="page-content flex-shrink-0" aria-label="Content">
+            @yield('content')
+        </main>
+
         @include('footer')
 
         <script src="{{ asset('js/app.js') }}"></script>
