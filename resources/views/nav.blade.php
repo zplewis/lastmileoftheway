@@ -14,7 +14,7 @@
   <header>
     <div class="container-fluid d-flex flex-column flex-md-row align-items-center py-3 border-bottom">
       <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo"></img>
+        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo mx-2"></img>
         <span class="fs-4">Last Mile of the Way</span>
       </a>
 
