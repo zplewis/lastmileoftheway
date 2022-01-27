@@ -1,0 +1,38 @@
+@extends('layout')
+
+@section('content')
+<!-- the entire page is divided into two columns inside a row; this example comes from https://getbootstrap.com/docs/5.1/components/scrollspy/#example-with-nested-nav -->
+<div class="row">
+    <div class="col-12 col-md-3">
+        <nav id="navbar-example3" class="navbar navbar-light bg-light flex-column align-items-stretch p-3 sticky-top">
+            <a class="navbar-brand" href="#">Top</a>
+
+            <div class="row">
+                {% for item in site.data.glossary.glossary %}
+                    <div class="col-3">
+                        <a class="nav-link" href="#{{ item.title | downcase }}" title="{{ item.title }}">{{ item.title }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <!-- <nav class="nav nav-pills flex-column">
+                {% for item in site.data.glossary.glossary %}
+                    <a class="nav-link" href="#{{ item.title | downcase }}" title="{{ item.title }}">{{ item.title }}</a>
+                {% endfor %}
+            </nav> -->
+        </nav> <!-- /#navbar-example3 -->
+    </div>
+    <div class="col-12 col-md-9">
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0">
+            {% for item in site.data.glossary.glossary %}
+                <h3 id="{{ item.title | downcase }}">{{ item.title | capitalize }}</h3>
+                {% for term in item.terms %}
+                <p class="lead" id="{{ term.name | slugify }}">{{ term.name | capitalize }}</p>
+                <p>{{ term.definition }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+@endsection

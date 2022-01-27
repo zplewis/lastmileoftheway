@@ -144,6 +144,20 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
+### Bootstrap 5
+
+You'll need to include Bootstrap 5 in `app.scss` and `app.js` so that the CSS and JS is included
+when the CSS and JS are compiled via Laravel Mix. You can use `npm run dev` in order to watch for
+changes in development and quickly rebuild these assets in the `/public` folder.
+
+```bash
+npm install bootstrap
+# A requirement for bootstrap
+npm install @popperjs/core --save-dev
+```
+
+This has already been completed in this code; this documentation is here for reference.
+
 ## Jekyll
 
 GitHub Pages utilitize [Jekyll](https://jekyllrb.com/) for static page generation

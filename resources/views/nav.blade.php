@@ -23,19 +23,19 @@
         role="button" data-bs-toggle="dropdown" aria-expanded="false">About
         </a>
         <ul class="dropdown-menu" aria-labelledby="about-dropdown">
-            <li><a class="dropdown-item" href="{{ url('about/why-lastmileoftheway/') }}">Why Last Mile of the Way?</a></li>
-            <li><a class="dropdown-item" href="{{ url('support/') }}">About this site</a></li>
-            <li><a class="dropdown-item" href="{{ url('support/') }}">About Pastor Farrow</a></li>
+            <li><a class="dropdown-item" href="{{ url('about/') }}">About this site</a></li>
+            <li><a class="dropdown-item" href="{{ url('about#about-pastor-farrow') }}">About Pastor Farrow</a></li>
+            <li><a class="dropdown-item" href="{{ url('about#why-lastmileoftheway') }}">Why Last Mile of the Way?</a></li>
           </ul>
 
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{ url('faqs/') }}">FAQs</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{ url('glossary/') }}">Glossary</a>
-        <a class="px-0 nav-link dropdown-toggle link-dark" href="#" title="support" id="support-dropdown"
-        role="button" data-bs-toggle="dropdown" aria-expanded="false">Support
+        <a class="px-0 nav-link dropdown-toggle link-dark" href="{{ url('support/') }}" title="support"
+        id="support-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support
         </a>
         <ul class="dropdown-menu" aria-labelledby="support-dropdown">
-            <li><a class="dropdown-item" href="#">Request an appointment</a></li>
-            <li><a class="dropdown-item" href="{{ url('support/') }}">Send feedback</a></li>
+            <li><a class="dropdown-item" href="{{ url('support#contact-us') }}">Contact us / send feedback</a></li>
+            <li><a class="dropdown-item" href="{{ url('support#request-appt') }}">Request an appointment</a></li>
           </ul>
       </nav>
     </div>
