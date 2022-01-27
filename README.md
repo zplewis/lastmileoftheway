@@ -82,9 +82,11 @@ npm install
 npm run production
 
 # Update the code by pulling the latest changes
+# Do the same for ~/code/test for the test site
 cd ~/code
 git checkout master
 git pull --rebase
+npm install
 npm run production
 ```
 
