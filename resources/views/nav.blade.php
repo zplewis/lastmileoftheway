@@ -19,7 +19,7 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="px-1 nav-link dropdown-toggle link-dark" href="{{ url('about/') }}" title="about" id="about-dropdown"
+        <a class="px-3 nav-link dropdown-toggle link-dark" href="{{ url('about/') }}" title="about" id="about-dropdown"
         role="button" data-bs-toggle="dropdown" aria-expanded="false">About
         </a>
         <ul class="dropdown-menu" aria-labelledby="about-dropdown">

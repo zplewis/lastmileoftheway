@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TestamentsSeeder::class,
             BibleVersionsSeeder::class,
+            FAQCategoriesSeeder::class,
+            FAQQuestionsSeeder::class
             // CommentSeeder::class,
         ]);
     }
