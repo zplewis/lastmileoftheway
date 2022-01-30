@@ -28,6 +28,7 @@ class FAQQuestionsSeeder extends Seeder
                 'Is video conferencing available for those who cannot attend in-person?'
             ],
             $video_conferencing => [
+                'What video platforms are good for using at a funeral?'
             ]
         ];
 

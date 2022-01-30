@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\FAQCategories;
 use App\Models\FAQQuestions;
 
 class CreateFAQAnswerFullsTable extends Migration
@@ -19,7 +18,6 @@ class CreateFAQAnswerFullsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(FAQQuestions::class)->constrained();
-            $table->foreignIdFor(FAQCategories::class)->constrained();
             $table->string('description');
         });
     }

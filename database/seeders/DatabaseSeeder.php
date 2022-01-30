@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             TestamentsSeeder::class,
             BibleVersionsSeeder::class,
             FAQCategoriesSeeder::class,
-            FAQQuestionsSeeder::class
+            FAQQuestionsSeeder::class,
+            FAQAnswersSeeder::class,
+            DefinitionsSeeder::class
             // CommentSeeder::class,
         ]);
     }

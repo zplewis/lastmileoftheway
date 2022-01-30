@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Definitions extends Model
 {
     use HasFactory;
+
+    public function similarTerms()
+    {
+        return $this->hasMany(SimilarTerms::class);
+    }
 }

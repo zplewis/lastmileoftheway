@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Models\FAQCategories;
+use \App\Models\Definitions;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +24,31 @@ Route::get('/about', function () {
 });
 
 Route::get('/faqs', function () {
-    return view('faqs');
+    return view('faqs', ['categories' => FAQCategories::orderBy('description')->get()]);
 });
 
-Route::get('/glossary', function () {
-    return view('glossary');
-});
+Route::permanentRedirect('/glossary', '/resources/glossary');
 
 Route::get('/support', function () {
     return view('support');
+});
+
+
+Route::prefix('resources')->group(function() {
+    Route::get('/songs', function () {
+        return view('resources.songs');
+    });
+    Route::get('/glossary', function () {
+        return view(
+            'resources.glossary',
+            [
+                // https://stackoverflow.com/a/431930/1620794
+                'categories' => range('A', 'Z'),
+                'definitions' => Definitions::orderBy('term')->get()
+            ]
+        );
+    });
+    Route::get('/bible-readings', function () {
+        return view('resources.readings');
+    });
 });

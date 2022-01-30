@@ -17,10 +17,8 @@ class CreateDefinitionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('term');
-            $table->string('definition');
-            // Any column modifiers must be called before the constrained method
-            // https://laravel.com/docs/8.x/migrations#foreign-key-constraints
-            $table->integer('similar_term')->nullable()->constrained();
+            $table->string('full_text', 2000);
+            $table->string('short_text', 2000)->nullable();
         });
     }
 

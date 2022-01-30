@@ -28,8 +28,17 @@
             <li><a class="dropdown-item" href="{{ url('about#why-lastmileoftheway') }}">Why Last Mile of the Way?</a></li>
           </ul>
 
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{ url('faqs/') }}">FAQs</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{ url('glossary/') }}">Glossary</a>
+        <a class="me-2 py-2 text-dark text-decoration-none" href="{{ url('faqs/') }}">FAQs</a>
+
+        <a class="px-3 nav-link dropdown-toggle link-dark" href="{{ url('resources/') }}" title="Resources"
+        id="support-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="support-dropdown">
+        <li><a class="dropdown-item" href="{{ url('glossary/') }}">Glossary</a></li>
+            <li><a class="dropdown-item" href="{{ url('resources/songs') }}">Solos, hymns, and songs</a></li>
+            <li><a class="dropdown-item" href="{{ url('resources/bible-readings') }}">Scripture Readings</a></li>
+        </ul>
+
         <a class="px-0 nav-link dropdown-toggle link-dark" href="{{ url('support/') }}" title="support"
         id="support-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support
         </a>
