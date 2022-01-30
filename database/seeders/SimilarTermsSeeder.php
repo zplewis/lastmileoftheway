@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use \App\Models\Definitions;
 
 class SimilarTermsSeeder extends Seeder
 {
@@ -16,10 +17,8 @@ class SimilarTermsSeeder extends Seeder
     {
         DB::table('similar_terms')->insert([
             [
-                'description' => 'Social distancing'
-            ],
-            [
-                'description' => 'Video conferencing'
+                'definitions_id' => Definitions::where('term','eulogy')->first()->id,
+                'similar_id' => Definitions::where('term','words of comfort')->first()->id
             ]
         ]);
     }

@@ -17,7 +17,7 @@ class CreateDefinitionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('term');
-            $table->string('full_text', 2000);
+            $table->string('full_text', 2000)->nullable();
             $table->string('short_text', 2000)->nullable();
         });
     }

@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
             FAQCategoriesSeeder::class,
             FAQQuestionsSeeder::class,
             FAQAnswersSeeder::class,
-            DefinitionsSeeder::class
-            // CommentSeeder::class,
+            DefinitionsSeeder::class,
+            SimilarTermsSeeder::class,
         ]);
     }
 }

@@ -11,13 +11,10 @@
                     @continue
                 @endif
 
-                <p class="lead" id="{{ Str::of($definition->term)->slug('-') }}">{{ $definition->term }}</p>
-                <p>{{ $definition->full_text }}
-                    @if ($definition->similarTerms()->get())
-                        <br />See
-                        @foreach ($definition->similarTerms()->get()->pluck('term') as $term)
-                            <a href="#{{ Str::of($term)->slug('-') }}" title="{{ $term }}">{{ $term }}</a>
-                        @endforeach
+                <p class="lead" id="{{ $definition->slug() }}">{{ $definition->term }}</p>
+                <p>
+                    {{ $definition->full_text }}
+                    @if ($definition->similarTerms()->get()->count())See {!! $definition->similarTermsAsLinks() !!}
                     @endif
                 </p>
 
