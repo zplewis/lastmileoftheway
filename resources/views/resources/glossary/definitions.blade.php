@@ -13,8 +13,8 @@
 
                 <p class="lead" id="{{ $definition->slug() }}">{{ $definition->term }}</p>
                 <p>
-                    {{ $definition->full_text }}
-                    @if ($definition->similarTerms()->get()->count())See {!! $definition->similarTermsAsLinks() !!}
+                    {!! $definition->full_text !!}
+                    @if ($definition->similarTerms()->get()->count())See {!! $definition->similarTermsAsLinks() !!}.
                     @endif
                 </p>
 

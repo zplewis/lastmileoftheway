@@ -19,6 +19,26 @@ class SimilarTermsSeeder extends Seeder
             [
                 'definitions_id' => Definitions::where('term','eulogy')->first()->id,
                 'similar_id' => Definitions::where('term','words of comfort')->first()->id
+            ],
+            [
+                'definitions_id' => Definitions::where('term','words of comfort')->first()->id,
+                'similar_id' => Definitions::where('term','eulogy')->first()->id
+
+            ],
+            [
+                'definitions_id' => Definitions::where('term','wake')->first()->id,
+                'similar_id' => Definitions::where('term','viewing')->first()->id
+
+            ],
+            [
+                'definitions_id' => Definitions::where('term','viewing')->first()->id,
+                'similar_id' => Definitions::where('term','wake')->first()->id
+
+            ],
+            [
+                'definitions_id' => Definitions::where('term','eulogist')->first()->id,
+                'similar_id' => Definitions::where('term','eulogy')->first()->id
+
             ]
         ]);
     }
