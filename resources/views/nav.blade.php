@@ -26,6 +26,7 @@
             <li><a class="dropdown-item" href="{{ url('about/') }}">About this site</a></li>
             <li><a class="dropdown-item" href="{{ url('about#about-pastor-farrow') }}">About Pastor Farrow</a></li>
             <li><a class="dropdown-item" href="{{ url('about#why-lastmileoftheway') }}">Why Last Mile of the Way?</a></li>
+            <li><a class="dropdown-item" href="{{ url('about#attributions') }}">Attributions</a></li>
           </ul>
 
         <a class="me-2 py-2 text-dark text-decoration-none" href="{{ url('faqs/') }}">FAQs</a>

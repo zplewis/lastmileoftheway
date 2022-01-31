@@ -40,4 +40,23 @@
       </div>
     </div>
   </div>
+
+  <hr>
+
+  <div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 class="display-4 fw-bold">Why <i>Last Mile of the Way</i>?</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4"><strong>Last Mile of The Way</strong> is a beloved hymn in the African American
+        church context. It was made especially popular in 1970 when Sam Cooke recorded it. I come
+        from a singing family. My dad and his siblings are often asked to sing at funerals. When my
+        uncle is asked to do a solo, it is always <strong>Last Mile of The Way</strong>. The hymn
+        speaks of coming to the end of one's journey and the Christian hope of standing before
+        Christ. I use these words to highlight what I believe the</p>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+      <div class="container px-5">
+        <img src="{{ url('images/man-with-questions.jpeg') }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+      </div>
+    </div>
+  </div>
 @endsection
