@@ -131,6 +131,8 @@ This app uses a MySQL database and can be set up quickly using migrations and se
 
 ```bash
 # Create a model, database migration (creates tables), and seeder (adds data to tables) all at once:
+# Model name here should be singular; the table will be created for you with a plural name
+# automatically, neat...
 php artisan make:model --controller --migration --seed -- FAQCategories
 
 # Perform a dry-run of the migrations that will be run

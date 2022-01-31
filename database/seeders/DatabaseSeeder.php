@@ -18,11 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TestamentsSeeder::class,
             BibleVersionsSeeder::class,
+            BibleBookSeeder::class,
             FAQCategoriesSeeder::class,
             FAQQuestionsSeeder::class,
             FAQAnswersSeeder::class,
             DefinitionsSeeder::class,
             SimilarTermsSeeder::class,
+            ScripturesSeeder::class
         ]);
     }
 }

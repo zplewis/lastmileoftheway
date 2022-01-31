@@ -16,10 +16,10 @@ class TestamentsSeeder extends Seeder
     {
         DB::table('testaments')->insert([
             [
-                'name' => 'Old'
+                'name' => 'old'
             ],
             [
-                'name' => 'New'
+                'name' => 'new'
             ]
         ]);
     }
