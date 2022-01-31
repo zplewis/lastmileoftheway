@@ -11452,3 +11452,13 @@ textarea.form-control-lg {
   background-color: #d2f4ea;
 }
 
+#about-this-site {
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  background-color: #264653;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient() */
+  background-image: linear-gradient(0.75turn, transparent, 10%, #264653), url(/images/last-mile-of-the-way-optimized.jpeg?800c25fd91383bd42dc827afe39681ff);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+

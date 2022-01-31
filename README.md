@@ -160,6 +160,10 @@ npm install @popperjs/core --save-dev
 
 This has already been completed in this code; this documentation is here for reference.
 
+### Royalty-Free Images
+
+- [Unsplash - Karsten Wurth](https://unsplash.com/photos/rafblRbne3o)
+
 ## Jekyll
 
 GitHub Pages utilitize [Jekyll](https://jekyllrb.com/) for static page generation
