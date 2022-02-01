@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
+use \App\Models\Scriptures;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,7 @@ Route::prefix('resources')->group(function() {
         return view(
             'resources.readings',
             [
-                'old' => Scriptures::whereRelation('')
+                'old' => []
             ]
         );
     });
