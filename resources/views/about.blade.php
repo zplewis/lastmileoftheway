@@ -47,7 +47,8 @@
     <h1 class="display-4 fw-bold">Why <i>Last Mile of the Way</i>?</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4"><strong>Last Mile of The Way</strong> is a beloved hymn in the African American
-        church context. It was made especially popular in 1970 when Sam Cooke recorded it. I come
+        church context. It was made especially popular in 1970 <a target="_blank" href="https://youtu.be/bxTh3KShLjs"
+        title="Sam Cooke - The Last Mile of the Way">when Sam Cooke recorded it</a>. I come
         from a singing family. My dad and his siblings are often asked to sing at funerals. When my
         uncle is asked to do a solo, it is always <strong>Last Mile of The Way</strong>. The hymn
         speaks of coming to the end of one's journey and the Christian hope of standing before

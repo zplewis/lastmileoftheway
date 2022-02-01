@@ -16,7 +16,8 @@ class CreateBibleVersionsTable extends Migration
         Schema::create('bible_versions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->string('acronymn');
+            $table->string('name')->nullable();
         });
     }
 

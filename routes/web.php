@@ -33,6 +33,18 @@ Route::get('/support', function () {
     return view('support');
 });
 
+Route::prefix('guide')->group(function() {
+    Route::get('/', function () {
+        return view('guide');
+    });
+
+    Route::get('/demographics', function () {
+        return view('guide2');
+    });
+});
+
+
+
 
 Route::prefix('resources')->group(function() {
     Route::get('/songs', function () {
@@ -49,6 +61,11 @@ Route::prefix('resources')->group(function() {
         );
     });
     Route::get('/bible-readings', function () {
-        return view('resources.readings');
+        return view(
+            'resources.readings',
+            [
+                'old' => Scriptures::whereRelation('')
+            ]
+        );
     });
 });

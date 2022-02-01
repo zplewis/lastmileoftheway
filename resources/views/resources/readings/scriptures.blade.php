@@ -1,4 +1,4 @@
-<div class="col-12 col-md-9">
+{{-- <div class="col-12 col-md-9">
     <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2 px-2" tabindex="0">
         @foreach ($categories as $category)
         <p id="{{ Str::of($category->description)->slug('-') }}" class="display-6">{{ $category->description }}</p>
@@ -8,4 +8,4 @@
             @endforeach
         @endforeach
     </div>
-</div>
+</div> --}}

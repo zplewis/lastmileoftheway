@@ -7,7 +7,7 @@
             program is not something people tend to think about until the dreaded time comes. This
             site can help!</p>
         <div class="d-grid gap-2 d-md-block mb-2">
-            <a href="{{ url('start/') }}" role="button" class="btn btn-primary btn-lg">Get started</a>
+            <a href="{{ url( 'guide/') }}" role="button" class="btn btn-primary btn-lg">Get started</a>
         </div>
 
         </div> <!-- /.col -->

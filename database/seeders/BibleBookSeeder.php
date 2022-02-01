@@ -93,7 +93,7 @@ class BibleBookSeeder extends Seeder
                     'order' => 18
                 ],
                 [
-                    'name' => 'Psalms',
+                    'name' => 'Psalm',
                     'order' => 19
                 ],
                 [

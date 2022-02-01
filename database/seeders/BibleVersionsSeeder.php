@@ -16,13 +16,16 @@ class BibleVersionsSeeder extends Seeder
     {
         DB::table('bible_versions')->insert([
             [
-                'name' => 'NIV'
+                'acronymn' => 'NIV',
+                'name' => 'New International Version'
             ],
             [
-                'name' => 'NRSV'
+                'acronymn' => 'NRSV',
+                'name' => 'New Revised Standard Version'
             ],
             [
-                'name' => 'KJV'
+                'acronymn' => 'KJV',
+                'name' => 'King James Version'
             ]
         ]);
     }
