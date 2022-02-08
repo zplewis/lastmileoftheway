@@ -75,7 +75,7 @@ Route::prefix('guide')->group(function() {
     foreach ($sections as $section => $pages) {
         foreach ($pages as $page => $pageDesc) {
 
-            Route::get($section . '/' . $page, function() use ($section, $page, $pageDesc, $sections) {
+            Route::match(['get', 'post'], $section . '/' . $page, function() use ($section, $page, $pageDesc, $sections) {
 
                 $fullPage = $section;
                 if ($page) {
