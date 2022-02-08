@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
 use \App\Models\Scriptures;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +36,66 @@ Route::get('/support', function () {
 });
 
 Route::prefix('guide')->group(function() {
-    Route::get('/', function () {
-        return view('guide');
+
+    Route::get('', function () {
+        return redirect('guide/getting-started');
     });
 
-    Route::get('/demographics', function () {
-        return view('guide2');
-    });
+    $sections = [
+        'getting-started' => [
+            '' => 'Take a Breath'
+        ],
+        'demographics' => [
+            '' => 'Your Name, Name of Deceased',
+            'dates' => 'Birth, Death, and Service Dates',
+            'venue' => 'Venue Location'
+        ],
+        'customize-service' => [
+            '' => 'Call to Worship',
+            'invocation' => 'Invocation',
+            'hymn' => 'Hymn',
+            'old-testament' => 'Old Testament Reading',
+            'new-testament' => 'New Testament Reading',
+            'prayer-of-comfort' => 'Prayer of Comfort',
+            'musical-selection' => 'Musical Selection',
+            'reflections' => 'Two Minute Reflections',
+            'acknowledgements' => 'Acknowledgements',
+            'musical-selection-2' => 'Musical Selection #2',
+            'eulogy' => 'Eulogy / Words of Comfort',
+            'mortician' => 'Mortician\'s Brief',
+            'burial' => 'Burial'
+        ],
+        'next-steps' => [
+            '' => 'Summary',
+            'questions' => 'Additional Questions',
+            'feedback' => 'Feedback Survey'
+        ]
+    ];
+
+    foreach ($sections as $section => $pages) {
+        foreach ($pages as $page => $pageDesc) {
+
+            Route::get($section . '/' . $page, function() use ($section, $page, $pageDesc, $sections) {
+
+                $fullPage = $section;
+                if ($page) {
+                    $fullPage .= '/' . $page;
+                }
+
+                $viewName = strtr($fullPage, '/', '.');
+                Log::debug('viewName: ' . $viewName);
+                return view(
+                    'guide',
+                    [
+                        'section' => $section,
+                        'page' => $viewName,
+                        'pageDesc' => $pageDesc,
+                        'sections' => $sections
+                    ]
+                );
+            });
+        }
+    }
 });
 
 
