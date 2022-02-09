@@ -35,11 +35,3 @@
         </form>
     </div> <!-- /.row me-1 -->
 </div> <!-- /.col-12 col-md-9 -->
-
-<div class="container">
-    <div class="row">
-<pre>
-{!! var_dump(session()->all()) !!}
-</pre>
-</div>
-</div>

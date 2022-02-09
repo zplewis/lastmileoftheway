@@ -58,13 +58,32 @@ Route::prefix('guide')->group(function() {
             ],
             'dates' => [
                 'description' => 'Birth, Death, and Service Dates',
+                'lead' => 'Include relevant dates about the deceased that may be included on a program.',
                 'next' => 'demographics/venue'
             ],
             'venue' => [
                 'description' => 'Venue Location',
+                'lead' => 'If known, specify the location of the service. The address will be validated with Google Maps to ensure it is accurate and can be found easily via GPS by traveling attendees. If the location is not known yet, that\'s okay.',
                 'next' => 'customize-service'
             ]
         ],
+        'customize-service' => [
+            '' => [
+                'description' => 'Call to Worship',
+                'lead' => 'The opening words of the service usually spoken by the officiating minister.',
+                'next' => 'customize-service/invocation'
+            ],
+            'invocation' => [
+                'description' => 'Invocation',
+                'lead' => 'The opening prayer. A number of prayers will be prayed throughout the service, each with a unique purpose. The purpose of the invocation is to acknowledge and affirm the Lord\'s presence (Matthew 18:20), and to ask the Lord\'s blessing upon all the happenings of the day. Though much planning and thought has gone into the service, still we yield to the superintending movement of the Holy Spirit.',
+                'next' => 'customize-service/hymn'
+            ],
+            'hymn' => [
+                'description' => 'Hymn',
+                'lead' => 'A selection from the Church\'s hymnal. Songs like "Amazing Grace," "It is Well with My Soul," "Great is Thy Faithfulness," or "Come, Ye Disconsolate" are all examples of traditional songs sung by the Christian community that contain inspiring, well-developed statements of faith and hope. While some examples are included below, feel free to select one not included here.',
+                'next' => 'customize-service/old-testament'
+            ],
+        ]
         // 'customize-service' => [
         //     '' => 'Call to Worship',
         //     'invocation' => 'Invocation',
@@ -116,9 +135,6 @@ Route::prefix('guide')->group(function() {
         }
     }
 });
-
-
-
 
 Route::prefix('resources')->group(function() {
     Route::get('/songs', function () {
