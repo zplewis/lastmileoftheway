@@ -17,8 +17,6 @@ class CreateSubmissionsTable extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreign('submitter_id')->references('id')->on('submission_users')->constrained();
-            $table->foreign('deceased_id')->references('id')->on('submission_users')->constrained();
         });
     }
 
