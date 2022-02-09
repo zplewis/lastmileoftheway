@@ -9,13 +9,4 @@ use App\Models\FAQAnswerFull;
 class FAQAnswerShort extends Model
 {
     use HasFactory;
-
-    public function getFullAnswer()
-    {
-        return FAQAnswerFull::firstOrNew(
-            [
-
-            ]
-        )
-    }
 }

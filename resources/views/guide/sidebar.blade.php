@@ -18,14 +18,19 @@
             </button>
             <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarSection }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    @foreach ($sidebarPages as $sidebarPage => $sidebarPageDesc)
+                    @foreach ($sidebarPages as $sidebarPage => $sidebarInfo)
                         @php
                             $path = $sidebarSection;
                             if ($sidebarPage) {
                                 $path .= '/' . $sidebarPage;
                             }
                         @endphp
-                        <li><a href="/guide/{{ $path }}" class="link-dark rounded">{{ $sidebarPageDesc }}</a></li>
+                        <li>
+                            <a href="/guide/{{ $path }}"
+                        class="{{ strcasecmp(request()->path(), 'guide/' . $path) === 0 ? 'link-dark' : 'link-secondary' }} rounded">
+                        {{ Arr::get($sidebarInfo, 'description') }}
+                            </a>
+                        </li>
                     @endforeach
 
                 </ul>

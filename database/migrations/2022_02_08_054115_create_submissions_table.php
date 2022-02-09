@@ -19,7 +19,6 @@ class CreateSubmissionsTable extends Migration
             $table->timestamps();
             $table->foreign('submitter_id')->references('id')->on('submission_users')->constrained();
             $table->foreign('deceased_id')->references('id')->on('submission_users')->constrained();
-
         });
     }
 

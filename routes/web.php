@@ -5,6 +5,7 @@ use \App\Models\FAQCategories;
 use \App\Models\Definitions;
 use \App\Models\Scriptures;
 use Illuminate\Support\Facades\Log;
+use \App\Http\Controllers\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,39 +44,53 @@ Route::prefix('guide')->group(function() {
 
     $sections = [
         'getting-started' => [
-            '' => 'Take a Breath'
+            '' => [
+                'description' => 'Take a Breath',
+                'next' => 'demographics'
+            ]
+
         ],
         'demographics' => [
-            '' => 'Your Name, Name of Deceased',
-            'dates' => 'Birth, Death, and Service Dates',
-            'venue' => 'Venue Location'
+            '' => [
+                'description' => 'Your Name, Name of Deceased',
+                'lead' => 'Additional text to explain what this page is about',
+                'next' => 'demographics.dates'
+            ],
+            'dates' => [
+                'description' => 'Birth, Death, and Service Dates',
+                'next' => 'demographics.venue'
+            ],
+            'venue' => [
+                'description' => 'Venue Location',
+                'next' => 'customize-service'
+            ]
         ],
-        'customize-service' => [
-            '' => 'Call to Worship',
-            'invocation' => 'Invocation',
-            'hymn' => 'Hymn',
-            'old-testament' => 'Old Testament Reading',
-            'new-testament' => 'New Testament Reading',
-            'prayer-of-comfort' => 'Prayer of Comfort',
-            'musical-selection' => 'Musical Selection',
-            'reflections' => 'Two Minute Reflections',
-            'acknowledgements' => 'Acknowledgements',
-            'musical-selection-2' => 'Musical Selection #2',
-            'eulogy' => 'Eulogy / Words of Comfort',
-            'mortician' => 'Mortician\'s Brief',
-            'burial' => 'Burial'
-        ],
-        'next-steps' => [
-            '' => 'Summary',
-            'questions' => 'Additional Questions',
-            'feedback' => 'Feedback Survey'
-        ]
+        // 'customize-service' => [
+        //     '' => 'Call to Worship',
+        //     'invocation' => 'Invocation',
+        //     'hymn' => 'Hymn',
+        //     'old-testament' => 'Old Testament Reading',
+        //     'new-testament' => 'New Testament Reading',
+        //     'prayer-of-comfort' => 'Prayer of Comfort',
+        //     'musical-selection' => 'Musical Selection',
+        //     'reflections' => 'Two Minute Reflections',
+        //     'acknowledgements' => 'Acknowledgements',
+        //     'musical-selection-2' => 'Musical Selection #2',
+        //     'eulogy' => 'Eulogy / Words of Comfort',
+        //     'mortician' => 'Mortician\'s Brief',
+        //     'burial' => 'Burial'
+        // ],
+        // 'next-steps' => [
+        //     '' => 'Summary',
+        //     'questions' => 'Additional Questions',
+        //     'feedback' => 'Feedback Survey'
+        // ]
     ];
 
     foreach ($sections as $section => $pages) {
-        foreach ($pages as $page => $pageDesc) {
+        foreach ($pages as $page => $info) {
 
-            Route::match(['get', 'post'], $section . '/' . $page, function() use ($section, $page, $pageDesc, $sections) {
+            Route::get($section . '/' . $page, function() use ($section, $page, $info, $sections) {
 
                 $fullPage = $section;
                 if ($page) {
@@ -83,17 +98,20 @@ Route::prefix('guide')->group(function() {
                 }
 
                 $viewName = strtr($fullPage, '/', '.');
-                Log::debug('viewName: ' . $viewName);
+
                 return view(
                     'guide',
                     [
                         'section' => $section,
-                        'page' => $viewName,
-                        'pageDesc' => $pageDesc,
-                        'sections' => $sections
+                        'page' => strtr($fullPage, '/', '.'),
+                        'pageDesc' => Arr::get($info, 'description'),
+                        'sections' => $sections,
+                        'lead' => Arr::get($info, 'lead')
                     ]
                 );
             });
+
+            Route::post($section . '/' . $page, [SubmissionController::class, 'store']);
         }
     }
 });

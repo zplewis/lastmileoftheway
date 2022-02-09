@@ -148,6 +148,18 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
+Use this code within a Blade template to see what is currently in the session:
+
+```php
+<div class="container">
+    <div class="row">
+<pre>
+{!! var_dump(session()->all()) !!}
+</pre>
+</div>
+</div>
+```
+
 ### Bootstrap 5
 
 You'll need to include Bootstrap 5 in `app.scss` and `app.js` so that the CSS and JS is included
