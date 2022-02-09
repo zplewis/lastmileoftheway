@@ -52,13 +52,13 @@ Route::prefix('guide')->group(function() {
         ],
         'demographics' => [
             '' => [
-                'description' => 'Your Name, Name of Deceased',
-                'lead' => 'Additional text to explain what this page is about',
-                'next' => 'demographics.dates'
+                'description' => 'Your Name &amp; Name of Deceased',
+                'lead' => 'Additional optional text to explain what this page is about',
+                'next' => 'demographics/dates'
             ],
             'dates' => [
                 'description' => 'Birth, Death, and Service Dates',
-                'next' => 'demographics.venue'
+                'next' => 'demographics/venue'
             ],
             'venue' => [
                 'description' => 'Venue Location',
@@ -106,7 +106,8 @@ Route::prefix('guide')->group(function() {
                         'page' => strtr($fullPage, '/', '.'),
                         'pageDesc' => Arr::get($info, 'description'),
                         'sections' => $sections,
-                        'lead' => Arr::get($info, 'lead')
+                        'lead' => Arr::get($info, 'lead'),
+                        'next' => Arr::get($info, 'next')
                     ]
                 );
             });

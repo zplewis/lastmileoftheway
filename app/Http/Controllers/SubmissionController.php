@@ -21,7 +21,7 @@ class SubmissionController extends Controller
         // If a failure occurred, return to the current request path. Otherwise,
         // go to the next one (if applicable, the last page won't have a next
         // page).
-        return redirect($request->path())->withInput();
+        return redirect($request->input('next-page', $request->path()))->withInput();
     }
 
     /**
@@ -41,10 +41,10 @@ class SubmissionController extends Controller
             case 'guide/demographics':
                 Log::debug(__FUNCTION__ . '(); made it to case "' . $path . '"');
                 // This returns an array, not an object
-                $validated = $request->validateWithBag($path, [
-                    'userFirstName' => 'required|max:50',
-                    'userLastName' => 'required|max:50',
-                    'userEmail' => 'required|email'
+                $validated = $request->validate([
+                    // 'userFirstName' => 'required|max:50',
+                    // 'userLastName' => 'required|max:50',
+                    // 'userEmail' => 'required|email'
                 ]);
                 break;
         }

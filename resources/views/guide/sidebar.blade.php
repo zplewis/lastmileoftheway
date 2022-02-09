@@ -1,6 +1,6 @@
 <div class="col col-md-3">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <span class="fs-5 fw-semibold">Service Plan</span>
+      <span class="fs-5 fw-semibold">Order of Service</span>
     </a>
     <ul class="list-unstyled ps-0">
         @foreach ($sections as $sidebarSection => $sidebarPages)
@@ -26,9 +26,10 @@
                             }
                         @endphp
                         <li>
+                            <!-- Highlight the current page in black -->
                             <a href="/guide/{{ $path }}"
                         class="{{ strcasecmp(request()->path(), 'guide/' . $path) === 0 ? 'link-dark' : 'link-secondary' }} rounded">
-                        {{ Arr::get($sidebarInfo, 'description') }}
+                        {!! Arr::get($sidebarInfo, 'description') !!}
                             </a>
                         </li>
                     @endforeach
