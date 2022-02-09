@@ -83,27 +83,74 @@ Route::prefix('guide')->group(function() {
                 'lead' => 'A selection from the Church\'s hymnal. Songs like "Amazing Grace," "It is Well with My Soul," "Great is Thy Faithfulness," or "Come, Ye Disconsolate" are all examples of traditional songs sung by the Christian community that contain inspiring, well-developed statements of faith and hope. While some examples are included below, feel free to select one not included here.',
                 'next' => 'customize-service/old-testament'
             ],
+            'old-testament' => [
+                'description' => 'Old Testament Reading',
+                'lead' => 'A reading taken from one of the 39 books that comprise what Christians call the Old Testament. Central to any worship service is the reading of Scripture. In the Scripture, we not only find words about God and words directed to God, but we also find words from God addressed to us. Scriptures are both informational in nature and formational in purpose. Hearing the word of God shapes us, gives meaning to the service, brings perspective to pain, and reminds us that though tragedy has a way of hiding the face of God, God is present and continues to speak.',
+                'next' => 'customize-service/new-testament'
+            ],
+            'new-testament' =>  [
+                'description' => 'New Testament Reading',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/prayer-of-comfort'
+            ],
+            'prayer-of-comfort' =>  [
+                'description' => 'Prayer of Comfort',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/musical-selection'
+            ],
+            'musical-selection' =>  [
+                'description' => 'Musical Selection',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/reflections'
+            ],
+            'reflections' =>  [
+                'description' => 'Two Minute Reflections',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/acknowledgements'
+            ],
+            'acknowledgements' =>  [
+                'description' => 'Acknowledgements',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/musical-selection-2'
+            ],
+            'musical-selection-2' =>  [
+                'description' => 'Musical Selection #2',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/eulogy'
+            ],
+            'eulogy' =>  [
+                'description' => 'Eulogy / Words of Comfort',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/mortician'
+            ],
+            'mortician' => [
+                'description' => 'Mortician\'s Brief',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'customize-service/burial'
+            ],
+            'burial' => [
+                'description' => 'Burial',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'next-steps'
+            ],
+        ],
+        'next-steps' => [
+            '' => [
+                'description' => 'Summary',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'next-steps/questions'
+            ],
+            'questions' => [
+                'description' => 'Additional Questions',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => 'next-steps/feedback'
+            ],
+            'feedback' => [
+                'description' => 'Feedback Survey',
+                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'next' => null
+            ],
         ]
-        // 'customize-service' => [
-        //     '' => 'Call to Worship',
-        //     'invocation' => 'Invocation',
-        //     'hymn' => 'Hymn',
-        //     'old-testament' => 'Old Testament Reading',
-        //     'new-testament' => 'New Testament Reading',
-        //     'prayer-of-comfort' => 'Prayer of Comfort',
-        //     'musical-selection' => 'Musical Selection',
-        //     'reflections' => 'Two Minute Reflections',
-        //     'acknowledgements' => 'Acknowledgements',
-        //     'musical-selection-2' => 'Musical Selection #2',
-        //     'eulogy' => 'Eulogy / Words of Comfort',
-        //     'mortician' => 'Mortician\'s Brief',
-        //     'burial' => 'Burial'
-        // ],
-        // 'next-steps' => [
-        //     '' => 'Summary',
-        //     'questions' => 'Additional Questions',
-        //     'feedback' => 'Feedback Survey'
-        // ]
     ];
 
     foreach ($sections as $section => $pages) {

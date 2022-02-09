@@ -2,7 +2,6 @@
 
 @section('guide.content')
 
-
 <div class="col-12">
     <label for="selectedHymn" class="form-label">Select a hymn
     </label>
@@ -16,7 +15,7 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'customHymn', 'inputType' => 'text', 'labelText' => 'Or, feel free to specify your own hymn below:'])
+    @include('guide.field', ['id' => 'customHymn', 'inputType' => 'text', 'labelText' => 'Or, feel free to specify your own below:'])
 </div>
 
 @endsection
