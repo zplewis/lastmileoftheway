@@ -90,7 +90,7 @@ Route::prefix('guide')->group(function() {
             ],
             'new-testament' =>  [
                 'description' => 'New Testament Reading',
-                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'lead' => 'A reading taken from one of the 27 books that comprise what Christians call the New Testament. Central to any worship service is the reading of Scripture. In the Scripture, we not only find words about God and words directed to God, but we also find words from God addressed to us. Scriptures are both informational in nature and formational in purpose. Hearing the word of God shapes us, gives meaning to the service, brings perspective to pain, and reminds us that though tragedy has a way of hiding the face of God, God is present and continues to speak.',
                 'next' => 'customize-service/prayer-of-comfort'
             ],
             'prayer-of-comfort' =>  [
@@ -104,7 +104,7 @@ Route::prefix('guide')->group(function() {
                 'next' => 'customize-service/reflections'
             ],
             'reflections' =>  [
-                'description' => 'Two Minute Reflections',
+                'description' => 'Reflections (2 minutes)',
                 'lead' => 'Some text explaining what this page is about, putting the user at ease.',
                 'next' => 'customize-service/acknowledgements'
             ],
@@ -114,18 +114,18 @@ Route::prefix('guide')->group(function() {
                 'next' => 'customize-service/musical-selection-2'
             ],
             'musical-selection-2' =>  [
-                'description' => 'Musical Selection #2',
+                'description' => 'Musical Selection',
                 'lead' => 'Some text explaining what this page is about, putting the user at ease.',
                 'next' => 'customize-service/eulogy'
             ],
             'eulogy' =>  [
-                'description' => 'Eulogy / Words of Comfort',
-                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'description' => 'Sermon',
+                'lead' => 'A sermonette given at the funeral or memorial service. The eulogy is the part of the service where the pastor speaks a good word on behalf of the dead; however, in some cases, the pastor did not know the deceased personally. Consequently, "words of comfort" are substituted for the eulogy. Because the pastor has no firsthand knowledge of the deceased, the pastor will focus more on those left to mourn the passing of the deceased, reminding them that "The Lord is near to the brokenhearted, and saves the crushed in spirit" (Ps. 34:18).',
                 'next' => 'customize-service/mortician'
             ],
             'mortician' => [
                 'description' => 'Mortician\'s Brief',
-                'lead' => 'Some text explaining what this page is about, putting the user at ease.',
+                'lead' => 'At the end of the funeral, the mortician(s) will come forward to offer remarks, give instructions for exiting the building, and for the procession to the cemetery. Depending on the funeral home, they will also use this moment to present a keepsake or memento on behalf of the funeral home.',
                 'next' => 'customize-service/burial'
             ],
             'burial' => [

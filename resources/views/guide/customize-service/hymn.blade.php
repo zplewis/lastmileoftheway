@@ -18,4 +18,8 @@
     @include('guide.field', ['id' => 'customHymn', 'inputType' => 'text', 'labelText' => 'Or, feel free to specify your own below:'])
 </div>
 
+<div class="col-12">
+    @include('guide.field', ['id' => 'invocationMinister', 'inputType' => 'text', 'labelText' => 'Who is rendering the music?', 'placeholder' => 'Church music ministry'])
+</div>
+
 @endsection

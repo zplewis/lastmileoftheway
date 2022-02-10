@@ -42,8 +42,12 @@ mv ~/public_html_test ~/public_html_test_original
 ln -s ~/code/test/public public_html_test
 
 # Download Composer and install packages
-cd ~/code
+# The version of composer native to A2Hosting is very old (from 2020)
+cd ~/code/test
 curl -sS https://getcomposer.org/installer | php
+# You may need to set an alias in ~/.bashrc so you can use the newer composer by default:
+echo "alias composer='php ~/code/test/composer.phar'" >> ~/.bashrc
+source ~/.bashrc
 composer install
 # Generate application key for Laravel
 # https://laravel.com/docs/6.x/installation#configuration
@@ -86,8 +90,7 @@ npm run production
 cd ~/code
 git checkout master
 git pull --rebase
-npm install
-npm run production
+composer install && php artisan migrate:fresh --seed && npm install && npm run production
 ```
 
 ## Laravel
