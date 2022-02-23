@@ -71,6 +71,11 @@ Route::prefix('guide')->group(function() {
             'service-type' => [
                 'description' => 'Service Type',
                 'lead' => 'Which type of service best suits your needs?',
+                'next' => 'customize-service/processional'
+            ],
+            'processional' => [
+                'description' => 'Processional',
+                'lead' => 'The formal entrance. This is when the officiating minister leads the family into the sanctuary or chapel.',
                 'next' => 'customize-service'
             ],
             '' => [
@@ -131,6 +136,11 @@ Route::prefix('guide')->group(function() {
             'mortician' => [
                 'description' => 'Mortician\'s Brief',
                 'lead' => 'At the end of the funeral, the mortician(s) will come forward to offer remarks, give instructions for exiting the building, and for the procession to the cemetery. Depending on the funeral home, they will also use this moment to present a keepsake or memento on behalf of the funeral home.',
+                'next' => 'customize-service/recessional'
+            ],
+            'recessional' => [
+                'description' => 'Recessional',
+                'lead' => 'The formal exit. There is generally an order to exiting the sanctuary or chapel. In most cases, it is directed by the funeral home. It is usually clergy followed by the floral bearers, paul bearers (with the casket), then the family.',
                 'next' => 'customize-service/burial'
             ],
             'burial' => [
