@@ -9,8 +9,8 @@
           so if something is not clear, you may find the answer in the
           <a href="{{ url('glossary') }}" title="Glossary">glossary</a> or
           <a href="{{ url('faqs') }}" title="FAQs">FAQs</a>. Still have questions? Feel free to
-          use the form below to send your question. See how we can make this process easier? Send us
-          some feedback. Need more assistance? We offer appointments for 1-on-1 consultations.  We are here to help.</p>
+          use the form below to send your question. See how this site can make the planning process easier? Send us
+          some feedback. Need more assistance? This site offers appointments for 1-on-1 consultations. We are here to help.</p>
     </div>
   </div>
 

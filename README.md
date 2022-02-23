@@ -121,6 +121,13 @@ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
 # Build the containers, then once they are built, you can try opening them in VS Code
 sail up
+
+# Use sail to tear down and rebuild the containers. VS Code can connect to the already-running
+# containers
+sail down --remove-orphans --volumes && sail up --build --detach
+
+# Run this
+composer install && php artisan migrate:fresh --seed && npm install && npm run dev
 ```
 
 The MySQL database files are installed to a volume so that the database can persist even after the
