@@ -64,10 +64,15 @@ Route::prefix('guide')->group(function() {
             'venue' => [
                 'description' => 'Venue Location',
                 'lead' => 'If known, specify the location of the service. The address will be validated with Google Maps to ensure it is accurate and can be found easily via GPS by traveling attendees. If the location is not known yet, that\'s okay.',
-                'next' => 'customize-service'
+                'next' => 'customize-service/service-type'
             ]
         ],
         'customize-service' => [
+            'service-type' => [
+                'description' => 'Service Type',
+                'lead' => 'Which type of service best suits your needs?',
+                'next' => 'customize-service'
+            ],
             '' => [
                 'description' => 'Call to Worship',
                 'lead' => 'The opening words of the service usually spoken by the officiating minister.',

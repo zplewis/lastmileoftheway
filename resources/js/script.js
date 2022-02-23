@@ -19,6 +19,36 @@
         });
     }
 
+    // When going through the guide, add the code that highlights the selected service type
+    const serviceTypeSelectors = document.querySelectorAll('.service-type-selector input[type="radio"]');
+
+    // Listener function that responds to the radio button click
+    function serviceTypeSelectorListener() {
+        // Reset all card-headers
+        const cards = document.querySelectorAll('.service-type-selector .card');
+
+        for (let card of cards) {
+            // Reset the card-header
+            const cardHeader = card.querySelector('.card-header');
+
+            // Is there a selected radio button? If so, then set the card header class differently
+            const selectedButton = card.querySelector('input[type="radio"]:checked');
+
+            let newClass = 'card-header py-3';
+            if (selectedButton) {
+                newClass += ' text-white bg-primary border-primary';
+            }
+
+            cardHeader.className = newClass;
+        }
+    }
+
+    if (serviceTypeSelectors) {
+        for (let i = 0; i < serviceTypeSelectors.length; i++) {
+            serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener);
+        }
+    }
+
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},
     window.jQuery,

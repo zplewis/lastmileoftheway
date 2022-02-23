@@ -5317,6 +5317,12 @@ if (token) {
   \********************************/
 /***/ (() => {
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // This may also be shorthand for $( document ).ready()
 // https://learn.jquery.com/using-jquery-core/document-ready/
 ;
@@ -5337,6 +5343,44 @@ if (token) {
         deceasedSomeoneElseDiv.classList.remove('d-none');
       }
     });
+  } // When going through the guide, add the code that highlights the selected service type
+
+
+  var serviceTypeSelectors = document.querySelectorAll('.service-type-selector input[type="radio"]'); // Listener function that responds to the radio button click
+
+  function serviceTypeSelectorListener() {
+    // Reset all card-headers
+    var cards = document.querySelectorAll('.service-type-selector .card');
+
+    var _iterator = _createForOfIteratorHelper(cards),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var card = _step.value;
+        // Reset the card-header
+        var cardHeader = card.querySelector('.card-header'); // Is there a selected radio button? If so, then set the card header class differently
+
+        var selectedButton = card.querySelector('input[type="radio"]:checked');
+        var newClass = 'card-header py-3';
+
+        if (selectedButton) {
+          newClass += ' text-white bg-primary border-primary';
+        }
+
+        cardHeader.className = newClass;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+
+  if (serviceTypeSelectors) {
+    for (var i = 0; i < serviceTypeSelectors.length; i++) {
+      serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener);
+    }
   } // confirms whether the user is sure if they want to complete the given action
 
 })(window.utilities = window.utilities || {}, window.jQuery, window, document, window.axios);
