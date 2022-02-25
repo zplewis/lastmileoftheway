@@ -2,16 +2,13 @@
 
 @section('guide.content')
 <div class="col-sm-6">
-    <label for="userFirstName" class="form-label">First name</label>
-    @include('guide.field', ['id' => 'userFirstName'])
+    @include('guide.field', ['id' => 'userFirstName', 'inputType' => 'text', 'labelText' => 'First name', 'required' => true])
 </div>
 <div class="col-sm-6">
-    <label for="userLastName" class="form-label">Last name</label>
-    @include('guide.field', ['id' => 'userLastName'])
+    @include('guide.field', ['id' => 'userLastName', 'inputType' => 'text', 'labelText' => 'Last name', 'required' => true])
 </div>
 <div class="col-12">
-    <label for="userEmail" class="form-label">Email address</label>
-    @include('guide.field', ['id' => 'userEmail', 'inputType' => 'email'])
+    @include('guide.field', ['id' => 'userEmail', 'inputType' => 'email', 'labelText' => 'Email address', 'required' => true])
 </div>
 <div class="col-12">
     <label for="userIsDeceased" class="form-label">Are you planning a service

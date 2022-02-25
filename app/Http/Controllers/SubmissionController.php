@@ -18,10 +18,25 @@ class SubmissionController extends Controller
 
         Log::debug('request->path: ' . $request->path());
 
+        // Reflash all data
+        // $request->session()->reflash();
+
+        $this->putAllInputToSession($request);
+        Log::debug(__FUNCTION__ . '(); just reflashed input to the session...');
+
         // If a failure occurred, return to the current request path. Otherwise,
         // go to the next one (if applicable, the last page won't have a next
         // page).
         return redirect($request->input('next-page', $request->path()))->withInput();
+    }
+
+    private function putAllInputToSession(Request $request)
+    {
+        // https://laravel.com/docs/8.x/requests#retrieving-an-input-value
+
+        foreach ($request->input() as $key => $value) {
+            $request->session()->put($key, $value);
+        }
     }
 
     /**
