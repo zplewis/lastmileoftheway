@@ -49,7 +49,14 @@
         from a singing family. My dad and his siblings are often asked to sing at funerals. When my
         uncle is asked to do a solo, it is always <strong>Last Mile of The Way</strong>. The hymn
         speaks of coming to the end of one's journey and the Christian hope of standing before
-        Christ. I use these words to highlight what I believe the</p>
+        Christ; however, I use these words to call attention to what I believe is the sacred
+        obligation of the church, which is to come alongside, "weep with those who weep," and
+        respond to the impact of each loss. As Thomas Long notes in his book,
+        <i>Accompany Them with Singing</i>, "Underlying all Christian funerals is a very basic
+        action shared by all humanity. Someone has died, and the body must be cared for and carried
+        to the place of burial, the place of farewell." I invite not only pastoral leaders but
+        laity to discover anew how the church can be the presence of Christ with mourners as they
+        take their loved ones the last mile of the way.</p>
     </div>
     <div class="overflow-hidden" style="max-height: 30vh;">
       <div class="container px-5">

@@ -12,6 +12,8 @@
         <option value="1" {{ strcmp(old('selectedHymn'), '1') === 0 ? 'selected' : '' }}>It is Well with My Soul</option>
         <option value="2" {{ strcmp(old('selectedHymn'), '2') === 0 ? 'selected' : '' }}>Great is Thy Faithfulness</option>
     </select>
+
+
 </div>
 
 <div class="col-12">
