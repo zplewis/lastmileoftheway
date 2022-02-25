@@ -19,6 +19,7 @@ class FAQQuestionsSeeder extends Seeder
     {
         $social_distancing = FAQCategories::where('description', 'Social distancing')->first()->id;
         $video_conferencing = FAQCategories::where('description', 'Video conferencing')->first()->id;
+        $venue_expectations = FAQCategories::where('description', 'Venue expectations')->first()->id;
 
         $categories = [
             $social_distancing => [
@@ -29,6 +30,11 @@ class FAQQuestionsSeeder extends Seeder
             ],
             $video_conferencing => [
                 'What video platforms are good for using at a funeral?'
+            ],
+            $venue_expectations => [
+                'What can I expect from Reeder Memorial Baptist Church?',
+                'Does the church design and/or print programs for the service?',
+                'Can clergy from outside to Reeder Memorial Baptist Church participate on the program?'
             ]
         ];
 

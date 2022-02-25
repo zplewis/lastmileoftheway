@@ -20,6 +20,9 @@ class FAQCategoriesSeeder extends Seeder
             ],
             [
                 'description' => 'Video conferencing'
+            ],
+            [
+                'description' => 'Venue expectations'
             ]
         ]);
     }

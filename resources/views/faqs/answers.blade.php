@@ -4,7 +4,7 @@
         <p id="{{ Str::of($category->description)->slug('-') }}" class="display-6">{{ $category->description }}</p>
             @foreach ($category->questions()->get() as $question)
                 <h4>{{ $question->description }}</h4>
-                <p>{{ $question->answer()->firstOrNew()->full_text }}</p>
+                <p>{!! $question->answer()->firstOrNew()->full_text !!}</p>
             @endforeach
         @endforeach
     </div>

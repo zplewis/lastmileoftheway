@@ -19,7 +19,7 @@ class CreateFAQAnswersTable extends Migration
             $table->timestamps();
             $table->foreignIdFor(FAQQuestions::class)->constrained();
             $table->string('short_text')->nullable();
-            $table->string('full_text')->nullable();
+            $table->string('full_text', 2500)->nullable();
         });
     }
 
