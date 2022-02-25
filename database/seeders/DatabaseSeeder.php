@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             FAQAnswersSeeder::class,
             DefinitionsSeeder::class,
             SimilarTermsSeeder::class,
-            ScripturesSeeder::class
+            ScripturesSeeder::class,
+            SongTypeSeeder::class,
+            SongSeeder::class,
         ]);
     }
 }
