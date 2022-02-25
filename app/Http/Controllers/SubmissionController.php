@@ -26,7 +26,7 @@ class SubmissionController extends Controller
 
         // If a failure occurred, return to the current request path. Otherwise,
         // go to the next one (if applicable, the last page won't have a next
-        // page).
+        // page). The path for the next page comes from the 'next-page' input
         return redirect($request->input('next-page', $request->path()))->withInput();
     }
 
@@ -35,8 +35,16 @@ class SubmissionController extends Controller
         // https://laravel.com/docs/8.x/requests#retrieving-an-input-value
 
         foreach ($request->input() as $key => $value) {
+            if (strcasecmp($key, 'next-page') === 0) {
+                continue;
+            }
             $request->session()->put($key, $value);
         }
+
+        // Just in case, forget 'next-page' if it's there, as that needs to be fresh every time
+        $request->session()->forget('next-page');
+
+        Log::debug(__FUNCTION__ . '(); all session data: ', session()->all());
     }
 
     /**

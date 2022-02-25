@@ -21,18 +21,15 @@
         <option value="1" {{ strcmp(old('userIsDeceased'), '1') === 0 ? 'selected' : '' }}>Yes, I am planning a service for myself</option>
     </select>
 </div>
+<div class="col-12">
+    @include('guide.field', ['id' => 'deceasedPreferredName', 'inputType' => 'text', 'labelText' => 'Deceased Preferred Name'])
+</div>
 <div class="demographics-someone-else-name d-none">
     <div class="col-sm-6">
-        <label for="deceasedFirstName" class="form-label">Deceased First name</label>
-        @include('guide.field', ['id' => 'deceasedFirstName'])
+        @include('guide.field', ['id' => 'deceasedFirstName', 'inputType' => 'text', 'labelText' => 'Deceased First name'])
     </div>
     <div class="col-sm-6">
-        <label for="deceasedLastName" class="form-label">Deceased Last name</label>
-        @include('guide.field', ['id' => 'deceasedLastName'])
-    </div>
-    <div class="col-12">
-        <label for="deceasedPreferredName" class="form-label">Deceased Preferred Name</label>
-        @include('guide.field', ['id' => 'deceasedPreferredName'])
+        @include('guide.field', ['id' => 'deceasedLastName', 'inputType' => 'text', 'labelText' => 'Deceased Last name'])
     </div>
 </div> <!-- /.demographics-someone-else-name -->
 @endsection

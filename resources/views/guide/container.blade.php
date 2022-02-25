@@ -28,7 +28,7 @@
                     <!-- Add code here so that Next if there is a "next page" specified,
                     otherwise, use Submit for the button text. -->
                     <button type="submit" id="guide-advance" name="guide-advance" class="btn btn-primary">
-                        {{ !$next ? 'Submit' : 'Next' }}
+                        {{ !$next ? 'Submit' : 'Save & Continue' }}
                     </button>
                 </div> <!-- /.col-12 -->
             </div> <!-- /.row g-3 -->
