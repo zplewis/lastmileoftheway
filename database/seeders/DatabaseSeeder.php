@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             SongTypeSeeder::class,
             SongSeeder::class,
             ServiceTypeSeeder::class,
+            GuideCategorySeeder::class,
+            GuideQuestionSeeder::class,
         ]);
     }
 }

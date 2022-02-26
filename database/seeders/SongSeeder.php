@@ -101,6 +101,87 @@ class SongSeeder extends Seeder
                 'youtube_url' => 'https://youtu.be/ENv7zIo_j9M',
                 'spotify_url' => null
             ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'How Great Thou Art',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Precious Lord',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Amazing Grace',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Great is Thy Faithfulness',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'If I Can Help Somebody',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'His Eye is on The Sparrow',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'When I See Jesus',
+                'release_year' => null,
+                'artist' => 'Douglas Miller',
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'The Last Mile of the Way',
+                'release_year' => null,
+                'artist' => 'Sam Cooke',
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Take Me to The King',
+                'release_year' => null,
+                'artist' => 'Tamela Mann',
+                'album' => null,
+                'youtube_url' => null,
+                'spotify_url' => null
+            ],
         ]);
     }
 }
