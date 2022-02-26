@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ScripturesSeeder::class,
             SongTypeSeeder::class,
             SongSeeder::class,
+            ServiceTypeSeeder::class,
         ]);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGuideCategoriesTable extends Migration
+class CreateGuideSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateGuideCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('guide_categories', function (Blueprint $table) {
+        Schema::create('guide_sections', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title');
-            $table->string('uri');
-            $table->integer('order');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateGuideCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guide_categories');
+        Schema::dropIfExists('guide_sections');
     }
 }

@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <form action="/{{ request()->path() }}" method="POST">
+        <form action="/{{ request()->path() }}" method="POST" id="guide-form">
             @csrf
 
             @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => 'guide/' . $next])

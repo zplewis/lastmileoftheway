@@ -18,8 +18,11 @@ class CreateGuideQuestionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(GuideCategory::class)->constrained();
-            $table->string('name');
-            $table->string('text');
+            $table->string('title');
+            $table->string('uri');
+            $table->integer('order');
+            // If non-zero, shows a switch to indicate whether this service part is optional
+            $table->boolean('optional');
         });
     }
 

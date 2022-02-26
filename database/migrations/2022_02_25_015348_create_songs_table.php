@@ -20,6 +20,7 @@ class CreateSongsTable extends Migration
             $table->string('name');
             $table->integer('release_year')->nullable();
             $table->string('artist')->nullable();
+            $table->string('album')->nullable();
             $table->foreignIdFor(SongType::class)->constrained();
             $table->string('youtube_url')->nullable();
             $table->string('spotify_url')->nullable();

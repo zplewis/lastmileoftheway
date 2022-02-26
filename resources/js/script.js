@@ -49,6 +49,28 @@
         }
     }
 
+    const songTypes = document.querySelectorAll('select[id^="songType"]');
+
+    function songTypeSelectorListener() {
+        // Clear the next-page hidden input
+        const nextPage = document.getElementById('next-page');
+        const guideForm = document.getElementById('guide-form');
+
+        if (nextPage) {
+            nextPage.value = null;
+        }
+
+        if (guideForm) {
+            guideForm.submit();
+        }
+    }
+
+    if (songTypes) {
+        for (let songType of songTypes) {
+            songType.addEventListener('change', songTypeSelectorListener);
+        }
+    }
+
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},
     window.jQuery,

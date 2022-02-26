@@ -5381,6 +5381,38 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     for (var i = 0; i < serviceTypeSelectors.length; i++) {
       serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener);
     }
+  }
+
+  var songTypes = document.querySelectorAll('select[id^="songType"]');
+
+  function songTypeSelectorListener() {
+    // Clear the next-page hidden input
+    var nextPage = document.getElementById('next-page');
+    var guideForm = document.getElementById('guide-form');
+
+    if (nextPage) {
+      nextPage.value = null;
+    }
+
+    if (guideForm) {
+      guideForm.submit();
+    }
+  }
+
+  if (songTypes) {
+    var _iterator2 = _createForOfIteratorHelper(songTypes),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var songType = _step2.value;
+        songType.addEventListener('change', songTypeSelectorListener);
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
   } // confirms whether the user is sure if they want to complete the given action
 
 })(window.utilities = window.utilities || {}, window.jQuery, window, document, window.axios);

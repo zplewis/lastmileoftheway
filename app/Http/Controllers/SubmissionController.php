@@ -16,7 +16,7 @@ class SubmissionController extends Controller
         // Validate and store the form submission.
         $validated = $this->validatePage($request);
 
-        Log::debug('request->path: ' . $request->path());
+        Log::debug(__FUNCTION__ . 'request->path(): ' . $request->path());
 
         // Reflash all data
         // $request->session()->reflash();
@@ -27,7 +27,18 @@ class SubmissionController extends Controller
         // If a failure occurred, return to the current request path. Otherwise,
         // go to the next one (if applicable, the last page won't have a next
         // page). The path for the next page comes from the 'next-page' input
-        return redirect($request->input('next-page', $request->path()))->withInput();
+        $redirectPath = $request->input('next-page', null);
+        if (!$redirectPath) {
+            $redirectPath = $request->path();
+        }
+
+        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
+        return redirect($redirectPath)->withInput();
+    }
+
+    public function load(Request $request)
+    {
+
     }
 
     private function putAllInputToSession(Request $request)
