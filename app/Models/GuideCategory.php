@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class GuideCategory extends Model
 {
     use HasFactory;
+
+    public function guideQuestions()
+    {
+        return $this->hasMany(GuideQuestion::class);
+    }
 }

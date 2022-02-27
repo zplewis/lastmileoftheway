@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
@@ -168,34 +169,79 @@ Route::prefix('guide')->group(function() {
         ]
     ];
 
-    foreach ($sections as $section => $pages) {
-        foreach ($pages as $page => $info) {
+    $serviceType = null;
+    if (session('service-type-selection')) {
+        $serviceType = \App\Models\ServiceType::find(session('service-type-selection'))->first();
+        Log::debug(__FUNCTION__ . '(); current service type: ' . $serviceType->title);
+    }
 
-            Route::get($section . '/' . $page, function() use ($section, $page, $info, $sections) {
+    $categories = \App\Models\GuideCategory::orderBy('order')->get();
 
-                $fullPage = $section;
-                if ($page) {
-                    $fullPage .= '/' . $page;
+    foreach ($categories as $category) {
+        Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
+
+        // Start off with all questions for the current guide category.
+        // However, if there is a service type selected by the user, then only keep those that
+        // apply to that selected service type.
+        $questions = $category->guideQuestions();
+
+        if ($serviceType) {
+            $questions = $questions->wherePivot('service_type', $serviceType);
+        }
+
+        $questions = $questions->orderBy('order')->get();
+
+        // For each question type, create a get and post route
+        foreach ($questions as $question) {
+            $path = $category->uri . '/' . $question->uri;
+            Log::debug(__FUNCTION__ . '(); route path: ' . $path);
+            Route::get(
+                $path,
+                function() use ($categories, $category, $question, $serviceType) {
+                    return App::call(
+                        '\App\Http\Controllers\SubmissionController@load',
+                        [
+                            'categories' => $categories,
+                            'category' => $category,
+                            'question' => $question,
+                            'serviceType' => $serviceType
+                        ]
+                    );
                 }
+            );
 
-                $viewName = strtr($fullPage, '/', '.');
-
-                return view(
-                    'guide',
-                    [
-                        'section' => $section,
-                        'page' => strtr($fullPage, '/', '.'),
-                        'pageDesc' => Arr::get($info, 'description'),
-                        'sections' => $sections,
-                        'lead' => Arr::get($info, 'lead'),
-                        'next' => Arr::get($info, 'next')
-                    ]
-                );
-            });
-
-            Route::post($section . '/' . $page, [SubmissionController::class, 'store']);
+            Route::post($path, [SubmissionController::class, 'store']);
         }
     }
+
+    // foreach ($sections as $section => $pages) {
+    //     foreach ($pages as $page => $info) {
+
+    //         Route::get($section . '/' . $page, function() use ($section, $page, $info, $sections) {
+
+    //             $fullPage = $section;
+    //             if ($page) {
+    //                 $fullPage .= '/' . $page;
+    //             }
+
+    //             $viewName = strtr($fullPage, '/', '.');
+
+    //             return view(
+    //                 'guide',
+    //                 [
+    //                     'section' => $section,
+    //                     'page' => strtr($fullPage, '/', '.'),
+    //                     'pageDesc' => Arr::get($info, 'description'),
+    //                     'sections' => $sections,
+    //                     'lead' => Arr::get($info, 'lead'),
+    //                     'next' => Arr::get($info, 'next')
+    //                 ]
+    //             );
+    //         });
+
+    //         Route::post($section . '/' . $page, [SubmissionController::class, 'store']);
+    //     }
+    // }
 });
 
 Route::prefix('resources')->group(function() {

@@ -36,14 +36,92 @@ class SubmissionController extends Controller
         return redirect($redirectPath)->withInput();
     }
 
-    public function load(Request $request)
-    {
+    private function getNextGuideQuestion(
+        \Illuminate\Database\Eloquent\Collection $categories,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        $found = false;
 
+        // Brute force it, although there may be a better way...
+        foreach ($categories as $sidebarCategory) {
+
+            // Continue until you get to the current category
+            if ($sidebarCategory->id < $category->id) {
+                Log::debug(__FUNCTION__ . '(); skipping the category: ' . $sidebarCategory->title);
+                continue;
+            }
+
+            Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
+
+            $questions = $sidebarCategory->guideQuestions();
+
+            if ($serviceType) {
+                $questions = $questions->wherePivot('service_type', $serviceType);
+            }
+
+            $questions = $questions->orderBy('order')->get();
+
+            foreach ($questions as $sidebarQuestion) {
+                if ($found) {
+                    Log::debug(__FUNCTION__ . '(); found the next question: ' . $sidebarQuestion->title);
+                    return $sidebarQuestion;
+                }
+
+                if ($sidebarQuestion->id === $question->id) {
+                    $found = true;
+                    Log::debug(__FUNCTION__ . '(); found the current question!');
+                }
+            }
+        }
+
+        return NULL;
+    }
+
+    /**
+     *
+     */
+    public function load(
+        Request $request,
+        \Illuminate\Database\Eloquent\Collection $categories,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+
+        Log::debug(__FUNCTION__ . '(); question: ' . $question->title);
+
+        $nextQuestion = $this->getNextGuideQuestion(
+            $categories,
+            $category,
+            $question
+        );
+
+        if ($nextQuestion) {
+            $nextCategory = $nextQuestion->guideCategory()->first();
+            Log::debug(__FUNCTION__ . '(); next question category: ' . $nextCategory->title);
+            Log::debug(__FUNCTION__ . '(); next question question: ' . $nextQuestion->title);
+            Log::debug(__FUNCTION__ . '(); next uri: ' . 'guide/' . $nextCategory->uri . '/' . $nextQuestion->uri);
+        }
+
+        return view(
+            'guide',
+            [
+                'categories' => $categories,
+                'currentCategory' => $category,
+                'currentQuestion' => $question,
+                'nextQuestion' => $nextQuestion,
+                'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : '')
+            ]
+        );
     }
 
     private function putAllInputToSession(Request $request)
     {
         // https://laravel.com/docs/8.x/requests#retrieving-an-input-value
+
+        Log::debug(__FUNCTION__ . '(); all input: ', $request->all());
 
         foreach ($request->input() as $key => $value) {
             if (strcasecmp($key, 'next-page') === 0) {
@@ -54,6 +132,26 @@ class SubmissionController extends Controller
 
         // Just in case, forget 'next-page' if it's there, as that needs to be fresh every time
         $request->session()->forget('next-page');
+
+        // From the request URI, get the current category and question to see if this question
+        // is optional. If it is, and the HTML ID of the optional switch is not in the input,
+        // then remove that value from the session
+        $parts = explode('/', $request->path());
+
+        if (count($parts) === 3) {
+            $category = \App\Models\GuideCategory::where('uri', $parts[1])->first();
+            $question = \App\Models\GuideQuestion::where('uri', $parts[2])->where('guide_category_id', $category->id)->first();
+
+            Log::debug(__FUNCTION__ . '(); uri parts: ', $parts);
+            Log::debug(__FUNCTION__ . '(); optional_html_id: ' . $question->optional_html_id);
+            Log::debug(__FUNCTION__ . '(); optional is yes: ' . $request->has($question->optional_html_id));
+
+            if ($question->optional_html_id &&
+            !$request->has($question->optional_html_id)) {
+                Log::debug(__FUNCTION__ . '(); setting optional flag to no: ' . $question->optional_html_id);
+                $request->session()->put($question->optional_html_id, 'no');
+            }
+        }
 
         Log::debug(__FUNCTION__ . '(); all session data: ', session()->all());
     }

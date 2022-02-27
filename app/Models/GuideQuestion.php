@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class GuideQuestion extends Model
 {
     use HasFactory;
+
+    public function serviceTypes()
+    {
+        return $this->belongsToMany(ServiceType::class);
+    }
+
+    public function guideCategory()
+    {
+        return $this->belongsTo(GuideCategory::class);
+    }
+
+    public function pageUri()
+    {
+        return 'guide/' . $this->guideCategory()->first()->uri . '/' . $this->uri;
+    }
 }

@@ -1,8 +1,8 @@
 <div class="col-12 col-md-9">
     <div class="row me-1">
-        <h4 class="mb-3">{!! $pageDesc !!}</h4>
-        @if ($lead)
-            <p class="lead">{!! $lead !!}</p>
+        <h4 class="mb-3">{!! $currentQuestion->title !!}</h4>
+        @if ($currentQuestion->description)
+            <p class="lead">{!! $currentQuestion->description !!}</p>
         @endif
 
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
@@ -19,8 +19,12 @@
         <form action="/{{ request()->path() }}" method="POST" id="guide-form">
             @csrf
 
-            @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => 'guide/' . $next])
+            @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => $nextQuestionUri])
             <div class="row g-3">
+
+                @if ($currentQuestion->optional)
+                    @include('guide.switch', ['id' => $currentQuestion->optional_html_id, 'labelText' => $currentQuestion->optional])
+                @endif
 
                 @yield('guide.content')
 
@@ -28,7 +32,7 @@
                     <!-- Add code here so that Next if there is a "next page" specified,
                     otherwise, use Submit for the button text. -->
                     <button type="submit" id="guide-advance" name="guide-advance" class="btn btn-primary">
-                        {{ !$next ? 'Submit' : 'Save & Continue' }}
+                        {{ !$nextQuestion ? 'Submit' : 'Save & Continue' }}
                     </button>
                 </div> <!-- /.col-12 -->
             </div> <!-- /.row g-3 -->

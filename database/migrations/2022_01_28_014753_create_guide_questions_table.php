@@ -21,8 +21,11 @@ class CreateGuideQuestionsTable extends Migration
             $table->string('title');
             $table->string('uri');
             $table->integer('order');
-            // If non-zero, shows a switch to indicate whether this service part is optional
-            $table->boolean('optional');
+            // If HTML is included here, display it as the text for a switch indicating that this
+            // guide question can be excluded from the service if desired
+            $table->string('optional')->nullable();
+            $table->string('optional_html_id')->nullable();
+            $table->string('description', 2500)->nullable();
         });
     }
 

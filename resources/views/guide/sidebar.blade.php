@@ -3,33 +3,25 @@
       <span class="fs-5 fw-semibold">Order of Service</span>
     </a>
     <ul class="list-unstyled ps-0">
-        @foreach ($sections as $sidebarSection => $sidebarPages)
+        @foreach ($categories as $sidebarCategory)
 
         @php
-            $sectionText = ucwords(strtr($sidebarSection, '-', ' '));
-            $isCurrentSection = strcasecmp($section, $sidebarSection) === 0;
-
+            $isCurrentSection = $currentCategory->id === $sidebarCategory->id;
         @endphp
         <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded {{ $isCurrentSection ? '' : 'collapsed' }}"
-            data-bs-toggle="collapse" data-bs-target="#{{ $sidebarSection }}-collapse"
+            data-bs-toggle="collapse" data-bs-target="#{{ $sidebarCategory->uri }}-collapse"
             aria-expanded="{{ $isCurrentSection ? 'true' : 'false' }}">
-              {{ $sectionText }}
+              {{ $sidebarCategory->title }}
             </button>
-            <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarSection }}-collapse" style="">
+            <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarCategory->uri }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    @foreach ($sidebarPages as $sidebarPage => $sidebarInfo)
-                        @php
-                            $path = $sidebarSection;
-                            if ($sidebarPage) {
-                                $path .= '/' . $sidebarPage;
-                            }
-                        @endphp
+                    @foreach ($sidebarCategory->guideQuestions()->orderBy('order')->get() as $question)
                         <li>
                             <!-- Highlight the current page in black -->
-                            <a href="/guide/{{ $path }}"
-                        class="{{ strcasecmp(request()->path(), 'guide/' . $path) === 0 ? 'link-dark' : 'link-secondary' }} rounded">
-                        {!! Arr::get($sidebarInfo, 'description') !!}
+                            <a href="/{{ $question->pageUri() }}"
+                        class="{{ strcasecmp(request()->path(), $question->pageUri()) === 0 ? 'link-dark' : 'link-secondary' }} rounded">
+                        {!! $question->title !!}
                             </a>
                         </li>
                     @endforeach
