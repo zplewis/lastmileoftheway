@@ -189,6 +189,19 @@ This has already been completed in this code; this documentation is here for ref
 - [Unsplash - Karsten Wurth](https://unsplash.com/photos/rafblRbne3o)
 - [Unsplash - Tachina Lee - Woman looking up](https://unsplash.com/photos/-wjk_SSqCE4)
 
+## TODOs
+
+- Finish adding all sidebar items to the database
+- Finish adding all songs to the database
+- Finish adding all scriptures to the database
+- Create a page for the songs
+- Create a page for the scriptures
+- Add support for showing a YouTube link upon selecting a song via javascript (no form submit needed)
+  - probably could use a `data-*` item on the selected option
+- Add summary page
+- Standardize all three song pages to select song type, and a song, or add their own
+- Add recommendation for the first song as the opening hymn
+
 ## Jekyll
 
 GitHub Pages utilitize [Jekyll](https://jekyllrb.com/) for static page generation
