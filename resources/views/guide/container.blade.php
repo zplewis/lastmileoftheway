@@ -16,6 +16,8 @@
             </div>
         @endif
 
+        <p class="lead">Selected service type: {{ $currentServiceType ? $currentServiceType->name : NULL }}</p>
+
         <form action="/{{ request()->path() }}" method="POST" id="guide-form">
             @csrf
 

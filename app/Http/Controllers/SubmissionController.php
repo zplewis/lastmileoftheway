@@ -7,8 +7,30 @@ use Illuminate\Support\Facades\Log;
 
 class SubmissionController extends Controller
 {
+
     /**
-     * Store a new submission
+     * If a service type is specified by the user, get the associated ServiceType object.
+     * @return ServiceType|null
+     */
+    public static function getSelectedServiceType()
+    {
+        $value = session('service-type-selection');
+
+        if (!session()->has('service-type-selection') || !$value) {
+            return null;
+        }
+
+        // Get the service type from the selection
+        $title = ucwords(str_replace('service-type-', '', $value));
+
+        Log::debug(__FUNCTION__ . '(); dervived service type title: ' . $title);
+
+        return \App\Models\ServiceType::where('title', $title)->first();
+    }
+
+    /**
+     * Store answers to the current question to the session. When on the final page in next steps,
+     * save the answers to the database.
      */
     public function store(Request $request)
     {
@@ -39,10 +61,11 @@ class SubmissionController extends Controller
     private function getNextGuideQuestion(
         \Illuminate\Database\Eloquent\Collection $categories,
         \App\Models\GuideCategory $category,
-        \App\Models\GuideQuestion $question,
-        \App\Models\ServiceType $serviceType = NULL
+        \App\Models\GuideQuestion $question
     ) {
         $found = false;
+
+        $serviceType = $this::getSelectedServiceType();
 
         // Brute force it, although there may be a better way...
         foreach ($categories as $sidebarCategory) {
@@ -86,12 +109,12 @@ class SubmissionController extends Controller
         Request $request,
         \Illuminate\Database\Eloquent\Collection $categories,
         \App\Models\GuideCategory $category,
-        \App\Models\GuideQuestion $question,
-        \App\Models\ServiceType $serviceType = NULL
+        \App\Models\GuideQuestion $question
     ) {
 
         Log::debug(__FUNCTION__ . '(); question: ' . $question->title);
 
+        // Discover the next guide question
         $nextQuestion = $this->getNextGuideQuestion(
             $categories,
             $category,
@@ -112,7 +135,8 @@ class SubmissionController extends Controller
                 'currentCategory' => $category,
                 'currentQuestion' => $question,
                 'nextQuestion' => $nextQuestion,
-                'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : '')
+                'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : ''),
+                'currentServiceType' => $this::getSelectedServiceType()
             ]
         );
     }

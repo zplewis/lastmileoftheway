@@ -39,10 +39,7 @@ Route::get('/support', function () {
 
 Route::prefix('guide')->group(function() {
 
-    $serviceType = null;
-    if (session('service-type-selection')) {
-        $serviceType = \App\Models\ServiceType::find(session('service-type-selection'))->first();
-    }
+    $serviceType = SubmissionController::getSelectedServiceType();
 
     Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
 
@@ -73,14 +70,13 @@ Route::prefix('guide')->group(function() {
             // Log::debug(__FUNCTION__ . '(); route path: ' . $path);
             Route::get(
                 $path,
-                function() use ($categories, $category, $question, $serviceType) {
+                function() use ($categories, $category, $question) {
                     return App::call(
                         '\App\Http\Controllers\SubmissionController@load',
                         [
                             'categories' => $categories,
                             'category' => $category,
                             'question' => $question,
-                            'serviceType' => $serviceType
                         ]
                     );
                 }

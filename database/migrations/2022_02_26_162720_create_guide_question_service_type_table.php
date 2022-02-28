@@ -15,7 +15,7 @@ class CreateGuideQuestionServiceTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('guide_question_service_types', function (Blueprint $table) {
+        Schema::create('guide_question_service_type', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(GuideQuestion::class)->constrained();
@@ -30,6 +30,6 @@ class CreateGuideQuestionServiceTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guide_question_service_types');
+        Schema::dropIfExists('guide_question_service_type');
     }
 }
