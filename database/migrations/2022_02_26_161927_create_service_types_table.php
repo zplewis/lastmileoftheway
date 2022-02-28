@@ -18,6 +18,7 @@ class CreateServiceTypesTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('description')->nullable();
+            $table->string('bullet_points', 2500)->nullable();
         });
     }
 

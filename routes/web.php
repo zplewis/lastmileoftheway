@@ -42,13 +42,14 @@ Route::prefix('guide')->group(function() {
     $serviceType = null;
     if (session('service-type-selection')) {
         $serviceType = \App\Models\ServiceType::find(session('service-type-selection'))->first();
-        Log::debug(__FUNCTION__ . '(); current service type: ' . $serviceType->title);
     }
+
+    Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
 
     $categories = \App\Models\GuideCategory::orderBy('order')->get();
 
     foreach ($categories as $category) {
-        Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
+        // Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
 
         // Start off with all questions for the current guide category.
         // However, if there is a service type selected by the user, then only keep those that
@@ -69,7 +70,7 @@ Route::prefix('guide')->group(function() {
         // For each question type, create a get and post route
         foreach ($questions as $question) {
             $path = $category->uri . '/' . $question->uri;
-            Log::debug(__FUNCTION__ . '(); route path: ' . $path);
+            // Log::debug(__FUNCTION__ . '(); route path: ' . $path);
             Route::get(
                 $path,
                 function() use ($categories, $category, $question, $serviceType) {

@@ -13,4 +13,9 @@ class ServiceType extends Model
     {
         return $this->belongsToMany(GuideQuestion::class);
     }
+
+    public function titleLower()
+    {
+        return strtolower($this->title);
+    }
 }

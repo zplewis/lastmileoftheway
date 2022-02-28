@@ -74,9 +74,7 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'order' => 1,
-                'description' => 'If known, specify the location of the service. The address will
-                be validated with Google Maps to ensure it is accurate and can be found easily via
-                GPS by traveling attendees. If the location is not known yet, that\'s okay.'
+                'description' => 'Which type of service best suits your needs?'
             ],
             [
                 'guide_category_id' => $customizeServiceId,
