@@ -158,6 +158,10 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
+> Note that if you change a column name and a migration fails, check routes/web.php.
+> It seems that somehow, routes/web.php is executed before other code and holds on to previous
+> column names.
+
 Use this code within a Blade template to see what is currently in the session:
 
 ```php

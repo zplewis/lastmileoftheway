@@ -28,6 +28,10 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    /**
+     * Retrieves questions for a given category based on whether a service type has been selected
+     * or not.
+     */
     public static function getQuestionsByCategoryByServiceType(
         \App\Models\GuideCategory $category,
         \App\Models\ServiceType $serviceType = NULL

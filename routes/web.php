@@ -43,10 +43,7 @@ Route::prefix('guide')->group(function() {
 
     Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
 
-    // TODO: Use 'item_order' here
-    // $categories = \App\Models\GuideCategory::orderBy('order')->get();
     $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
-    // $categories = \App\Models\GuideCategory::all();
 
     foreach ($categories as $category) {
         // Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
