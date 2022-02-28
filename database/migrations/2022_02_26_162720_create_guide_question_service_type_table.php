@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use \App\Models\GuideQuestion;
 use \App\Models\ServiceType;
 
-class CreateGuideQuestionServiceTypesTable extends Migration
+class CreateGuideQuestionServiceTypeTable extends Migration
 {
     /**
      * Run the migrations.

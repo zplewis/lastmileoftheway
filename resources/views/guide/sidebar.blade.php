@@ -16,7 +16,7 @@
             </button>
             <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarCategory->uri }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    @foreach ($sidebarCategory->guideQuestions()->orderBy('order')->get() as $question)
+                    @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByCategoryByServiceType($sidebarCategory, \App\Http\Controllers\SubmissionController::getSelectedServiceType()) as $question)
                         <li>
                             <!-- Highlight the current page in black -->
                             <a href="/{{ $question->pageUri() }}"

@@ -28,6 +28,36 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    public static function getQuestionsByCategoryByServiceType(
+        \App\Models\GuideCategory $category,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        $questions = $category->guideQuestions()->orderBy('order')->get();
+
+        if (!$serviceType) {
+            return $questions;
+        }
+
+        // Brute force way to do it
+        $filtered = collect();
+
+        foreach ($questions as $question) {
+
+            $found = $question->serviceTypes()->find($serviceType->id);
+
+            // Log::debug(__FUNCTION__ . '(); question text: ' . $question->title);
+            // Log::debug(__FUNCTION__ . '(); service types for question (#1): ', $test);
+
+            if (!$found) {
+                continue;
+            }
+
+            $filtered->push($question);
+        }
+
+        return $filtered;
+    }
+
     /**
      * Store answers to the current question to the session. When on the final page in next steps,
      * save the answers to the database.
@@ -78,13 +108,10 @@ class SubmissionController extends Controller
 
             Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
 
-            $questions = $sidebarCategory->guideQuestions();
-
-            if ($serviceType) {
-                $questions = $questions->wherePivot('service_type', $serviceType);
-            }
-
-            $questions = $questions->orderBy('order')->get();
+            $questions = $this::getQuestionsByCategoryByServiceType(
+                $sidebarCategory,
+                $serviceType
+            );
 
             foreach ($questions as $sidebarQuestion) {
                 if ($found) {
