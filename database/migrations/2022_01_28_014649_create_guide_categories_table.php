@@ -18,7 +18,7 @@ class CreateGuideCategoriesTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('uri');
-            $table->integer('order');
+            $table->integer('item_order');
         });
     }
 

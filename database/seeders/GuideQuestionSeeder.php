@@ -28,7 +28,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'take-a-breath',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 1,
+                'item_order' => 1,
                 'description' => 'The site will guide you through thinking about the different parts
                 of the service. All fields are required unless otherwise indicated. Please note that
                 this site does not create a <strong>program</strong>, but a liturgy (order of
@@ -43,7 +43,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'names',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 1,
+                'item_order' => 1,
                 'description' => ''
             ],
             [
@@ -53,7 +53,7 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include a <a href="/resources/glossary#viewing" title="Glossary -
                 viewing" target="_blank">viewing</a> one hour prior to start of service',
                 'optional_html_id' => 'hasViewing',
-                'order' => 2,
+                'item_order' => 2,
                 'description' => 'Include relevant dates about the deceased that may be included on a program.'
             ],
             [
@@ -62,7 +62,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'venue',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 3,
+                'item_order' => 3,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
                 GPS by traveling attendees. If the location is not known yet, that\'s okay.'
@@ -73,7 +73,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'service-type',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 1,
+                'item_order' => 1,
                 'description' => 'Which type of service best suits your needs?'
             ],
             [
@@ -82,7 +82,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'processional',
                 'optional' => 'Include a Processional in this service',
                 'optional_html_id' => 'hasProcessional',
-                'order' => 2,
+                'item_order' => 2,
                 'description' => Definitions::where('term', 'processional')->first()->full_text
             ],
             [
@@ -91,7 +91,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'call-to-worship',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 3,
+                'item_order' => 3,
                 'description' => 'The opening words of the service usually spoken by the officiating minister.'
             ],
             [
@@ -100,7 +100,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'invocation',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 4,
+                'item_order' => 4,
                 'description' => Definitions::where('term', 'invocation')->first()->full_text
             ],
             [
@@ -109,7 +109,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'musical-selection-1',
                 'optional' => 'Include musical selection #1 in this service',
                 'optional_html_id' => 'hasMusicalSelection1',
-                'order' => 5,
+                'item_order' => 5,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .
                 ' While some examples are included below, feel free to select one not included
                 here.'
@@ -120,7 +120,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'old-testament',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 6,
+                'item_order' => 6,
                 'description' => Definitions::where('term', 'old testament scripture reading')->first()->full_text
             ],
             [
@@ -129,7 +129,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'new-testament',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 7,
+                'item_order' => 7,
                 'description' => Definitions::where('term', 'new testament scripture reading')->first()->full_text
             ],
             [
@@ -138,7 +138,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'prayer-of-comfort',
                 'optional' => 'Include Prayer of Comfort in this service',
                 'optional_html_id' => 'hasPrayerOfComfort',
-                'order' => 8,
+                'item_order' => 8,
                 'description' => Definitions::where('term', 'prayer of comfort')->first()->full_text
             ],
             [
@@ -147,7 +147,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'musical-selection-2',
                 'optional' => 'Include musical selection #2 in this service',
                 'optional_html_id' => 'hasMusicalSelection2',
-                'order' => 9,
+                'item_order' => 9,
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
@@ -156,7 +156,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'reflections',
                 'optional' => 'Include Reflections (2 Minutes) in this service',
                 'optional_html_id' => 'hasReflections',
-                'order' => 10,
+                'item_order' => 10,
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
@@ -165,7 +165,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'acknowledgements',
                 'optional' => 'Include Acknowledgements in this service',
                 'optional_html_id' => 'hasAcknowledgements',
-                'order' => 11,
+                'item_order' => 11,
                 'description' => Definitions::where('term', 'acknowledgements')->first()->short_text
             ],
             [
@@ -174,7 +174,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'musical-selection-3',
                 'optional' => 'Include musical selection #3 in this service',
                 'optional_html_id' => 'hasMusicalSelection3',
-                'order' => 12,
+                'item_order' => 12,
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
@@ -183,7 +183,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'sermon',
                 'optional' => 'Include sermon in this service',
                 'optional_html_id' => 'hasSermon',
-                'order' => 13,
+                'item_order' => 13,
                 'description' => Definitions::where('term', 'eulogy')->first()->full_text
             ],
             [
@@ -192,7 +192,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'mortician',
                 'optional' => 'Include Mortician\'s Brief in this service',
                 'optional_html_id' => 'hasMorticiansBrief',
-                'order' => 14,
+                'item_order' => 14,
                 'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
             ],
             [
@@ -201,7 +201,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'recessional',
                 'optional' => 'Include Recessional in this service',
                 'optional_html_id' => 'hasRecessional',
-                'order' => 15,
+                'item_order' => 15,
                 'description' => Definitions::where('term', 'recessional')->first()->full_text
             ],
             [
@@ -210,7 +210,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'burial',
                 'optional' => 'Include Burial in this service',
                 'optional_html_id' => 'hasBurial',
-                'order' => 16,
+                'item_order' => 16,
                 'description' => Definitions::where('term', 'committal')->first()->full_text
             ],
             [
@@ -219,7 +219,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'summary',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 1,
+                'item_order' => 1,
                 'description' => 'Please review your selections. Click Edit for any section to
                 modify that part of the service.'
             ],
@@ -229,7 +229,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'questions',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 2,
+                'item_order' => 2,
                 'description' => 'Here are some more questions to ask your question or funeral home.'
             ],
             [
@@ -238,7 +238,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'feedback',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'order' => 3,
+                'item_order' => 3,
                 'description' => 'Was this site helpful to you? What did this process do well? What
                 could be better? Please let us know using the feedback form below.'
             ],

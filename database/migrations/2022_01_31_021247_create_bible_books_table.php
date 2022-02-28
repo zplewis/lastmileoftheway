@@ -19,7 +19,7 @@ class CreateBibleBooksTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->foreignIdFor(Testament::class)->constrained();
-            $table->integer('order');
+            $table->integer('item_order');
         });
     }
 

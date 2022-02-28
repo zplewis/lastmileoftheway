@@ -43,8 +43,10 @@ Route::prefix('guide')->group(function() {
 
     Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
 
+    // TODO: Use 'item_order' here
     // $categories = \App\Models\GuideCategory::orderBy('order')->get();
-    $categories = \App\Models\GuideCategory::all();
+    $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
+    // $categories = \App\Models\GuideCategory::all();
 
     foreach ($categories as $category) {
         // Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
@@ -58,7 +60,7 @@ Route::prefix('guide')->group(function() {
             $questions = $questions->wherePivot('service_type', $serviceType);
         }
 
-        $questions = $questions->orderBy('order')->get();
+        $questions = $questions->orderBy('item_order')->get();
 
         // Add a redirect for /guide
         if ($category->id === 1) {

@@ -22,269 +22,269 @@ class BibleBookSeeder extends Seeder
             $oldTestament => [
                 [
                     'name' => 'Genesis',
-                    'order' => 1
+                    'item_order' => 1
                 ],
                 [
                     'name' => 'Exodus',
-                    'order' => 2
+                    'item_order' => 2
                 ],
                 [
                     'name' => 'Leviticus',
-                    'order' => 3
+                    'item_order' => 3
                 ],
                 [
                     'name' => 'Numbers',
-                    'order' => 4
+                    'item_order' => 4
                 ],
                 [
                     'name' => 'Deuteronomy',
-                    'order' => 5
+                    'item_order' => 5
                 ],
                 [
                     'name' => 'Joshua',
-                    'order' => 6
+                    'item_order' => 6
                 ],
                 [
                     'name' => 'Judges ',
-                    'order' => 7
+                    'item_order' => 7
                 ],
                 [
                     'name' => 'Ruth',
-                    'order' => 8
+                    'item_order' => 8
                 ],
                 [
                     'name' => '1 Samuel',
-                    'order' => 9
+                    'item_order' => 9
                 ],
                 [
                     'name' => '2 Samuel',
-                    'order' => 10
+                    'item_order' => 10
                 ],
                 [
                     'name' => '1 Kings',
-                    'order' => 11
+                    'item_order' => 11
                 ],
                 [
                     'name' => '2 Kings',
-                    'order' => 12
+                    'item_order' => 12
                 ],
                 [
                     'name' => '1 Chronicles',
-                    'order' => 13
+                    'item_order' => 13
                 ],
                 [
                     'name' => '2 Chronicles',
-                    'order' => 14
+                    'item_order' => 14
                 ],
                 [
                     'name' => 'Ezra',
-                    'order' => 15
+                    'item_order' => 15
                 ],
                 [
                     'name' => 'Nehemiah',
-                    'order' => 16
+                    'item_order' => 16
                 ],
                 [
                     'name' => 'Esther',
-                    'order' => 17
+                    'item_order' => 17
                 ],
                 [
                     'name' => 'Job',
-                    'order' => 18
+                    'item_order' => 18
                 ],
                 [
                     'name' => 'Psalm',
-                    'order' => 19
+                    'item_order' => 19
                 ],
                 [
                     'name' => 'Proverbs',
-                    'order' => 20
+                    'item_order' => 20
                 ],
                 [
                     'name' => 'Ecclesiastes',
-                    'order' => 21
+                    'item_order' => 21
                 ],
                 [
                     'name' => 'Song of Solomon',
-                    'order' => 22
+                    'item_order' => 22
                 ],
                 [
                     'name' => 'Isaiah',
-                    'order' => 23
+                    'item_order' => 23
                 ],
                 [
                     'name' => 'Jeremiah',
-                    'order' => 24
+                    'item_order' => 24
                 ],
                 [
                     'name' => 'Lamentations',
-                    'order' => 25
+                    'item_order' => 25
                 ],
                 [
                     'name' => 'Ezekiel',
-                    'order' => 26
+                    'item_order' => 26
                 ],
                 [
                     'name' => 'Daniel',
-                    'order' => 27
+                    'item_order' => 27
                 ],
                 [
                     'name' => 'Hosea',
-                    'order' => 28
+                    'item_order' => 28
                 ],
                 [
                     'name' => 'Joel',
-                    'order' => 29
+                    'item_order' => 29
                 ],
                 [
                     'name' => 'Amos',
-                    'order' => 30
+                    'item_order' => 30
                 ],
                 [
                     'name' => 'Obadiah',
-                    'order' => 31
+                    'item_order' => 31
                 ],
                 [
                     'name' => 'Jonah',
-                    'order' => 32
+                    'item_order' => 32
                 ],
                 [
                     'name' => 'Micah',
-                    'order' => 33
+                    'item_order' => 33
                 ],
                 [
                     'name' => 'Nahum',
-                    'order' => 34
+                    'item_order' => 34
                 ],
                 [
                     'name' => 'Habakkuk',
-                    'order' => 35
+                    'item_order' => 35
                 ],
                 [
                     'name' => 'Zephaniah',
-                    'order' => 36
+                    'item_order' => 36
                 ],
                 [
                     'name' => 'Haggai',
-                    'order' => 37
+                    'item_order' => 37
                 ],
                 [
                     'name' => 'Zechariah',
-                    'order' => 38
+                    'item_order' => 38
                 ],
                 [
                     'name' => 'Malachi',
-                    'order' => 39
+                    'item_order' => 39
                 ],
             ],
             $newTestament => [
                 [
                     'name' => 'Matthew',
-                    'order' => 40
+                    'item_order' => 40
                 ],
                 [
                     'name' => 'Mark',
-                    'order' => 41
+                    'item_order' => 41
                 ],
                 [
                     'name' => 'Luke',
-                    'order' => 42
+                    'item_order' => 42
                 ],
                 [
                     'name' => 'John',
-                    'order' => 43
+                    'item_order' => 43
                 ],
                 [
                     'name' => 'Acts',
-                    'order' => 44
+                    'item_order' => 44
                 ],
                 [
                     'name' => 'Romans',
-                    'order' => 45
+                    'item_order' => 45
                 ],
                 [
                     'name' => '1 Corinthians',
-                    'order' => 46
+                    'item_order' => 46
                 ],
                 [
                     'name' => '2 Corinthians',
-                    'order' => 47
+                    'item_order' => 47
                 ],
                 [
                     'name' => 'Galatians',
-                    'order' => 48
+                    'item_order' => 48
                 ],
                 [
                     'name' => 'Ephesians',
-                    'order' => 49
+                    'item_order' => 49
                 ],
                 [
                     'name' => 'Philippians',
-                    'order' => 50
+                    'item_order' => 50
                 ],
                 [
                     'name' => 'Colossians',
-                    'order' => 51
+                    'item_order' => 51
                 ],
                 [
                     'name' => '1 Thessalonians',
-                    'order' => 52
+                    'item_order' => 52
                 ],
                 [
                     'name' => '2 Thessalonians',
-                    'order' => 53
+                    'item_order' => 53
                 ],
                 [
                     'name' => '1 Timothy',
-                    'order' => 54
+                    'item_order' => 54
                 ],
                 [
                     'name' => '2 Timothy',
-                    'order' => 55
+                    'item_order' => 55
                 ],
                 [
                     'name' => 'Titus',
-                    'order' => 56
+                    'item_order' => 56
                 ],
                 [
                     'name' => 'Philemon',
-                    'order' => 57
+                    'item_order' => 57
                 ],
                 [
                     'name' => 'Hebrews',
-                    'order' => 58
+                    'item_order' => 58
                 ],
                 [
                     'name' => 'James',
-                    'order' => 59
+                    'item_order' => 59
                 ],
                 [
                     'name' => '1 Peter',
-                    'order' => 60
+                    'item_order' => 60
                 ],
                 [
                     'name' => '2 Peter',
-                    'order' => 61
+                    'item_order' => 61
                 ],
                 [
                     'name' => '1 John',
-                    'order' => 62
+                    'item_order' => 62
                 ],
                 [
                     'name' => '2 John',
-                    'order' => 63
+                    'item_order' => 63
                 ],
                 [
                     'name' => '3 John',
-                    'order' => 64
+                    'item_order' => 64
                 ],
                 [
                     'name' => 'Jude',
-                    'order' => 65
+                    'item_order' => 65
                 ],
                 [
                     'name' => 'Revelation',
-                    'order' => 66
+                    'item_order' => 66
                 ],
             ]
         ];

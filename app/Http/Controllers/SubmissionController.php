@@ -32,7 +32,7 @@ class SubmissionController extends Controller
         \App\Models\GuideCategory $category,
         \App\Models\ServiceType $serviceType = NULL
     ) {
-        $questions = $category->guideQuestions()->orderBy('order')->get();
+        $questions = $category->guideQuestions()->orderBy('item_order')->get();
 
         if (!$serviceType) {
             return $questions;

@@ -21,7 +21,7 @@ class CreateFAQQuestionsTable extends Migration
             // https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html
             $table->foreignIdFor(FAQCategories::class)->constrained();
             $table->string('description');
-            $table->integer('order')->nullable();
+            $table->integer('item_order')->nullable();
         });
     }
 

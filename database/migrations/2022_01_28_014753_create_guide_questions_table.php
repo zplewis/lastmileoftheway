@@ -20,7 +20,7 @@ class CreateGuideQuestionsTable extends Migration
             $table->foreignIdFor(GuideCategory::class)->constrained();
             $table->string('title');
             $table->string('uri');
-            $table->integer('order');
+            $table->integer('item_order');
             // If HTML is included here, display it as the text for a switch indicating that this
             // guide question can be excluded from the service if desired
             $table->string('optional')->nullable();

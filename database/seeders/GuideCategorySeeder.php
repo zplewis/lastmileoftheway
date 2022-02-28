@@ -18,22 +18,22 @@ class GuideCategorySeeder extends Seeder
             [
                 'title' => 'Getting Started',
                 'uri' => 'getting-started',
-                'order' => 1
+                'item_order' => 1
             ],
             [
                 'title' => 'Demographics',
                 'uri' => 'demographics',
-                'order' => 2
+                'item_order' => 2
             ],
             [
                 'title' => 'Customize Service',
                 'uri' => 'customize-service',
-                'order' => 3
+                'item_order' => 3
             ],
             [
                 'title' => 'Next Steps',
                 'uri' => 'next-steps',
-                'order' => 4
+                'item_order' => 4
             ],
         ]);
     }
