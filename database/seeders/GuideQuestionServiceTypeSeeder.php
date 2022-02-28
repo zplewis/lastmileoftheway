@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use \App\Models\GuideQuestion;
 use \App\Models\ServiceType;
+use \App\Models\GuideCategory;
 
 class GuideQuestionServiceTypeSeeder extends Seeder
 {
@@ -15,9 +16,14 @@ class GuideQuestionServiceTypeSeeder extends Seeder
      */
     public function run()
     {
-        $question = GuideQuestion::where('uri', 'take-a-breath')->first();
-        $types = ServiceType::all();
+        // It seems like it would be faster to attach all questions and then
+        // only detach the ones that don't apply...
+        $allQuestions = GuideQuestion::all();
+        $allServiceTypes = ServiceType::all();
 
-        $question->serviceTypes()->attach($types);
+        foreach ($allQuestions as $question) {
+            $question->serviceTypes()->attach($allServiceTypes);
+        }
+
     }
 }
