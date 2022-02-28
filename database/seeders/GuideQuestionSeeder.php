@@ -19,6 +19,7 @@ class GuideQuestionSeeder extends Seeder
         $gettingStartedId = GuideCategory::where('title', 'Getting Started')->first()->id;
         $demograhpicsId = GuideCategory::where('title', 'Demographics')->first()->id;
         $customizeServiceId = GuideCategory::where('title', 'Customize Service')->first()->id;
+        $nextStepsId = GuideCategory::where('title', 'Next Steps')->first()->id;
 
         DB::table('guide_questions')->insert([
             [
@@ -29,11 +30,12 @@ class GuideQuestionSeeder extends Seeder
                 'optional_html_id' => NULL,
                 'order' => 1,
                 'description' => 'The site will guide you through thinking about the different parts
-                of the service. All fields are required unless otherwise indicated. If you ever need
-                help, feel free to check our <a href="/resources/glossary" title="Glossary">
-                glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. Still have
-                questions? Feel free to use <a href="/support" title="Support">the contact form</a>
-                to more support.'
+                of the service. All fields are required unless otherwise indicated. Please note that
+                this site does not create a <strong>program</strong>, but a liturgy (order of
+                service) to help you plan the service and determine the people and details that
+                are involved.<br />If you ever need help, feel free to check our <a href="/resources/glossary" title="Glossary">
+                glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. At the end, you\'ll
+                have the opportunity to submit feedback on your service planning experience.'
             ],
             [
                 'guide_category_id' => $demograhpicsId,
@@ -84,6 +86,163 @@ class GuideQuestionSeeder extends Seeder
                 'optional_html_id' => 'hasProcessional',
                 'order' => 2,
                 'description' => Definitions::where('term', 'processional')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Call to Worship',
+                'uri' => 'call-to-worship',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 3,
+                'description' => 'The opening words of the service usually spoken by the officiating minister.'
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Invocation',
+                'uri' => 'invocation',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 4,
+                'description' => Definitions::where('term', 'invocation')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Musical Selection #1',
+                'uri' => 'musical-selection-1',
+                'optional' => 'Include musical selection #1 in this service',
+                'optional_html_id' => 'hasMusicalSelection1',
+                'order' => 5,
+                'description' => Definitions::where('term', 'hymn')->first()->full_text .
+                ' While some examples are included below, feel free to select one not included
+                here.'
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Old Testament Reading',
+                'uri' => 'old-testament',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 6,
+                'description' => Definitions::where('term', 'old testament scripture reading')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'New Testament Reading',
+                'uri' => 'new-testament',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 7,
+                'description' => Definitions::where('term', 'new testament scripture reading')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Prayer of Comfort',
+                'uri' => 'prayer-of-comfort',
+                'optional' => 'Include Prayer of Comfort in this service',
+                'optional_html_id' => 'hasPrayerOfComfort',
+                'order' => 8,
+                'description' => Definitions::where('term', 'prayer of comfort')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Musical Selection #2',
+                'uri' => 'musical-selection-2',
+                'optional' => 'Include musical selection #2 in this service',
+                'optional_html_id' => 'hasMusicalSelection2',
+                'order' => 9,
+                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Reflections (2 Minutes)',
+                'uri' => 'reflections',
+                'optional' => 'Include Reflections (2 Minutes) in this service',
+                'optional_html_id' => 'hasReflections',
+                'order' => 10,
+                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Acknowledgements',
+                'uri' => 'acknowledgements',
+                'optional' => 'Include Acknowledgements in this service',
+                'optional_html_id' => 'hasAcknowledgements',
+                'order' => 11,
+                'description' => Definitions::where('term', 'acknowledgements')->first()->short_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Musical Selection #3',
+                'uri' => 'musical-selection-3',
+                'optional' => 'Include musical selection #3 in this service',
+                'optional_html_id' => 'hasMusicalSelection3',
+                'order' => 12,
+                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Sermon',
+                'uri' => 'sermon',
+                'optional' => 'Include sermon in this service',
+                'optional_html_id' => 'hasSermon',
+                'order' => 13,
+                'description' => Definitions::where('term', 'eulogy')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Mortician\'s Brief',
+                'uri' => 'mortician',
+                'optional' => 'Include Mortician\'s Brief in this service',
+                'optional_html_id' => 'hasMorticiansBrief',
+                'order' => 14,
+                'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Recessional',
+                'uri' => 'recessional',
+                'optional' => 'Include Recessional in this service',
+                'optional_html_id' => 'hasRecessional',
+                'order' => 15,
+                'description' => Definitions::where('term', 'recessional')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Burial',
+                'uri' => 'burial',
+                'optional' => 'Include Burial in this service',
+                'optional_html_id' => 'hasBurial',
+                'order' => 16,
+                'description' => Definitions::where('term', 'committal')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $nextStepsId,
+                'title' => 'Summary',
+                'uri' => 'summary',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 1,
+                'description' => 'Please review your selections. Click Edit for any section to
+                modify that part of the service.'
+            ],
+            [
+                'guide_category_id' => $nextStepsId,
+                'title' => 'Additional Questions',
+                'uri' => 'questions',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 2,
+                'description' => 'Here are some more questions to ask your question or funeral home.'
+            ],
+            [
+                'guide_category_id' => $nextStepsId,
+                'title' => 'Submit Feedback',
+                'uri' => 'feedback',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'order' => 3,
+                'description' => 'Was this site helpful to you? What did this process do well? What
+                could be better? Please let us know using the feedback form below.'
             ],
         ]);
     }
