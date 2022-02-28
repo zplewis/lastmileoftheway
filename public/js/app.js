@@ -5413,6 +5413,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     } finally {
       _iterator2.f();
     }
+  }
+
+  var requestApptInput = document.getElementById('request-appt');
+
+  if (requestApptInput) {
+    requestApptInput.addEventListener('change', function (event) {
+      var apptTypeDiv = document.getElementById('div-appointment-type');
+      var contactApptType = document.getElementById('contactApptType'); // Default to invisible
+
+      var className = event.target.checked ? 'col-12' : 'col-12 d-none';
+      apptTypeDiv.className = className;
+
+      if (!event.target.checked) {
+        // The empty string is different from null as a value
+        contactApptType.value = '';
+      }
+    });
   } // confirms whether the user is sure if they want to complete the given action
 
 })(window.utilities = window.utilities || {}, window.jQuery, window, document, window.axios);

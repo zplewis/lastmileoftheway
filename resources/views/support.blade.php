@@ -20,7 +20,7 @@
 
     <p class="lead">Whether your have questions, feedback, or both, feel free to reach out to
         us by completing this form. If you prefer email, you can also send a message to
-        <a href="mailto:support@lastmileoftheway.com" title="support@lastmileoftheway.com">
+        <a href="mailto:support@lastmileoftheway.com" title="support@lastmileoftheway.com" target="_blank">
             support@lastmileoftheway.com
         </a>.
     </p>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="col-12 d-none" id="div-appointment-type">
-                @include('guide.select', ['id' => 'contactApptType', 'labelText' => 'Appointment Type', 'collection' => \App\Models\ApptType::all(), 'textProp' => 'name'])
+                @include('guide.select', ['id' => 'contactApptType', 'labelText' => 'Appointment Type', 'collection' => \App\Models\ApptType::orderBy('name')->get(), 'textProp' => 'name'])
             </div>
             <div class="col-12">
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Send Message</button>
