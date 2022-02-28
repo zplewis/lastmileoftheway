@@ -40,6 +40,10 @@
                 <input type="email" class="form-control" id="user-email" required />
             </div>
             <div class="col-12">
+                <label for="user-phone" class="form-label">Phone number</label>
+                <input type="tel" class="form-control" id="user-phone" required />
+            </div>
+            <div class="col-12">
                 <label for="contact-message" class="form-label">Your message for us</label>
                 <textarea class="form-control" id="contact-message" rows="5" required></textarea>
             </div>
@@ -48,11 +52,14 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="request-appt" />
                     <label class="form-check-label" for="request-appt">Check this box if you would
                         like to request a 15-minute 1-on-1 consultation for more assistance. <i>
-                            Please note that you must have a complete service plan in order to
+                            Please note that you must have a completed order of service in order to
                             request a consultation.
                         </i>
                     </label>
                 </div>
+            </div>
+            <div class="col-12 d-none" id="div-appointment-type">
+                @include('guide.select', ['id' => 'contactApptType', 'labelText' => 'Appointment Type', 'collection' => \App\Models\ApptType::all(), 'textProp' => 'name'])
             </div>
             <div class="col-12">
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Send Message</button>
