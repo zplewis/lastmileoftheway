@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 class SubmissionController extends Controller
 {
@@ -42,7 +43,7 @@ class SubmissionController extends Controller
             return $questions;
         }
 
-        // Brute force way to do it
+        // Brute force way to do it; I'm pretty sure there is a better way.
         $filtered = collect();
 
         foreach ($questions as $question) {
@@ -68,7 +69,7 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        Log::debug('about to validate the page...');
+        Log::debug(__FUNCTION__ . 'about to validate the page...');
         // Validate and store the form submission.
         $validated = $this->validatePage($request);
 
@@ -237,5 +238,60 @@ class SubmissionController extends Controller
         }
 
         return $validated;
+    }
+
+    public static function generateRoutes()
+    {
+        $serviceType = SubmissionController::getSelectedServiceType();
+
+        Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
+
+        $categories = \App\Models\GuideCategory::all();
+
+        foreach ($categories as $category) {
+            // Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
+
+            // Start off with all questions for the current guide category.
+            // However, if there is a service type selected by the user, then only keep those that
+            // apply to that selected service type.
+            $questions = $category->guideQuestions();
+
+            if ($serviceType) {
+                $questions = $questions->wherePivot('service_type', $serviceType);
+            }
+
+            $questions = $questions->get();
+
+            // Add a redirect for /guide
+            if ($category->id === 1) {
+                Route::permanentRedirect('', $category->uri . '/');
+            }
+
+            // For each question type, create a get and post route
+            foreach ($questions as $question) {
+                $path = $category->uri . '/' . $question->uri;
+                // Log::debug(__FUNCTION__ . '(); route path: ' . $path);
+                Route::get(
+                    $path,
+                    function() use ($categories, $category, $question) {
+                        return App::call(
+                            '\App\Http\Controllers\SubmissionController@load',
+                            [
+                                'categories' => $categories,
+                                'category' => $category,
+                                'question' => $question,
+                            ]
+                        );
+                    }
+                );
+
+                // Add a GET route for the first question in each section of the guide
+                if ($question->order === 1) {
+                    Route::permanentRedirect($category->uri . '/', $path);
+                }
+
+                Route::post($path, [SubmissionController::class, 'store']);
+            }
+        }
     }
 }

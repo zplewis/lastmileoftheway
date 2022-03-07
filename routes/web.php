@@ -39,57 +39,13 @@ Route::get('/support', function () {
 
 Route::prefix('guide')->group(function() {
 
-    $serviceType = SubmissionController::getSelectedServiceType();
+    // Put this code in a static method so that if problems occur, the fix is to
+    // 1. Comment out this method
+    // 2. Run all migrations and seeders
+    // 3. Uncomment this method
+    // 4. Run all migrations and seeders again
+    SubmissionController::generateRoutes();
 
-    Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
-
-    $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
-
-    foreach ($categories as $category) {
-        // Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
-
-        // Start off with all questions for the current guide category.
-        // However, if there is a service type selected by the user, then only keep those that
-        // apply to that selected service type.
-        $questions = $category->guideQuestions();
-
-        if ($serviceType) {
-            $questions = $questions->wherePivot('service_type', $serviceType);
-        }
-
-        $questions = $questions->orderBy('item_order')->get();
-
-        // Add a redirect for /guide
-        if ($category->id === 1) {
-            Route::permanentRedirect('', $category->uri . '/');
-        }
-
-        // For each question type, create a get and post route
-        foreach ($questions as $question) {
-            $path = $category->uri . '/' . $question->uri;
-            // Log::debug(__FUNCTION__ . '(); route path: ' . $path);
-            Route::get(
-                $path,
-                function() use ($categories, $category, $question) {
-                    return App::call(
-                        '\App\Http\Controllers\SubmissionController@load',
-                        [
-                            'categories' => $categories,
-                            'category' => $category,
-                            'question' => $question,
-                        ]
-                    );
-                }
-            );
-
-            // Add a GET route for the first question in each section of the guide
-            if ($question->order === 1) {
-                Route::permanentRedirect($category->uri . '/', $path);
-            }
-
-            Route::post($path, [SubmissionController::class, 'store']);
-        }
-    }
 });
 
 Route::prefix('resources')->group(function() {
