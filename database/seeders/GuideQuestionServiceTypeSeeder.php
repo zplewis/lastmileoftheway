@@ -30,8 +30,8 @@ class GuideQuestionServiceTypeSeeder extends Seeder
         $memorial = ServiceType::where('title', 'Memorial')->first();
 
         // Processional is funeral only
-        $memorial->guideQuestions()->detatch(GuideQuestion::where('uri', 'processional')->first()->id);
-        $graveside->guideQuestions()->detatch(GuideQuestion::where('uri', 'processional')->first()->id);
+        $memorial->guideQuestions()->detach(GuideQuestion::where('uri', 'processional')->first()->id);
+        $graveside->guideQuestions()->detach(GuideQuestion::where('uri', 'processional')->first()->id);
 
         // Musical selection #2 is not used for graveside service
         ServiceType::where('title', 'Graveside')->first()->guideQuestions()->detach(GuideQuestion::where('uri', 'musical-selection-2')->first()->id);
