@@ -199,6 +199,9 @@ This has already been completed in this code; this documentation is here for ref
 - Add support for URL parameters to select the service type automatically
 - Include all parts of service by default unless the user chose to disable them
   - Use "no" to show the user chose something, null or yes to make it checked!
+- If a service is selected and the users a guide question that is not a part of that selected service,
+  get the category name from that selected service and jump to the first guide question in that category.
+- Find a way to add date timestamp or something to prevent javascript caching
 - Finish adding all sidebar items to the database
 - Finish adding all songs to the database
 - Finish adding all scriptures to the database

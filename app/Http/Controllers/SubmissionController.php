@@ -269,13 +269,13 @@ class SubmissionController extends Controller
 
                 // Add a redirect for /guide
                 if ($category->item_order === 1) {
-                    Log::debug(__FUNCTION__ . '(); redirect added from / to ' . $category->uri . '/');
-                    Route::redirect('/', $category->uri . '/');
+                    Log::debug(__FUNCTION__ . '(); redirect added from / to /' . $category->uri);
+                    Route::redirect('/', '/' . $category->uri);
                 }
 
                 // For each question type, create a get and post route
                 foreach ($questions as $question) {
-                    $path = $category->uri . '/' . $question->uri;
+                    $path = '/' . $category->uri . '/' . $question->uri;
                     Log::debug(__FUNCTION__ . '(); route path: ' . $path);
                     Route::get(
                         $path,
@@ -293,8 +293,8 @@ class SubmissionController extends Controller
 
                     // Add a GET route for the first question in each section of the guide
                     if ($question->item_order === 1) {
-                        Log::debug(__FUNCTION__ . '(); redirect added from ' . $category->uri . '/' . ' to ' . $path);
-                        Route::redirect($category->uri . '/', $path);
+                        Log::debug(__FUNCTION__ . '(); redirect added from /' . $category->uri . ' to ' . $path);
+                        Route::redirect('/' . $category->uri, $path);
                     }
 
                     Route::post($path, [SubmissionController::class, 'store']);
