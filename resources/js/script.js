@@ -34,9 +34,20 @@
             // Is there a selected radio button? If so, then set the card header class differently
             const selectedButton = card.querySelector('input[type="radio"]:checked');
 
+            // Button text
+            const radioLabel = card.querySelector('label');
+
+            if (radioLabel) {
+                radioLabel.textContent = 'Select this service';
+            }
+
             let newClass = 'card-header py-3';
             if (selectedButton) {
                 newClass += ' text-white bg-primary border-primary';
+
+                if (radioLabel) {
+                    radioLabel.textContent = 'Service selected';
+                }
             }
 
             cardHeader.className = newClass;

@@ -195,6 +195,10 @@ This has already been completed in this code; this documentation is here for ref
 
 ## TODOs
 
+- Make sure all links work
+- Add support for URL parameters to select the service type automatically
+- Include all parts of service by default unless the user chose to disable them
+  - Use "no" to show the user chose something, null or yes to make it checked!
 - Finish adding all sidebar items to the database
 - Finish adding all songs to the database
 - Finish adding all scriptures to the database

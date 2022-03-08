@@ -20,7 +20,9 @@
                 <input type="radio" class="btn-check" name="service-type-selection" id="service-type-{{ $serviceType->titleLower() }}" autocomplete="off"
                 value="service-type-{{ $serviceType->titleLower() }}"
                 {{ strcasecmp(session('service-type-selection'), 'service-type-' . $serviceType->titleLower()) === 0 ? 'checked' : ''}} />
-                <label class="btn btn-outline-primary" for="service-type-{{ $serviceType->titleLower() }}">Select this service</label>
+                <label class="btn btn-outline-primary" for="service-type-{{ $serviceType->titleLower() }}">
+                    {{ strcasecmp(session('service-type-selection'), 'service-type-' . $serviceType->titleLower()) === 0 ? 'Service selected' : 'Select this service'}}
+                </label>
             </div> <!-- /.card-body -->
         </div> <!-- /.card -->
     </div> <!-- /.col for a card -->

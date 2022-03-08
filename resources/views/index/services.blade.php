@@ -17,7 +17,7 @@
             <li>Great for social distancing</li>
             <li>Weather-contingent</li>
           </ul>
-          <a href="{{ url('guide/') }}" role="button" class="w-100 btn btn-lg btn-outline-primary">Get started</a>
+          <a href="guide/" role="button" class="w-100 btn btn-lg btn-outline-primary">Get started</a>
         </div>
       </div>
     </div> <!-- /.col -->
@@ -33,7 +33,7 @@
               <li>What most people think of as a burial service</li>
               <li>Capacity dependent upon venue</li>
             </ul>
-            <a href="{{ url('guide/') }}" role="button" class="w-100 btn btn-lg btn-primary">Get started</a>
+            <a href="guide/" role="button" class="w-100 btn btn-lg btn-primary">Get started</a>
           </div>
         </div> <!-- /.card -->
       </div> <!-- /.col -->
@@ -50,7 +50,7 @@
             <li>Tends to be a shorter service</li>
             <li>Preaching optional</li>
           </ul>
-          <a href="{{ url('guide/') }}" role="button" class="w-100 btn btn-lg btn-outline-primary">Get started</a>
+          <a href="guide/" role="button" class="w-100 btn btn-lg btn-outline-primary">Get started</a>
         </div>
       </div>
     </div>

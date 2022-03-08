@@ -11,7 +11,7 @@ class ServiceType extends Model
 
     public function guideQuestions()
     {
-        return $this->belongToMany(GuideQuestion::class, 'guide_question_service_type', 'service_type_id', 'guide_question_id');
+        return $this->belongsToMany(GuideQuestion::class, 'guide_question_service_type', 'service_type_id', 'guide_question_id');
     }
 
     public function titleLower()

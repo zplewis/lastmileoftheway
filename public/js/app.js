@@ -5361,11 +5361,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         // Reset the card-header
         var cardHeader = card.querySelector('.card-header'); // Is there a selected radio button? If so, then set the card header class differently
 
-        var selectedButton = card.querySelector('input[type="radio"]:checked');
+        var selectedButton = card.querySelector('input[type="radio"]:checked'); // Button text
+
+        var radioLabel = card.querySelector('label');
+
+        if (radioLabel) {
+          radioLabel.textContent = 'Select this service';
+        }
+
         var newClass = 'card-header py-3';
 
         if (selectedButton) {
           newClass += ' text-white bg-primary border-primary';
+
+          if (radioLabel) {
+            radioLabel.textContent = 'Service selected';
+          }
         }
 
         cardHeader.className = newClass;
