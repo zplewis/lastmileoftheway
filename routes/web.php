@@ -37,12 +37,16 @@ Route::get('/support', function () {
     return view('support');
 });
 
+
+
 // Put this code in a static method so that if problems occur, the fix is to
 // 1. Comment out this method
 // 2. Run all migrations and seeders
 // 3. Uncomment this method
 // 4. Run all migrations and seeders again
 SubmissionController::generateRoutes();
+
+Route::redirect('/guide', '/guide/getting-started/take-a-breath');
 
 Route::prefix('resources')->group(function() {
     Route::get('/songs', function () {
