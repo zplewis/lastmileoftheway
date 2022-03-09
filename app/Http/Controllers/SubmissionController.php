@@ -169,7 +169,7 @@ class SubmissionController extends Controller
                 'currentQuestion' => $question,
                 'nextQuestion' => $nextQuestion,
                 'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : ''),
-                'currentServiceType' => $this::getSelectedServiceType()
+                'currentServiceType' => self::getSelectedServiceType()
             ]
         );
     }
