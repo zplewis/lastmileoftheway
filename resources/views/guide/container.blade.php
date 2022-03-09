@@ -25,7 +25,7 @@
             <div class="row g-3">
 
                 @if ($currentQuestion->optional)
-                    @include('guide.switch', ['id' => $currentQuestion->optional_html_id, 'labelText' => $currentQuestion->optional])
+                    @include('guide.switch', ['id' => $currentQuestion->optional_html_id, 'labelText' => $currentQuestion->optional ?? 'Include a ' . $currentQuestion->title . ' in this service'])
                 @endif
 
                 @yield('guide.content')

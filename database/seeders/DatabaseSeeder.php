@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             GuideQuestionSeeder::class,
             ApptTypeSeeder::class,
             GuideQuestionServiceTypeSeeder::class,
+            SermonTypeSeeder::class,
         ]);
     }
 }

@@ -89,8 +89,8 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $customizeServiceId,
                 'title' => 'Call to Worship',
                 'uri' => 'call-to-worship',
-                'optional' => NULL,
-                'optional_html_id' => NULL,
+                'optional' => 'Include Call to Worship to open the service',
+                'optional_html_id' => 'hasCallToWorship',
                 'item_order' => 3,
                 'description' => 'The opening words of the service usually spoken by the officiating minister.'
             ],
@@ -179,10 +179,10 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $customizeServiceId,
-                'title' => 'Sermon',
-                'uri' => 'sermon',
-                'optional' => 'Include sermon in this service',
-                'optional_html_id' => 'hasSermon',
+                'title' => 'Sermon Eulogy',
+                'uri' => 'eulogy',
+                'optional' => 'Include Sermon / Eulogy in this service',
+                'optional_html_id' => 'hasEulogy',
                 'item_order' => 13,
                 'description' => Definitions::where('term', 'eulogy')->first()->full_text
             ],
