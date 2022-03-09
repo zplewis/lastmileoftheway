@@ -46,7 +46,7 @@ Route::get('/support', function () {
 // 4. Run all migrations and seeders again
 SubmissionController::generateRoutes();
 
-Route::redirect('/guide', '/guide/getting-started/take-a-breath');
+// Route::redirect('/guide', '/guide/getting-started/take-a-breath');
 
 Route::prefix('resources')->group(function() {
     Route::get('/songs', function () {

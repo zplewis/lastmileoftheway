@@ -20,6 +20,7 @@ class CreateGuideQuestionServiceTypeTable extends Migration
             $table->timestamps();
             $table->foreignIdFor(GuideQuestion::class)->constrained();
             $table->foreignIdFor(ServiceType::class)->constrained();
+            $table->string('question_title')->nullable();
         });
     }
 

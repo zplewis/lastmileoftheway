@@ -30,14 +30,24 @@ class GuideQuestionServiceTypeSeeder extends Seeder
         $memorial = ServiceType::where('title', 'Memorial')->first();
 
         // Processional is funeral only
-        $memorial->guideQuestions()->detach(GuideQuestion::where('uri', 'processional')->first()->id);
-        $graveside->guideQuestions()->detach(GuideQuestion::where('uri', 'processional')->first()->id);
+        GuideQuestion::where('uri', 'processional')->first()->serviceTypes()->detach([$memorial->id, $graveside->id]);
 
         // Musical selection #2 is not used for graveside service
         ServiceType::where('title', 'Graveside')->first()->guideQuestions()->detach(GuideQuestion::where('uri', 'musical-selection-2')->first()->id);
         // Question about graveside service: are reflections not limited to two minutes?
         // Recommended selection type for musical selection #3 is solo
-        // There is no committal
+
+        // There is no committal for a memorial
+        GuideQuestion::where('uri', 'committal')->first()->serviceTypes()->detach([$memorial->id]);
+
+        // Keep benediction (solo, not coupled with committal) only for memorial
+        GuideQuestion::where('uri', 'benediction')->first()->serviceTypes()->detach([$graveside->id, $funeral->id]);
+
+        // There is no burial at a memorial
+        GuideQuestion::where('uri', 'burial')->first()->serviceTypes()->detach([$memorial->id]);
+
+        // No recessional at graveside; it should come after mortician's brief
+        GuideQuestion::where('uri', 'recessional')->first()->serviceTypes()->detach([$graveside->id]);
 
     }
 }

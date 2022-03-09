@@ -179,7 +179,7 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $customizeServiceId,
-                'title' => 'Sermon Eulogy',
+                'title' => 'Sermon / Eulogy',
                 'uri' => 'eulogy',
                 'optional' => 'Include Sermon / Eulogy in this service',
                 'optional_html_id' => 'hasEulogy',
@@ -188,11 +188,20 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $customizeServiceId,
+                'title' => 'Committal & Benediction',
+                'uri' => 'committal',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 14,
+                'description' => Definitions::where('term', 'committal')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
                 'title' => 'Mortician\'s Brief',
                 'uri' => 'mortician',
                 'optional' => 'Include Mortician\'s Brief in this service',
                 'optional_html_id' => 'hasMorticiansBrief',
-                'item_order' => 14,
+                'item_order' => 15,
                 'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
             ],
             [
@@ -201,7 +210,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'recessional',
                 'optional' => 'Include Recessional in this service',
                 'optional_html_id' => 'hasRecessional',
-                'item_order' => 15,
+                'item_order' => 16,
                 'description' => Definitions::where('term', 'recessional')->first()->full_text
             ],
             [
@@ -210,8 +219,17 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'burial',
                 'optional' => 'Include Burial in this service',
                 'optional_html_id' => 'hasBurial',
-                'item_order' => 16,
+                'item_order' => 17,
                 'description' => Definitions::where('term', 'committal')->first()->full_text
+            ],
+            [
+                'guide_category_id' => $customizeServiceId,
+                'title' => 'Benediction',
+                'uri' => 'benediction',
+                'optional' => 'Include Benediction in this service',
+                'optional_html_id' => 'hasBenediction',
+                'item_order' => 18,
+                'description' => Definitions::where('term', 'benediction')->first()->full_text
             ],
             [
                 'guide_category_id' => $nextStepsId,
