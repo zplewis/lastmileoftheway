@@ -37,6 +37,13 @@
             // Button text
             const radioLabel = card.querySelector('label');
 
+            // The form for the current question
+            const guideForm = document.getElementById('guide-form');
+
+            // Hidden input that determines whether the guide advances forward or stays on the
+            // current page on submit
+            const nextPage = document.getElementById('next-page');
+
             if (radioLabel) {
                 radioLabel.textContent = 'Select this service';
             }
@@ -51,6 +58,17 @@
             }
 
             cardHeader.className = newClass;
+
+            // Go ahead and select the service, which should change the left-hand side automatically
+            if (selectedButton && guideForm) {
+                // Make the form refresh the page instead of move forward so the user can select
+                // the service and see how the items on the left-hand side change
+                if (nextPage) {
+                    nextPage.value = '';
+                }
+
+                guideForm.submit();
+            }
         }
     }
 
