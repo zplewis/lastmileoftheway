@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
 use \App\Models\Scriptures;
+use \App\Models\SongType;
+use \App\Models\Song;
 use Illuminate\Support\Facades\Log;
 use \App\Http\Controllers\SubmissionController;
 
@@ -50,15 +52,22 @@ SubmissionController::generateRoutes();
 
 Route::prefix('resources')->group(function() {
     Route::get('/songs', function () {
-        return view('resources.songs');
+        return view(
+            'resources.songs',
+            [
+                'songTypes' =>  \App\Models\SongType::orderBy('name')->get(),
+                'songs' => \App\Models\Song::orderBy('song_type_id')->orderBy('name')->get()
+            ]
+        );
     });
+
     Route::get('/glossary', function () {
         return view(
             'resources.glossary',
             [
                 // https://stackoverflow.com/a/431930/1620794
                 'categories' => range('A', 'Z'),
-                'definitions' => Definitions::orderBy('term')->get()
+                'definitions' => \App\Models\Definitions::orderBy('term')->get()
             ]
         );
     });
@@ -70,4 +79,6 @@ Route::prefix('resources')->group(function() {
             ]
         );
     });
+
+
 });
