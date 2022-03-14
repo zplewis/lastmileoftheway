@@ -14,7 +14,7 @@
         <meta property="og:url" content="">
         <meta property="og:image" content="">
 
-        <link rel="manifest" href="mix-manifest.json">
+        <link rel="manifest" href="/mix-manifest.json">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <link rel="apple-touch-icon-precomposed" href="/icon.png" />

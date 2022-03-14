@@ -60,7 +60,7 @@ class SongSeeder extends Seeder
                 'song_type_id' => $hymnId,
                 'name' => 'It is Well',
                 'release_year' => null,
-                'artist' => null,
+                'artist' => 'Melissa Jean',
                 'album' => null,
                 'youtube_url' => 'https://www.youtube.com/embed/E6Td6we_WUc',
                 'spotify_url' => null
@@ -71,16 +71,16 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/CBKwV6oNYvw',
                 'spotify_url' => null
             ],
             [
                 'song_type_id' => $hymnId,
                 'name' => 'Holy, Holy, Holy',
                 'release_year' => null,
-                'artist' => null,
+                'artist' => 'Shirley Caesar',
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/KZM6PoTy31g',
                 'spotify_url' => null
             ],
             [
@@ -91,6 +91,87 @@ class SongSeeder extends Seeder
                 'album' => 'There Is Hope',
                 'youtube_url' => 'https://www.youtube.com/embed/i6lDRc8hZYA',
                 'spotify_url' => ''
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Order My Steps',
+                'release_year' => 1993,
+                'artist' => 'GMWA Women of Worship',
+                'album' => 'It\'s Our Time',
+                'youtube_url' => 'https://www.youtube.com/embed/kCSuw1zs8Kw',
+                'spotify_url' => ''
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Stand',
+                'release_year' => 1996,
+                'artist' => 'Donnie McClurkin',
+                'album' => 'Donnie McClurkin',
+                'youtube_url' => 'https://www.youtube.com/embed/f_AZWYVlzD8',
+                'spotify_url' => ''
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'More Than I Can Bear',
+                'release_year' => 1996,
+                'artist' => 'Kirk Franklin',
+                'album' => 'God\'s Property',
+                'youtube_url' => 'https://www.youtube.com/embed/WDuvsUTpUWw',
+                'spotify_url' => ''
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'When We All Get to Heaven',
+                'release_year' => 2015,
+                'artist' => 'Richard Smallwood',
+                'album' => 'Anthology',
+                'youtube_url' => 'https://www.youtube.com/embed/gTz71g8ePc8',
+                'spotify_url' => ''
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Soon and Very Soon',
+                'release_year' => null,
+                'artist' => 'Andraé Crouch',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/ZmW-Tz6DFdc',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Total Praise',
+                'release_year' => null,
+                'artist' => 'Richard Smallwood',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/Vv9-WlymKg0',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Through It All',
+                'release_year' => null,
+                'artist' => 'Andraé Crouch',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/iB2pPCydEjs',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Because He Lives',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/4M-zwE33zHA',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $selectionId,
+                'name' => 'Tis So Sweet to Trust in Jesus',
+                'release_year' => null,
+                'artist' => null,
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/6vBBUNAzhRE',
+                'spotify_url' => null
             ],
             [
                 'song_type_id' => $soloId,
@@ -125,7 +206,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/CBKwV6oNYvw',
                 'spotify_url' => null
             ],
             [
@@ -134,7 +215,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/cLOMz1ybYQg',
                 'spotify_url' => null
             ],
             [
@@ -143,7 +224,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/AOA7sHQrgcU',
                 'spotify_url' => null
             ],
             [
@@ -158,10 +239,10 @@ class SongSeeder extends Seeder
             [
                 'song_type_id' => $soloId,
                 'name' => 'When I See Jesus',
-                'release_year' => null,
+                'release_year' => 1981,
                 'artist' => 'Douglas Miller',
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/_QOUNpfq5WU',
                 'spotify_url' => null
             ],
             [
@@ -180,6 +261,24 @@ class SongSeeder extends Seeder
                 'artist' => 'Tamela Mann',
                 'album' => 'Best Days',
                 'youtube_url' => 'https://www.youtube.com/embed/XvV9p-wU4hk',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'I Look to You',
+                'release_year' => null,
+                'artist' => 'Whitney Houston',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/5Pze_mdbOK8',
+                'spotify_url' => null
+            ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Come Ye Disconsolate',
+                'release_year' => 2004,
+                'artist' => 'Ted & Sheri',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/HbW_f5rTGxQ',
                 'spotify_url' => null
             ],
         ]);

@@ -193,6 +193,18 @@ This has already been completed in this code; this documentation is here for ref
 - [Unsplash - Karsten Wurth](https://unsplash.com/photos/rafblRbne3o)
 - [Unsplash - Tachina Lee - Woman looking up](https://unsplash.com/photos/-wjk_SSqCE4)
 
+### Iframes for YouTube Videos
+
+This is a note to self.
+
+Upon selecting a song, you can change the `src` property of the `<iframe>` in order to change the
+loaded video, but the reason for performing a submit is so that the selected song is saved to the
+session for the user. Without the form submit on change, the user's selection would not be saved
+until they clicked __Save & Continue__.
+
+There is a `data` attribute on each option of the song `<select>` element that includes the
+embedeed YouTube link for preview.
+
 ## TODOs
 
 - If you encounter issues with the routes again, look into using route parameters

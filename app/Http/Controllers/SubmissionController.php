@@ -79,7 +79,7 @@ class SubmissionController extends Controller
         // Reflash all data
         // $request->session()->reflash();
 
-        $this->putAllInputToSession($request);
+        self::putAllInputToSession($request);
         Log::debug(__FUNCTION__ . '(); just reflashed input to the session...');
 
         // If a failure occurred, return to the current request path. Otherwise,
@@ -174,16 +174,38 @@ class SubmissionController extends Controller
         );
     }
 
-    private function putAllInputToSession(Request $request)
+    public static function putAllInputToSession(Request $request)
     {
         // https://laravel.com/docs/8.x/requests#retrieving-an-input-value
 
         Log::debug(__FUNCTION__ . '(); all input: ', $request->all());
 
+        $valuesAreIds = [
+            '/^song(Type)*\d*/'
+        ];
+
         foreach ($request->input() as $key => $value) {
             if (strcasecmp($key, 'next-page') === 0) {
                 continue;
             }
+
+            // If the key starts with "song" or "songType" and then a number, then the value should
+            // be a number (max of 2 characters for 2-digit numbers)
+            // https://www.phpliveregex.com/p/DZo
+            // foreach ($valuesAreIds as $regex) {
+            //     $output_array = [];
+            //     $matched = preg_match($regex, $key, $output_array) !== false;
+
+            //     if (count($output_array) === 0) {
+            //         continue;
+            //     }
+
+            //     if (strcasecmp($output_array[0], $key) === 0 && isset($value) && strlen($value) > 0) {
+            //         $value = (trim($value) . '')[0];
+            //     }
+            // }
+
+            // Save the value to the session
             $request->session()->put($key, $value);
         }
 

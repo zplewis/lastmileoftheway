@@ -3,12 +3,12 @@
 @section('guide.content')
 
 @php
-    $songTypes = \App\Models\SongType::all();
+    $songTypes = \App\Models\SongType::orderBy('name')->get();
     $selectedSongType = (session('songType' . ($musicalSelectionIndex)) ?? old('songType' . ($musicalSelectionIndex)));
     $selectedSongId = (session('song' . ($musicalSelectionIndex)) ?? old('song' . ($musicalSelectionIndex)));
     $selectedSongTypeModel = $songTypes->where('id', $selectedSongType)->first();
     $selectedSongTypeName = $selectedSongTypeModel === null ? 'song' : $selectedSongTypeModel->name;
-    $songs = \App\Models\Song::where('song_type_id', $selectedSongType)->get();
+    $songs = \App\Models\Song::where('song_type_id', $selectedSongType)->orderBy('name')->get();
     $selectedSong = $songs->where('id', $selectedSongId)->first();
     $selectedSongYouTube = $selectedSong !== null && $selectedSong->youtube_url ? $selectedSong->youtube_url : null;
 @endphp
@@ -38,8 +38,8 @@
     )
 </div>
 
-<div class="col-4 {{ $selectedSongYouTube ? '' : 'd-none' }}" id="song-youtube-preview{{ ($musicalSelectionIndex ?? '1') }}">
-    <iframe width="100%" height="100%" src="{{ $selectedSongYouTube ? $selectedSong->youtube_url : '' }}?&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="col-12 col-md-4 {{ $selectedSongYouTube ? '' : 'd-none' }}" id="song-youtube-preview{{ ($musicalSelectionIndex ?? '1') }}">
+    <iframe width="100%" height="300px" src="{{ $selectedSongYouTube ? $selectedSong->youtube_url : '' }}?&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <div class="col-12">

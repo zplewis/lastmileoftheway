@@ -51,7 +51,14 @@ SubmissionController::generateRoutes();
 // Route::redirect('/guide', '/guide/getting-started/take-a-breath');
 
 Route::prefix('resources')->group(function() {
-    Route::get('/songs', function () {
+    Route::match(['get', 'post'], '/songs', function (\Illuminate\Http\Request $request) {
+
+        Log::debug(__FUNCTION__ . '(); songs method: ' . $request->method());
+
+        if ($request->isMethod('post')) {
+            SubmissionController::putAllInputToSession($request);
+        }
+
         return view(
             'resources.songs',
             [

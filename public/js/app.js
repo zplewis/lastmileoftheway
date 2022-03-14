@@ -5409,7 +5409,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   }
 
-  var songTypes = document.querySelectorAll('select[id^="songType"]'); // Used to submit current inputs to the session and refresh the page without advancing forward.
+  var songSelects = document.querySelectorAll('select[id^="song"]'); // Used to submit current inputs to the session and refresh the page without advancing forward.
 
   function submitAndRefresh() {
     // Clear the next-page hidden input
@@ -5425,14 +5425,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   }
 
-  if (songTypes) {
-    var _iterator2 = _createForOfIteratorHelper(songTypes),
+  if (songSelects) {
+    var index = 1;
+
+    var _iterator2 = _createForOfIteratorHelper(songSelects),
         _step2;
 
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var songType = _step2.value;
-        songType.addEventListener('change', submitAndRefresh);
+        var songSelect = _step2.value;
+        songSelect.addEventListener('change', submitAndRefresh);
+        console.log('added change for song select #' + index);
+        index += 1;
       }
     } catch (err) {
       _iterator2.e(err);
@@ -5442,26 +5446,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   } // 1. Code to show the YouTube iframe if a song is selected, hide it if a song is NOT selected
   // 2. Change the iframe src based on the selected song
 
-
-  var youtubePreview = document.querySelector('div[id^="song-youtube-preview"]');
-  var songSelects = document.querySelectorAll('select[id^="song"]');
-
-  if (songSelects) {
-    var _iterator3 = _createForOfIteratorHelper(songSelects),
-        _step3;
-
-    try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var songSelect = _step3.value;
-        songSelect.addEventListener('change', submitAndRefresh);
-        console.log('add change for song select!');
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
-    }
-  }
 
   var requestApptInput = document.getElementById('request-appt');
 
