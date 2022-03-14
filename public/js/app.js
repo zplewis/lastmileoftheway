@@ -5409,9 +5409,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   }
 
-  var songTypes = document.querySelectorAll('select[id^="songType"]');
+  var songTypes = document.querySelectorAll('select[id^="songType"]'); // Used to submit current inputs to the session and refresh the page without advancing forward.
 
-  function songTypeSelectorListener() {
+  function submitAndRefresh() {
     // Clear the next-page hidden input
     var nextPage = document.getElementById('next-page');
     var guideForm = document.getElementById('guide-form');
@@ -5432,12 +5432,34 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var songType = _step2.value;
-        songType.addEventListener('change', songTypeSelectorListener);
+        songType.addEventListener('change', submitAndRefresh);
       }
     } catch (err) {
       _iterator2.e(err);
     } finally {
       _iterator2.f();
+    }
+  } // 1. Code to show the YouTube iframe if a song is selected, hide it if a song is NOT selected
+  // 2. Change the iframe src based on the selected song
+
+
+  var youtubePreview = document.querySelector('div[id^="song-youtube-preview"]');
+  var songSelects = document.querySelectorAll('select[id^="song"]');
+
+  if (songSelects) {
+    var _iterator3 = _createForOfIteratorHelper(songSelects),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var songSelect = _step3.value;
+        songSelect.addEventListener('change', submitAndRefresh);
+        console.log('add change for song select!');
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
     }
   }
 

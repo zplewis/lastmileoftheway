@@ -80,7 +80,9 @@
 
     const songTypes = document.querySelectorAll('select[id^="songType"]');
 
-    function songTypeSelectorListener() {
+    // Used to submit current inputs to the session and refresh the page without advancing forward.
+    function submitAndRefresh() {
+
         // Clear the next-page hidden input
         const nextPage = document.getElementById('next-page');
         const guideForm = document.getElementById('guide-form');
@@ -96,7 +98,19 @@
 
     if (songTypes) {
         for (let songType of songTypes) {
-            songType.addEventListener('change', songTypeSelectorListener);
+            songType.addEventListener('change', submitAndRefresh);
+        }
+    }
+
+    // 1. Code to show the YouTube iframe if a song is selected, hide it if a song is NOT selected
+    // 2. Change the iframe src based on the selected song
+    const youtubePreview = document.querySelector('div[id^="song-youtube-preview"]');
+    const songSelects = document.querySelectorAll('select[id^="song"]');
+
+    if (songSelects) {
+        for (let songSelect of songSelects) {
+            songSelect.addEventListener('change', submitAndRefresh);
+            console.log('add change for song select!');
         }
     }
 
@@ -118,6 +132,9 @@
 
         });
     }
+
+
+
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},

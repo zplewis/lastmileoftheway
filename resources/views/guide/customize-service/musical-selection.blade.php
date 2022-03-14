@@ -5,13 +5,13 @@
 @php
     $songTypes = \App\Models\SongType::all();
     $selectedSongType = (session('songType' . ($musicalSelectionIndex)) ?? old('songType' . ($musicalSelectionIndex)));
+    $selectedSongId = (session('song' . ($musicalSelectionIndex)) ?? old('song' . ($musicalSelectionIndex)));
     $selectedSongTypeModel = $songTypes->where('id', $selectedSongType)->first();
     $selectedSongTypeName = $selectedSongTypeModel === null ? 'song' : $selectedSongTypeModel->name;
+    $songs = \App\Models\Song::where('song_type_id', $selectedSongType)->get();
+    $selectedSong = $songs->where('id', $selectedSongId)->first();
+    $selectedSongYouTube = $selectedSong !== null && $selectedSong->youtube_url ? $selectedSong->youtube_url : null;
 @endphp
-
-<pre>
-    songType{{ $musicalSelectionIndex }}: {{ $selectedSongType }}
-</pre>
 
 <div class="col-12">
 
@@ -22,7 +22,24 @@
 
 <div class="col-12">
     {{-- This select menu lists the song types --}}
-    @include('guide.select', ['id' => 'song' . ($musicalSelectionIndex ?? '1'), 'labelText' => 'Select a ' . $selectedSongTypeName, 'collection' => \App\Models\Song::where('song_type_id', $selectedSongType)->get(), 'textProp' => 'name', 'textProp2' => 'artist'])
+    @include(
+    'guide.select',
+    [
+        'id' => 'song' . ($musicalSelectionIndex ?? '1'),
+        'labelText' => 'Select a ' . $selectedSongTypeName,
+        'collection' => $songs,
+        'textProp' => 'name',
+        'textProp2' => 'artist',
+        'dataAttributes' => [
+            'data-youtube-url' => 'youtube_url',
+            'data-release-year' => 'release_year'
+        ]
+    ]
+    )
+</div>
+
+<div class="col-4 {{ $selectedSongYouTube ? '' : 'd-none' }}" id="song-youtube-preview{{ ($musicalSelectionIndex ?? '1') }}">
+    <iframe width="100%" height="100%" src="{{ $selectedSongYouTube ? $selectedSong->youtube_url : '' }}?&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <div class="col-12">

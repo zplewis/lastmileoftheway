@@ -26,7 +26,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/cLOMz1ybYQg',
                 'spotify_url' => null
             ],
             [
@@ -35,7 +35,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/uMLOlYWM03g',
                 'spotify_url' => null
             ],
             [
@@ -44,7 +44,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/yFQjTTdxr9k',
                 'spotify_url' => null
             ],
             [
@@ -53,7 +53,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/AqXLvMB3cWI',
                 'spotify_url' => null
             ],
             [
@@ -62,7 +62,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/E6Td6we_WUc',
                 'spotify_url' => null
             ],
             [
@@ -89,7 +89,7 @@ class SongSeeder extends Seeder
                 'release_year' => 1986,
                 'artist' => 'Rev. Milton Brunson & The Thompson Community Singers',
                 'album' => 'There Is Hope',
-                'youtube_url' => 'https://youtu.be/i6lDRc8hZYA',
+                'youtube_url' => 'https://www.youtube.com/embed/i6lDRc8hZYA',
                 'spotify_url' => ''
             ],
             [
@@ -98,7 +98,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => 'Douglas Miller',
                 'album' => 'Unspeakable Joy',
-                'youtube_url' => 'https://youtu.be/ENv7zIo_j9M',
+                'youtube_url' => 'https://www.youtube.com/embed/ENv7zIo_j9M',
                 'spotify_url' => null
             ],
             [
@@ -107,7 +107,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/BsBT_Mo8_vg',
                 'spotify_url' => null
             ],
             [
@@ -116,7 +116,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/PpFq9gxBxhk?t=20',
                 'spotify_url' => null
             ],
             [
@@ -152,7 +152,7 @@ class SongSeeder extends Seeder
                 'release_year' => null,
                 'artist' => null,
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/k7Pk5YMkEcg',
                 'spotify_url' => null
             ],
             [
@@ -168,18 +168,18 @@ class SongSeeder extends Seeder
                 'song_type_id' => $soloId,
                 'name' => 'The Last Mile of the Way',
                 'release_year' => null,
-                'artist' => 'Sam Cooke',
+                'artist' => 'Sam Cooke & The Soul Stirrers',
                 'album' => null,
-                'youtube_url' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/ELA_pkY1IfA',
                 'spotify_url' => null
             ],
             [
                 'song_type_id' => $soloId,
                 'name' => 'Take Me to The King',
-                'release_year' => null,
+                'release_year' => 2016,
                 'artist' => 'Tamela Mann',
-                'album' => null,
-                'youtube_url' => null,
+                'album' => 'Best Days',
+                'youtube_url' => 'https://www.youtube.com/embed/XvV9p-wU4hk',
                 'spotify_url' => null
             ],
         ]);
