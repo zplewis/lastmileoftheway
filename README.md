@@ -195,6 +195,10 @@ This has already been completed in this code; this documentation is here for ref
 
 ## TODOs
 
+- If you encounter issues with the routes again, look into using route parameters
+  - `/guide/{guide_category}/{guide_question}`
+  - `/guide/{guide_category}`
+  - `/guide`
 - Make sure all links work
 - Add support for URL parameters to select the service type automatically
 - Include all parts of service by default unless the user chose to disable them

@@ -105,7 +105,7 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $customizeServiceId,
-                'title' => 'Musical Selection #1',
+                'title' => 'Opening Hymn',
                 'uri' => 'musical-selection-1',
                 'optional' => 'Include musical selection #1 in this service',
                 'optional_html_id' => 'hasMusicalSelection1',
