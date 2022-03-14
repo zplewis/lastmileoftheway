@@ -79,10 +79,16 @@ Route::prefix('resources')->group(function() {
         );
     });
     Route::get('/bible-readings', function () {
+
+        // Version to use for readings
+        $nrsv = \App\Models\BibleVersions::where('acronymn', 'NRSV')->first();
+
         return view(
             'resources.readings',
             [
-                'old' => []
+                'testaments' => \App\Models\Testament::orderBy('name', 'desc')->get(),
+                'scriptures' => \App\Models\Scriptures::where('bible_versions_id', $nrsv->id)
+                ->orderBy('title')->get()
             ]
         );
     });
