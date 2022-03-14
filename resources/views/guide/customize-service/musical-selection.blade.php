@@ -22,7 +22,7 @@
 
 <div class="col-12">
     {{-- This select menu lists the song types --}}
-    @include('guide.select', ['id' => 'song' . ($musicalSelectionIndex ?? '1'), 'labelText' => 'Select a ' . $selectedSongTypeName, 'collection' => \App\Models\Song::where('song_type_id', $selectedSongType)->get(), 'textProp' => 'name'])
+    @include('guide.select', ['id' => 'song' . ($musicalSelectionIndex ?? '1'), 'labelText' => 'Select a ' . $selectedSongTypeName, 'collection' => \App\Models\Song::where('song_type_id', $selectedSongType)->get(), 'textProp' => 'name', 'textProp2' => 'artist'])
 </div>
 
 <div class="col-12">

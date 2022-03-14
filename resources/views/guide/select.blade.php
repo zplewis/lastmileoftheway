@@ -9,7 +9,8 @@
         @foreach ($collection as $option)
             <option value="{{ $option->id }}"
                 {{ strcasecmp((session($id) ?? old($id) ?? $value ?? $placeholder ?? ''), $option->id) === 0 ? 'selected' : '' }}>
-                {{ $option->$textProp }}
+                {{ $option->$textProp }}{{ isset($textProp2) && $option->$textProp2 ? ' - ' . $option->$textProp2 : '' }}
+                {{ isset($textProp3) && $option->$textProp3 ? ' - ' . $option->$textProp3 : '' }}
             </option>
         @endforeach
     @endif
