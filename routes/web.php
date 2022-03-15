@@ -41,7 +41,7 @@ Route::get('/support', function () {
 
 Route::get('/guide', function(\Illuminate\Http\Request $request) {
 
-    $path = '/guide/getting-started';
+    $path = '/guide/getting-started/take-a-breath';
 
     // If a service is passed to /guide and it is a valid service type, then
     // go ahead and set the service type
