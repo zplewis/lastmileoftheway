@@ -39,7 +39,24 @@ Route::get('/support', function () {
     return view('support');
 });
 
+Route::get('/guide', function(Request $request) {
 
+    $path = '/guide/getting-started';
+
+    // If a service is passed to /guide and it is a valid service type, then
+    // go ahead and set the service type
+    if ($request->has('service')) {
+        $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
+
+        if ($serviceType !== null) {
+            // Save the service type to the session
+            $request->merge([\App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . 'selection' => \App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+            \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
+        }
+    }
+
+    return redirect($path);
+});
 
 // Put this code in a static method so that if problems occur, the fix is to
 // 1. Comment out this method

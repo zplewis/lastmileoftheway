@@ -126,8 +126,12 @@ sail up
 # detached containers.
 sail down --remove-orphans --volumes && sail up --build --detach
 
-# Run this
+# Run this locally
 composer install && php artisan migrate:fresh --seed && npm install && npm run dev && php artisan route:cache
+
+# Run this on the server
+# npm run dev fails for some reason, which doesn't matter for now.
+composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:cache
 ```
 
 The MySQL database files are installed to a volume so that the database can persist even after the

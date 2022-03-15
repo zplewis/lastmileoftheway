@@ -317,7 +317,7 @@ class SubmissionController extends Controller
                         return redirect($path);
 
                     });
-                    Route::redirect('/guide', '/guide/' . $category->uri);
+                    // Route::redirect('/guide', '/guide/' . $category->uri);
                 }
 
                 // For each question type, create a get and post route
