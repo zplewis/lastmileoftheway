@@ -6,14 +6,7 @@
             $numDefinitionsByLetter = 0;
         @endphp
 
-            @foreach ($definitions as $definition)
-                @if (strtoupper($definition->term)[0] > $category)
-                    @break
-                @endif
-
-                @if (strtoupper($definition->term)[0] < $category)
-                    @continue
-                @endif
+            @foreach (\App\Models\Definitions::where('term', 'like', strtolower($category) . '%')->orderBy('term')->get() as $definition)
 
                 {{-- Only print the letter if there is at least 1 term that starts with it --}}
                 @if ($numDefinitionsByLetter === 0)

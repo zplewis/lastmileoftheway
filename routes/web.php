@@ -73,8 +73,7 @@ Route::prefix('resources')->group(function() {
             'resources.glossary',
             [
                 // https://stackoverflow.com/a/431930/1620794
-                'categories' => range('A', 'Z'),
-                'definitions' => \App\Models\Definitions::orderBy('term')->get()
+                'categories' => range('A', 'Z')
             ]
         );
     });
