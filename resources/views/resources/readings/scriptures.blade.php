@@ -21,7 +21,7 @@
             })->orderBy('title')->get()
             as $scripture)
 
-            <h3>{{ $scripture->title }}</h3>
+            <h3 id="{{ Str::of($scripture->title)->slug('-') }}">{{ $scripture->title }}</h3>
             <figure>
                 <blockquote class="blockquote">
                     {{ $scripture->verses }}

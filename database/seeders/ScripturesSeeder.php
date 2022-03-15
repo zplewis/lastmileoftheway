@@ -259,6 +259,90 @@ class ScripturesSeeder extends Seeder
                     for I am gentle and humble in heart, and you will find rest for your souls.
                     For my yoke is easy, and my burden is light.\""
                 ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
+                    'title' => 'The Good Shepherd Gives Eternal Life',
+                    'location' => 'John 10:27-29',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
+                    'title' => 'Jesus, the Resurrection',
+                    'location' => 'John 11:17-26',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
+                    'title' => 'Jesus, the Way, Truth, and Life',
+                    'location' => 'John 14:1-6',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'Romans')->first()->id,
+                    'title' => 'God\'s Love',
+                    'location' => 'Romans 8:31-39',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'Romans')->first()->id,
+                    'title' => 'We Are the Lord\'s',
+                    'location' => 'Romans 14:7-9',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '1 Corinthians')->first()->id,
+                    'title' => 'Love',
+                    'location' => '1 Corinthians 13:1-13',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '1 Corinthians')->first()->id,
+                    'title' => 'We Will All Be Changed',
+                    'location' => '1 Corinthians 15:51-56',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
+                    'title' => 'God of All Consolation',
+                    'location' => '2 Corinthians 1:3-7',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
+                    'title' => 'We Do Not Lose Heart',
+                    'location' => '2 Corinthians 4:16-18',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
+                    'title' => 'Our Building from God',
+                    'location' => '2 Corinthians 5:1-5',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '1 Thessalonians')->first()->id,
+                    'title' => 'Words of Comfort',
+                    'location' => '1 Thessalonians 4:13-18',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', '2 Timothy')->first()->id,
+                    'title' => 'A Fought Fight, Finished Course, and Kept Faith',
+                    'location' => '2 Timothy 4:6-8',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'Revelation')->first()->id,
+                    'title' => 'God Will Wipe Tears Away',
+                    'location' => 'Revelation 7:15-17',
+                    'verses' => null
+                ],
+                [
+                    'bible_book_id' => BibleBook::where('name', 'Revelation')->first()->id,
+                    'title' => 'A New Heaven and earth',
+                    'location' => 'Revelation 21:1-6',
+                    'verses' => null
+                ],
             ]
         ];
 

@@ -19,7 +19,7 @@
                                 })
                                 ->whereHas('bible_book.testament', function ($query) use ($testament) {
                                     $query->where('name', $testament->name);
-                                })->get()
+                                })->orderBy('title')->get()
                                  as $scripture)
                                     <li>
                                         <a href="#{{ Str::of($scripture->title)->slug('-') }}" class="link-secondary rounded" title="{{ $scripture->title }}">
