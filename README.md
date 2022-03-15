@@ -127,7 +127,7 @@ sail up
 sail down --remove-orphans --volumes && sail up --build --detach
 
 # Run this
-composer install && php artisan migrate:fresh --seed && npm install && npm run dev
+composer install && php artisan migrate:fresh --seed && npm install && npm run dev && php artisan route:cache
 ```
 
 The MySQL database files are installed to a volume so that the database can persist even after the

@@ -46,7 +46,7 @@ Route::get('/support', function () {
 // 2. Run all migrations and seeders
 // 3. Uncomment this method
 // 4. Run all migrations and seeders again
-SubmissionController::generateRoutes();
+\App\Http\Controllers\SubmissionController::generateRoutes();
 
 // Route::redirect('/guide', '/guide/getting-started/take-a-breath');
 
@@ -56,7 +56,7 @@ Route::prefix('resources')->group(function() {
         Log::debug(__FUNCTION__ . '(); songs method: ' . $request->method());
 
         if ($request->isMethod('post')) {
-            SubmissionController::putAllInputToSession($request);
+            \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
         }
 
         return view(
