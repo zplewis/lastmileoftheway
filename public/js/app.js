@@ -5423,11 +5423,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     if (guideForm) {
       guideForm.submit();
     }
-  }
+  } // We submit and refresh so that the selected song is saved; yes, it is possible to set the src
+  // property of the iframe without refreshing, but then the user would have to click save &
+  // continue to save their selection
+
 
   if (songSelects) {
-    var index = 1;
-
     var _iterator2 = _createForOfIteratorHelper(songSelects),
         _step2;
 
@@ -5435,17 +5436,32 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var songSelect = _step2.value;
         songSelect.addEventListener('change', submitAndRefresh);
-        console.log('added change for song select #' + index);
-        index += 1;
       }
     } catch (err) {
       _iterator2.e(err);
     } finally {
       _iterator2.f();
     }
-  } // 1. Code to show the YouTube iframe if a song is selected, hide it if a song is NOT selected
-  // 2. Change the iframe src based on the selected song
+  } // Save and load the selected scripture upon selection
 
+
+  var scriptureSelects = document.querySelector('select[id$="TestamentReading"]');
+
+  if (scriptureSelects) {
+    var _iterator3 = _createForOfIteratorHelper(scriptureSelects),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var scriptureSelect = _step3.value;
+        scriptureSelect.addEventListener('change', submitAndRefresh);
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  }
 
   var requestApptInput = document.getElementById('request-appt');
 

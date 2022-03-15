@@ -14,7 +14,6 @@
                         </button>
                         <div class="collapse" id="{{ $testament->name }}-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
                                 @foreach (\App\Models\Scriptures::whereHas('bible_versions', function ($query) use ($bible_version) {
                                     $query->where('id', $bible_version->id);
                                 })
@@ -23,11 +22,10 @@
                                 })->get()
                                  as $scripture)
                                     <li>
-                                        <a href="#" title="{{ $scripture->title }}">
+                                        <a href="#{{ Str::of($scripture->title)->slug('-') }}" class="link-secondary rounded" title="{{ $scripture->title }}">
                                             {{ $scripture->title }}
                                         </a>
                                     </li>
-                                    @break
                                 @endforeach
                             </ul>
                         </div> <!-- ./collapse -->

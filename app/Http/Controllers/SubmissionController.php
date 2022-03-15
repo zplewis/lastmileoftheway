@@ -169,7 +169,8 @@ class SubmissionController extends Controller
                 'currentQuestion' => $question,
                 'nextQuestion' => $nextQuestion,
                 'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : ''),
-                'currentServiceType' => self::getSelectedServiceType()
+                'currentServiceType' => self::getSelectedServiceType(),
+                'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
             ]
         );
     }

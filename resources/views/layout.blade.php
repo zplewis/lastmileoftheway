@@ -22,7 +22,7 @@
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
     </head>
 
     <body>
@@ -37,6 +37,7 @@
 
         @include('footer')
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        {{-- https://laravel-mix.com/docs/6.0/versioning --}}
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

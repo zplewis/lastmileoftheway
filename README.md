@@ -205,6 +205,13 @@ until they clicked __Save & Continue__.
 There is a `data` attribute on each option of the song `<select>` element that includes the
 embedeed YouTube link for preview.
 
+### Static file caching
+
+Laravel Mix has built-in functionality for adding hashes to prevent browsers from caching the
+wrong version of static files so that the user has the up-to-date versions:
+
+<https://laravel-mix.com/docs/6.0/versioning>
+
 ## TODOs
 
 - If you encounter issues with the routes again, look into using route parameters
