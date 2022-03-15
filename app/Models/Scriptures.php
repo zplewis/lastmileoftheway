@@ -9,8 +9,12 @@ class Scriptures extends Model
 {
     use HasFactory;
 
-    public function book()
+    public function bible_book()
     {
         return $this->belongsTo(BibleBook::class);
+    }
+
+    public function bible_versions() {
+        return $this->belongsTo(BibleVersions::class);
     }
 }

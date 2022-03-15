@@ -87,8 +87,8 @@ Route::prefix('resources')->group(function() {
             'resources.readings',
             [
                 'testaments' => \App\Models\Testament::orderBy('name', 'desc')->get(),
-                'scriptures' => \App\Models\Scriptures::where('bible_versions_id', $nrsv->id)
-                ->orderBy('title')->get()
+                'bible_version' => $nrsv
+
             ]
         );
     });
