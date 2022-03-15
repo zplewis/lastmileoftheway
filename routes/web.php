@@ -30,7 +30,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/faqs', function () {
-    return view('faqs', ['categories' => FAQCategories::orderBy('description')->get()]);
+    return view('faqs', ['categories' => \App\Models\FAQCategories::orderBy('description')->get()]);
 });
 
 Route::permanentRedirect('/glossary', '/resources/glossary');

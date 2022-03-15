@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 class SubmissionController extends Controller
 {
 
+    const SERVICE_TYPE_PREFIX = 'service-type-';
+
     /**
      * If a service type is specified by the user, get the associated ServiceType object.
      * @return ServiceType|null
@@ -23,7 +25,7 @@ class SubmissionController extends Controller
         }
 
         // Get the service type from the selection
-        $title = ucwords(str_replace('service-type-', '', $value));
+        $title = ucwords(str_replace(self::SERVICE_TYPE_PREFIX, '', $value));
 
         Log::debug(__FUNCTION__ . '(); dervived service type title: ' . $title);
 
@@ -271,58 +273,82 @@ class SubmissionController extends Controller
         // The selected service type, if any
         $serviceType = SubmissionController::getSelectedServiceType();
 
-        // All categories in order
-        $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
+        // This try block seems to be required in order to allow migrations to proceed normally,
+        // probably due to the order which models are loaded in the request lifecycle
+        try {
+            $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
 
-        Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
-        Log::debug(__FUNCTION__ . '(); routes/web.php - # of guide categories: ' . count($categories));
+            Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
+            Log::debug(__FUNCTION__ . '(); routes/web.php - # of guide categories: ' . count($categories));
 
-        foreach ($categories as $category) {
-            Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
+            foreach ($categories as $category) {
+                Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
 
-            // Start off with all questions for the current guide category.
-            // However, if there is a service type selected by the user, then only keep those that
-            // apply to that selected service type.
-            $questions = $category->guideQuestions();
+                // Start off with all questions for the current guide category.
+                // However, if there is a service type selected by the user, then only keep those that
+                // apply to that selected service type.
+                $questions = $category->guideQuestions();
 
-            if ($serviceType) {
-                $questions = $questions->wherePivot('service_type', $serviceType);
-            }
-
-            $questions = $questions->get();
-
-            // Add a redirect for /guide
-            if ($category->item_order === 1) {
-                Log::debug(__FUNCTION__ . '(); redirect added from / to /guide/' . $category->uri);
-                Route::redirect('/guide', '/guide/' . $category->uri);
-            }
-
-            // For each question type, create a get and post route
-            foreach ($questions as $question) {
-                $path = '/guide/' . $category->uri . '/' . $question->uri;
-                Log::debug(__FUNCTION__ . '(); route path: ' . $path);
-                Route::get(
-                    $path,
-                    function() use ($categories, $category, $question) {
-                        return App::call(
-                            '\App\Http\Controllers\SubmissionController@load',
-                            [
-                                'categories' => $categories,
-                                'category' => $category,
-                                'question' => $question,
-                            ]
-                        );
-                    }
-                );
-
-                // Add a GET route for the first question in each section of the guide
-                if ($question->item_order === 1) {
-                    Log::debug(__FUNCTION__ . '(); redirect added from /' . $category->uri . ' to ' . $path);
-                    Route::redirect('/guide/' . $category->uri, $path);
+                if ($serviceType) {
+                    $questions = $questions->wherePivot('service_type', $serviceType);
                 }
 
-                Route::post($path, [SubmissionController::class, 'store']);
-            }
+                $questions = $questions->get();
+
+                // Add a redirect for /guide
+                if ($category->item_order === 1) {
+                    Log::debug(__FUNCTION__ . '(); redirect added from / to /guide/' . $category->uri);
+                    Route::get('/guide', function(Request $request) use ($category) {
+
+                        $path = '/guide/' . $category->uri;
+
+                        // If a service is passed to /guide and it is a valid service type, then
+                        // go ahead and set the service type
+                        if ($request->has('service')) {
+                            $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
+
+                            if ($serviceType !== null) {
+                                // Save the service type to the session
+                                $request->merge([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+                                self::putAllInputToSession($request);
+                            }
+                        }
+
+                        return redirect($path);
+
+                    });
+                    Route::redirect('/guide', '/guide/' . $category->uri);
+                }
+
+                // For each question type, create a get and post route
+                foreach ($questions as $question) {
+                    $path = '/guide/' . $category->uri . '/' . $question->uri;
+                    Log::debug(__FUNCTION__ . '(); route path: ' . $path);
+                    Route::get(
+                        $path,
+                        function() use ($categories, $category, $question) {
+                            return App::call(
+                                '\App\Http\Controllers\SubmissionController@load',
+                                [
+                                    'categories' => $categories,
+                                    'category' => $category,
+                                    'question' => $question,
+                                ]
+                            );
+                        }
+                    );
+
+                    // Add a GET route for the first question in each section of the guide
+                    if ($question->item_order === 1) {
+                        Log::debug(__FUNCTION__ . '(); redirect added from /' . $category->uri . ' to ' . $path);
+                        Route::redirect('/guide/' . $category->uri, $path);
+                    }
+
+                    Route::post($path, [SubmissionController::class, 'store']);
+                }
+            } // end of foreach
+        } catch (\Throwable $th) {
+            Log::error(__FUNCTION__ . '(); failed to create dynamic routes for guide!');
         }
     }
 }

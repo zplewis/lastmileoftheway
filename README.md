@@ -123,7 +123,7 @@ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 sail up
 
 # Use sail to tear down and rebuild the containers. VS Code can connect to the already-running
-# containers
+# detached containers.
 sail down --remove-orphans --volumes && sail up --build --detach
 
 # Run this
@@ -214,6 +214,10 @@ wrong version of static files so that the user has the up-to-date versions:
 
 ## TODOs
 
+- Be able to set the service type using a URL parameter to the main `/guide` URL
+- HIGH Priority: Look into creating routes the right way
+- Look into redirecting to the beginning of the category if a route is used that doesn't belong to
+  the selected service
 - If you encounter issues with the routes again, look into using route parameters
   - `/guide/{guide_category}/{guide_question}`
   - `/guide/{guide_category}`
