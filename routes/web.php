@@ -39,7 +39,7 @@ Route::get('/support', function () {
     return view('support');
 });
 
-Route::get('/guide', function(Request $request) {
+Route::get('/guide', function(\Illuminate\Http\Request $request) {
 
     $path = '/guide/getting-started';
 
