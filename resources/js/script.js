@@ -13,10 +13,14 @@
             const deceasedSomeoneElseDiv = document.querySelector('.demographics-someone-else-name');
             deceasedSomeoneElseDiv.classList.add('d-none');
 
-            if (event.target.value == '0') {
+            if (event.target.value === '1') {
                 deceasedSomeoneElseDiv.classList.remove('d-none');
             }
+
+            console.log('userIsDeceased select changed');
         });
+
+        console.log('userIsDeceased select exists!');
     }
 
     // When going through the guide, add the code that highlights the selected service type
