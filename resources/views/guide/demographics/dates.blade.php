@@ -6,8 +6,6 @@
     @include('guide.field', ['id' => 'dateBirth', 'inputType' => 'date', 'labelText' => 'Date of birth'])
 </div>
 
-<pre>userIsDeceased: {{ session('userIsDeceased') }}</pre>
-
 @if (strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) !== 0)
 
     <div class="col-12">

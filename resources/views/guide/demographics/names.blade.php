@@ -27,7 +27,9 @@
 <div class="col-12">
     @include('guide.field', ['id' => 'deceasedPreferredName', 'inputType' => 'text', 'labelText' => 'Deceased Preferred Name'])
 </div>
-<div class="demographics-someone-else-name d-none">
+
+
+<div class="demographics-someone-else-name {{ strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) !== 0 ? '' : 'd-none' }}">
     <div class="col-sm-6">
         @include('guide.field', ['id' => 'deceasedFirstName', 'inputType' => 'text', 'labelText' => 'Deceased First name'])
     </div>
