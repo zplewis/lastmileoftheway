@@ -160,6 +160,15 @@ php artisan db:seed
 
 # To completely refresh the database (drop all tables, recreate and seed them)
 php artisan migrate:fresh --seed
+
+# List all routes
+php artisan route:list
+
+# Clear route cache
+php artisan route:clear
+
+# Re-cache routes
+php artisan route:cache
 ```
 
 > Note that if you change a column name and a migration fails, check routes/web.php.
@@ -215,6 +224,11 @@ Laravel Mix has built-in functionality for adding hashes to prevent browsers fro
 wrong version of static files so that the user has the up-to-date versions:
 
 <https://laravel-mix.com/docs/6.0/versioning>
+
+## Testing
+
+- Make sure every save & continue button works in the guide
+-
 
 ## TODOs
 
