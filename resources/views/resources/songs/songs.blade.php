@@ -16,7 +16,7 @@
     $selectedSongTypeName = $selectedSongTypeModel === null ? 'song' : $selectedSongTypeModel->name;
     $songs = \App\Models\Song::where('song_type_id', $selectedSongType)->orderBy('name')->get();
     $selectedSong = $songs->where('id', $selectedSongId)->first();
-    $selectedSongYouTube = $selectedSong !== null && $selectedSong->youtube_url ? $selectedSong->youtube_url : null;
+    $selectedSongYouTube = $selectedSong !== null && $selectedSong->youtube_url ? $selectedSong->youtube_url : '';
 @endphp
 
 <div class="col-12 mb-3">

@@ -43,8 +43,8 @@ class GuideQuestionServiceTypeSeeder extends Seeder
         // Keep benediction (solo, not coupled with committal) only for memorial
         GuideQuestion::where('uri', 'benediction')->first()->serviceTypes()->detach([$graveside->id, $funeral->id]);
 
-        // There is no burial at a memorial
-        GuideQuestion::where('uri', 'burial')->first()->serviceTypes()->detach([$memorial->id]);
+        // There is no burial at a memorial or graveside
+        GuideQuestion::where('uri', 'burial')->first()->serviceTypes()->detach([$memorial->id, $graveside->id]);
 
         // No recessional at graveside; it should come after mortician's brief
         GuideQuestion::where('uri', 'recessional')->first()->serviceTypes()->detach([$graveside->id]);

@@ -3,10 +3,15 @@
       <span class="fs-5 fw-semibold">Order of Service</span>
     </a>
     <ul class="list-unstyled ps-0">
+        @php
+            $questions = \App\Http\Controllers\SubmissionController::getQuestionsByServiceType(\App\Http\Controllers\SubmissionController::getSelectedServiceType());
+        @endphp
+
         @foreach ($categories as $sidebarCategory)
 
         @php
             $isCurrentSection = $currentCategory->id === $sidebarCategory->id;
+
         @endphp
         <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded {{ $isCurrentSection ? '' : 'collapsed' }}"
@@ -16,7 +21,7 @@
             </button>
             <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarCategory->uri }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByCategoryByServiceType($sidebarCategory, \App\Http\Controllers\SubmissionController::getSelectedServiceType()) as $question)
+                    @foreach ($questions->where('guide_category_id', $sidebarCategory->id) as $question)
                         <li>
                             <!-- Highlight the current page in black -->
                             <a href="/{{ $question->pageUri() }}"

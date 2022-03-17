@@ -24,10 +24,10 @@
 
 <div class="col-12 {{ $selectedScriptureId ? '' : 'd-none' }}">
     <figure>
-        <blockquote class="blockquote">{{ $selectedScriptureId ? $selectedScripture->verses : null }}</blockquote>
+        <blockquote class="blockquote">{{ $selectedScriptureId ? $selectedScripture->verses : '' }}</blockquote>
         <figcaption class="blockquote-footer">
-            <span class="scripture-location">{{ $selectedScriptureId ? $selectedScripture->location : null }}</span>
-            <cite class="scripture-version" title="Bible Version">({{ $selectedScriptureId ? $selectedScripture->bible_versions->name : null }})</cite>
+            <span class="scripture-location">{{ $selectedScriptureId ? $selectedScripture->location : '' }}</span>
+            <cite class="scripture-version" title="Bible Version">({{ $selectedScriptureId ? $selectedScripture->bible_versions->name : '' }})</cite>
         </figcaption>
     </figure>
 </div>

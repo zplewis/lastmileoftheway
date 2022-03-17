@@ -60,7 +60,7 @@ class SongSeeder extends Seeder
                 'song_type_id' => $hymnId,
                 'name' => 'It is Well',
                 'release_year' => null,
-                'artist' => 'Melissa Jean',
+                'artist' => null,
                 'album' => null,
                 'youtube_url' => 'https://www.youtube.com/embed/E6Td6we_WUc',
                 'spotify_url' => null
@@ -78,7 +78,7 @@ class SongSeeder extends Seeder
                 'song_type_id' => $hymnId,
                 'name' => 'Holy, Holy, Holy',
                 'release_year' => null,
-                'artist' => 'Shirley Caesar',
+                'artist' => null,
                 'album' => null,
                 'youtube_url' => 'https://www.youtube.com/embed/KZM6PoTy31g',
                 'spotify_url' => null

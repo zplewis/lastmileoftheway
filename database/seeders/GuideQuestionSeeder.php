@@ -190,8 +190,8 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $customizeServiceId,
                 'title' => 'Committal & Benediction',
                 'uri' => 'committal',
-                'optional' => NULL,
-                'optional_html_id' => NULL,
+                'optional' => 'Include Committal in this service',
+                'optional_html_id' => 'hasCommittal',
                 'item_order' => 14,
                 'description' => Definitions::where('term', 'committal')->first()->full_text
             ],

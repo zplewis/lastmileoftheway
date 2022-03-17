@@ -32,6 +32,19 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    public static function getQuestionsByServiceType(
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+
+        if ($serviceType === null) {
+            return \App\Models\GuideQuestion::orderBy('item_order')->get();
+        }
+
+        return \App\Models\GuideQuestion::whereHas('service_type', function ($query) use ($serviceType) {
+            $query->where('service_types.id', $serviceType->id);
+        })->orderBy('item_order')->get();
+    }
+
     /**
      * Retrieves questions for a given category based on whether a service type has been selected
      * or not.
@@ -46,24 +59,28 @@ class SubmissionController extends Controller
             return $questions;
         }
 
+        return $category->guideQuestions()->whereHas('serviceTypes', function ($query) use ($serviceType) {
+            $query->where('service_types.id', $serviceType->id);
+        })->orderBy('item_order')->get();
+
         // Brute force way to do it; I'm pretty sure there is a better way.
-        $filtered = collect();
+        // $filtered = collect();
 
-        foreach ($questions as $question) {
+        // foreach ($questions as $question) {
 
-            $found = $question->serviceTypes()->find($serviceType->id);
+        //     $found = $question->serviceTypes()->find($serviceType->id);
 
-            // Log::debug(__FUNCTION__ . '(); question text: ' . $question->title);
-            // Log::debug(__FUNCTION__ . '(); service types for question (#1): ', $test);
+        //     // Log::debug(__FUNCTION__ . '(); question text: ' . $question->title);
+        //     // Log::debug(__FUNCTION__ . '(); service types for question (#1): ', $test);
 
-            if (!$found) {
-                continue;
-            }
+        //     if (!$found) {
+        //         continue;
+        //     }
 
-            $filtered->push($question);
-        }
+        //     $filtered->push($question);
+        // }
 
-        return $filtered;
+        // return $filtered;
     }
 
     /**
@@ -134,6 +151,7 @@ class SubmissionController extends Controller
             }
         }
 
+        // Reaching this means there is no next question.
         return NULL;
     }
 
