@@ -5448,7 +5448,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   } // Save and load the selected scripture upon selection
 
 
-  var scriptureSelects = document.querySelector('select[id$="TestamentReading"]');
+  var scriptureSelects = document.querySelectorAll('select[id$="TestamentReading"]');
 
   if (scriptureSelects) {
     var _iterator3 = _createForOfIteratorHelper(scriptureSelects),

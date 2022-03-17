@@ -106,12 +106,11 @@
     if (songSelects) {
         for (let songSelect of songSelects) {
             songSelect.addEventListener('change', submitAndRefresh);
-
         }
     }
 
     // Save and load the selected scripture upon selection
-    const scriptureSelects = document.querySelector('select[id$="TestamentReading"]');
+    const scriptureSelects = document.querySelectorAll('select[id$="TestamentReading"]');
 
     if (scriptureSelects) {
         for (let scriptureSelect of scriptureSelects) {
@@ -138,9 +137,6 @@
 
         });
     }
-
-
-
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},

@@ -12,7 +12,7 @@
                                     $query->where('name', $testament->name);
                                 })->orderBy('title')->get();
     $selectedScriptureId = (session($inputId) ?? old($inputId));
-    $selectedScripture = $scriptures->where('id', $selectedScriptureId);
+    $selectedScripture = $scriptures->where('id', $selectedScriptureId)->first();
 @endphp
 
 <div class="col-12">
@@ -24,7 +24,7 @@
 
 <div class="col-12 {{ $selectedScriptureId ? '' : 'd-none' }}">
     <figure>
-        <blockquote class="blockquote">{{ $selectedScriptureId ? $selectedScripture->verses : '' }}</blockquote>
+        <blockquote class="blockquote">{{ $selectedScriptureId && $selectedScripture ? $selectedScripture->verses : '' }}</blockquote>
         <figcaption class="blockquote-footer">
             <span class="scripture-location">{{ $selectedScriptureId ? $selectedScripture->location : '' }}</span>
             <cite class="scripture-version" title="Bible Version">({{ $selectedScriptureId ? $selectedScripture->bible_versions->name : '' }})</cite>
