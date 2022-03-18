@@ -5,6 +5,8 @@ Email: {{ session('userEmail') }}<br />
 </p>
 
 <h6>Deceased Information</h6>
-<p>Preferred Name: {{ session('deceasedPreferredName') }}<br />
-Name: {{ session('deceasedFirstName') }} {{ session('deceasedLastName') }}
+<p>Preferred Name: {{ session('deceasedPreferredName') }}
+@if (!$userIsDeceased)
+<br />Name: {{ session('deceasedFirstName') }} {{ session('deceasedLastName') }}
+@endif
 </p>
