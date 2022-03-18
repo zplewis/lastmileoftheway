@@ -42,7 +42,7 @@ class SubmissionController extends Controller
 
         return \App\Models\GuideQuestion::whereHas('service_type', function ($query) use ($serviceType) {
             $query->where('service_types.id', $serviceType->id);
-        })->orderBy('item_order')->get();
+        })->orderBy('guide_category_id')->orderBy('item_order')->get();
     }
 
     /**
@@ -61,7 +61,7 @@ class SubmissionController extends Controller
 
         return $category->guideQuestions()->whereHas('serviceTypes', function ($query) use ($serviceType) {
             $query->where('service_types.id', $serviceType->id);
-        })->orderBy('item_order')->get();
+        })->orderBy('guide_category_id')->orderBy('item_order')->get();
 
         // Brute force way to do it; I'm pretty sure there is a better way.
         // $filtered = collect();
@@ -89,11 +89,11 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        Log::debug(__FUNCTION__ . 'about to validate the page...');
+        Log::debug(__FUNCTION__ . '(); about to validate the page...');
         // Validate and store the form submission.
         $validated = $this->validatePage($request);
 
-        Log::debug(__FUNCTION__ . 'request->path(): ' . $request->path());
+        Log::debug(__FUNCTION__ . '(); request->path(): ' . $request->path());
 
         // Reflash all data
         // $request->session()->reflash();
@@ -104,7 +104,13 @@ class SubmissionController extends Controller
         // If a failure occurred, return to the current request path. Otherwise,
         // go to the next one (if applicable, the last page won't have a next
         // page). The path for the next page comes from the 'next-page' input
+
+        // If a
+
+
+
         $redirectPath = $request->input('next-page', null);
+        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
         if (!$redirectPath) {
             $redirectPath = $request->path();
         }
@@ -127,11 +133,9 @@ class SubmissionController extends Controller
 
             // Continue until you get to the current category
             if ($sidebarCategory->id < $category->id) {
-                Log::debug(__FUNCTION__ . '(); skipping the category: ' . $sidebarCategory->title);
+                // Log::debug(__FUNCTION__ . '(); skipping the category: ' . $sidebarCategory->title);
                 continue;
             }
-
-            Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
 
             $questions = $this::getQuestionsByCategoryByServiceType(
                 $sidebarCategory,
@@ -140,12 +144,14 @@ class SubmissionController extends Controller
 
             foreach ($questions as $sidebarQuestion) {
                 if ($found) {
+                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
                     Log::debug(__FUNCTION__ . '(); found the next question: ' . $sidebarQuestion->title);
                     return $sidebarQuestion;
                 }
 
                 if ($sidebarQuestion->id === $question->id) {
                     $found = true;
+                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
                     Log::debug(__FUNCTION__ . '(); found the current question!');
                 }
             }

@@ -1,5 +1,5 @@
 <div class="col-12 col-md-9">
-    <div class="row me-1">
+    <div class="row">
         <h4 class="mb-3">{!! $currentQuestion->title !!}</h4>
         @if ($currentQuestion->description)
             <p class="lead">{!! $currentQuestion->description !!}</p>
@@ -44,5 +44,5 @@
                 </div> <!-- /.col-12 -->
             </div> <!-- /.row g-3 -->
         </form>
-    </div> <!-- /.row me-1 -->
+    </div> <!-- /.row -->
 </div> <!-- /.col-12 col-md-9 -->
