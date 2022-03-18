@@ -9,11 +9,11 @@
 @if (strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) !== 0)
 
     <div class="col-12">
-        @include('guide.field', ['id' => 'dateDeath', 'inputType' => 'date', 'labelText' => 'Date of passing away'])
+        @include('guide.field', ['id' => 'dateDeath', 'inputType' => 'date', 'labelText' => 'Date of passing away', 'pattern' => '\d{2}-\d{2}-\d{4}'])
     </div>
 
     <div class="col-12">
-        @include('guide.field', ['id' => 'dateService', 'inputType' => 'date', 'labelText' => 'Desired Service date'])
+        @include('guide.field', ['id' => 'dateService', 'inputType' => 'date', 'labelText' => 'Desired Service date', 'pattern' => '\d{2}-\d{2}-\d{4}'])
     </div>
 @endif
 
