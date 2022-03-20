@@ -89,7 +89,7 @@ npm run production
 # Do the same for ~/code/test for the test site
 cd ~/code
 git checkout master
-git checkout -- . && git pull --rebase && composer install && php artisan migrate:fresh --seed && php artisan route:cache && npm install && npm run production
+git checkout -- . && git pull --rebase && composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:clear && php artisan route:cache
 ```
 
 ## Laravel
@@ -130,7 +130,7 @@ composer install && php artisan migrate:fresh --seed && npm install && npm run d
 
 # Run this on the server
 # npm run dev fails for some reason, which doesn't matter for now.
-composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:cache
+git checkout -- . && git pull --rebase && composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:cache
 ```
 
 The MySQL database files are installed to a volume so that the database can persist even after the

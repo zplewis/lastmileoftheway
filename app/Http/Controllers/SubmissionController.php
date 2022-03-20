@@ -168,7 +168,7 @@ class SubmissionController extends Controller
     private function getNextGuideQuestion2(
         \Illuminate\Database\Eloquent\Collection $questions,
         \App\Models\GuideQuestion $question,
-        \App\Models\ServiceType $serviceType
+        \App\Models\ServiceType $serviceType = null
     ) {
 
         // Get the current question
