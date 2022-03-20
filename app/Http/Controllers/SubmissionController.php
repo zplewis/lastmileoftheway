@@ -37,8 +37,11 @@ class SubmissionController extends Controller
     ) {
 
         if ($serviceType === null) {
-            return \App\Models\GuideQuestion::orderBy('item_order')->get();
+            return \App\Models\GuideQuestion::orderBy('guide_category_id')->orderBy('item_order')->get();
         }
+
+        // questions have category IDs and item order
+        // pivot table connecting questions to service types
 
         return \App\Models\GuideQuestion::whereHas('service_type', function ($query) use ($serviceType) {
             $query->where('service_types.id', $serviceType->id);
@@ -53,7 +56,7 @@ class SubmissionController extends Controller
         \App\Models\GuideCategory $category,
         \App\Models\ServiceType $serviceType = NULL
     ) {
-        $questions = $category->guideQuestions()->orderBy('item_order')->get();
+        $questions = $category->guideQuestions()->orderBy('guide_category_id')->orderBy('item_order')->get();
 
         if (!$serviceType) {
             return $questions;

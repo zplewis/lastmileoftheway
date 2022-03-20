@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/guidequestions', function (Request $request) {
+    $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
+
+    return \App\Http\Controllers\SubmissionController::getQuestionsByServiceType($serviceType);
+});
