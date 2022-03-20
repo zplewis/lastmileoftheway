@@ -256,6 +256,8 @@ wrong version of static files so that the user has the up-to-date versions:
 - Add summary page
 - Standardize all three song pages to select song type, and a song, or add their own
 - Add recommendation for the first song as the opening hymn
+- Handle when invalid guide URLs are provided
+  - a 404 | Not Found page is displayed currently
 
 ## Jekyll
 

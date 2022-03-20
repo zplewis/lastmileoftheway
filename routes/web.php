@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
+use App\Models\GuideCategory;
 use \App\Models\Scriptures;
 use \App\Models\SongType;
 use \App\Models\Song;
@@ -41,7 +42,7 @@ Route::get('/support', function () {
 
 Route::get('/guide', function(\Illuminate\Http\Request $request) {
 
-    $path = '/guide/getting-started/take-a-breath';
+    $path = '/guide/getting-started';
 
     // If a service is passed to /guide and it is a valid service type, then
     // go ahead and set the service type
@@ -63,9 +64,17 @@ Route::get('/guide', function(\Illuminate\Http\Request $request) {
 // 2. Run all migrations and seeders
 // 3. Uncomment this method
 // 4. Run all migrations and seeders again
-\App\Http\Controllers\SubmissionController::generateRoutes();
+// \App\Http\Controllers\SubmissionController::generateRoutes();
 
-// Route::redirect('/guide', '/guide/getting-started/take-a-breath');
+// This worked due to explicit binding, since implicit binding didn't seem to do it.
+Route::controller(SubmissionController::class)->group(function () {
+    Route::get('/guide/{guidecategory}', 'implicitLoad');
+    Route::get('/guide/{guidecategory}/{guidequestion}', 'implicitLoad');
+    Route::post('/guide/{guidecategory}', 'advance');
+    Route::post('/guide/{guidecategory}/{guidequestion}', 'advance');
+});
+
+
 
 Route::prefix('resources')->group(function() {
     Route::match(['get', 'post'], '/songs', function (\Illuminate\Http\Request $request) {

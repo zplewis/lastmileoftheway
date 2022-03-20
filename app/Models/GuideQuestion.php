@@ -9,6 +9,16 @@ class GuideQuestion extends Model
 {
     use HasFactory;
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uri';
+    }
+
     public function serviceTypes()
     {
         return $this->belongsToMany(ServiceType::class, 'guide_question_service_type', 'guide_question_id', 'service_type_id');

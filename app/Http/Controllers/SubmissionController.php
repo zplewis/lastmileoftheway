@@ -42,7 +42,7 @@ class SubmissionController extends Controller
 
         return \App\Models\GuideQuestion::whereHas('service_type', function ($query) use ($serviceType) {
             $query->where('service_types.id', $serviceType->id);
-        })->orderBy('guide_category_id')->orderBy('item_order')->get();
+        })->orderBy('guide_category_id')->orderBy('guide_questions.item_order')->get();
     }
 
     /**
@@ -162,6 +162,132 @@ class SubmissionController extends Controller
     }
 
     /**
+     * Given a list of questions already in order by category and question item order, get the
+     * next question in the list
+     */
+    private function getNextGuideQuestion2(
+        \Illuminate\Database\Eloquent\Collection $questions,
+        \App\Models\GuideQuestion $question,
+        \App\Models\ServiceType $serviceType
+    ) {
+
+        // Get the current question
+        // https://laravel.com/docs/9.x/collections#method-skipuntil
+        $subset = $questions->skipUntil(function ($item) use ($question) {
+            return $item->id === $question->id;
+        });
+        // Remove the first item, which is the current question
+        // https://laravel.com/docs/9.x/collections#method-shift
+        $subset->shift();
+        // Therefore, the next item is the next question
+        $nextQuestion = $subset->first();
+        // If the service type is already known, then skip it and go to the next question
+        // This does not affect the sidebar, just what is determined as the next question
+        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'service-type') === 0) {
+            $subset->shift();
+            $nextQuestion = $subset->first();
+        }
+
+        return $nextQuestion;
+    }
+
+    /**
+     * This function fixes issues with load():
+     * Explicit model loading now removes the need to loop to create routes for the guide
+     * Detecting the next question is done more reasonably given a sorted list of all questions.
+     */
+    public function implicitLoad(Request $request, \App\Models\GuideCategory $category, \App\Models\GuideQuestion $question = NULL) {
+
+        // TODO: Find a way to handle when a category is not found; redirect to the second category
+        // TODO: Find a way to handle when a question is not found; redirect to the first question of the current category
+
+        // Get current selected service type
+        $serviceType = self::getSelectedServiceType();
+
+        // Get all categories
+        $allCategories = \App\Models\GuideCategory::orderBy('item_order')->get();
+
+        // Get all questions based on current selected service type (if any, get all questions)
+        $allQuestions = self::getQuestionsByServiceType($serviceType);
+
+        // Default to the 1st question of the current category if the question is null;
+        // this happens when a category is specified but not a question in the URL
+        if ($question === null) {
+            $question = \App\Models\GuideQuestion::where('guide_category_id', $category->id)->where('item_order', 1)->first();
+        }
+
+        // If the specified question is not valid for this service type, then redirect the user to
+        // the current category
+        if ($allQuestions->where('id', $question->id)->first() === null) {
+            return redirect('/guide/' . $category->uri);
+        }
+
+        // Get the next question based on the current question
+        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $question, $serviceType);
+
+        // Get the category from the next question
+        $nextCategory = $nextQuestion ? $nextQuestion->guideCategory()->first() : null;
+
+        // Get the URI from the next category and question
+        $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
+
+        return view(
+            'guide',
+            [
+                'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
+                'categories' => $allCategories,
+                'currentServiceType' => self::getSelectedServiceType(),
+                'currentCategory' => $category,
+                'currentQuestion' => $question,
+                'nextCategory' => $nextCategory,
+                'nextQuestion' => $nextQuestion,
+                'nextQuestionUri' => $nextQuestionUri
+            ]
+        );
+    }
+
+    /**
+     * Replacement for store() that advances the guide forward or stays on the same page as needed.
+     */
+    public function advance(Request $request, \App\Models\GuideCategory $category, \App\Models\GuideQuestion $question = NULL) {
+
+        // Get current selected service type
+        $serviceType = self::getSelectedServiceType();
+
+        // Get all questions based on current selected service type (if any, get all questions)
+        $allQuestions = self::getQuestionsByServiceType($serviceType);
+
+        // Default to the 1st question of the current category if the question is null;
+        // this happens when a category is specified but not a question in the URL
+        if ($question === null) {
+            $question = \App\Models\GuideQuestion::where('guide_category_id', $category->id)->where('item_order', 1)->first();
+        }
+
+        // Get the next question based on the current question
+        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $question, $serviceType);
+
+        // Get the category from the next question
+        $nextCategory = $nextQuestion ? $nextQuestion->guideCategory()->first() : null;
+
+        // Get the URI from the next category and question
+        $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
+
+        // If the next-page input is nothing, then stay on the current page
+        Log::debug(__FUNCTION__ . '(); current request path: ' . $request->path());
+        if (!$request->has('next-page') || !$request->input('next-page')) {
+            $nextQuestionUri = $request->path();
+            Log::debug(__FUNCTION__ . '(); staying on page ' . $nextQuestionUri);
+        } else {
+            Log::debug(__FUNCTION__ . '(); advancing to page ' . $nextQuestionUri);
+        }
+
+        // Save all data to the session
+        self::putAllInputToSession($request);
+
+        return redirect($nextQuestionUri)->withInput();
+    }
+
+    /**
      *
      */
     public function load(
@@ -201,6 +327,9 @@ class SubmissionController extends Controller
         );
     }
 
+    /**
+     * Put all inputs from the request into the session, with a few caveats.
+     */
     public static function putAllInputToSession(Request $request)
     {
         // https://laravel.com/docs/8.x/requests#retrieving-an-input-value

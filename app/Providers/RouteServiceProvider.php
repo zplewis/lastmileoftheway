@@ -35,6 +35,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::model('guidecategory', \App\Models\GuideCategory::class);
+
+        Route::model('guidequestion', \App\Models\GuideQuestion::class);
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
