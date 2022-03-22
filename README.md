@@ -227,7 +227,6 @@ wrong version of static files so that the user has the up-to-date versions:
 ## Testing
 
 - Make sure every save & continue button works in the guide
--
 
 ## TODOs
 

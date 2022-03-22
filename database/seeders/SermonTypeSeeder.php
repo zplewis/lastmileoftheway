@@ -19,9 +19,6 @@ class SermonTypeSeeder extends Seeder
                 'title' => 'Eulogy',
             ],
             [
-                'title' => 'Sermon',
-            ],
-            [
                 'title' => 'Words of Comfort',
             ]
         ]);
