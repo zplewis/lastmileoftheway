@@ -47,7 +47,7 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'songMinister' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Who is rendering the music?', 'placeholder' => 'Church music ministry'])
+    @include('guide.field', ['id' => 'songMinister' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Who is rendering the music?', 'placeholder' => 'RMBC Soloist'])
 </div>
 
 @endsection
