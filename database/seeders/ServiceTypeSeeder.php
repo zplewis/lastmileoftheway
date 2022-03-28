@@ -17,18 +17,18 @@ class ServiceTypeSeeder extends Seeder
         DB::table('service_types')->insert([
             [
                 'title' => 'Graveside',
-                'description' => 'Service held outside at the burial site',
-                'bullet_points' => 'Suitable for smaller services,Great for social distancing, Weather-contingent'
+                'description' => 'A funeral that takes place at the graveside',
+                'bullet_points' => 'Shorter service,Weather and time-contingent'
             ],
             [
                 'title' => 'Funeral',
-                'description' => 'Service held in church or funeral home',
-                'bullet_points' => 'What most people think of as a burial service,Capacity dependent upon venue'
+                'description' => 'Takes place in a church or funeral home with the body present',
+                'bullet_points' => 'Capacity dependent upon location,More time contingent'
             ],
             [
                 'title' => 'Memorial',
-                'description' => 'Service held when burial is not possible',
-                'bullet_points' => 'Most flexible concerning location,Tends to be a shorter service,Preaching optional'
+                'description' => 'A service intended to remember and honor the life of someone who has died',
+                'bullet_points' => 'Body is not present,Less time contingent'
             ]
         ]);
     }

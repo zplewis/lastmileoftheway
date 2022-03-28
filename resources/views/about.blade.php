@@ -4,15 +4,15 @@
 <div class="px-4 py-5 my-5 text-center" id="about-this-site">
     <h1 class="display-5 fw-bold">About this site</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead"><i>Last Mile of the Way</i> is an interactive website designed not only to help
-          those who find themselves in the unfamiliar position of having to plan a funeral or
-          memorial service but is also a tool for those who desire to be more intentional and
-          involved on the worship planning side.</p>
-      <p class="lead"><i>Last Mile of the Way</i> can also be used
+      <p class="lead"><i>Last Mile of the Way</i> is an interactive website designed to help
+          those thrust into the uncomfortable position of having to plan a funeral or
+          memorial service.
+      <p class="lead">This site can also be used
           as a church counterpart to a pre-need contract, a service offered by most funeral homes
           which allows people to decide on which services they want in advance. This website allows
-          you to make your requests known. Use this site to determine a liturgy based on the type
-          of service you envision, save or print a copy of your order of service, and place it with
+          you to make your requests known. Use this site to make your requests known. Determine a
+          program outline based on the type of service you envision, save or print a copy of your
+          order of service, and place it with
           other important documents intended for those who will be tasked with making your final
           arrangements.</p>
     </div>
