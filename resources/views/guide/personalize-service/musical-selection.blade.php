@@ -11,6 +11,7 @@
     $songs = \App\Models\Song::where('song_type_id', $selectedSongType)->orderBy('name')->get();
     $selectedSong = $songs->where('id', $selectedSongId)->first();
     $selectedSongYouTube = $selectedSong !== null && $selectedSong->youtube_url ? $selectedSong->youtube_url : null;
+    $songMinisterPlaceholder = $currentServiceType !== null && strcasecmp($currentServiceType->title, 'graveside') === 0 ? 'RMBC Soloist' : 'RMBC Music Ministry';
 @endphp
 
 <div class="col-12">
@@ -47,7 +48,7 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'songMinister' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Who is rendering the music?', 'placeholder' => 'RMBC Soloist'])
+    @include('guide.field', ['id' => 'songMinister' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Who is rendering the music?', 'placeholder' => $songMinisterPlaceholder])
 </div>
 
 @endsection

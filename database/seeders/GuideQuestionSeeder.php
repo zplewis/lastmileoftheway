@@ -36,7 +36,7 @@ class GuideQuestionSeeder extends Seeder
                 service) to help you plan the service and determine the people and details that
                 are involved.<br />If you ever need help, feel free to check our <a href="/resources/glossary" title="Glossary">
                 glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. At the end, you\'ll
-                have the opportunity to submit feedback on your service planning experience.'
+                have the opportunity to submit feedback on your service planning experience.',
             ],
             [
                 'guide_category_id' => $demograhpicsId,
@@ -69,9 +69,9 @@ class GuideQuestionSeeder extends Seeder
                 GPS by traveling attendees. If the location is not known yet, that\'s okay.'
             ],
             [
-                'guide_category_id' => $personalizeServiceId,
-                'title' => 'Service Type',
-                'uri' => 'service-type',
+                'guide_category_id' => $serviceTypeId,
+                'title' => 'Select a Service',
+                'uri' => 'select-a-service',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 1,
@@ -191,9 +191,9 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $personalizeServiceId,
                 'title' => 'Committal & Benediction',
                 'uri' => 'committal',
-                'optional' => 'Include Committal in this service',
+                'optional' => NULL,
                 'optional_html_id' => 'hasCommittal',
-                'item_order' => 14,
+                'item_order' => 16,
                 'description' => Definitions::where('term', 'committal')->first()->full_text
             ],
             [
@@ -202,7 +202,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'mortician',
                 'optional' => 'Include Mortician\'s Brief in this service',
                 'optional_html_id' => 'hasMorticiansBrief',
-                'item_order' => 15,
+                'item_order' => 14,
                 'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
             ],
             [
@@ -211,7 +211,7 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'recessional',
                 'optional' => 'Include Recessional in this service',
                 'optional_html_id' => 'hasRecessional',
-                'item_order' => 16,
+                'item_order' => 15,
                 'description' => Definitions::where('term', 'recessional')->first()->full_text
             ],
             [
@@ -261,16 +261,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Was this site helpful to you? What did this process do well? What
                 could be better? Please let us know using the feedback form below.'
             ],
-            [
-                'guide_category_id' => $serviceTypeId,
-                'title' => 'Select a Service',
-                'uri' => 'select-a-service',
-                'optional' => NULL,
-                'optional_html_id' => NULL,
-                'item_order' => 1,
-                'description' => 'Was this site helpful to you? What did this process do well? What
-                could be better? Please let us know using the feedback form below.'
-            ],
+
         ]);
     }
 }

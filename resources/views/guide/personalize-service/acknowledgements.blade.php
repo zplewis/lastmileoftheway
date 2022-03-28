@@ -6,7 +6,7 @@
 @include('guide.switch', ['id' => 'obituaryReading', 'labelText' => 'Include a reading of the obituary'])
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'invocationMinister', 'inputType' => 'text', 'labelText' => 'Designated person', 'placeholder' => 'Name of person'])
+    @include('guide.field', ['id' => 'acknowledgementsPerson', 'inputType' => 'text', 'labelText' => 'Designated person', 'placeholder' => 'Name of person'])
 </div>
 
 @endsection

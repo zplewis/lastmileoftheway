@@ -26,6 +26,7 @@ class CreateGuideQuestionsTable extends Migration
             $table->string('optional')->nullable();
             $table->string('optional_html_id')->nullable();
             $table->string('description', 2500)->nullable();
+            $table->string('default_value')->nullable();
         });
     }
 

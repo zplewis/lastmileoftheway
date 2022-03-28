@@ -24,7 +24,7 @@
             @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => $nextQuestionUri])
             <div class="row g-3">
 
-                @if ($currentQuestion->optional)
+                @if ($currentQuestion->optional_html_id)
                     @include('guide.switch', ['id' => $currentQuestion->optional_html_id, 'labelText' => $currentQuestion->optional ?? 'Include a ' . $currentQuestion->title . ' in this service'])
                 @endif
 
