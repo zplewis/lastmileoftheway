@@ -88,7 +88,7 @@ class ScripturesSeeder extends Seeder
                 My tears have been my food
                     day and night,
                 while people say to me continually,
-                    “Where is your God?”
+                    \"Where is your God?\"
 
                 These things I remember,
                     as I pour out my soul:
@@ -263,85 +263,215 @@ class ScripturesSeeder extends Seeder
                     'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
                     'title' => 'The Good Shepherd Gives Eternal Life',
                     'location' => 'John 10:27-29',
-                    'verses' => null
+                    'verses' => "My sheep hear my voice. I know them, and they follow me. I give them
+                    eternal life, and they will never perish. No one will snatch them out of my hand.
+                    What my Father has given me is greater than all else, and no one can snatch it
+                    out of the Father's hand."
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
                     'title' => 'Jesus, the Resurrection',
                     'location' => 'John 11:17-26',
-                    'verses' => null
+                    'verses' => 'When Jesus arrived, he found that Lazarus had already been in the
+                    tomb four days. Now Bethany was near Jerusalem, some two miles away, and many
+                    of the Jews had come to Martha and Mary to console them about their brother.
+                    When Martha heard that Jesus was coming, she went and met him, while Mary stayed
+                    at home. Martha said to Jesus, "Lord, if you had been here, my brother would
+                    not have died. But even now I know that God will give you whatever you ask of
+                    him. Jesus said to her, "Your brother will rise again." Martha said to him,
+                    "I know that he will rise again in the resurrection on the last day." Jesus
+                    said to her, "I am the resurrection and the life. Those who believe in me,
+                    even though they die, will live, and everyone who lives and believes in me will
+                    never die. Do you believe this?"'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'John')->first()->id,
                     'title' => 'Jesus, the Way, Truth, and Life',
                     'location' => 'John 14:1-6',
-                    'verses' => null
+                    'verses' => '"Do not let your hearts be troubled. Believe in God, believe also
+                    in me. In my Father\'s house there are many dwelling places. If it were not so,
+                    would I have told you that I go to prepare a place for you? And if I go and
+                    prepare a place for you, I will come again and will take you to myself, so
+                    that where I am, there you may be also. And you know the way to the place where
+                    I am going." Thomas said to him, "Lord, we do not know where you are going.
+                    How can we know the way?" Jesus said to him, "I am the way, and the truth, and
+                    the life. No one comes to the Father except through me.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'Romans')->first()->id,
-                    'title' => 'God\'s Love',
+                    'title' => 'God\'s Love in Christ Jesus',
                     'location' => 'Romans 8:31-39',
-                    'verses' => null
+                    'verses' => 'What then are we to say about these things? If God is for us, who
+                    is against us? He who did not withhold his own Son, but gave him up for all of
+                    us, will he not with him also give us everything else? Who will bring any charge
+                    against God\'s elect? It is God who justifies. Who is to condemn? It is Christ
+                    Jesus, who died, yes, who was raised, who is at the right hand of God, who indeed
+                    intercedes for us. Who will separate us from the love of Christ? Will hardship,
+                    or distress, or persecution, or famine, or nakedness, or peril, or sword?
+                    As it is written,
+                    "For your sake we are being killed all day long;
+                        we are accounted as sheep to be slaughtered."
+
+                    No, in all these things we are more than conquerors through him who loved us.
+                    For I am convinced that neither death, nor life, nor angels, nor rulers, nor
+                    things present, nor things to come, nor powers, nor height, nor depth, nor
+                    anything else in all creation, will be able to separate us from the love of
+                    God in Christ Jesus our Lord.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'Romans')->first()->id,
                     'title' => 'We Are the Lord\'s',
                     'location' => 'Romans 14:7-9',
-                    'verses' => null
+                    'verses' => 'We do not live to ourselves, and we do not die to ourselves.
+                    If we live, we live to the Lord, and if we die, we die to the Lord; so then,
+                    whether we live or whether we die, we are the Lord\'s. For to this end Christ
+                    died and lived again, so that he might be Lord of both the dead and the living.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '1 Corinthians')->first()->id,
-                    'title' => 'Love',
+                    'title' => 'The Gift of Love',
                     'location' => '1 Corinthians 13:1-13',
-                    'verses' => null
+                    'verses' => 'If I speak in the tongues of mortals and of angels, but do not have
+                    love, I am a noisy gong or a clanging cymbal. And if I have prophetic powers,
+                    and understand all mysteries and all knowledge, and if I have all faith, so as
+                    to remove mountains, but do not have love, I am nothing. If I give away all my
+                    possessions, and if I hand over my body so that I may boast, but do not have
+                    love, I gain nothing.
+
+                    Love is patient; love is kind; love is not envious or boastful or arrogant or
+                    rude. It does not insist on its own way; it is not irritable or resentful; it
+                    does not rejoice in wrongdoing, but rejoices in the truth. It bears all things,
+                    believes all things, hopes all things, endures all things.
+
+                    Love never ends. But as for prophecies, they will come to an end; as for
+                    tongues, they will cease; as for knowledge, it will come to an end. For we know
+                    only in part, and we prophesy only in part; but when the complete comes, the
+                    partial will come to an end. When I was a child, I spoke like a child, I
+                    thought like a child, I reasoned like a child; when I became an adult, I put an
+                    end to childish ways. For now we see in a mirror, dimly, but then we will see
+                    face to face. Now I know only in part; then I will know fully, even as I have
+                    been fully known. And now faith, hope, and love abide, these three; and the
+                    greatest of these is love.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '1 Corinthians')->first()->id,
                     'title' => 'We Will All Be Changed',
                     'location' => '1 Corinthians 15:51-56',
-                    'verses' => null
+                    'verses' => 'Listen, I will tell you a mystery! We will not all die, but we will
+                    all be changed, in a moment, in the twinkling of an eye, at the last trumpet.
+                    For the trumpet will sound, and the dead will be raised imperishable, and we
+                    will be changed. For this perishable body must put on imperishability, and this
+                    mortal body must put on immortality. When this perishable body puts on
+                    imperishability, and this mortal body puts on immortality, then the saying that
+                    is written will be fulfilled:
+
+                    "Death has been swallowed up in victory."
+                    "Where, O death, is your victory?
+                        Where, O death, is your sting?"
+
+                    The sting of death is sin, and the power of sin is the law.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
                     'title' => 'God of All Consolation',
                     'location' => '2 Corinthians 1:3-7',
-                    'verses' => null
+                    'verses' => 'Blessed be the God and Father of our Lord Jesus Christ, the Father
+                    of mercies and the God of all consolation, who consoles us in all our
+                    affliction, so that we may be able to console those who are in any affliction
+                    with the consolation with which we ourselves are consoled by God. For just as
+                    the sufferings of Christ are abundant for us, so also our consolation is
+                    abundant through Christ. If we are being afflicted, it is for your consolation
+                    and salvation; if we are being consoled, it is for your consolation, which you
+                    experience when you patiently endure the same sufferings that we are also
+                    suffering. Our hope for you is unshaken; for we know that as you share in our
+                    sufferings, so also you share in our consolation.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
                     'title' => 'We Do Not Lose Heart',
                     'location' => '2 Corinthians 4:16-18',
-                    'verses' => null
+                    'verses' => 'So we do not lose heart. Even though our outer nature is wasting
+                    away, our inner nature is being renewed day by day. For this slight momentary
+                    affliction is preparing us for an eternal weight of glory beyond all measure,
+                    because we look not at what can be seen but at what cannot be seen; for what
+                    can be seen is temporary, but what cannot be seen is eternal.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '2 Corinthians')->first()->id,
                     'title' => 'Our Building from God',
                     'location' => '2 Corinthians 5:1-5',
-                    'verses' => null
+                    'verses' => 'For we know that if the earthly tent we live in is destroyed, we
+                    have a building from God, a house not made with hands, eternal in the heavens.
+                    For in this tent we groan, longing to be clothed with our heavenly dwelling—if
+                    indeed, when we have taken it off we will not be found naked. For while we are
+                    still in this tent, we groan under our burden, because we wish not to be
+                    unclothed but to be further clothed, so that what is mortal may be swallowed up
+                    by life. He who has prepared us for this very thing is God, who has given us
+                    the Spirit as a guarantee.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '1 Thessalonians')->first()->id,
                     'title' => 'Words of Comfort',
                     'location' => '1 Thessalonians 4:13-18',
-                    'verses' => null
+                    'verses' => 'But we do not want you to be uninformed, brothers and sisters,
+                    about those who have died, so that you may not grieve as others do who have no
+                    hope. For since we believe that Jesus died and rose again, even so, through
+                    Jesus, God will bring with him those who have died. For this we declare to you
+                    by the word of the Lord, that we who are alive, who are left until the coming
+                    of the Lord, will by no means precede those who have died. For the Lord himself,
+                    with a cry of command, with the archangel\'s call and with the sound of God\'s
+                    trumpet, will descend from heaven, and the dead in Christ will rise first. Then
+                    we who are alive, who are left, will be caught up in the clouds together with
+                    them to meet the Lord in the air; and so we will be with the Lord forever.
+                    Therefore encourage one another with these words.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', '2 Timothy')->first()->id,
                     'title' => 'A Fought Fight, Finished Course, and Kept Faith',
                     'location' => '2 Timothy 4:6-8',
-                    'verses' => null
+                    'verses' => 'As for me, I am already being poured out as a libation, and the
+                    time of my departure has come. I have fought the good fight, I have finished
+                    the race, I have kept the faith. From now on there is reserved for me the crown
+                    of righteousness, which the Lord, the righteous judge, will give me on that day,
+                    and not only to me but also to all who have longed for his appearing.'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'Revelation')->first()->id,
                     'title' => 'God Will Wipe Tears Away',
                     'location' => 'Revelation 7:15-17',
-                    'verses' => null
+                    'verses' => 'For this reason they are before the throne of God,
+                    and worship him day and night within his temple,
+                    and the one who is seated on the throne will shelter them.
+                    They will hunger no more, and thirst no more;
+                    the sun will not strike them,
+                    nor any scorching heat;
+                    for the Lamb at the center of the throne will be their shepherd,
+                    and he will guide them to springs of the water of life,
+                    and God will wipe away every tear from their eyes."'
                 ],
                 [
                     'bible_book_id' => BibleBook::where('name', 'Revelation')->first()->id,
-                    'title' => 'A New Heaven and earth',
+                    'title' => 'The New Heaven and the New Earth',
                     'location' => 'Revelation 21:1-6',
-                    'verses' => null
+                    'verses' => 'Then I saw a new heaven and a new earth; for the first heaven and
+                    the first earth had passed away, and the sea was no more. And I saw the holy
+                    city, the new Jerusalem, coming down out of heaven from God, prepared as a
+                    bride adorned for her husband. And I heard a loud voice from the throne saying,
+
+                    "See, the home of God is among mortals.
+                    He will dwell with them;
+                    they will be his peoples,
+                    and God himself will be with them;
+                    he will wipe every tear from their eyes.
+                    Death will be no more;
+                    mourning and crying and pain will be no more,
+                    for the first things have passed away."
+
+                    And the one who was seated on the throne said, "See, I am making all things
+                    new." Also he said, "Write this, for these words are trustworthy and true."
+                    Then he said to me, "It is done! I am the Alpha and the Omega, the beginning
+                    and the end. To the thirsty I will give water as a gift from the spring of the
+                    water of life.'
                 ],
             ]
         ];
