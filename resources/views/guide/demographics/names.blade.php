@@ -1,6 +1,11 @@
 @extends('guide.container')
 
 @section('guide.content')
+
+@php
+    $isUserIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) === 0;
+@endphp
+
 <div class="col-sm-6">
     @include('guide.field', ['id' => 'userFirstName', 'inputType' => 'text', 'labelText' => 'First name', 'required' => true])
 </div>
@@ -25,11 +30,11 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'deceasedPreferredName', 'inputType' => 'text', 'labelText' => 'Deceased Preferred Name'])
+    @include('guide.field', ['id' => 'deceasedPreferredName', 'inputType' => 'text', 'labelText' => ($isUserIsDeceased === true ? 'Preferred Name' : 'Deceased Preferred Name')])
 </div>
 
 
-<div class="demographics-someone-else-name {{ strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) !== 0 ? '' : 'd-none' }}">
+<div class="demographics-someone-else-name {{ $isUserIsDeceased !== true ? '' : 'd-none' }}">
     <div class="col-sm-6">
         @include('guide.field', ['id' => 'deceasedFirstName', 'inputType' => 'text', 'labelText' => 'Deceased First name'])
     </div>

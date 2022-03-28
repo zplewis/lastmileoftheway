@@ -11,16 +11,24 @@
         userIsDeceasedSelect.addEventListener('change', (event) => {
             // hide and clear the box
             const deceasedSomeoneElseDiv = document.querySelector('.demographics-someone-else-name');
+            const deceasedPreferredNameLabel = document.querySelector('label[for="deceasedPreferredName"]');
             deceasedSomeoneElseDiv.classList.add('d-none');
 
-            if (event.target.value === '1') {
+            if (deceasedPreferredNameLabel) {
+                deceasedPreferredNameLabel.textContent = 'Preferred Name';
+            }
+
+            // Get the text of the selected index. If the text does NOT include the word "self,"
+            // then show the other fields
+            if (event.target.options[event.target.selectedIndex].text.indexOf('self') === -1) {
                 deceasedSomeoneElseDiv.classList.remove('d-none');
+                if (deceasedPreferredNameLabel) {
+                    deceasedPreferredNameLabel.textContent = 'Deceased Preferred Name';
+                }
             }
 
             console.log('userIsDeceased select changed');
         });
-
-        console.log('userIsDeceased select exists!');
     }
 
     // When going through the guide, add the code that highlights the selected service type
