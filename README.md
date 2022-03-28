@@ -230,6 +230,10 @@ wrong version of static files so that the user has the up-to-date versions:
 
 ## TODOs
 
+### Completed - 2022/03/28
+
+
+
 - Be able to set the service type using a URL parameter to the main `/guide` URL
 - HIGH Priority: Look into creating routes the right way
 - Look into redirecting to the beginning of the category if a route is used that doesn't belong to
@@ -238,6 +242,7 @@ wrong version of static files so that the user has the up-to-date versions:
   - `/guide/{guide_category}/{guide_question}`
   - `/guide/{guide_category}`
   - `/guide`
+- Make it so that people can be added or taken away dynamically for reflections.
 - Make sure all links work
 - Add support for URL parameters to select the service type automatically
 - Include all parts of service by default unless the user chose to disable them

@@ -18,7 +18,8 @@ class GuideQuestionSeeder extends Seeder
     {
         $gettingStartedId = GuideCategory::where('title', 'Getting Started')->first()->id;
         $demograhpicsId = GuideCategory::where('title', 'Demographics')->first()->id;
-        $customizeServiceId = GuideCategory::where('title', 'Customize Service')->first()->id;
+        $serviceTypeId = GuideCategory::where('uri', 'service-type')->first()->id;
+        $personalizeServiceId = GuideCategory::where('uri', 'personalize-service')->first()->id;
         $nextStepsId = GuideCategory::where('title', 'Next Steps')->first()->id;
 
         DB::table('guide_questions')->insert([
@@ -57,18 +58,18 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Include relevant dates about the deceased that may be included on a program.'
             ],
             [
-                'guide_category_id' => $demograhpicsId,
+                'guide_category_id' => $serviceTypeId,
                 'title' => 'Venue Location',
                 'uri' => 'venue',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'item_order' => 3,
+                'item_order' => 2,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
                 GPS by traveling attendees. If the location is not known yet, that\'s okay.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Service Type',
                 'uri' => 'service-type',
                 'optional' => NULL,
@@ -77,7 +78,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Which type of service best suits your needs?'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Processional',
                 'uri' => 'processional',
                 'optional' => 'Include a Processional in this service',
@@ -86,7 +87,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'processional')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Call to Worship',
                 'uri' => 'call-to-worship',
                 'optional' => 'Include Call to Worship to open the service',
@@ -95,7 +96,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'The opening words of the service usually spoken by the officiating minister.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Invocation',
                 'uri' => 'invocation',
                 'optional' => NULL,
@@ -104,7 +105,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'invocation')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Opening Hymn',
                 'uri' => 'musical-selection-1',
                 'optional' => 'Include musical selection #1 in this service',
@@ -115,7 +116,7 @@ class GuideQuestionSeeder extends Seeder
                 here.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Old Testament Reading',
                 'uri' => 'old-testament',
                 'optional' => NULL,
@@ -124,7 +125,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'old testament scripture reading')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'New Testament Reading',
                 'uri' => 'new-testament',
                 'optional' => NULL,
@@ -133,7 +134,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'new testament scripture reading')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Prayer of Comfort',
                 'uri' => 'prayer-of-comfort',
                 'optional' => 'Include Prayer of Comfort in this service',
@@ -142,7 +143,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'prayer of comfort')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Musical Selection #2',
                 'uri' => 'musical-selection-2',
                 'optional' => 'Include musical selection #2 in this service',
@@ -151,7 +152,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Reflections (2 Minutes)',
                 'uri' => 'reflections',
                 'optional' => 'Include Reflections (2 Minutes) in this service',
@@ -160,7 +161,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Acknowledgements',
                 'uri' => 'acknowledgements',
                 'optional' => 'Include Acknowledgements in this service',
@@ -169,7 +170,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'acknowledgements')->first()->short_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Musical Selection #3',
                 'uri' => 'musical-selection-3',
                 'optional' => 'Include musical selection #3 in this service',
@@ -178,7 +179,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'Some text explaining what this page is about, putting the user at ease.'
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Sermon / Eulogy',
                 'uri' => 'eulogy',
                 'optional' => 'Include Sermon / Eulogy in this service',
@@ -187,7 +188,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'eulogy')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Committal & Benediction',
                 'uri' => 'committal',
                 'optional' => 'Include Committal in this service',
@@ -196,7 +197,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'committal')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Mortician\'s Brief',
                 'uri' => 'mortician',
                 'optional' => 'Include Mortician\'s Brief in this service',
@@ -205,7 +206,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Recessional',
                 'uri' => 'recessional',
                 'optional' => 'Include Recessional in this service',
@@ -214,7 +215,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'recessional')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Burial',
                 'uri' => 'burial',
                 'optional' => 'Include Burial in this service',
@@ -223,7 +224,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => Definitions::where('term', 'committal')->first()->full_text
             ],
             [
-                'guide_category_id' => $customizeServiceId,
+                'guide_category_id' => $personalizeServiceId,
                 'title' => 'Benediction',
                 'uri' => 'benediction',
                 'optional' => 'Include Benediction in this service',
@@ -257,6 +258,16 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 3,
+                'description' => 'Was this site helpful to you? What did this process do well? What
+                could be better? Please let us know using the feedback form below.'
+            ],
+            [
+                'guide_category_id' => $serviceTypeId,
+                'title' => 'Select a Service',
+                'uri' => 'select-a-service',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 1,
                 'description' => 'Was this site helpful to you? What did this process do well? What
                 could be better? Please let us know using the feedback form below.'
             ],

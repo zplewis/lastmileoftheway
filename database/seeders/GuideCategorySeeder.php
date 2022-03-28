@@ -26,14 +26,19 @@ class GuideCategorySeeder extends Seeder
                 'item_order' => 2
             ],
             [
-                'title' => 'Customize Service',
-                'uri' => 'customize-service',
+                'title' => 'Service Type',
+                'uri' => 'service-type',
                 'item_order' => 3
+            ],
+            [
+                'title' => 'Personalize Service',
+                'uri' => 'personalize-service',
+                'item_order' => 4
             ],
             [
                 'title' => 'Next Steps',
                 'uri' => 'next-steps',
-                'item_order' => 4
+                'item_order' => 5
             ],
         ]);
     }

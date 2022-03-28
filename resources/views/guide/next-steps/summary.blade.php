@@ -3,13 +3,13 @@
 @section('guide.content')
 
 @php
-    $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'customize-service'])->get();
+    $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'personalize-service'])->get();
     $categoryIds = $categories->pluck('id');
     $userIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) === 0;
 @endphp
 
 <ul class="list-group">
-    <!-- loop through questions for demographic and customize-service categories, -->
+    <!-- loop through questions for demographic and personalize-service categories, -->
     @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByServiceType(\App\Http\Controllers\SubmissionController::getSelectedServiceType())->whereIn('guide_category_id', $categoryIds)->whereNotIn('uri', ['service-type']) as $question)
     @php
         $questionCategoryUri = $categories->where('id', $question->guide_category_id)->first()->uri;
