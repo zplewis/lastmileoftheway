@@ -34,7 +34,7 @@
                     <!-- Add code here so that Next if there is a "next page" specified,
                     otherwise, use Submit for the button text. -->
                     <button type="submit" id="guide-advance" name="guide-advance" class="btn btn-primary">
-                        @if ($currentQuestion->uri === 'take-a-breath')
+                        @if ($currentQuestion->item_order === 1 && $currentCategory->item_order === 1)
                         Start
                         @else
                         {{ !$nextQuestion ? 'Submit' : 'Save & Continue' }}

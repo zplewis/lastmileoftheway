@@ -166,22 +166,45 @@ class SubmissionController extends Controller
 
     /**
      * Given a list of questions already in order by category and question item order, get the
-     * next question in the list
+     * next question in the list.
+     * @param $questions
+     * @param $question
+     * @param $serviceType
      */
     private function getNextGuideQuestion2(
         \Illuminate\Database\Eloquent\Collection $questions,
-        \App\Models\GuideQuestion $question,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question = null,
         \App\Models\ServiceType $serviceType = null
     ) {
 
+        $questionInServiceType = false;
+
         // Get the current question
         // https://laravel.com/docs/9.x/collections#method-skipuntil
-        $subset = $questions->skipUntil(function ($item) use ($question) {
-            return $item->id === $question->id;
+        $subset = $questions->skipUntil(function ($item) use ($category, $question) {
+            if ($question !== null) {
+                $questionInServiceType = true;
+                return $item->id === $question->id;
+            }
+            return $item->guide_category_id === $category->id;
         });
+
         // Remove the first item, which is the current question
         // https://laravel.com/docs/9.x/collections#method-shift
-        $subset->shift();
+        $nextQuestion = $subset->shift();
+
+        // If the question cannot be found, default to the first question of the current category
+        if ($nextQuestion === null) {
+            return $questions->where('guide_category_id', $category->id)->first();
+        }
+
+        // Stop here if the question value is null, as the next question would be the first question
+        // for the current category for the current service type
+        if ($question === null) {
+            return $nextQuestion;
+        }
+
         // Therefore, the next item is the next question
         $nextQuestion = $subset->first();
         // If the service type is already known, then skip it and go to the next question
@@ -213,26 +236,28 @@ class SubmissionController extends Controller
         // Get all questions based on current selected service type (if any, get all questions)
         $allQuestions = self::getQuestionsByServiceType($serviceType);
 
-        // Default to the 1st question of the current category if the question is null;
-        // this happens when a category is specified but not a question in the URL
-        if ($question === null) {
-            $question = \App\Models\GuideQuestion::where('guide_category_id', $category->id)->where('item_order', 1)->first();
-        }
-
-        // If the specified question is not valid for this service type, then redirect the user to
-        // the current category
-        if ($allQuestions->where('id', $question->id)->first() === null) {
-            return redirect('/guide/' . $category->uri);
-        }
-
         // Get the next question based on the current question
-        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $question, $serviceType);
+        // Defaults to the 1st question of the current category if the question is null
+        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
 
         // Get the category from the next question
         $nextCategory = $nextQuestion ? $nextQuestion->guideCategory()->first() : null;
 
         // Get the URI from the next category and question
         $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
+
+        // If the specified question is not valid for this service type, then redirect the user to
+        // the current category
+        if ($question === null || $allQuestions->where('id', $question->id)->first() === null) {
+            // $allQuestions is all questions based on the current service type, if any
+            return redirect($nextQuestionUri);
+        }
+
+        // Default to the 1st question of the current category if the question is null;
+        // this happens when a category is specified but not a question in the URL
+        // if ($question === null) {
+        //     $question = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
+        // }
 
         return view(
             'guide',
@@ -267,7 +292,7 @@ class SubmissionController extends Controller
         }
 
         // Get the next question based on the current question
-        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $question, $serviceType);
+        $nextQuestion = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
 
         // Get the category from the next question
         $nextCategory = $nextQuestion ? $nextQuestion->guideCategory()->first() : null;

@@ -246,37 +246,27 @@ wrong version of static files so that the user has the up-to-date versions:
   - `/guide/{guide_category}/{guide_question}`
   - `/guide/{guide_category}`
   - `/guide`
-
+- On `/guide/service-type/select-a-service/`, make it required to select a service type before continuing
+- ~~Add support for showing a YouTube link upon selecting a song via javascript (no form submit needed)~~
+  - ~~probably could use a `data-*` item on the selected option~~
+- Be able to set the service type using a URL parameter to the main `/guide` URL
+- On `/guide/getting-started`, add a newline between the first and second paragraphs
+- Look into redirecting to the beginning of the category if a route is used is valid but doesn't belong to
+  the selected service
+- If a service is selected and the users a guide question that is not a part of that selected service,
+  get the category name from that selected service and jump to the first guide question in that category.
 
 ### Remaining
 - Scrollspy errors on a few pages:
   - `/resources/bible-readings`
   - `/faqs`
-- On `/guide/getting-started`, add a newline between the first and second paragraphs
 - On `/guide/getting-started`, detect whether the user previously entered information and warn them that
   continuing will clear all previously saved information. If they click OK, then clear all data from
   the session.
 - Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
-- On `/guide/service-type/select-a-service/`, make it required to select a service type before continuing
-- Be able to set the service type using a URL parameter to the main `/guide` URL
-
-- Look into redirecting to the beginning of the category if a route is used that doesn't belong to
-  the selected service
-
 - Make it so that people can be added or taken away dynamically for reflections.
 - Make sure all links work
-- Add support for URL parameters to select the service type automatically
-
-- If a service is selected and the users a guide question that is not a part of that selected service,
-  get the category name from that selected service and jump to the first guide question in that category.
-
-
-
-- Add support for showing a YouTube link upon selecting a song via javascript (no form submit needed)
-  - probably could use a `data-*` item on the selected option
 - Add summary page
-
-
 - Handle when invalid guide URLs are provided
   - a 404 | Not Found page is displayed currently
   - Redirect to the category page instead of 404 for guide links
