@@ -87,6 +87,9 @@
     if (serviceTypeSelectors) {
         for (let i = 0; i < serviceTypeSelectors.length; i++) {
             serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener);
+
+            // Set custom browser accessible meessages that appear in Chrome/Brave
+            serviceTypeSelectors[i].setCustomValidity('Please select a service to continue.');
         }
     }
 

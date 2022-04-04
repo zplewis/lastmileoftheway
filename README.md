@@ -126,7 +126,7 @@ sail up
 sail down --remove-orphans --volumes && sail up --build --detach
 
 # Run this locally
-composer install && php artisan migrate:fresh --seed && npm install && npm run dev && php artisan route:cache
+composer install && php artisan migrate:fresh --seed && npm install && php artisan route:cache && npm run watch
 
 # Run this on the server
 # npm run dev fails for some reason, which doesn't matter for now.
@@ -230,38 +230,58 @@ wrong version of static files so that the user has the up-to-date versions:
 
 ## TODOs
 
-### Completed - 2022/03/28
-
-
-
-- Be able to set the service type using a URL parameter to the main `/guide` URL
+### Completed
 - HIGH Priority: Look into creating routes the right way
-- Look into redirecting to the beginning of the category if a route is used that doesn't belong to
-  the selected service
-- If you encounter issues with the routes again, look into using route parameters
-  - `/guide/{guide_category}/{guide_question}`
-  - `/guide/{guide_category}`
-  - `/guide`
-- Make it so that people can be added or taken away dynamically for reflections.
-- Make sure all links work
-- Add support for URL parameters to select the service type automatically
 - Include all parts of service by default unless the user chose to disable them
   - Use "no" to show the user chose something, null or yes to make it checked!
-- If a service is selected and the users a guide question that is not a part of that selected service,
-  get the category name from that selected service and jump to the first guide question in that category.
-- Find a way to add date timestamp or something to prevent javascript caching
 - Finish adding all sidebar items to the database
+- Add recommendation for the first song as the opening hymn
+- Standardize all three song pages to select song type, and a song, or add their own
 - Finish adding all songs to the database
 - Finish adding all scriptures to the database
 - Create a page for the songs
 - Create a page for the scriptures
+- Find a way to add date timestamp or something to prevent javascript caching
+- If you encounter issues with the routes again, look into using route parameters
+  - `/guide/{guide_category}/{guide_question}`
+  - `/guide/{guide_category}`
+  - `/guide`
+
+
+### Remaining
+- Scrollspy errors on a few pages:
+  - `/resources/bible-readings`
+  - `/faqs`
+- On `/guide/getting-started`, add a newline between the first and second paragraphs
+- On `/guide/getting-started`, detect whether the user previously entered information and warn them that
+  continuing will clear all previously saved information. If they click OK, then clear all data from
+  the session.
+- Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
+- On `/guide/service-type/select-a-service/`, make it required to select a service type before continuing
+- Be able to set the service type using a URL parameter to the main `/guide` URL
+
+- Look into redirecting to the beginning of the category if a route is used that doesn't belong to
+  the selected service
+
+- Make it so that people can be added or taken away dynamically for reflections.
+- Make sure all links work
+- Add support for URL parameters to select the service type automatically
+
+- If a service is selected and the users a guide question that is not a part of that selected service,
+  get the category name from that selected service and jump to the first guide question in that category.
+
+
+
 - Add support for showing a YouTube link upon selecting a song via javascript (no form submit needed)
   - probably could use a `data-*` item on the selected option
 - Add summary page
-- Standardize all three song pages to select song type, and a song, or add their own
-- Add recommendation for the first song as the opening hymn
+
+
 - Handle when invalid guide URLs are provided
   - a 404 | Not Found page is displayed currently
+  - Redirect to the category page instead of 404 for guide links
+- True server side form validation
+- Complete summary page
 
 ## Jekyll
 

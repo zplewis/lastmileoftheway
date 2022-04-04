@@ -5418,7 +5418,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   if (serviceTypeSelectors) {
     for (var i = 0; i < serviceTypeSelectors.length; i++) {
-      serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener);
+      serviceTypeSelectors[i].addEventListener('change', serviceTypeSelectorListener); // Set custom browser accessible meessages that appear in Chrome/Brave
+
+      serviceTypeSelectors[i].setCustomValidity('Please select a service to continue.');
     }
   }
 
