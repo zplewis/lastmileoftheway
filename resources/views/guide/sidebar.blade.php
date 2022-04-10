@@ -17,7 +17,7 @@
             <button class="btn btn-toggle align-items-center rounded {{ $isCurrentSection ? '' : 'collapsed' }}"
             data-bs-toggle="collapse" data-bs-target="#{{ $sidebarCategory->uri }}-collapse"
             aria-expanded="{{ $isCurrentSection ? 'true' : 'false' }}">
-              {{ $sidebarCategory->title }}
+              {{ $sidebarCategory->title }} {{ isset($currentServiceType) && strcasecmp($sidebarCategory->uri, 'personalize-service') === 0 ? '(' . $currentServiceType->title . ')' : '' }}
             </button>
             <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarCategory->uri }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
