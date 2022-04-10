@@ -21,7 +21,7 @@
 <div class="container col-xxl-8 px-4 py-5" id="about-pastor-farrow">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="{{ url('images/about-pastor-farrow-white.jpeg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        <img src="{{ url('images/about-pastor-farrow-2.png') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
       </div>
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold lh-1 mb-3">About Pastor Farrow</h1>
@@ -32,7 +32,7 @@
         <p class="lead">
         Rev Farrow serves God faithfully as evidenced by his unique and energetic preaching and teaching style. He approaches the tasks of ministry with earnestness, sincerity and humility. Rev. Farrow has preached all over North Carolina and beyond in diverse contexts. He’s preached in the prison, nursing homes, and in various denominational traditions. He has preached the MLK Commemorative Day Service for Shaw University. He has preached multiple times for the students at Campbell University. He has also preached and taught at the General Baptist State Convention of NC’s Annual Session. He is active in the United Missionary Baptist Association as well as the State Convention, where he serves on the Executive Board.</p>
         <p class="lead">
-        Among his numerous honors and awards, Rev. Farrow has been recognized by the Fayetteville Observer as one of the area's rising leaders under the age of 40. Rev Farrow has a broad range of experiences in ministry, which have formed the basis for his passion for ministry and missions; however, the joy of his life is his family. Rev. Farrow is married to Kembrie Farrow, who works as a social worker in the Charlotte-Mecklenburg School System. They are proud parents of three children, Kadence, Kailand, and Karson.
+        Among his numerous honors and awards, Rev. Farrow has been recognized by the Fayetteville Observer as one of the area's rising leaders under the age of 40. Rev Farrow has a broad range of experiences in ministry, which have formed the basis for his passion for ministry and missions; however, the joy of his life is his family. Rev. Farrow is married to Kembrie Farrow, who works as a social worker in the Charlotte-Mecklenburg School System. They are proud parents of three children, Kadence, Karson, and Kailand.
         </p>
       </div>
     </div>
