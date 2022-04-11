@@ -1,6 +1,6 @@
 <div class="col-12 col-md-9">
     <div class="row">
-        <h4 class="mb-3">{!! $currentQuestion->title !!}</h4>
+        <h2 class="mb-3">{!! $currentQuestion->title !!}</h2>
         @if ($currentQuestion->description)
             <p class="lead">{!! $currentQuestion->description !!}</p>
         @endif

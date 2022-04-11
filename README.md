@@ -125,7 +125,7 @@ sail up
 # detached containers.
 sail down --remove-orphans --volumes && sail up --build --detach
 
-# Run this locally
+# Run this locally (local development after building the image and starting the container)
 composer install && php artisan migrate:fresh --seed && npm install && php artisan route:cache && npm run watch
 
 # Run this on the server
@@ -246,7 +246,7 @@ wrong version of static files so that the user has the up-to-date versions:
   - `/guide/{guide_category}/{guide_question}`
   - `/guide/{guide_category}`
   - `/guide`
-- On `/guide/service-type/select-a-service/`, make it required to select a service type before continuing
+- On `/guide/service-type/selected-service/`, make it required to select a service type before continuing
 - ~~Add support for showing a YouTube link upon selecting a song via javascript (no form submit needed)~~
   - ~~probably could use a `data-*` item on the selected option~~
 - Be able to set the service type using a URL parameter to the main `/guide` URL

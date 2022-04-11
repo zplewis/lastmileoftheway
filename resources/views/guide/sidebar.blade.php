@@ -1,6 +1,6 @@
 <div class="col col-md-3">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <span class="fs-5 fw-semibold">Order of Service</span>
+      <span class="fs-5 fw-semibold">Order of Service Guide</span>
     </a>
     <ul class="list-unstyled ps-0">
         @php

@@ -71,8 +71,8 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $serviceTypeId,
-                'title' => 'Select a Service',
-                'uri' => 'select-a-service',
+                'title' => 'Selected Service',
+                'uri' => 'selected-service',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 1,
