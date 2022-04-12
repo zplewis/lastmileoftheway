@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class GuideQuestionField extends Model
 {
     use HasFactory;
+
+    public function guideQuestion()
+    {
+        return $this->hasOne(GuideQuestion::class);
+    }
 }

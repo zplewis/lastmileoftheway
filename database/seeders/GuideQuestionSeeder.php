@@ -17,7 +17,7 @@ class GuideQuestionSeeder extends Seeder
     public function run()
     {
         $gettingStartedId = GuideCategory::where('title', 'Getting Started')->first()->id;
-        $demograhpicsId = GuideCategory::where('title', 'Demographics')->first()->id;
+        $demographicsId = GuideCategory::where('title', 'Demographics')->first()->id;
         $serviceTypeId = GuideCategory::where('uri', 'service-type')->first()->id;
         $personalizeServiceId = GuideCategory::where('uri', 'personalize-service')->first()->id;
         $nextStepsId = GuideCategory::where('title', 'Next Steps')->first()->id;
@@ -40,7 +40,7 @@ class GuideQuestionSeeder extends Seeder
                 have the opportunity to submit feedback on your service planning experience.',
             ],
             [
-                'guide_category_id' => $demograhpicsId,
+                'guide_category_id' => $demographicsId,
                 'title' => 'Your Name & Name of Deceased',
                 'uri' => 'names',
                 'optional' => NULL,
@@ -49,7 +49,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => ''
             ],
             [
-                'guide_category_id' => $demograhpicsId,
+                'guide_category_id' => $demographicsId,
                 'title' => 'Birth, Death, and Service Dates',
                 'uri' => 'dates',
                 'optional' => 'Include a <a href="/resources/glossary#viewing" title="Glossary -

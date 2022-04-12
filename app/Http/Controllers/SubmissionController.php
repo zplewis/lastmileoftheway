@@ -98,9 +98,6 @@ class SubmissionController extends Controller
 
         Log::debug(__FUNCTION__ . '(); request->path(): ' . $request->path());
 
-        // Reflash all data
-        // $request->session()->reflash();
-
         self::putAllInputToSession($request);
         Log::debug(__FUNCTION__ . '(); just reflashed input to the session...');
 
@@ -108,15 +105,14 @@ class SubmissionController extends Controller
         // go to the next one (if applicable, the last page won't have a next
         // page). The path for the next page comes from the 'next-page' input
 
-        // If a
-
-
-
         $redirectPath = $request->input('next-page', null);
         Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
         if (!$redirectPath) {
             $redirectPath = $request->path();
         }
+
+        // If page validation failed, then $errors->any() will return true
+        // https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors
 
         Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
         return redirect($redirectPath)->withInput();
@@ -267,6 +263,7 @@ class SubmissionController extends Controller
                 'currentServiceType' => self::getSelectedServiceType(),
                 'currentCategory' => $category,
                 'currentQuestion' => $question,
+                'currentQuestionFields' => $question->guideQuestionFields()->get(),
                 'nextCategory' => $nextCategory,
                 'nextQuestion' => $nextQuestion,
                 'nextQuestionUri' => $nextQuestionUri
@@ -300,6 +297,18 @@ class SubmissionController extends Controller
         // Get the URI from the next category and question
         $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
 
+        // Now that we figured out the next possible question, now attempt to validate the page
+        Log::debug(__FUNCTION__ . '(); about to validate the page...');
+        // Validate and store the form submission.
+        $validated = $this->validatePage($request, $question);
+
+        if (is_array($validated)) {
+            Log::debug(__FUNCTION__ . '(); validated (array): ', $validated);
+        }
+        if (is_object($validated)) {
+            Log::debug(__FUNCTION__ . '(); validated (object): ' . $validated);
+        }
+
         // If the next-page input is nothing, then stay on the current page
         Log::debug(__FUNCTION__ . '(); current request path: ' . $request->path());
         if (!$request->has('next-page') || !$request->input('next-page')) {
@@ -313,46 +322,6 @@ class SubmissionController extends Controller
         self::putAllInputToSession($request);
 
         return redirect($nextQuestionUri)->withInput();
-    }
-
-    /**
-     *
-     */
-    public function load(
-        Request $request,
-        \Illuminate\Database\Eloquent\Collection $categories,
-        \App\Models\GuideCategory $category,
-        \App\Models\GuideQuestion $question
-    ) {
-
-        Log::debug(__FUNCTION__ . '(); question: ' . $question->title);
-
-        // Discover the next guide question
-        $nextQuestion = $this->getNextGuideQuestion(
-            $categories,
-            $category,
-            $question
-        );
-
-        if ($nextQuestion) {
-            $nextCategory = $nextQuestion->guideCategory()->first();
-            Log::debug(__FUNCTION__ . '(); next question category: ' . $nextCategory->title);
-            Log::debug(__FUNCTION__ . '(); next question:          ' . $nextQuestion->title);
-            Log::debug(__FUNCTION__ . '(); next uri: ' . 'guide/' . $nextCategory->uri . '/' . $nextQuestion->uri);
-        }
-
-        return view(
-            'guide',
-            [
-                'categories' => $categories,
-                'currentCategory' => $category,
-                'currentQuestion' => $question,
-                'nextQuestion' => $nextQuestion,
-                'nextQuestionUri' => ($nextQuestion !== NULL ? $nextQuestion->pageUri() : ''),
-                'currentServiceType' => self::getSelectedServiceType(),
-                'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
-            ]
-        );
     }
 
     /**
@@ -422,10 +391,16 @@ class SubmissionController extends Controller
     /**
      * Provides page-specific form validation prior to advancing to the next
      * page.
+     * TODO: Add validation rules to the database for all required fields, load them for the current
+     * question into this function
+     * TODO: Add HTML validation for all required fields
      */
-    private function validatePage(Request $request)
+    private function validatePage(Request $request, \App\Models\GuideQuestion $question)
     {
         $path = $request->path();
+
+        // Parse the path for the corresponding GuideQuestion object; that way, we can then
+        // get validation rules for all fields from the database
 
         $validated = null;
         // https://laravel.com/docs/8.x/requests#retrieving-the-request-path
@@ -433,12 +408,12 @@ class SubmissionController extends Controller
         // https://laravel.com/docs/8.x/validation#available-validation-rules
         switch($path)
         {
-            case 'guide/demographics':
+            case 'guide/demographics/names':
                 Log::debug(__FUNCTION__ . '(); made it to case "' . $path . '"');
                 // This returns an array, not an object
                 $validated = $request->validate([
-                    // 'userFirstName' => 'required|max:50',
-                    // 'userLastName' => 'required|max:50',
+                    'userFirstName' => 'required|max:50',
+                    'userLastName' => 'required|max:50',
                     // 'userEmail' => 'required|email'
                 ]);
                 break;

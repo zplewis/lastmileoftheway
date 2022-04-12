@@ -38,4 +38,9 @@ class GuideQuestion extends Model
     {
         return 'guide/' . $this->guideCategory()->first()->uri . '/' . $this->uri;
     }
+
+    public function guideQuestionFields()
+    {
+        return $this->hasMany(GuideQuestionField::class);
+    }
 }

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ServiceTypeSeeder::class,
             GuideCategorySeeder::class,
             GuideQuestionSeeder::class,
+            GuideQuestionFieldSeeder::class,
             ApptTypeSeeder::class,
             GuideQuestionServiceTypeSeeder::class,
             SermonTypeSeeder::class,

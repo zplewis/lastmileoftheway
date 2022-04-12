@@ -272,6 +272,8 @@ wrong version of static files so that the user has the up-to-date versions:
   - Redirect to the category page instead of 404 for guide links
 - True server side form validation
 - Complete summary page
+- Finish input validation for all required fields (input, select)
+- Finish adding input validation values to the database
 
 ## Jekyll
 
