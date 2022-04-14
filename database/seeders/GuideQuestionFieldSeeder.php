@@ -62,7 +62,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'names')->first()->id,
                 'html_id' => 'deceasedFirstName',
                 'label' => 'Deceased First Name',
-                'validation' => 'required_unless:userIsDeceased,null',
+                'validation' => 'required_unless:userIsDeceased,2',
                 'validation_msg' => "The first name of the deceased is required.",
                 'required_type' => 'required_unless'
             ],
@@ -71,7 +71,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'names')->first()->id,
                 'html_id' => 'deceasedLastName',
                 'label' => 'Deceased Last Name',
-                'validation' => 'required_unless:userIsDeceased,null',
+                'validation' => 'required_unless:userIsDeceased,2',
                 'validation_msg' => "The last name of the deceased is required.",
                 'required_type' => 'required_unless'
             ],

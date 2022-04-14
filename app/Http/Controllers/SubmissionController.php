@@ -186,7 +186,7 @@ class SubmissionController extends Controller
         $nextQuestion = $subset->first();
         // If the service type is already known, then skip it and go to the next question
         // This does not affect the sidebar, just what is determined as the next question
-        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'select-a-service') === 0) {
+        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'selected-service') === 0) {
             $subset->shift();
             $nextQuestion = $subset->first();
         }
@@ -247,7 +247,8 @@ class SubmissionController extends Controller
                 'currentQuestionFields' => $question->guideQuestionFields()->get(),
                 'nextCategory' => $nextCategory,
                 'nextQuestion' => $nextQuestion,
-                'nextQuestionUri' => $nextQuestionUri
+                'nextQuestionUri' => $nextQuestionUri,
+                'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0
             ]
         );
     }

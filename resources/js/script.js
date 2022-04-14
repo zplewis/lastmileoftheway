@@ -36,7 +36,7 @@
                 element.required = !deceasedIsSelf;
             });
 
-            console.log('userIsDeceased select changed');
+            // console.log('userIsDeceased select changed');
         });
     }
 

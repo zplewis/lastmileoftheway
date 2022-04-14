@@ -2,10 +2,6 @@
 
 @section('guide.content')
 
-@php
-    $isUserIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased', old('userIsDeceased'))) === 0;
-@endphp
-
 <div class="col-sm-6">
     @include('guide.field', ['id' => 'userFirstName', 'inputType' => 'text', 'labelText' => 'First name', 'required' => true])
 </div>

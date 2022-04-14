@@ -6,7 +6,7 @@
     @include('guide.field', ['id' => 'dateBirth', 'inputType' => 'date', 'labelText' => 'Date of birth'])
 </div>
 
-@if (strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) !== 0)
+@if (!$isUserIsDeceased)
 
     <div class="col-12">
         @include('guide.field', ['id' => 'dateDeath', 'inputType' => 'date', 'labelText' => 'Date of passing away', 'pattern' => '\d{2}-\d{2}-\d{4}'])

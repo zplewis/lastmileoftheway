@@ -5364,8 +5364,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       deceasedSomeoneElseDiv.querySelectorAll('input').forEach(function (element) {
         console.log('deceasedIsSelf: ' + deceasedIsSelf);
         element.required = !deceasedIsSelf;
-      });
-      console.log('userIsDeceased select changed');
+      }); // console.log('userIsDeceased select changed');
     });
   } // When going through the guide, add the code that highlights the selected service type
 
