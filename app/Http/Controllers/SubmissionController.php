@@ -65,25 +65,6 @@ class SubmissionController extends Controller
         return $category->guideQuestions()->whereHas('serviceTypes', function ($query) use ($serviceType) {
             $query->where('service_types.id', $serviceType->id);
         })->orderBy('guide_category_id')->orderBy('item_order')->get();
-
-        // Brute force way to do it; I'm pretty sure there is a better way.
-        // $filtered = collect();
-
-        // foreach ($questions as $question) {
-
-        //     $found = $question->serviceTypes()->find($serviceType->id);
-
-        //     // Log::debug(__FUNCTION__ . '(); question text: ' . $question->title);
-        //     // Log::debug(__FUNCTION__ . '(); service types for question (#1): ', $test);
-
-        //     if (!$found) {
-        //         continue;
-        //     }
-
-        //     $filtered->push($question);
-        // }
-
-        // return $filtered;
     }
 
     /**
@@ -205,7 +186,7 @@ class SubmissionController extends Controller
         $nextQuestion = $subset->first();
         // If the service type is already known, then skip it and go to the next question
         // This does not affect the sidebar, just what is determined as the next question
-        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'service-type') === 0) {
+        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'select-a-service') === 0) {
             $subset->shift();
             $nextQuestion = $subset->first();
         }
@@ -299,15 +280,11 @@ class SubmissionController extends Controller
 
         // Now that we figured out the next possible question, now attempt to validate the page
         Log::debug(__FUNCTION__ . '(); about to validate the page...');
-        // Validate and store the form submission.
+        // Validate and store the form submission; if validation fails, then an exception is thrown
+        // and the code never progresses past this point
         $validated = $this->validatePage($request, $question);
 
-        if (is_array($validated)) {
-            Log::debug(__FUNCTION__ . '(); validated (array): ', $validated);
-        }
-        if (is_object($validated)) {
-            Log::debug(__FUNCTION__ . '(); validated (object): ' . $validated);
-        }
+        Log::debug(__FUNCTION__ . '(); validation succeeded.');
 
         // If the next-page input is nothing, then stay on the current page
         Log::debug(__FUNCTION__ . '(); current request path: ' . $request->path());
@@ -389,122 +366,29 @@ class SubmissionController extends Controller
     }
 
     /**
-     * Provides page-specific form validation prior to advancing to the next
-     * page.
-     * TODO: Add validation rules to the database for all required fields, load them for the current
-     * question into this function
+     * Provides question-specific form validation prior to advancing to the next
+     * page. The validation rules are loaded from the database for the current question.
      * TODO: Add HTML validation for all required fields
+     * @param $request
+     * @param $question
      */
     private function validatePage(Request $request, \App\Models\GuideQuestion $question)
     {
-        $path = $request->path();
 
-        // Parse the path for the corresponding GuideQuestion object; that way, we can then
-        // get validation rules for all fields from the database
+        // 1. Get the validation rules for the current question.
+        // https://laravel.com/docs/9.x/collections#method-mapwithkeys
+        // all() is required to get the underlying array; otherwise, a Collection object is returned
+        // https://laravel.com/docs/9.x/collections#method-all
+        $validationRules = $question->guideQuestionFields()->whereNotNull('validation')->get()
+        ->mapWithKeys(function ($item, $key) {
+            return [$item['html_id'] => $item['validation']];
+        })->all();
 
-        $validated = null;
-        // https://laravel.com/docs/8.x/requests#retrieving-the-request-path
-        // All validation rules:
-        // https://laravel.com/docs/8.x/validation#available-validation-rules
-        switch($path)
-        {
-            case 'guide/demographics/names':
-                Log::debug(__FUNCTION__ . '(); made it to case "' . $path . '"');
-                // This returns an array, not an object
-                $validated = $request->validate([
-                    'userFirstName' => 'required|max:50',
-                    'userLastName' => 'required|max:50',
-                    // 'userEmail' => 'required|email'
-                ]);
-                break;
-        }
+        Log::debug(
+            __FUNCTION__ . '(); validation rules for path ' . $request->path() . ': ',
+            $validationRules
+        );
 
-        return $validated;
-    }
-
-
-
-    public static function generateRoutes()
-    {
-        // The selected service type, if any
-        $serviceType = SubmissionController::getSelectedServiceType();
-
-        // This try block seems to be required in order to allow migrations to proceed normally,
-        // probably due to the order which models are loaded in the request lifecycle
-        try {
-            $categories = \App\Models\GuideCategory::orderBy('item_order')->get();
-
-            Log::debug(__FUNCTION__ . '(); current service type: ' . ($serviceType ? $serviceType->title : NULL));
-            Log::debug(__FUNCTION__ . '(); routes/web.php - # of guide categories: ' . count($categories));
-
-            foreach ($categories as $category) {
-                Log::debug(__FUNCTION__ . '(); category: ' . $category->title);
-
-                // Start off with all questions for the current guide category.
-                // However, if there is a service type selected by the user, then only keep those that
-                // apply to that selected service type.
-                $questions = $category->guideQuestions();
-
-                if ($serviceType) {
-                    $questions = $questions->wherePivot('service_type', $serviceType);
-                }
-
-                $questions = $questions->get();
-
-                // Add a redirect for /guide
-                if ($category->item_order === 1) {
-                    Log::debug(__FUNCTION__ . '(); redirect added from / to /guide/' . $category->uri);
-                    Route::get('/guide', function(Request $request) use ($category) {
-
-                        $path = '/guide/' . $category->uri;
-
-                        // If a service is passed to /guide and it is a valid service type, then
-                        // go ahead and set the service type
-                        if ($request->has('service')) {
-                            $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
-
-                            if ($serviceType !== null) {
-                                // Save the service type to the session
-                                $request->merge([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
-                                self::putAllInputToSession($request);
-                            }
-                        }
-
-                        return redirect($path);
-
-                    });
-                    // Route::redirect('/guide', '/guide/' . $category->uri);
-                }
-
-                // For each question type, create a get and post route
-                foreach ($questions as $question) {
-                    $path = '/guide/' . $category->uri . '/' . $question->uri;
-                    Log::debug(__FUNCTION__ . '(); route path: ' . $path);
-                    Route::get(
-                        $path,
-                        function() use ($categories, $category, $question) {
-                            return App::call(
-                                '\App\Http\Controllers\SubmissionController@load',
-                                [
-                                    'categories' => $categories,
-                                    'category' => $category,
-                                    'question' => $question,
-                                ]
-                            );
-                        }
-                    );
-
-                    // Add a GET route for the first question in each section of the guide
-                    if ($question->item_order === 1) {
-                        Log::debug(__FUNCTION__ . '(); redirect added from /' . $category->uri . ' to ' . $path);
-                        Route::redirect('/guide/' . $category->uri, $path);
-                    }
-
-                    Route::post($path, [SubmissionController::class, 'store']);
-                }
-            } // end of foreach
-        } catch (\Throwable $th) {
-            Log::error(__FUNCTION__ . '(); failed to create dynamic routes for guide!');
-        }
+        return $request->validate($validationRules);
     }
 }
