@@ -89,7 +89,7 @@ npm run production
 # Do the same for ~/code/test for the test site
 cd ~/code
 git checkout master
-git checkout -- . && git pull --rebase && composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:clear && php artisan route:cache
+git checkout -- . && git pull --rebase && composer install && php artisan migrate:fresh --seed && npm install && npm run production && php artisan route:cache
 ```
 
 ## Laravel
