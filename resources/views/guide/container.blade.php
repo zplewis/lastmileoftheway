@@ -6,7 +6,7 @@
         @endif
 
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
-        {{-- @if ($errors->any())
+        @if ($errors->any() && strcasecmp($currentQuestion->uri, 'select-a-service') === 0)
             <div class="alert alert-danger" role="alert">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -14,7 +14,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif --}}
+        @endif
 
         {{-- <p class="lead">Selected service type: {{ $currentServiceType ? $currentServiceType->name : NULL }}</p> --}}
 

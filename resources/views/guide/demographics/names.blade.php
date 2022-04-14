@@ -3,7 +3,7 @@
 @section('guide.content')
 
 @php
-    $isUserIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) === 0;
+    $isUserIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased', old('userIsDeceased'))) === 0;
 @endphp
 
 <div class="col-sm-6">
