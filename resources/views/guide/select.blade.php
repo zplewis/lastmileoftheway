@@ -3,7 +3,8 @@
 <label for="{{ $id }}" class="form-label">{!! $labelText !!}</label>
 @endif
 
-<select class="form-select" id="{{ $id }}" name="{{ $id }}" aria-label="{{ isset($labelText) ? $labelText : '' }}">
+<select class="form-select" id="{{ $id }}" name="{{ $id }}"
+aria-label="{{ isset($labelText) ? $labelText : '' }}" {{ isset($required) && $required === true ? 'required' : '' }}>
     <option value="" {{ !(session($id) ?? old($id) ?? $value ?? null) ? 'selected' : '' }}>Choose one</option>
     @if (isset($collection))
         @foreach ($collection as $option)
@@ -18,3 +19,10 @@
         @endforeach
     @endif
 </select>
+
+@error($id)
+<!-- show invalid feedback for this field -->
+<div class="invalid-feedback">
+    {{ $message }}
+</div>
+@enderror

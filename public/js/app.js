@@ -5342,6 +5342,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       // hide and clear the box
       var deceasedSomeoneElseDiv = document.querySelector('.demographics-someone-else-name');
       var deceasedPreferredNameLabel = document.querySelector('label[for="deceasedPreferredName"]');
+      var deceasedIsSelf = event.target.options[event.target.selectedIndex].text.indexOf('self') !== -1; // Hide this div by default
+
       deceasedSomeoneElseDiv.classList.add('d-none');
 
       if (deceasedPreferredNameLabel) {
@@ -5350,14 +5352,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       // then show the other fields
 
 
-      if (event.target.options[event.target.selectedIndex].text.indexOf('self') === -1) {
+      if (!deceasedIsSelf) {
         deceasedSomeoneElseDiv.classList.remove('d-none');
 
         if (deceasedPreferredNameLabel) {
           deceasedPreferredNameLabel.textContent = 'Deceased Preferred Name';
         }
-      }
+      } // Set the hidden deceased first and last name fields to required if applicable
 
+
+      deceasedSomeoneElseDiv.querySelectorAll('input').forEach(function (element) {
+        console.log('deceasedIsSelf: ' + deceasedIsSelf);
+        element.required = !deceasedIsSelf;
+      });
       console.log('userIsDeceased select changed');
     });
   } // When going through the guide, add the code that highlights the selected service type

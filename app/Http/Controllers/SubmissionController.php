@@ -379,9 +379,18 @@ class SubmissionController extends Controller
         // https://laravel.com/docs/9.x/collections#method-mapwithkeys
         // all() is required to get the underlying array; otherwise, a Collection object is returned
         // https://laravel.com/docs/9.x/collections#method-all
-        $validationRules = $question->guideQuestionFields()->whereNotNull('validation')->get()
-        ->mapWithKeys(function ($item, $key) {
+
+        $validations = $question->guideQuestionFields()->whereNotNull('validation')->get();
+
+        $validationRules = $validations->mapWithKeys(function ($item, $key) {
             return [$item['html_id'] => $item['validation']];
+        })->all();
+
+        // To properly specify custom messages for different validation rules, you will need to use
+        // the column "required_type" to do so
+        // TODO: Make sure to add the required type
+        $customMessages = $validations->whereNotNull('validation_msg')->mapWithKeys(function ($item, $key) {
+            return [$item['html_id'] . '.' . $item['required_type'] => $item['validation_msg']];
         })->all();
 
         Log::debug(
@@ -389,6 +398,11 @@ class SubmissionController extends Controller
             $validationRules
         );
 
-        return $request->validate($validationRules);
+        Log::debug(
+            __FUNCTION__ . '(); custom validation messages for path ' . $request->path() . ': ',
+            $customMessages
+        );
+
+        return $request->validate($validationRules, $customMessages);
     }
 }

@@ -24,7 +24,8 @@
         'id' => 'userIsDeceased',
         'labelText' => 'Are you planning a service for yourself?',
         'collection' => \App\Models\UserType::orderBy('item_order')->get(),
-        'textProp' => 'title'
+        'textProp' => 'title',
+        'required' => true
     ]
     )
 </div>
@@ -36,10 +37,10 @@
 
 <div class="demographics-someone-else-name {{ $isUserIsDeceased !== true ? '' : 'd-none' }}">
     <div class="col-sm-6">
-        @include('guide.field', ['id' => 'deceasedFirstName', 'inputType' => 'text', 'labelText' => 'Deceased First name'])
+        @include('guide.field', ['id' => 'deceasedFirstName', 'inputType' => 'text', 'labelText' => 'Deceased First name', 'required' => $isUserIsDeceased !== true])
     </div>
     <div class="col-sm-6">
-        @include('guide.field', ['id' => 'deceasedLastName', 'inputType' => 'text', 'labelText' => 'Deceased Last name'])
+        @include('guide.field', ['id' => 'deceasedLastName', 'inputType' => 'text', 'labelText' => 'Deceased Last name', 'required' => $isUserIsDeceased !== true])
     </div>
 </div> <!-- /.demographics-someone-else-name -->
 @endsection

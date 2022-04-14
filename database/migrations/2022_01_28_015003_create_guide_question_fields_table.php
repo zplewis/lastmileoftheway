@@ -20,9 +20,13 @@ class CreateGuideQuestionFieldsTable extends Migration
             $table->foreignIdFor(GuideQuestion::class)->constrained();
             // $table->foreignIdFor(GuideFieldType::class)->constrained();
             $table->string('html_id');
+            $table->string('blade_template')->nullable()->default('guide.field');
+            $table->string('input_type')->default('text');
             $table->string('label')->nullable();
             $table->string('validation')->nullable();
+            $table->string('validation_msg')->nullable();
             $table->string('field_css')->nullable();
+            $table->string('required_type')->nullable()->default('required');
         });
     }
 

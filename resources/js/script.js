@@ -12,6 +12,9 @@
             // hide and clear the box
             const deceasedSomeoneElseDiv = document.querySelector('.demographics-someone-else-name');
             const deceasedPreferredNameLabel = document.querySelector('label[for="deceasedPreferredName"]');
+            const deceasedIsSelf = event.target.options[event.target.selectedIndex].text.indexOf('self') !== -1;
+
+            // Hide this div by default
             deceasedSomeoneElseDiv.classList.add('d-none');
 
             if (deceasedPreferredNameLabel) {
@@ -20,12 +23,18 @@
 
             // Get the text of the selected index. If the text does NOT include the word "self,"
             // then show the other fields
-            if (event.target.options[event.target.selectedIndex].text.indexOf('self') === -1) {
+            if (!deceasedIsSelf) {
                 deceasedSomeoneElseDiv.classList.remove('d-none');
                 if (deceasedPreferredNameLabel) {
                     deceasedPreferredNameLabel.textContent = 'Deceased Preferred Name';
                 }
             }
+
+            // Set the hidden deceased first and last name fields to required if applicable
+            deceasedSomeoneElseDiv.querySelectorAll('input').forEach((element) => {
+                console.log('deceasedIsSelf: ' + deceasedIsSelf);
+                element.required = !deceasedIsSelf;
+            });
 
             console.log('userIsDeceased select changed');
         });
