@@ -212,6 +212,56 @@ class SubmissionController extends Controller
     }
 
     /**
+     * If the user selected a service and made it to the summary, add an item to the session
+     * that shows this submission is complete.
+     */
+    private function markSubmissionComplete(
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question
+    ) {
+        // Do nothing if the next question is not the summary
+        if (strcasecmp($category->uri, 'next-steps') !== 0 ||
+        $question->guide_category_id !== $category->id ||
+        $question->item_order !== 1) {
+            return;
+        }
+
+        // Add an item, submission-complete, to the session
+        session(['submission-complete' => '1']);
+    }
+
+    /**
+     * Upon clicking Start, clear all session data except the service type, just
+     * in case it was set by URL parameter.
+     */
+    private function clearAllSessionData(
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        // Do nothing if the current question is not the very first question
+        if (strcasecmp($category->uri, 'getting-started') !== 0 ||
+        $question->guide_category_id !== $category->id ||
+        $question->item_order !== 1) {
+            return;
+        }
+
+        // Clear all of the session data
+        session()->flush();
+
+        Log::debug(__FUNCTION__ . '(); cleared all session data.');
+
+        // Save the service type back to the session if known
+        if ($serviceType === null) {
+            Log::debug(__FUNCTION__ . '(); no service type saved to re-add to the session');
+            return;
+        }
+
+        Log::debug(__FUNCTION__ . '(); adding service type to the session: ' . strtolower($serviceType->title));
+        session([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+    }
+
+    /**
      * Replacement for store() that advances the guide forward or stays on the same page as needed.
      */
     public function advance(Request $request, \App\Models\GuideCategory $category, \App\Models\GuideQuestion $question = NULL) {
@@ -253,6 +303,12 @@ class SubmissionController extends Controller
         } else {
             Log::debug(__FUNCTION__ . '(); advancing to page ' . $nextQuestionUri);
         }
+
+        // If the next question is the summary, then set a session variable
+        $this->markSubmissionComplete($nextCategory, $nextQuestion);
+
+        // If the current question is the very first one, then clear everything except the service type
+        $this->clearAllSessionData($category, $question, $serviceType);
 
         // Save all data to the session
         self::putAllInputToSession($request);
