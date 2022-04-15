@@ -99,48 +99,6 @@ class SubmissionController extends Controller
         return redirect($redirectPath)->withInput();
     }
 
-    private function getNextGuideQuestion(
-        \Illuminate\Database\Eloquent\Collection $categories,
-        \App\Models\GuideCategory $category,
-        \App\Models\GuideQuestion $question
-    ) {
-        $found = false;
-
-        $serviceType = $this::getSelectedServiceType();
-
-        // Brute force it, although there may be a better way...
-        foreach ($categories as $sidebarCategory) {
-
-            // Continue until you get to the current category
-            if ($sidebarCategory->id < $category->id) {
-                // Log::debug(__FUNCTION__ . '(); skipping the category: ' . $sidebarCategory->title);
-                continue;
-            }
-
-            $questions = $this::getQuestionsByCategoryByServiceType(
-                $sidebarCategory,
-                $serviceType
-            );
-
-            foreach ($questions as $sidebarQuestion) {
-                if ($found) {
-                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
-                    Log::debug(__FUNCTION__ . '(); found the next question: ' . $sidebarQuestion->title);
-                    return $sidebarQuestion;
-                }
-
-                if ($sidebarQuestion->id === $question->id) {
-                    $found = true;
-                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
-                    Log::debug(__FUNCTION__ . '(); found the current question!');
-                }
-            }
-        }
-
-        // Reaching this means there is no next question.
-        return NULL;
-    }
-
     /**
      * Given a list of questions already in order by category and question item order, get the
      * next question in the list.

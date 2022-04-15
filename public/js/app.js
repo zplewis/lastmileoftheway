@@ -5373,7 +5373,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   function serviceTypeSelectorListener() {
     // Reset all card-headers
-    var cards = document.querySelectorAll('.service-type-selector .card');
+    var cards = document.querySelectorAll('.service-type-selector .card'); // The form for the current question
+
+    var guideForm = document.getElementById('guide-form');
 
     var _iterator = _createForOfIteratorHelper(cards),
         _step;
@@ -5386,9 +5388,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         var selectedButton = card.querySelector('input[type="radio"]:checked'); // Button text
 
-        var radioLabel = card.querySelector('label'); // The form for the current question
-
-        var guideForm = document.getElementById('guide-form'); // Hidden input that determines whether the guide advances forward or stays on the
+        var radioLabel = card.querySelector('label'); // Hidden input that determines whether the guide advances forward or stays on the
         // current page on submit
 
         var nextPage = document.getElementById('next-page');
@@ -5435,6 +5435,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   var songSelects = document.querySelectorAll('select[id^="song"]'); // Used to submit current inputs to the session and refresh the page without advancing forward.
+
+  /**
+   *
+   */
 
   function submitAndRefresh() {
     // Clear the next-page hidden input
@@ -5501,6 +5505,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (!event.target.checked) {
         // The empty string is different from null as a value
         contactApptType.value = '';
+      }
+    });
+  }
+
+  var previousSubmission = document.getElementById('previous-submission');
+  var guideAdvance = document.querySelector('#guide-advance'); // The form for the current question
+
+  var guideForm = document.getElementById('guide-form'); // Asks a question on the first question if the user made it to the summary before
+
+  if (guideForm && previousSubmission && guideAdvance && guideAdvance.innerText === 'Start') {
+    guideForm.addEventListener('submit', function (event) {
+      // prevent form submission
+      event.preventDefault();
+      var submit = confirm('You have previously personalized a service. Continuing will clear your current progress. Is that OK?');
+
+      if (submit) {
+        guideForm.submit();
       }
     });
   } // confirms whether the user is sure if they want to complete the given action

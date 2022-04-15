@@ -48,6 +48,9 @@
         // Reset all card-headers
         const cards = document.querySelectorAll('.service-type-selector .card');
 
+        // The form for the current question
+        const guideForm = document.getElementById('guide-form');
+
         for (let card of cards) {
             // Reset the card-header
             const cardHeader = card.querySelector('.card-header');
@@ -57,9 +60,6 @@
 
             // Button text
             const radioLabel = card.querySelector('label');
-
-            // The form for the current question
-            const guideForm = document.getElementById('guide-form');
 
             // Hidden input that determines whether the guide advances forward or stays on the
             // current page on submit
@@ -105,6 +105,9 @@
     const songSelects = document.querySelectorAll('select[id^="song"]');
 
     // Used to submit current inputs to the session and refresh the page without advancing forward.
+    /**
+     *
+     */
     function submitAndRefresh() {
 
         // Clear the next-page hidden input
@@ -157,6 +160,27 @@
 
         });
     }
+
+    const previousSubmission = document.getElementById('previous-submission');
+    const guideAdvance = document.querySelector('#guide-advance');
+
+    // The form for the current question
+    const guideForm = document.getElementById('guide-form');
+
+    // Asks a question on the first question if the user made it to the summary before
+    if (guideForm && previousSubmission && guideAdvance && guideAdvance.innerText === 'Start') {
+        guideForm.addEventListener('submit', ( event ) => {
+            // prevent form submission
+            event.preventDefault();
+
+            const submit = confirm('You have previously personalized a service. Continuing will clear your current progress. Is that OK?');
+
+            if (submit) {
+                guideForm.submit();
+            }
+        });
+    }
+
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},
