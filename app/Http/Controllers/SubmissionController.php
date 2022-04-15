@@ -199,7 +199,7 @@ class SubmissionController extends Controller
             [
                 'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
                 'categories' => $allCategories,
-                'currentServiceType' => self::getSelectedServiceType(),
+                'currentServiceType' => $serviceType,
                 'currentCategory' => $category,
                 'currentQuestion' => $question,
                 'currentQuestionFields' => $question->guideQuestionFields()->get(),

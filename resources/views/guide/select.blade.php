@@ -3,7 +3,7 @@
 <label for="{{ $id }}" class="form-label">{!! $labelText !!}</label>
 @endif
 
-<select class="form-select" id="{{ $id }}" name="{{ $id }}"
+<select class="form-select @error($id) is-invalid @enderror" id="{{ $id }}" name="{{ $id }}"
 aria-label="{{ isset($labelText) ? $labelText : '' }}" {{ isset($required) && $required === true ? 'required' : '' }}>
     <option value="" {{ !(old($id) ?? session($id) ?? $value ?? null) ? 'selected' : '' }}>Choose one</option>
     @if (isset($collection))

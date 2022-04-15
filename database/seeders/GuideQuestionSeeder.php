@@ -109,7 +109,7 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $personalizeServiceId,
                 'title' => 'Opening Hymn',
                 'uri' => 'musical-selection-1',
-                'optional' => 'Include musical selection #1 in this service',
+                'optional' => 'Include an opening hymn in this service',
                 'optional_html_id' => 'hasMusicalSelection1',
                 'item_order' => 5,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .

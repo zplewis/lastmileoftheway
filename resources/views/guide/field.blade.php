@@ -6,7 +6,8 @@
 @if (isset($labelText))
 <label for="{{ $id }}" class="form-label">{!! $labelText !!}</label>
 @endif
-<{{ $fieldType ?? 'input'}} type="{{ $inputType ?? 'text' }}" class="form-control"
+<!-- https://laravel.com/docs/9.x/validation#the-at-error-directive -->
+<{{ $fieldType ?? 'input'}} type="{{ $inputType ?? 'text' }}" class="form-control @error($id) is-invalid @enderror"
 id="{{ $id }}" name="{{ $id }}"
 {{-- Don't use the session for the 'next-page' input; should be excluded --}}
 value="{{ old($id) ?? session($id) ?? $value ?? $placeholder ?? '' }}"

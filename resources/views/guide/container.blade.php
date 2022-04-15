@@ -20,7 +20,8 @@
 
         {{-- .needs-validation class used so that it's easier to target forms that need validation, even beyond #guide-form --}}
         {{-- https://getbootstrap.com/docs/5.1/forms/validation/ --}}
-        <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation {{ $errors->any() ? 'was-validated' : '' }}">
+        {{-- <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation {{ $errors->any() ? 'was-validated' : '' }}"> --}}
+        <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation">
             @csrf
 
             @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => $nextQuestionUri])

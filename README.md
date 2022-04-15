@@ -224,6 +224,11 @@ wrong version of static files so that the user has the up-to-date versions:
 
 <https://laravel-mix.com/docs/6.0/versioning>
 
+### Google Maps JavaScript API
+
+- [Google Maps Platform - Maps JavaScript API - Using API Keys](https://developers.google.com/maps/documentation/javascript/get-api-key)
+- [Google Maps Platform - Place Autocomplete Address Form](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform)
+
 ## Testing
 
 - Make sure every save & continue button works in the guide

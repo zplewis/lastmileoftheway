@@ -4,7 +4,7 @@
     </a>
     <ul class="list-unstyled ps-0">
         @php
-            $questions = \App\Http\Controllers\SubmissionController::getQuestionsByServiceType(\App\Http\Controllers\SubmissionController::getSelectedServiceType());
+            $questions = \App\Http\Controllers\SubmissionController::getQuestionsByServiceType($currentServiceType);
         @endphp
 
         @foreach ($categories as $sidebarCategory)
