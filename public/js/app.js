@@ -5524,6 +5524,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         guideForm.submit();
       }
     });
+  }
+
+  var guideResetForm = document.getElementById('guide-reset-form');
+
+  if (guideResetForm) {
+    guideResetForm.addEventListener('submit', function (event) {
+      // prevent form submission
+      event.preventDefault();
+      var submit = confirm('This action will immediately clear your current progress customizing a service and you will start again from the beginning. Is that OK?');
+
+      if (submit) {
+        event.target.submit();
+      }
+    });
   } // confirms whether the user is sure if they want to complete the given action
 
 })(window.utilities = window.utilities || {}, window.jQuery, window, document, window.axios);

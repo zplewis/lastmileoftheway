@@ -181,6 +181,21 @@
         });
     }
 
+    const guideResetForm = document.getElementById('guide-reset-form');
+
+    if (guideResetForm) {
+        guideResetForm.addEventListener('submit', ( event ) => {
+            // prevent form submission
+            event.preventDefault();
+
+            const submit = confirm('This action will immediately clear your current progress customizing a service and you will start again from the beginning. Is that OK?');
+
+            if (submit) {
+                event.target.submit();
+            }
+        });
+    }
+
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},

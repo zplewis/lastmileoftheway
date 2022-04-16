@@ -52,9 +52,8 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $demographicsId,
                 'title' => 'Birth, Death, and Service Dates',
                 'uri' => 'dates',
-                'optional' => 'Include a <a href="/resources/glossary#viewing" title="Glossary -
-                viewing" target="_blank">viewing</a> one hour prior to start of service',
-                'optional_html_id' => 'hasViewing',
+                'optional' => null,
+                'optional_html_id' => null,
                 'item_order' => 2,
                 'description' => 'Include relevant dates about the deceased that may be included on a program.'
             ],
@@ -65,6 +64,17 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 2,
+                'description' => 'If known, specify the location of the service. The address will
+                be validated with Google Maps to ensure it is accurate and can be found easily via
+                GPS by traveling attendees. If the location is not known yet, that\'s okay.'
+            ],
+            [
+                'guide_category_id' => $serviceTypeId,
+                'title' => 'Venue and Viewing Locations',
+                'uri' => 'venue-and-viewing',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 3,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
                 GPS by traveling attendees. If the location is not known yet, that\'s okay.'
@@ -250,7 +260,18 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 2,
-                'description' => 'Here are some more questions to ask your question or funeral home.'
+                'description' => 'Here are some more questions to ask your pastor or funeral home.'
+            ],
+            [
+                'guide_category_id' => $nextStepsId,
+                'title' => 'Send Service via Email',
+                'uri' => 'send-email',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 3,
+                'description' => 'Use this page to send your order of service to your pastor, funeral
+                home, or any one else that needs it. You can also upload a document, like a biography,
+                that can be included in this email.'
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -258,9 +279,9 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'feedback',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'item_order' => 3,
+                'item_order' => 4,
                 'description' => 'Was this site helpful to you? What did this process do well? What
-                could be better? Please let us know using the feedback form below.'
+                could be better? Please let us know using the feedback survey link below:'
             ],
 
         ]);

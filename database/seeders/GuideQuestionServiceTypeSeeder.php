@@ -49,5 +49,12 @@ class GuideQuestionServiceTypeSeeder extends Seeder
         // No recessional at graveside; it should come after mortician's brief
         GuideQuestion::where('uri', 'recessional')->first()->serviceTypes()->detach([$graveside->id]);
 
+        // We now have "venue" and "venue and viewing" questions;
+        // graveside and memorial only needs venue
+        // funeral needs venue and viewing
+        GuideQuestion::where('uri', 'venue-and-viewing')->first()->serviceTypes()->detach([$memorial->id, $graveside->id]);
+        GuideQuestion::where('uri', 'venue')->first()->serviceTypes()->detach([$funeral->id]);
+
+
     }
 }

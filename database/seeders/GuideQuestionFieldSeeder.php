@@ -18,6 +18,7 @@ class GuideQuestionFieldSeeder extends Seeder
     {
         $demographicsId = GuideCategory::where('title', 'Demographics')->first()->id;
         $personalizeServiceId = GuideCategory::where('uri', 'personalize-service')->first()->id;
+        $serviceTypeId = GuideCategory::where('uri', 'service-type')->first()->id;
 
         // https://laravel.com/docs/9.x/validation#available-validation-rules
 
@@ -103,8 +104,15 @@ class GuideQuestionFieldSeeder extends Seeder
                 'validation_msg' => "The person or group responsible for rendering the music is required.",
                 'required_type' => 'required_unless'
             ],
-
-            // "required_unless:userIsDeceased,2
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $serviceTypeId)
+                ->where('uri', 'selected-service')->first()->id,
+                'html_id' => 'service-type-selection',
+                'label' => null,
+                'validation' => 'required',
+                'validation_msg' => "Please select a service type.",
+                'required_type' => 'required'
+            ],
         ]);
     }
 }

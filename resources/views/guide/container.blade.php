@@ -8,7 +8,7 @@
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
         @if ($errors->any() && strcasecmp($currentQuestion->uri, 'selected-service') === 0 || $errors->any())
             <div class="alert alert-danger" role="alert">
-                <ul>
+                <ul class="list-unstyled">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach

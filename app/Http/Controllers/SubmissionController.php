@@ -68,35 +68,72 @@ class SubmissionController extends Controller
     }
 
     /**
-     * Store answers to the current question to the session. When on the final page in next steps,
-     * save the answers to the database.
+     * Set the service type using a URL parameter.
      */
-    public function store(Request $request)
+    public function setServiceTypeByUrl(Request $request)
     {
-        Log::debug(__FUNCTION__ . '(); about to validate the page...');
-        // Validate and store the form submission.
-        $validated = $this->validatePage($request);
+        // If a service is passed to /guide and it is a valid service type, then
+        // go ahead and set the service type
+        if ($request->has('service')) {
+            $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
 
-        Log::debug(__FUNCTION__ . '(); request->path(): ' . $request->path());
-
-        self::putAllInputToSession($request);
-        Log::debug(__FUNCTION__ . '(); just reflashed input to the session...');
-
-        // If a failure occurred, return to the current request path. Otherwise,
-        // go to the next one (if applicable, the last page won't have a next
-        // page). The path for the next page comes from the 'next-page' input
-
-        $redirectPath = $request->input('next-page', null);
-        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
-        if (!$redirectPath) {
-            $redirectPath = $request->path();
+            if ($serviceType !== null) {
+                // Save the service type to the session
+                $request->merge([\App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . 'selection' => \App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+                \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
+            }
         }
 
-        // If page validation failed, then $errors->any() will return true
-        // https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors
+        return redirect('/guide/getting-started');
+    }
 
-        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
-        return redirect($redirectPath)->withInput();
+    /**
+     * Clear all session data and send the user to the first question in the guide.
+     */
+    public function hardReset(Request $request)
+    {
+        // Clear all session data
+        $this->resetGuide($request);
+
+        // Send the user to the first question
+        return redirect('/guide');
+    }
+
+    /**
+     * Clears all data from the session, which clears data from the guide.
+     */
+    public function resetGuide(Request $request)
+    {
+        $resetAll = stripos($request->path(), 'all') !== false;
+
+        // In the event that we are
+        $keysToKeep = [
+            self::SERVICE_TYPE_PREFIX . 'selection',
+            'userFirstName',
+            'userLastName',
+            'userEmail'
+        ];
+
+        $values = [];
+
+        foreach ($keysToKeep as $key) {
+            $values[$key] = session($key);
+        }
+
+        // Clear all of the session data
+        session()->flush();
+
+        Log::debug(__FUNCTION__ . '(); cleared all session data.');
+
+        // If we are clearing all of the session data, there is no need to restore anything
+        if ($resetAll) {
+            return;
+        }
+
+        // Restoring service type and user demographic data
+        foreach ($values as $key => $value) {
+            session()->put($key, $value);
+        }
     }
 
     /**
@@ -144,7 +181,8 @@ class SubmissionController extends Controller
         $nextQuestion = $subset->first();
         // If the service type is already known, then skip it and go to the next question
         // This does not affect the sidebar, just what is determined as the next question
-        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'selected-service') === 0) {
+        if ($serviceType !== null && $nextQuestion !== null &&
+        strcasecmp($nextQuestion->uri, 'selected-service') === 0) {
             $subset->shift();
             $nextQuestion = $subset->first();
         }
@@ -194,6 +232,7 @@ class SubmissionController extends Controller
         //     $question = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
         // }
 
+        // The values included here will be available across all blade templates for /guide pages.
         return view(
             'guide',
             [
@@ -235,6 +274,7 @@ class SubmissionController extends Controller
      * in case it was set by URL parameter.
      */
     private function clearAllSessionData(
+        Request $request,
         \App\Models\GuideCategory $category,
         \App\Models\GuideQuestion $question,
         \App\Models\ServiceType $serviceType = NULL
@@ -246,19 +286,8 @@ class SubmissionController extends Controller
             return;
         }
 
-        // Clear all of the session data
-        session()->flush();
-
-        Log::debug(__FUNCTION__ . '(); cleared all session data.');
-
-        // Save the service type back to the session if known
-        if ($serviceType === null) {
-            Log::debug(__FUNCTION__ . '(); no service type saved to re-add to the session');
-            return;
-        }
-
-        Log::debug(__FUNCTION__ . '(); adding service type to the session: ' . strtolower($serviceType->title));
-        session([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+        // Clear all session data except demographic data
+        $this->resetGuide($request);
     }
 
     /**
@@ -308,7 +337,7 @@ class SubmissionController extends Controller
         $this->markSubmissionComplete($nextCategory, $nextQuestion);
 
         // If the current question is the very first one, then clear everything except the service type
-        $this->clearAllSessionData($category, $question, $serviceType);
+        $this->clearAllSessionData($request, $category, $question, $serviceType);
 
         // Save all data to the session
         self::putAllInputToSession($request);
