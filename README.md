@@ -186,6 +186,10 @@ Use this code within a Blade template to see what is currently in the session:
 </div>
 ```
 
+### Validation Rules
+
+- [Laravel - Available Validation Rules](https://laravel.com/docs/9.x/validation#available-validation-rules)
+
 ### Bootstrap 5
 
 You'll need to include Bootstrap 5 in `app.scss` and `app.js` so that the CSS and JS is included

@@ -428,7 +428,12 @@ class SubmissionController extends Controller
 
         $validationRules = $validations->mapWithKeys(function ($item, $key) {
             return [$item['html_id'] => $item['validation']];
-        })->all();
+        })->filter(function ($value, $key) use ($request) {
+            // $key is the ID of the input field, like 'dateDeath'; keeps the validation rule if
+            // the field is in the form input of the request
+            return $request->has($key);
+        })
+        ->all();
 
         // To properly specify custom messages for different validation rules, you will need to use
         // the column "required_type" to do so

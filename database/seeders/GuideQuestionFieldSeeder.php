@@ -89,10 +89,10 @@ class GuideQuestionFieldSeeder extends Seeder
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $demographicsId)
                 ->where('uri', 'dates')->first()->id,
-                'html_id' => 'dateBirth',
-                'label' => 'Date of birth',
+                'html_id' => 'dateDeath',
+                'label' => 'Date of passing away',
                 'validation' => 'required|date:m/d/Y',
-                'validation_msg' => "Date of birth is required.",
+                'validation_msg' => "Date of passing away is required.",
                 'required_type' => 'required'
             ],
             [
