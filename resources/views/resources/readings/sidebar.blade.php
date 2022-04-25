@@ -8,8 +8,8 @@
               <ul class="list-unstyled ps-0">
                 @foreach ($testaments as $testament)
                     <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#{{ $testament->name }}-collapse" aria-expanded="false">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" type="button"
+                        data-bs-target="#{{ $testament->name }}-collapse" aria-expanded="false" aria-controls="#{{ $testament->name }}-collapse">
                             {{ ucwords($testament->name) }} Testament Readings
                         </button>
                         <div class="collapse" id="{{ $testament->name }}-collapse" style="">
@@ -22,7 +22,8 @@
                                 })->orderBy('title')->get()
                                  as $scripture)
                                     <li>
-                                        <a href="#{{ Str::of($scripture->title)->slug('-') }}" class="link-secondary rounded" title="{{ $scripture->title }}">
+                                        <!-- the .nav-link CSS class is required for Scrollspy components to work properly -->
+                                        <a href="#{{ Str::of($scripture->title)->slug('-') }}" class="nav-link link-secondary rounded" title="{{ $scripture->title }}">
                                             {{ $scripture->title }}
                                         </a>
                                     </li>

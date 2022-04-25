@@ -1,5 +1,5 @@
 <div class="col-12 col-md-9">
-    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" class="scrollspy-example-2" tabindex="0">
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
 
         <h1>Scripture Readings</h1>
 

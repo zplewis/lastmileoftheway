@@ -20,7 +20,7 @@ configure the DNS settings there from the cPanel on A2Hosting.
 ```bash
 # SSH into A2Hosting's servers
 # Reference URL: https://blog.netgloo.com/2015/08/06/configuring-godaddys-shared-hosting-for-laravel-and-git/
-#
+# This requires setting up ~/.ssh/config
 ssh lastmileoftheway.com
 
 # Clone the code repo then rename the folder
@@ -233,6 +233,21 @@ wrong version of static files so that the user has the up-to-date versions:
 
 - Make sure every save & continue button works in the guide
 
+## WSL2 + Ubuntu
+
+For optimal performance, [it is recommended](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#develop-in-remote-containers-using-vs-code)
+that code is stored on the WSL operating system instead of the Windows operating
+system. WSL can access the Windows files via `/mnt/c/`. I prefer to create a folder
+on `~/code`, which is the same as `/home/username/code`. The difference also is
+that files created on the Windows file system are owned by `root` while files
+created by the Linux user on WSL are owned by that user.
+
+You **MUST** store files on the WSL file system if you're going to use tools
+installed on the WSL distribution or you will encounter file ownership errors
+that prevent Composer from working correctly. Additionally, the speed of
+operations on files in the WSL file system are much faster than those stored on
+the Windows host file system.
+
 ## TODOs
 
 ### Completed
@@ -260,14 +275,18 @@ wrong version of static files so that the user has the up-to-date versions:
   the selected service
 - If a service is selected and the users a guide question that is not a part of that selected service,
   get the category name from that selected service and jump to the first guide question in that category.
-
-### Remaining
+- With a memorial, there is not a burial
+- With graveside, we have already captured the burial location, so no need to ask separately
 - Scrollspy errors on a few pages:
   - `/resources/bible-readings`
   - `/faqs`
 - On `/guide/getting-started`, detect whether the user previously entered information and warn them that
   continuing will clear all previously saved information. If they click OK, then clear all data from
   the session.
+
+### Remaining
+
+
 - Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
 - Make it so that people can be added or taken away dynamically for reflections.
 - Make sure all links work
@@ -279,6 +298,8 @@ wrong version of static files so that the user has the up-to-date versions:
 - Complete summary page
 - Finish input validation for all required fields (input, select)
 - Finish adding input validation values to the database
+
+- Definition for liturgy in glossary?
 
 ## Jekyll
 

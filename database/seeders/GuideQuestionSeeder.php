@@ -33,7 +33,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'The site will guide you through thinking about the different parts
                 of the service. All fields are required unless otherwise indicated. If you ever need
                 to go back to a previous section, feel free to click any link in the sidebar on the
-                left-hand side. Please note that this site does not create a <strong>program</strong>, but a liturgy (order of
+                left-hand side. Please note that this site does not create a program, but a <strong>liturgy</strong> (order of
                 service) to help you plan the service and determine the people and details that
                 are involved.<br /><br />If you ever need help, feel free to check our <a href="/resources/glossary" title="Glossary">
                 glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. At the end, you\'ll
