@@ -3,16 +3,16 @@
 <label for="{{ $id }}" class="form-label">{!! $labelText !!}</label>
 @endif
 
-<select class="form-select" id="{{ $id }}" name="{{ $id }}"
+<select class="form-select @error($id) is-invalid @enderror" id="{{ $id }}" name="{{ $id }}"
 aria-label="{{ isset($labelText) ? $labelText : '' }}" {{ isset($required) && $required === true ? 'required' : '' }}>
-    <option value="" {{ !(session($id) ?? old($id) ?? $value ?? null) ? 'selected' : '' }}>Choose one</option>
+    <option value="" {{ !(old($id) ?? session($id) ?? $value ?? null) ? 'selected' : '' }}>Choose one</option>
     @if (isset($collection))
         @foreach ($collection as $option)
             <option value="{{ $option->id }}"
                 @foreach (($dataAttributes ?? []) as $attribute => $value)
                     {{ $attribute }}="{{ $option->$value }}"
                 @endforeach
-                {{ strcasecmp((session($id) ?? old($id) ?? $value ?? $placeholder ?? ''), $option->id) === 0 ? 'selected' : '' }}>
+                {{ strcasecmp((old($id) ?? session($id) ?? $value ?? $placeholder ?? ''), $option->id) === 0 ? 'selected' : '' }}>
                 {{ $option->$textProp }}{{ isset($textProp2) && $option->$textProp2 ? ' - ' . $option->$textProp2 : '' }}
                 {{ isset($textProp3) && $option->$textProp3 ? ' - ' . $option->$textProp3 : '' }}
             </option>

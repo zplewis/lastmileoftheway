@@ -40,32 +40,15 @@ Route::get('/support', function () {
     return view('support');
 });
 
-Route::get('/guide', function(\Illuminate\Http\Request $request) {
-
-    $path = '/guide/getting-started';
-
-    // If a service is passed to /guide and it is a valid service type, then
-    // go ahead and set the service type
-    if ($request->has('service')) {
-        $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
-
-        if ($serviceType !== null) {
-            // Save the service type to the session
-            $request->merge([\App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . 'selection' => \App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
-            \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
-        }
-    }
-
-    return redirect($path);
-});
-
 
 // This worked due to explicit binding, since implicit binding didn't seem to do it.
 Route::controller(SubmissionController::class)->group(function () {
+    Route::post('/guide/reset/all', 'hardReset');
     Route::get('/guide/{guidecategory}', 'implicitLoad');
     Route::get('/guide/{guidecategory}/{guidequestion}', 'implicitLoad');
     Route::post('/guide/{guidecategory}', 'advance');
     Route::post('/guide/{guidecategory}/{guidequestion}', 'advance');
+    Route::get('/guide', 'setServiceTypeByUrl');
 });
 
 

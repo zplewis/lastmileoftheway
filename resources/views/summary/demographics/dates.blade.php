@@ -1,6 +1,6 @@
 <p>Date of birth: {{ session('dateBirth') }}
 
-@if (!$userIsDeceased)
+@if (!$isUserIsDeceased)
 <br />Date of passing away: {{ session('dateDeath') }}
 <br />Desired service date: {{ session('dateService') }}
 @endif

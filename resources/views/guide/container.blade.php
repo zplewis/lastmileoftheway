@@ -6,21 +6,22 @@
         @endif
 
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
-        {{-- @if ($errors->any())
+        @if ($errors->any() && strcasecmp($currentQuestion->uri, 'selected-service') === 0 || $errors->any())
             <div class="alert alert-danger" role="alert">
-                <ul>
+                <ul class="list-unstyled">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
-        @endif --}}
+        @endif
 
         {{-- <p class="lead">Selected service type: {{ $currentServiceType ? $currentServiceType->name : NULL }}</p> --}}
 
         {{-- .needs-validation class used so that it's easier to target forms that need validation, even beyond #guide-form --}}
         {{-- https://getbootstrap.com/docs/5.1/forms/validation/ --}}
-        <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation {{ $errors->any() ? 'was-validated' : '' }}">
+        {{-- <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation {{ $errors->any() ? 'was-validated' : '' }}"> --}}
+        <form action="/{{ request()->path() }}" method="POST" id="guide-form" novalidate class="needs-validation">
             @csrf
 
             @include('guide.field', ['inputType' => 'hidden', 'id' => 'next-page', 'value' => $nextQuestionUri])

@@ -22,6 +22,8 @@
         <link rel="apple-touch-icon" href="icon.png">
         <!-- Place favicon.ico in the root directory -->
 
+        <!-- automatically add needed polyfills for the current browser -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
     </head>
 

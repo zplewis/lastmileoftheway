@@ -68,77 +68,72 @@ class SubmissionController extends Controller
     }
 
     /**
-     * Store answers to the current question to the session. When on the final page in next steps,
-     * save the answers to the database.
+     * Set the service type using a URL parameter.
      */
-    public function store(Request $request)
+    public function setServiceTypeByUrl(Request $request)
     {
-        Log::debug(__FUNCTION__ . '(); about to validate the page...');
-        // Validate and store the form submission.
-        $validated = $this->validatePage($request);
+        // If a service is passed to /guide and it is a valid service type, then
+        // go ahead and set the service type
+        if ($request->has('service')) {
+            $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
 
-        Log::debug(__FUNCTION__ . '(); request->path(): ' . $request->path());
-
-        self::putAllInputToSession($request);
-        Log::debug(__FUNCTION__ . '(); just reflashed input to the session...');
-
-        // If a failure occurred, return to the current request path. Otherwise,
-        // go to the next one (if applicable, the last page won't have a next
-        // page). The path for the next page comes from the 'next-page' input
-
-        $redirectPath = $request->input('next-page', null);
-        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
-        if (!$redirectPath) {
-            $redirectPath = $request->path();
+            if ($serviceType !== null) {
+                // Save the service type to the session
+                $request->merge([\App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . 'selection' => \App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+                \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
+            }
         }
 
-        // If page validation failed, then $errors->any() will return true
-        // https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors
-
-        Log::debug(__FUNCTION__ . '(); redirect path: ' . $redirectPath);
-        return redirect($redirectPath)->withInput();
+        return redirect('/guide/getting-started');
     }
 
-    private function getNextGuideQuestion(
-        \Illuminate\Database\Eloquent\Collection $categories,
-        \App\Models\GuideCategory $category,
-        \App\Models\GuideQuestion $question
-    ) {
-        $found = false;
+    /**
+     * Clear all session data and send the user to the first question in the guide.
+     */
+    public function hardReset(Request $request)
+    {
+        // Clear all session data
+        $this->resetGuide($request);
 
-        $serviceType = $this::getSelectedServiceType();
+        // Send the user to the first question
+        return redirect('/guide');
+    }
 
-        // Brute force it, although there may be a better way...
-        foreach ($categories as $sidebarCategory) {
+    /**
+     * Clears all data from the session, which clears data from the guide.
+     */
+    public function resetGuide(Request $request)
+    {
+        $resetAll = stripos($request->path(), 'all') !== false;
 
-            // Continue until you get to the current category
-            if ($sidebarCategory->id < $category->id) {
-                // Log::debug(__FUNCTION__ . '(); skipping the category: ' . $sidebarCategory->title);
-                continue;
-            }
+        // In the event that we are
+        $keysToKeep = [
+            self::SERVICE_TYPE_PREFIX . 'selection',
+            'userFirstName',
+            'userLastName',
+            'userEmail'
+        ];
 
-            $questions = $this::getQuestionsByCategoryByServiceType(
-                $sidebarCategory,
-                $serviceType
-            );
+        $values = [];
 
-            foreach ($questions as $sidebarQuestion) {
-                if ($found) {
-                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
-                    Log::debug(__FUNCTION__ . '(); found the next question: ' . $sidebarQuestion->title);
-                    return $sidebarQuestion;
-                }
-
-                if ($sidebarQuestion->id === $question->id) {
-                    $found = true;
-                    Log::debug(__FUNCTION__ . '(); category: ' . $sidebarCategory->title);
-                    Log::debug(__FUNCTION__ . '(); found the current question!');
-                }
-            }
+        foreach ($keysToKeep as $key) {
+            $values[$key] = session($key);
         }
 
-        // Reaching this means there is no next question.
-        return NULL;
+        // Clear all of the session data
+        session()->flush();
+
+        Log::debug(__FUNCTION__ . '(); cleared all session data.');
+
+        // If we are clearing all of the session data, there is no need to restore anything
+        if ($resetAll) {
+            return;
+        }
+
+        // Restoring service type and user demographic data
+        foreach ($values as $key => $value) {
+            session()->put($key, $value);
+        }
     }
 
     /**
@@ -186,7 +181,8 @@ class SubmissionController extends Controller
         $nextQuestion = $subset->first();
         // If the service type is already known, then skip it and go to the next question
         // This does not affect the sidebar, just what is determined as the next question
-        if ($serviceType !== null && strcasecmp($nextQuestion->uri, 'select-a-service') === 0) {
+        if ($serviceType !== null && $nextQuestion !== null &&
+        strcasecmp($nextQuestion->uri, 'selected-service') === 0) {
             $subset->shift();
             $nextQuestion = $subset->first();
         }
@@ -236,20 +232,62 @@ class SubmissionController extends Controller
         //     $question = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
         // }
 
+        // The values included here will be available across all blade templates for /guide pages.
         return view(
             'guide',
             [
                 'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
                 'categories' => $allCategories,
-                'currentServiceType' => self::getSelectedServiceType(),
+                'currentServiceType' => $serviceType,
                 'currentCategory' => $category,
                 'currentQuestion' => $question,
                 'currentQuestionFields' => $question->guideQuestionFields()->get(),
                 'nextCategory' => $nextCategory,
                 'nextQuestion' => $nextQuestion,
-                'nextQuestionUri' => $nextQuestionUri
+                'nextQuestionUri' => $nextQuestionUri,
+                'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0
             ]
         );
+    }
+
+    /**
+     * If the user selected a service and made it to the summary, add an item to the session
+     * that shows this submission is complete.
+     */
+    private function markSubmissionComplete(
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question
+    ) {
+        // Do nothing if the next question is not the summary
+        if (strcasecmp($category->uri, 'next-steps') !== 0 ||
+        $question->guide_category_id !== $category->id ||
+        $question->item_order !== 1) {
+            return;
+        }
+
+        // Add an item, submission-complete, to the session
+        session(['submission-complete' => '1']);
+    }
+
+    /**
+     * Upon clicking Start, clear all session data except the service type, just
+     * in case it was set by URL parameter.
+     */
+    private function clearAllSessionData(
+        Request $request,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        // Do nothing if the current question is not the very first question
+        if (strcasecmp($category->uri, 'getting-started') !== 0 ||
+        $question->guide_category_id !== $category->id ||
+        $question->item_order !== 1) {
+            return;
+        }
+
+        // Clear all session data except demographic data
+        $this->resetGuide($request);
     }
 
     /**
@@ -294,6 +332,12 @@ class SubmissionController extends Controller
         } else {
             Log::debug(__FUNCTION__ . '(); advancing to page ' . $nextQuestionUri);
         }
+
+        // If the next question is the summary, then set a session variable
+        $this->markSubmissionComplete($nextCategory, $nextQuestion);
+
+        // If the current question is the very first one, then clear everything except the service type
+        $this->clearAllSessionData($request, $category, $question, $serviceType);
 
         // Save all data to the session
         self::putAllInputToSession($request);
@@ -384,7 +428,12 @@ class SubmissionController extends Controller
 
         $validationRules = $validations->mapWithKeys(function ($item, $key) {
             return [$item['html_id'] => $item['validation']];
-        })->all();
+        })->filter(function ($value, $key) use ($request) {
+            // $key is the ID of the input field, like 'dateDeath'; keeps the validation rule if
+            // the field is in the form input of the request
+            return $request->has($key);
+        })
+        ->all();
 
         // To properly specify custom messages for different validation rules, you will need to use
         // the column "required_type" to do so

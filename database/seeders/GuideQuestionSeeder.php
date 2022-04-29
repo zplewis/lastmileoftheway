@@ -33,7 +33,7 @@ class GuideQuestionSeeder extends Seeder
                 'description' => 'The site will guide you through thinking about the different parts
                 of the service. All fields are required unless otherwise indicated. If you ever need
                 to go back to a previous section, feel free to click any link in the sidebar on the
-                left-hand side. Please note that this site does not create a <strong>program</strong>, but a liturgy (order of
+                left-hand side. Please note that this site does not create a program, but a <strong>liturgy</strong> (order of
                 service) to help you plan the service and determine the people and details that
                 are involved.<br /><br />If you ever need help, feel free to check our <a href="/resources/glossary" title="Glossary">
                 glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. At the end, you\'ll
@@ -52,9 +52,8 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $demographicsId,
                 'title' => 'Birth, Death, and Service Dates',
                 'uri' => 'dates',
-                'optional' => 'Include a <a href="/resources/glossary#viewing" title="Glossary -
-                viewing" target="_blank">viewing</a> one hour prior to start of service',
-                'optional_html_id' => 'hasViewing',
+                'optional' => null,
+                'optional_html_id' => null,
                 'item_order' => 2,
                 'description' => 'Include relevant dates about the deceased that may be included on a program.'
             ],
@@ -65,6 +64,17 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 2,
+                'description' => 'If known, specify the location of the service. The address will
+                be validated with Google Maps to ensure it is accurate and can be found easily via
+                GPS by traveling attendees. If the location is not known yet, that\'s okay.'
+            ],
+            [
+                'guide_category_id' => $serviceTypeId,
+                'title' => 'Venue and Viewing Locations',
+                'uri' => 'venue-and-viewing',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 3,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
                 GPS by traveling attendees. If the location is not known yet, that\'s okay.'
@@ -109,7 +119,7 @@ class GuideQuestionSeeder extends Seeder
                 'guide_category_id' => $personalizeServiceId,
                 'title' => 'Opening Hymn',
                 'uri' => 'musical-selection-1',
-                'optional' => 'Include musical selection #1 in this service',
+                'optional' => 'Include an opening hymn in this service',
                 'optional_html_id' => 'hasMusicalSelection1',
                 'item_order' => 5,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .
@@ -250,7 +260,18 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 2,
-                'description' => 'Here are some more questions to ask your question or funeral home.'
+                'description' => 'Here are some more questions to ask your pastor or funeral home.'
+            ],
+            [
+                'guide_category_id' => $nextStepsId,
+                'title' => 'Send Service via Email',
+                'uri' => 'send-email',
+                'optional' => NULL,
+                'optional_html_id' => NULL,
+                'item_order' => 3,
+                'description' => 'Use this page to send your order of service to your pastor, funeral
+                home, or any one else that needs it. You can also upload a document, like a biography,
+                that can be included in this email.'
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -258,9 +279,9 @@ class GuideQuestionSeeder extends Seeder
                 'uri' => 'feedback',
                 'optional' => NULL,
                 'optional_html_id' => NULL,
-                'item_order' => 3,
+                'item_order' => 4,
                 'description' => 'Was this site helpful to you? What did this process do well? What
-                could be better? Please let us know using the feedback form below.'
+                could be better? Please let us know using the feedback survey link below:'
             ],
 
         ]);

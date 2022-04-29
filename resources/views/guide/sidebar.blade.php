@@ -4,7 +4,7 @@
     </a>
     <ul class="list-unstyled ps-0">
         @php
-            $questions = \App\Http\Controllers\SubmissionController::getQuestionsByServiceType(\App\Http\Controllers\SubmissionController::getSelectedServiceType());
+            $questions = \App\Http\Controllers\SubmissionController::getQuestionsByServiceType($currentServiceType);
         @endphp
 
         @foreach ($categories as $sidebarCategory)
@@ -22,6 +22,10 @@
             <div class="collapse {{ $isCurrentSection ? 'show' : '' }}" id="{{ $sidebarCategory->uri }}-collapse" style="">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     @foreach ($questions->where('guide_category_id', $sidebarCategory->id) as $question)
+                        {{-- Skip the "venue location" question if no service type have been selected yet,
+                        as "Venue and Viewing Locations" supercedes this question --}}
+                        @continue($currentServiceType === null && strcasecmp($question->uri, 'venue') === 0)
+
                         <li>
                             <!-- Highlight the current page in black -->
                             <a href="/{{ $question->pageUri() }}"
@@ -35,5 +39,11 @@
             </div>
         </li>
         @endforeach
+        <li class="my-2 ms-2">
+            <form action="/guide/reset/all" method="POST" id="guide-reset-form" novalidate>
+                @csrf
+                <button type="submit" id="hard-reset" class="btn btn-danger btn-sm">Start over from scratch</button>
+            </form>
+        </li>
     </ul>
   </div>
