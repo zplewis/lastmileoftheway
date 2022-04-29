@@ -17,6 +17,15 @@ configure the DNS settings there from the cPanel on A2Hosting.
 
 ### How to update site on A2Hosting with the latest code
 
+> This is the text of ~/.ssh/config
+
+```txt
+Host lastmileoftheway.com
+    HostName lastmileoftheway.com
+    User lastmile
+    Port 7822
+```
+
 ```bash
 # SSH into A2Hosting's servers
 # Reference URL: https://blog.netgloo.com/2015/08/06/configuring-godaddys-shared-hosting-for-laravel-and-git/
