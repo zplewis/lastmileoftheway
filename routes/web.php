@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use \App\Mail\SubmissionSent;
 use \App\Models\FAQCategories;
 use \App\Models\Definitions;
 use App\Models\GuideCategory;
@@ -9,7 +10,9 @@ use \App\Models\Scriptures;
 use \App\Models\SongType;
 use \App\Models\Song;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use \App\Http\Controllers\SubmissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,10 @@ Route::permanentRedirect('/glossary', '/resources/glossary');
 
 Route::get('/support', function () {
     return view('support');
+});
+
+Route::get('/mailable/test', function() {
+    Mail::to('tap52384@gmail.com')->send(new \App\Mail\SubmissionSent());
 });
 
 

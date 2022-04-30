@@ -32,6 +32,9 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    /**
+     * Returns a Collection object of GuideQuestion objects filtered by service type, if any.
+     */
     public static function getQuestionsByServiceType(
         \App\Models\ServiceType $serviceType = NULL
     ) {
@@ -48,24 +51,6 @@ class SubmissionController extends Controller
         })->orderBy('guide_category_id')->orderBy('guide_questions.item_order')->get();
     }
 
-    /**
-     * Retrieves questions for a given category based on whether a service type has been selected
-     * or not.
-     */
-    public static function getQuestionsByCategoryByServiceType(
-        \App\Models\GuideCategory $category,
-        \App\Models\ServiceType $serviceType = NULL
-    ) {
-        $questions = $category->guideQuestions()->orderBy('guide_category_id')->orderBy('item_order')->get();
-
-        if (!$serviceType) {
-            return $questions;
-        }
-
-        return $category->guideQuestions()->whereHas('serviceTypes', function ($query) use ($serviceType) {
-            $query->where('service_types.id', $serviceType->id);
-        })->orderBy('guide_category_id')->orderBy('item_order')->get();
-    }
 
     /**
      * Set the service type using a URL parameter.
@@ -79,8 +64,8 @@ class SubmissionController extends Controller
 
             if ($serviceType !== null) {
                 // Save the service type to the session
-                $request->merge([\App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . 'selection' => \App\Http\Controllers\SubmissionController::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
-                \App\Http\Controllers\SubmissionController::putAllInputToSession($request);
+                $request->merge([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
+                self::putAllInputToSession($request);
             }
         }
 
@@ -220,17 +205,11 @@ class SubmissionController extends Controller
         $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
 
         // If the specified question is not valid for this service type, then redirect the user to
-        // the current category
+        // the current category, which takes the user to the appropriate first question
         if ($question === null || $allQuestions->where('id', $question->id)->first() === null) {
             // $allQuestions is all questions based on the current service type, if any
             return redirect($nextQuestionUri);
         }
-
-        // Default to the 1st question of the current category if the question is null;
-        // this happens when a category is specified but not a question in the URL
-        // if ($question === null) {
-        //     $question = $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType);
-        // }
 
         // The values included here will be available across all blade templates for /guide pages.
         return view(
@@ -245,7 +224,8 @@ class SubmissionController extends Controller
                 'nextCategory' => $nextCategory,
                 'nextQuestion' => $nextQuestion,
                 'nextQuestionUri' => $nextQuestionUri,
-                'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0
+                'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
+                'submissionComplete' => $this->validateSubmission($allQuestions, $serviceType)
             ]
         );
     }
@@ -298,13 +278,16 @@ class SubmissionController extends Controller
         // Get current selected service type
         $serviceType = self::getSelectedServiceType();
 
-        // Get all questions based on current selected service type (if any, get all questions)
+        // Get all questions based on current selected service type (if none, get all questions)
         $allQuestions = self::getQuestionsByServiceType($serviceType);
 
         // Default to the 1st question of the current category if the question is null;
         // this happens when a category is specified but not a question in the URL
+        // By using $allQuestions, we avoid a database call and also calling an item that's not
+        // a part of the given service
         if ($question === null) {
-            $question = \App\Models\GuideQuestion::where('guide_category_id', $category->id)->where('item_order', 1)->first();
+            // $question = \App\Models\GuideQuestion::where('guide_category_id', $category->id)->where('item_order', 1)->first();
+            $question = $allQuestions->where('guide_category_id', $category->id)->first();
         }
 
         // Get the next question based on the current question
@@ -363,22 +346,6 @@ class SubmissionController extends Controller
                 continue;
             }
 
-            // If the key starts with "song" or "songType" and then a number, then the value should
-            // be a number (max of 2 characters for 2-digit numbers)
-            // https://www.phpliveregex.com/p/DZo
-            // foreach ($valuesAreIds as $regex) {
-            //     $output_array = [];
-            //     $matched = preg_match($regex, $key, $output_array) !== false;
-
-            //     if (count($output_array) === 0) {
-            //         continue;
-            //     }
-
-            //     if (strcasecmp($output_array[0], $key) === 0 && isset($value) && strlen($value) > 0) {
-            //         $value = (trim($value) . '')[0];
-            //     }
-            // }
-
             // Save the value to the session
             $request->session()->put($key, $value);
         }
@@ -409,6 +376,53 @@ class SubmissionController extends Controller
         Log::debug(__FUNCTION__ . '(); all session data: ', session()->all());
     }
 
+    private function validateSubmission(
+        \Illuminate\Database\Eloquent\Collection $questions,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        // 0. If no service type is selected, then return false
+        if ($serviceType === null) {
+            Log::debug(__FUNCTION__ . '(); submission validation failed due to no service type selected.');
+            return false;
+        }
+
+
+        // 1. Using all questions based on the service type, check the required fields in the session
+        // If any are missing, then return false. Skip any that are "requireIf," "requireUnless,"
+        // or any other "special" require types since they are conditional.
+
+        foreach ($questions as $question) {
+
+            // 1. Get the validation rules for the current question.
+            // https://laravel.com/docs/9.x/collections#method-mapwithkeys
+            // all() is required to get the underlying array; otherwise, a Collection object is returned
+            // https://laravel.com/docs/9.x/collections#method-all
+
+            // If the question is optional and the user chose not to include it, then no need to
+            // validate any of the items
+            if ($question->optional_html_id && strcasecmp(session($question->optional_html_id), 'no') === 0) {
+                continue;
+            }
+
+            $validations = $question->guideQuestionFields()->where('validation', 'required')->get();
+
+            // 2. Loop through validations for the current question
+            foreach ($validations as $validation) {
+
+                // 2. If the html_id is not in the session or is empty, then return false
+                $value = session($validation->html_id);
+
+                if (!session()->has($validation->html_id) || !$value) {
+                    Log::debug(__FUNCTION__ . '(); submission validation - required value for ' .
+                    'question ' . $question->title . ' missing: ' . $validation->label);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Provides question-specific form validation prior to advancing to the next
      * page. The validation rules are loaded from the database for the current question.
@@ -437,7 +451,6 @@ class SubmissionController extends Controller
 
         // To properly specify custom messages for different validation rules, you will need to use
         // the column "required_type" to do so
-        // TODO: Make sure to add the required type
         $customMessages = $validations->whereNotNull('validation_msg')->mapWithKeys(function ($item, $key) {
             return [$item['html_id'] . '.' . $item['required_type'] => $item['validation_msg']];
         })->all();

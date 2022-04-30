@@ -199,6 +199,22 @@ Use this code within a Blade template to see what is currently in the session:
 
 - [Laravel - Available Validation Rules](https://laravel.com/docs/9.x/validation#available-validation-rules)
 
+### Mail
+
+Here is documentation on how to generate a `Mailable` object, which can be used to send email,
+[according to the documentation](https://laravel.com/docs/9.x/mail#generating-mailables):
+
+```bash
+php artisan make:mail SubmissionSent
+```
+
+Mail is sent using the email account included with the hosting. In cPanel, go to
+__Portal Home__ -> __Client Area__ -> __My Products & Services__ -> __Product Details__
+to get the required mail connection information.
+
+Go to <https://lastmileoftheway.com/webmail> to get the SMTP port number. These connection details
+can be added to the `.env` file.
+
 ### Bootstrap 5
 
 You'll need to include Bootstrap 5 in `app.scss` and `app.js` so that the CSS and JS is included
@@ -309,10 +325,16 @@ the Windows host file system.
   - Redirect to the category page instead of 404 for guide links
 - True server side form validation
 - Complete summary page
+- All optional switch fields should be required! toggle to off sets the value to "No"
+- Can you require a field unless two fields have values. like in the case of a song?
+  - If you include the opening hymn, but do not select a song, , then custom song is required
+  - Or, you could have both song values (select, custom) required_unless!
 - Finish input validation for all required fields (input, select)
 - Finish adding input validation values to the database
+- Add ability to upload a file and send the summary via email on the same page
 
 - Definition for liturgy in glossary?
+- Should invocation minister be required?
 
 ## Jekyll
 

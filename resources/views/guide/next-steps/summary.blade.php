@@ -2,15 +2,21 @@
 
 @section('guide.content')
 
+@if (!$submissionComplete)
+            <div class="alert alert-danger" role="alert">
+                Your order of service is incomplete. Please review the options below and answer any
+                incomplete questions.
+            </div>
+        @endif
+
 @php
-    $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get();
-    $categoryIds = $categories->pluck('id');
-    // $userIsDeceased = strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, session('userIsDeceased')) === 0;
-    $selectAServiceQuestion = \App\Models\GuideQuestion::where('uri', 'selected-service')->first();
-    $selectAServiceCategory = \App\Models\GuideCategory::where('id', $selectAServiceQuestion->guide_category_id)->first();
+    // $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get();
+    // $categoryIds = $categories->pluck('id');
+    // $selectAServiceQuestion = \App\Models\GuideQuestion::where('uri', 'selected-service')->first();
+    // $selectAServiceCategory = \App\Models\GuideCategory::where('id', $selectAServiceQuestion->guide_category_id)->first();
 @endphp
 
-@foreach ($categories as $category)
+@foreach ($categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get() as $category)
 
 <h3>{{ strcasecmp($category->uri, 'personalize-service') === 0 ? 'Personalized Order of Service' : $category->title }}</h3>
 
