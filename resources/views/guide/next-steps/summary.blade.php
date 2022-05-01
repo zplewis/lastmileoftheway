@@ -43,7 +43,8 @@
             @includeIf(
                 'summary.' . $questionCategoryUri . '.' . $question->uri,
                 [
-                    'isUserIsDeceased' => $isUserIsDeceased
+                    'isUserIsDeceased' => $isUserIsDeceased,
+                    'question' => $question
                 ]
             )
         </p>
