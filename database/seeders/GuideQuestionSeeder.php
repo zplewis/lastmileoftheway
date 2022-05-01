@@ -271,7 +271,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 3,
                 'description' => 'Use this page to send your order of service to your pastor, funeral
                 home, or any one else that needs it. You can also upload a document, like a biography,
-                that can be included in this email.'
+                that can be included in this email. Click <strong>Save &amp; Continue</strong> to
+                send the order of service via email with the file you uploaded attached.'
             ],
             [
                 'guide_category_id' => $nextStepsId,

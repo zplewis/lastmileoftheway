@@ -211,6 +211,9 @@ class SubmissionController extends Controller
             return redirect($nextQuestionUri);
         }
 
+        // Get a collection of all incomplete questions; this will be useful for the Summary page
+        $incompleteQuestions = $this->incompleteQuestions($allQuestions);
+
         // The values included here will be available across all blade templates for /guide pages.
         return view(
             'guide',
@@ -225,7 +228,8 @@ class SubmissionController extends Controller
                 'nextQuestion' => $nextQuestion,
                 'nextQuestionUri' => $nextQuestionUri,
                 'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
-                'submissionComplete' => $this->validateSubmission($allQuestions, $serviceType)
+                'incompleteQuestions' => $incompleteQuestions,
+                'submissionComplete' => $serviceType !== null && count($incompleteQuestions) === 0
             ]
         );
     }
@@ -376,16 +380,16 @@ class SubmissionController extends Controller
         Log::debug(__FUNCTION__ . '(); all session data: ', session()->all());
     }
 
-    private function validateSubmission(
+    /**
+     * Returns a Collection object containing questions that are incomplete. These
+     * questions are then highlighted red on the Summary page.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function incompleteQuestions(
         \Illuminate\Database\Eloquent\Collection $questions,
         \App\Models\ServiceType $serviceType = NULL
     ) {
-        // 0. If no service type is selected, then return false
-        if ($serviceType === null) {
-            Log::debug(__FUNCTION__ . '(); submission validation failed due to no service type selected.');
-            return false;
-        }
-
+        $incomplete = [];
 
         // 1. Using all questions based on the service type, check the required fields in the session
         // If any are missing, then return false. Skip any that are "requireIf," "requireUnless,"
@@ -401,6 +405,7 @@ class SubmissionController extends Controller
             // If the question is optional and the user chose not to include it, then no need to
             // validate any of the items
             if ($question->optional_html_id && strcasecmp(session($question->optional_html_id), 'no') === 0) {
+                Log::debug(__FUNCTION__ . '(); the question ' . $question->title . ' is optional and was declined. skipping...');
                 continue;
             }
 
@@ -415,12 +420,26 @@ class SubmissionController extends Controller
                 if (!session()->has($validation->html_id) || !$value) {
                     Log::debug(__FUNCTION__ . '(); submission validation - required value for ' .
                     'question ' . $question->title . ' missing: ' . $validation->label);
-                    return false;
+                    $incomplete[] = $question;
+                    break;
                 }
             }
         }
 
-        return true;
+        return collect($incomplete);
+    }
+
+    private function validateSubmission(
+        \Illuminate\Database\Eloquent\Collection $questions,
+        \App\Models\ServiceType $serviceType = NULL
+    ) {
+        // 0. If no service type is selected, then return false
+        if ($serviceType === null) {
+            Log::debug(__FUNCTION__ . '(); submission validation failed due to no service type selected.');
+            return false;
+        }
+
+        return count($this->incompleteQuestions($questions)) === 0;
     }
 
     /**

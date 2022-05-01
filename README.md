@@ -315,7 +315,6 @@ the Windows host file system.
 
 ### Remaining
 
-
 - Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
 - Make it so that people can be added or taken away dynamically for reflections.
 - Make sure all links work
@@ -332,6 +331,11 @@ the Windows host file system.
 - Finish input validation for all required fields (input, select)
 - Finish adding input validation values to the database
 - Add ability to upload a file and send the summary via email on the same page
+- Add validation to make sure that the upload bio file is an accepted type
+- Add validation for all five email address inputs
+- Summary: With no service type selected, make sure the user made a choice whether to include all optional parts of the service
+- Summary: make sure an old testament reading is selected or a custom one provided
+- Summary: make sure a new testament reading is selected or a custome one provided
 
 - Definition for liturgy in glossary?
 - Should invocation minister be required?

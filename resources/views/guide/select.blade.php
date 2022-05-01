@@ -5,7 +5,7 @@
 
 <select class="form-select @error($id) is-invalid @enderror" id="{{ $id }}" name="{{ $id }}"
 aria-label="{{ isset($labelText) ? $labelText : '' }}" {{ isset($required) && $required === true ? 'required' : '' }}>
-    <option value="" {{ !(old($id) ?? session($id) ?? $value ?? null) ? 'selected' : '' }}>Choose one</option>
+    <option value="" {{ !(old($id) ?? session($id) ?? $value ?? null) ? 'selected' : '' }}>{{ $defaultOptionText ?? 'Choose one' }}</option>
     @if (isset($collection))
         @foreach ($collection as $option)
             <option value="{{ $option->id }}"

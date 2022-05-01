@@ -4,7 +4,7 @@
 
 {{-- https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#limiting_accepted_file_types --}}
 <div class="mb-3">
-    <label for="deceasedBio" class="form-label">Upload a biography or other document for the deceased:</label>
+    <label for="deceasedBio" class="form-label">Upload a biography or other document for the deceased (PDF, Microsoft Word):</label>
     <input class="form-control" type="file" id="deceasedBio" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
 </div>
 

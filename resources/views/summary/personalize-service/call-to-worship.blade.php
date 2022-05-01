@@ -1,5 +1,5 @@
-<p class="{{ strcasecmp(session('hasCallToWorship'), 'no') === 0 ? 'text-danger' : '' }}">Included in this service: {{ session('hasCallToWorship') ?? 'Yes' }}</p>
+@include('summary.included', ['htmlId' => 'hasCallToWorship'])
 
-@if(strcasecmp(session('hasCallToWorship'), 'no') !== 0)
-<p>Officiating minister: {{ session('callToWorshipMinister') ?? 'N/A' }}</p>
+@if(strcasecmp(session('hasCallToWorship'), 'yes') === 0)
+<p>Officiating minister: {{ session('callToWorshipMinister') ?? 'Undecided' }}</p>
 @endif

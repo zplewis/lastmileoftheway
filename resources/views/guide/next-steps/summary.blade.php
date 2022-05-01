@@ -3,11 +3,17 @@
 @section('guide.content')
 
 @if (!$submissionComplete)
-            <div class="alert alert-danger" role="alert">
-                Your order of service is incomplete. Please review the options below and answer any
-                incomplete questions.
-            </div>
-        @endif
+    <div class="alert alert-danger" role="alert">
+        Your order of service is incomplete. Please review your selections below and answer any
+        incomplete questions. Incomplete sections are highlighted in <strong>red</strong>:
+
+        <ul class="list-unstyled mt-0 mb-2">
+        @foreach ($incompleteQuestions as $question)
+            <li>{{ $question->title }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif
 
 @php
     // $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get();
@@ -26,10 +32,11 @@
     @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByServiceType($currentServiceType)->whereIn('guide_category_id', $category->id) as $question)
     @php
         $questionCategoryUri = $categories->where('id', $question->guide_category_id)->first()->uri;
+        $isIncomplete = $incompleteQuestions->where('guide_category_id', $question->guide_category_id)->where('id', $question->id)->first() !== null;
     @endphp
     <li class="list-group-item">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{ $question->title }}</h5>
+            <h5 class="mb-1 {{ $isIncomplete ? 'text-danger' : '' }}">{{ $question->title }}</h5>
             <a class="btn btn-primary" title="Edit" href="/guide/{{ $questionCategoryUri }}/{{ $question->uri }}">Edit</a>
         </div>
         <p class="mb-1">

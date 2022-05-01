@@ -44,7 +44,7 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => 'songCustom' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Or, feel free to specify your own below:'])
+    @include('guide.field', ['id' => 'songCustom' . ($musicalSelectionIndex ?? '1'), 'inputType' => 'text', 'labelText' => 'Or, feel free to specify your own below:', 'defaultOptionText' => 'Please choose a song.'])
 </div>
 
 <div class="col-12">
