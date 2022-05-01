@@ -281,6 +281,15 @@ class SongSeeder extends Seeder
                 'youtube_url' => 'https://www.youtube.com/embed/HbW_f5rTGxQ',
                 'spotify_url' => null
             ],
+            [
+                'song_type_id' => $soloId,
+                'name' => 'Stand',
+                'release_year' => 1996,
+                'artist' => 'Donnie McClurkin',
+                'album' => null,
+                'youtube_url' => 'https://www.youtube.com/embed/I7XLHvj96t0',
+                'spotify_url' => null
+            ],
         ]);
     }
 }
