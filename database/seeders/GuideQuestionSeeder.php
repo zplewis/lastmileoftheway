@@ -160,7 +160,9 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include musical selection #2 in this service',
                 'optional_html_id' => 'hasMusicalSelection2',
                 'item_order' => 9,
-                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+                'description' => Definitions::where('term', 'hymn')->first()->full_text .
+                ' While some examples are included below, feel free to select one not included
+                here.'
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -169,7 +171,9 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Reflections (2 Minutes) in this service',
                 'optional_html_id' => 'hasReflections',
                 'item_order' => 10,
-                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+                'description' => 'It is good idea to usually select people in advance to give brief
+                remarks on the life of the deceased. These remarks can include how God enriched the
+                lives of friends and family through their dearly departed.'
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -187,7 +191,9 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include musical selection #3 in this service',
                 'optional_html_id' => 'hasMusicalSelection3',
                 'item_order' => 12,
-                'description' => 'Some text explaining what this page is about, putting the user at ease.'
+                'description' => Definitions::where('term', 'hymn')->first()->full_text .
+                ' While some examples are included below, feel free to select one not included
+                here.'
             ],
             [
                 'guide_category_id' => $personalizeServiceId,

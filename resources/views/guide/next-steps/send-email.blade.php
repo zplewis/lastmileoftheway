@@ -15,7 +15,7 @@
     and try again.
 </p>
 
-@foreach (range(1, 5) as $index)
+@foreach (range(1, env('MAX_NUM_EMAIL_RECIPIENTS', 5)) as $index)
 <div class="col-12">
     @include('guide.field', ['id' => 'recipientEmail' . $index, 'inputType' => 'email', 'labelText' => 'Email address #' . $index, 'required' => $loop->first])
 </div>

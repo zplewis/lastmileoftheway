@@ -196,6 +196,33 @@ class GuideQuestionFieldSeeder extends Seeder
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'new-testament')->first()->id,
+                'html_id' => 'newTestamentReadingReader',
+                'label' => 'Scripture reader',
+                'validation' => 'required',
+                'validation_msg' => "Please specify who will read the scripture.",
+                'required_type' => 'required'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'new-testament')->first()->id,
+                'html_id' => 'newTestamentReading',
+                'label' => 'Select a reading',
+                'validation' => 'required_without:newTestamentReadingCustom',
+                'validation_msg' => "Please select a scripture from the list.",
+                'required_type' => 'required_without'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'new-testament')->first()->id,
+                'html_id' => 'newTestamentReadingCustom',
+                'label' => 'Or, feel free to specify your own below:',
+                'validation' => 'required_without:newTestamentReading',
+                'validation_msg' => "Please select a scripture above or specify your own in the textbox.",
+                'required_type' => 'required_without'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'prayer-of-comfort')->first()->id,
                 'html_id' => 'hasPrayerOfComfort',
                 'label' => 'Include Prayer of Comfort in this service',

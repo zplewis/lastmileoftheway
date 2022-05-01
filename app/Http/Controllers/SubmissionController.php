@@ -397,6 +397,8 @@ class SubmissionController extends Controller
 
         foreach ($questions as $question) {
 
+            Log::debug(__FUNCTION__ . '(); question title: ' . $question->title);
+
             // 1. Get the validation rules for the current question.
             // https://laravel.com/docs/9.x/collections#method-mapwithkeys
             // all() is required to get the underlying array; otherwise, a Collection object is returned
@@ -409,7 +411,8 @@ class SubmissionController extends Controller
                 continue;
             }
 
-            $validations = $question->guideQuestionFields()->where('validation', 'required')->get();
+            // Get a list of all validations with using standard rule "required"
+            $validations = $question->guideQuestionFields()->where('required_type', 'required')->get();
 
             // 2. Loop through validations for the current question
             foreach ($validations as $validation) {
