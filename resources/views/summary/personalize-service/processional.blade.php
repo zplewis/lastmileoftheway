@@ -1,1 +1,1 @@
-@include('summary.included', ['htmlId' => 'hasProcessional'])
+@include('summary.included', ['htmlId' => $question->optional_html_id])

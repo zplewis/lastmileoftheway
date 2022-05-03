@@ -166,9 +166,9 @@ class GuideQuestionSeeder extends Seeder
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
-                'title' => 'Reflections (2 Minutes)',
+                'title' => 'Reflections (2 minutes)',
                 'uri' => 'reflections',
-                'optional' => 'Include Reflections (2 Minutes) in this service',
+                'optional' => 'Include Reflections (2 minutes) in this service',
                 'optional_html_id' => 'hasReflections',
                 'item_order' => 10,
                 'description' => 'It is good idea to usually select people in advance to give brief
