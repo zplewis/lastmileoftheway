@@ -1,7 +1,4 @@
 {{-- Nice Blade template for creating form fields easily and consistently --}}
-{{-- @php
-    $questionField = $currentQuestionFields->where('html_id', $id)->first();
-@endphp --}}
 
 @if (isset($labelText))
 <label for="{{ $id }}" class="form-label">{!! $labelText !!}</label>
@@ -11,8 +8,10 @@
 id="{{ $id }}" name="{{ $id }}"
 {{-- Don't use the session for the 'next-page' input; should be excluded --}}
 value="{{ old($id) ?? session($id) ?? $value ?? $placeholder ?? '' }}"
-placeholder="{{ $placeholder ?? '' }}" {{ isset($required) && $required === true ? 'required' : '' }}
-{{ isset($pattern) ? 'pattern="' . $pattern . '"' : '' }} />
+@if(in_array(strtolower($fieldType ?? 'input'), ['text', 'search', 'url', 'tel', 'email', 'password', 'number'], true))
+placeholder="{{ $placeholder ?? '' }}"
+@endif
+{{ isset($required) && $required === true ? 'required' : '' }} {{ isset($pattern) ? 'pattern="' . $pattern . '"' : '' }} />
 
 @error($id)
 <!-- show invalid feedback for this field -->

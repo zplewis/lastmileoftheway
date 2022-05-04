@@ -12,7 +12,7 @@
 
         </div> <!-- /.col -->
         <div class="col">
-            <img src="{{ asset('images/pastor_farrow_no_bg.png') }}" class="img-fluid"></img>
+            <img src="{{ asset('images/pastor_farrow_no_bg.png') }}" class="img-fluid" alt="Pastor Farrow picture" />
         </div>
     </div> <!-- /.row -->
 </div> <!-- /.advertisement-jumbotron -->

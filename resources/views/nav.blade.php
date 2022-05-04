@@ -14,7 +14,7 @@
   <header>
     <div class="container-fluid d-flex flex-column flex-md-row align-items-center py-3 border-bottom">
       <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo mx-2"></img>
+        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo mx-2" alt="Last Mile of the Way logo" />
         <span class="fs-4">Last Mile of the Way</span>
       </a>
 
@@ -32,9 +32,9 @@
         <a class="me-2 py-2 text-dark text-decoration-none" href="{{ url('faqs/') }}">FAQs</a>
 
         <a class="px-3 nav-link dropdown-toggle link-dark" href="{{ url('resources/') }}" title="Resources"
-        id="support-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources
+        id="resources-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources
         </a>
-        <ul class="dropdown-menu" aria-labelledby="support-dropdown">
+        <ul class="dropdown-menu" aria-labelledby="resources-dropdown">
         <li><a class="dropdown-item" href="{{ url('glossary/') }}">Glossary</a></li>
             <li><a class="dropdown-item" href="{{ url('resources/songs') }}">Solos, hymns, and songs</a></li>
             <li><a class="dropdown-item" href="{{ url('resources/bible-readings') }}">Scripture Readings</a></li>

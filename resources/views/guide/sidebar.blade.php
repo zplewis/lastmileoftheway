@@ -42,7 +42,7 @@
         <li class="my-2 ms-2">
             <form action="/guide/reset/all" method="POST" id="guide-reset-form" novalidate>
                 @csrf
-                <button type="submit" id="hard-reset" class="btn btn-danger btn-sm">Start over from scratch</button>
+                <button type="submit" id="hard-reset" class="btn btn-danger btn-sm">Reset Order of Service</button>
             </form>
         </li>
     </ul>

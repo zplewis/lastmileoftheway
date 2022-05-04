@@ -13,7 +13,7 @@
       <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
     </ul>
     <div class="text-center">
-        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo" />
+        <img src="{{ asset('images/leaf-logo-1.png') }}" class="header-leaf-logo" alt="Last Mile of the Way logo" />
         <p class="text-center text-muted">&copy; 2021-{{ now()->format('Y') }} Last Mile of the Way, Inc</p>
     </div>
 
