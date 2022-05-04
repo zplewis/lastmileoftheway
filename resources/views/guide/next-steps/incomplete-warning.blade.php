@@ -1,3 +1,4 @@
+{{-- Show an alertbox if the order of service is incomplete. --}}
 @if (!$submissionComplete)
     <div class="alert alert-danger" role="alert">
         @if(!request()->is('guide/next-steps/summary'))
@@ -21,3 +22,6 @@
 
     </div>
 @endif
+
+{{-- Prevent advancing forward and sending an email if the order of service is not complete --}}
+@include('guide.field', ['inputType' => 'hidden', 'id' => 'submissionComplete', 'value' => $submissionComplete])

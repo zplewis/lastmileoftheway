@@ -2,6 +2,10 @@
 
 Website for creating custom funeral or memorial liturgies (orders of service).
 
+## GitHub
+
+- <https://github.com/tap52384/lastmileoftheway>
+
 ## A2Hosting
 
 - The actual domain is with [Google Domains](https://domains.google.com); you

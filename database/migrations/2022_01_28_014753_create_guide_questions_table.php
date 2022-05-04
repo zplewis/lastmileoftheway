@@ -27,6 +27,8 @@ class CreateGuideQuestionsTable extends Migration
             $table->string('optional_html_id')->nullable();
             $table->string('description', 2500)->nullable();
             $table->string('default_value')->nullable();
+            // Text for a button to allow moving forward without submitting the form
+            $table->string('advance_no_save_btn_text')->nullable();
         });
     }
 

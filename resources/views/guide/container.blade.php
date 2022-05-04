@@ -6,7 +6,7 @@
         @endif
 
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
-        @if ($errors->any() && strcasecmp($currentQuestion->uri, 'selected-service') === 0 || $errors->any())
+        @if ($errors->any() && strcasecmp($currentQuestion->uri, 'selected-service') === 0)
             <div class="alert alert-danger" role="alert">
                 <ul class="list-unstyled">
                     @foreach ($errors->all() as $error)
@@ -44,6 +44,14 @@
                         @endif
 
                     </button>
+
+                    {{-- Show a button that allows you to continue without saving in case you don't want to repeat the action again --}}
+                    @if ($currentQuestion->advance_no_save_btn_text && $submissionComplete === true)
+                        <a href="{{ $nextQuestionUri }}" title="{{ $currentQuestion->advance_no_save_btn_text }}"
+                            class="btn btn-success">
+                            {{ $currentQuestion->advance_no_save_btn_text }}
+                        </a>
+                    @endif
                 </div> <!-- /.col-12 -->
             </div> <!-- /.row g-3 -->
         </form>

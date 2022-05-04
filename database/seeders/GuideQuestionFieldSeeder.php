@@ -19,6 +19,7 @@ class GuideQuestionFieldSeeder extends Seeder
         $demographicsId = GuideCategory::where('title', 'Demographics')->first()->id;
         $personalizeServiceId = GuideCategory::where('uri', 'personalize-service')->first()->id;
         $serviceTypeId = GuideCategory::where('uri', 'service-type')->first()->id;
+        $nextStepsId = GuideCategory::where('uri', 'next-steps')->first()->id;
 
         // https://laravel.com/docs/9.x/validation#available-validation-rules
 
@@ -445,6 +446,79 @@ class GuideQuestionFieldSeeder extends Seeder
                 'validation' => 'required',
                 'validation_msg' => "Please select a service type.",
                 'required_type' => 'required'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'summary')->first()->id,
+                'html_id' => 'submissionComplete',
+                'label' => null,
+                'validation' => 'required',
+                'validation_msg' => null,
+                'required_type' => 'required'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'submissionComplete',
+                'label' => null,
+                'validation' => 'required',
+                'validation_msg' => null,
+                'required_type' => 'required'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'recipientEmail1',
+                'label' => 'Email address #1',
+                'validation' => 'required|email',
+                'validation_msg' => null,
+                'required_type' => 'required'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'recipientEmail2',
+                'label' => 'Email address #2',
+                'validation' => 'email',
+                'validation_msg' => null,
+                'required_type' => null
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'recipientEmail3',
+                'label' => 'Email address #3',
+                'validation' => 'email',
+                'validation_msg' => null,
+                'required_type' => null
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'recipientEmail4',
+                'label' => 'Email address #4',
+                'validation' => 'email',
+                'validation_msg' => null,
+                'required_type' => null
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'recipientEmail5',
+                'label' => 'Email address #5',
+                'validation' => 'email',
+                'validation_msg' => null,
+                'required_type' => null
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+                ->where('uri', 'send-email')->first()->id,
+                'html_id' => 'obituaryFile',
+                'label' => 'Obituary or other document',
+                // https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+                'validation' => 'mimes:' . env('FILE_UPLOAD_MIME_TYPES'),
+                'validation_msg' => null,
+                'required_type' => null
             ],
         ]);
     }

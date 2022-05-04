@@ -38,6 +38,7 @@ class GuideQuestionSeeder extends Seeder
                 are involved.<br /><br />If you ever need help, feel free to check our <a href="/resources/glossary" title="Glossary">
                 glossary</a> or <a href="/resources/faqs" title="FAQs">FAQs</a>. At the end, you\'ll
                 have the opportunity to submit feedback on your service planning experience.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $demographicsId,
@@ -46,7 +47,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 1,
-                'description' => ''
+                'description' => '',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $demographicsId,
@@ -55,7 +57,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => null,
                 'optional_html_id' => null,
                 'item_order' => 2,
-                'description' => 'Include relevant dates about the deceased that may be included on a program.'
+                'description' => 'Include relevant dates about the deceased that may be included on a program.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $serviceTypeId,
@@ -66,7 +69,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 2,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
-                GPS by traveling attendees. If the location is not known yet, that\'s okay.'
+                GPS by traveling attendees. If the location is not known yet, that\'s okay.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $serviceTypeId,
@@ -77,7 +81,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 3,
                 'description' => 'If known, specify the location of the service. The address will
                 be validated with Google Maps to ensure it is accurate and can be found easily via
-                GPS by traveling attendees. If the location is not known yet, that\'s okay.'
+                GPS by traveling attendees. If the location is not known yet, that\'s okay.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $serviceTypeId,
@@ -86,7 +91,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 1,
-                'description' => 'Which type of service best suits your needs?'
+                'description' => 'Which type of service best suits your needs?',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -95,7 +101,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include a Processional in this service',
                 'optional_html_id' => 'hasProcessional',
                 'item_order' => 2,
-                'description' => Definitions::where('term', 'processional')->first()->full_text
+                'description' => Definitions::where('term', 'processional')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -104,7 +111,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Call to Worship to open the service',
                 'optional_html_id' => 'hasCallToWorship',
                 'item_order' => 3,
-                'description' => 'The opening words of the service usually spoken by the officiating minister.'
+                'description' => 'The opening words of the service usually spoken by the officiating minister.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -113,7 +121,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 4,
-                'description' => Definitions::where('term', 'invocation')->first()->full_text
+                'description' => Definitions::where('term', 'invocation')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -124,7 +133,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 5,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .
                 ' While some examples are included below, feel free to select one not included
-                here.'
+                here.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -133,7 +143,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 6,
-                'description' => Definitions::where('term', 'old testament scripture reading')->first()->full_text
+                'description' => Definitions::where('term', 'old testament scripture reading')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -142,7 +153,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 7,
-                'description' => Definitions::where('term', 'new testament scripture reading')->first()->full_text
+                'description' => Definitions::where('term', 'new testament scripture reading')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -151,7 +163,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Prayer of Comfort in this service',
                 'optional_html_id' => 'hasPrayerOfComfort',
                 'item_order' => 8,
-                'description' => Definitions::where('term', 'prayer of comfort')->first()->full_text
+                'description' => Definitions::where('term', 'prayer of comfort')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -162,7 +175,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 9,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .
                 ' While some examples are included below, feel free to select one not included
-                here.'
+                here.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -173,7 +187,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 10,
                 'description' => 'It is good idea to usually select people in advance to give brief
                 remarks on the life of the deceased. These remarks can include how God enriched the
-                lives of friends and family through their dearly departed.'
+                lives of friends and family through their dearly departed.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -182,7 +197,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Acknowledgements in this service',
                 'optional_html_id' => 'hasAcknowledgements',
                 'item_order' => 11,
-                'description' => Definitions::where('term', 'acknowledgements')->first()->short_text
+                'description' => Definitions::where('term', 'acknowledgements')->first()->short_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -193,7 +209,8 @@ class GuideQuestionSeeder extends Seeder
                 'item_order' => 12,
                 'description' => Definitions::where('term', 'hymn')->first()->full_text .
                 ' While some examples are included below, feel free to select one not included
-                here.'
+                here.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -202,7 +219,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Sermon / Eulogy in this service',
                 'optional_html_id' => 'hasEulogy',
                 'item_order' => 13,
-                'description' => Definitions::where('term', 'eulogy')->first()->full_text
+                'description' => Definitions::where('term', 'eulogy')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -211,7 +229,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => 'hasCommittal',
                 'item_order' => 16,
-                'description' => Definitions::where('term', 'committal')->first()->full_text
+                'description' => Definitions::where('term', 'committal')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -220,7 +239,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Mortician\'s Brief in this service',
                 'optional_html_id' => 'hasMorticiansBrief',
                 'item_order' => 14,
-                'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text
+                'description' => Definitions::where('term', 'mortician\'s brief')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -229,7 +249,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Recessional in this service',
                 'optional_html_id' => 'hasRecessional',
                 'item_order' => 15,
-                'description' => Definitions::where('term', 'recessional')->first()->full_text
+                'description' => Definitions::where('term', 'recessional')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -238,7 +259,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Burial in this service',
                 'optional_html_id' => 'hasBurial',
                 'item_order' => 17,
-                'description' => Definitions::where('term', 'committal')->first()->full_text
+                'description' => Definitions::where('term', 'committal')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $personalizeServiceId,
@@ -247,7 +269,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => 'Include Benediction in this service',
                 'optional_html_id' => 'hasBenediction',
                 'item_order' => 18,
-                'description' => Definitions::where('term', 'benediction')->first()->full_text
+                'description' => Definitions::where('term', 'benediction')->first()->full_text,
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -257,7 +280,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional_html_id' => NULL,
                 'item_order' => 1,
                 'description' => 'Please review your selections. Click Edit for any section to
-                modify that part of the service.'
+                modify that part of the service.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -266,7 +290,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional' => NULL,
                 'optional_html_id' => NULL,
                 'item_order' => 2,
-                'description' => 'Here are some more questions to ask your pastor or funeral home.'
+                'description' => 'Here are some more questions to ask your pastor or funeral home.',
+                'advance_no_save_btn_text' => null
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -276,9 +301,10 @@ class GuideQuestionSeeder extends Seeder
                 'optional_html_id' => NULL,
                 'item_order' => 3,
                 'description' => 'Use this page to send your order of service to your pastor, funeral
-                home, or any one else that needs it. You can also upload a document, like a biography,
+                home, or any one else that needs it. You can also upload a document, like an obituary,
                 that can be included in this email. Click <strong>Save &amp; Continue</strong> to
-                send the order of service via email with the file you uploaded attached.'
+                send the order of service via email with the file you uploaded attached.',
+                'advance_no_save_btn_text' => 'Continue without sending email'
             ],
             [
                 'guide_category_id' => $nextStepsId,
@@ -288,7 +314,8 @@ class GuideQuestionSeeder extends Seeder
                 'optional_html_id' => NULL,
                 'item_order' => 4,
                 'description' => 'Was this site helpful to you? What did this process do well? What
-                could be better? Please let us know using the feedback survey link below:'
+                could be better? Please let us know using the feedback survey link below:',
+                'advance_no_save_btn_text' => null
             ],
 
         ]);

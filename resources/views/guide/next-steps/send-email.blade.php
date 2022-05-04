@@ -7,7 +7,7 @@
 {{-- https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#limiting_accepted_file_types --}}
 <div class="mb-3">
     <label for="deceasedBio" class="form-label">Upload an obituary or other document for the deceased (PDF, Microsoft Word):</label>
-    <input class="form-control" type="file" id="obituaryFile" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+    <input class="form-control" type="file" id="obituaryFile" accept="{{ env('FILE_UPLOAD_MIME_TYPES') }}" />
 </div>
 
 <h3>Email recipients</h3>
