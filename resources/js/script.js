@@ -196,6 +196,31 @@
         });
     }
 
+    // Select the optional switch for the question
+    const optionalQuestionSwitch = document.querySelector('input[role="switch"][name^="has"]');
+
+    if (optionalQuestionSwitch) {
+
+        function toggleQuestionContent() {
+            // Get the switch state
+            const checked = optionalQuestionSwitch.checked === true;
+
+            // If there is a div containing any content, hide it all
+            const questionContentDiv = document.querySelector('div.question-content');
+
+            if (questionContentDiv) {
+                if (checked === true) {
+                    questionContentDiv.classList.remove('d-none');
+                } else {
+                    questionContentDiv.classList.add('d-none');
+                }
+            }
+        }
+
+        optionalQuestionSwitch.addEventListener('change', toggleQuestionContent);
+        toggleQuestionContent();
+    }
+
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},

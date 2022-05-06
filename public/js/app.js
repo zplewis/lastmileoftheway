@@ -5538,6 +5538,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         event.target.submit();
       }
     });
+  } // Select the optional switch for the question
+
+
+  var optionalQuestionSwitch = document.querySelector('input[role="switch"][name^="has"]');
+
+  if (optionalQuestionSwitch) {
+    var toggleQuestionContent = function toggleQuestionContent() {
+      // Get the switch state
+      var checked = optionalQuestionSwitch.checked === true; // If there is a div containing any content, hide it all
+
+      var questionContentDiv = document.querySelector('div.question-content');
+
+      if (questionContentDiv) {
+        if (checked === true) {
+          questionContentDiv.classList.remove('d-none');
+        } else {
+          questionContentDiv.classList.add('d-none');
+        }
+      }
+    };
+
+    optionalQuestionSwitch.addEventListener('change', toggleQuestionContent);
+    toggleQuestionContent();
   } // confirms whether the user is sure if they want to complete the given action
 
 })(window.utilities = window.utilities || {}, window.jQuery, window, document, window.axios);

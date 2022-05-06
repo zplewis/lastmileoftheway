@@ -323,6 +323,14 @@ the Windows host file system.
 
 ### Remaining
 
+- PDF changes
+    - Add Last Mile of the Way text with logo at the top
+    - Add <h1>Order of Service</h1> with <p>for First Name Last Name</p> under the logo and text
+    - Make the Last Mile of the Way text at the top a link to the site
+- Make it so that users can have up to 5 users to provide reflections
+  - Add a button that increases the number of reflections persons to a maximum of 5 (max is set via `.env`)
+  - Make sure the summary also shows the number of reflections people selected
+  - Allow increasing the reflections people even if there are empty persons fields
 - Actually send the email with a PDF containing the summary, attached obituary, and additional questions
 - Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
 - Make it so that people can be added or taken away dynamically for reflections.

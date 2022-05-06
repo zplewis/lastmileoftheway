@@ -33,7 +33,9 @@
                     @include('guide.switch', ['id' => $currentQuestion->optional_html_id, 'labelText' => $currentQuestion->optional ?? 'Include a ' . $currentQuestion->title . ' in this service'])
                 @endif
 
-                @yield('guide.content')
+                <div class="question-content {{ isset($currentQuestion->optional_html_id) && (strcasecmp(session($currentQuestion->optional_html_id), 'no') === 0) ? 'd-none' : '' }}">
+                    @yield('guide.content')
+                </div> <!-- /.question-content -->
 
                 {{-- Do not show any buttons at the bottom if in Blade template preview mode --}}
                 @if(!isset($isPreview) || !$isPreview)
