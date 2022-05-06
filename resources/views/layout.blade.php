@@ -2,7 +2,12 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+
+        @if (request()->is('*/pdf*'))
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        @else
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @endif
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="description" content="">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -29,17 +34,22 @@
 
     <body>
 
-        @include('svgs')
+        @if (!isset($isPreview) || !$isPreview)
+            @include('svgs')
 
-        @include('nav')
+            @include('nav')
+        @endif
+
 
         <main class="page-content flex-shrink-0" aria-label="Content">
             @yield('content')
         </main>
 
-        @include('footer')
+        @if (!isset($isPreview) || !$isPreview)
+            @include('footer')
 
-        {{-- https://laravel-mix.com/docs/6.0/versioning --}}
-        <script src="{{ mix('js/app.js') }}"></script>
+            {{-- https://laravel-mix.com/docs/6.0/versioning --}}
+            <script src="{{ mix('js/app.js') }}"></script>
+        @endif
     </body>
 </html>

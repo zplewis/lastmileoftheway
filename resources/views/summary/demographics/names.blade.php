@@ -1,9 +1,21 @@
-<h6>Your Information</h6>
+@php
+    $isUserIsDeceasedDecided = session()->has('userIsDeceased') && session('userIsDeceased');
+    $isThisServiceForYou = 'Undecided';
+    if ($isUserIsDeceasedDecided) {
+        $isThisServiceForYou = $isUserIsDeceased ? 'Yes' : 'No';
+    }
+@endphp
+
+<h5>Your Information</h5>
 <p class="mb-0 {{ !session()->has('userFirstName') || !session('userFirstName') || !session('userLastName') ? 'text-danger' : '' }}">Name:{{ (session('userFirstName') . ' ' . session('userLastName')) ?? 'Missing' }}</p>
 @include('summary.required', ['htmlId' => 'userEmail', 'desc' => 'Email:', 'defaultValue' => 'Missing'])
-@include('summary.required', ['htmlId' => 'userIsDeceased', 'desc' => 'Are you planning this service for yourself?', 'defaultValue' => 'Undecided'])
 
-<h6 class="mt-2">Deceased Information</h6>
+{{-- Did not use summary.required because we need the actual yes/no text and the session value is a number --}}
+<p class="mb-0 {{ !$isUserIsDeceasedDecided ? 'text-danger' : '' }}">
+    Are you planning this service for yourself? {{ $isThisServiceForYou }}
+</p>
+
+<h5 class="mt-2">Deceased Information</h5>
 <p class="mb-0">Preferred Name: {{ session('deceasedPreferredName') }}</p>
 
 @if (!$isUserIsDeceased)

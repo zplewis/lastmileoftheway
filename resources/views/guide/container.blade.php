@@ -1,8 +1,10 @@
 <div class="col-12 col-md-9">
     <div class="row">
-        <h2 class="mb-3">{!! $currentQuestion->title !!}</h2>
-        @if ($currentQuestion->description)
-            <p class="lead">{!! $currentQuestion->description !!}</p>
+        @if (!request()->is('*/pdf*'))
+            <h2 class="mb-3">{!! $currentQuestion->title !!}</h2>
+            @if ($currentQuestion->description)
+                <p class="lead">{!! $currentQuestion->description !!}</p>
+            @endif
         @endif
 
         <!-- Display any validation errors if they are present. This will be handled better in the future. -->
@@ -33,26 +35,29 @@
 
                 @yield('guide.content')
 
-                <div class="col-12">
-                    <!-- Add code here so that Next if there is a "next page" specified,
-                    otherwise, use Submit for the button text. -->
-                    <button type="submit" id="guide-advance" name="guide-advance" class="btn btn-primary">
-                        @if ($currentQuestion->item_order === 1 && $currentCategory->item_order === 1)
-                        Start
-                        @else
-                        {{ !$nextQuestion ? 'Submit' : 'Save & Continue' }}
+                {{-- Do not show any buttons at the bottom if in Blade template preview mode --}}
+                @if(!isset($isPreview) || !$isPreview)
+                    <div class="col-12">
+                        <!-- Add code here so that Next if there is a "next page" specified,
+                        otherwise, use Submit for the button text. -->
+                        <button type="submit" id="guide-advance" name="guide-advance" class="btn btn-primary">
+                            @if ($currentQuestion->item_order === 1 && $currentCategory->item_order === 1)
+                            Start
+                            @else
+                            {{ !$nextQuestion ? 'Submit' : 'Save & Continue' }}
+                            @endif
+
+                        </button>
+
+                        {{-- Show a button that allows you to continue without saving in case you don't want to repeat the action again --}}
+                        @if ($currentQuestion->advance_no_save_btn_text && $submissionComplete === true)
+                            <a href="{{ $nextQuestionUri }}" title="{{ $currentQuestion->advance_no_save_btn_text }}"
+                                class="btn btn-success">
+                                {{ $currentQuestion->advance_no_save_btn_text }}
+                            </a>
                         @endif
-
-                    </button>
-
-                    {{-- Show a button that allows you to continue without saving in case you don't want to repeat the action again --}}
-                    @if ($currentQuestion->advance_no_save_btn_text && $submissionComplete === true)
-                        <a href="{{ $nextQuestionUri }}" title="{{ $currentQuestion->advance_no_save_btn_text }}"
-                            class="btn btn-success">
-                            {{ $currentQuestion->advance_no_save_btn_text }}
-                        </a>
-                    @endif
-                </div> <!-- /.col-12 -->
+                    </div> <!-- /.col-12 -->
+                @endif
             </div> <!-- /.row g-3 -->
         </form>
     </div> <!-- /.row -->

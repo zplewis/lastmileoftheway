@@ -21,6 +21,9 @@ class GuideQuestionFieldSeeder extends Seeder
         $serviceTypeId = GuideCategory::where('uri', 'service-type')->first()->id;
         $nextStepsId = GuideCategory::where('uri', 'next-steps')->first()->id;
 
+        // The ID for when the user is planning a service for themselves
+        $idWhenUserIsDeceased = \App\Models\UserType::where('title', 'like', '%self%')->first()->id;
+
         // https://laravel.com/docs/9.x/validation#available-validation-rules
 
         DB::table('guide_question_fields')->insert([
@@ -65,7 +68,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'names')->first()->id,
                 'html_id' => 'deceasedFirstName',
                 'label' => 'Deceased First Name',
-                'validation' => 'required_unless:userIsDeceased,2',
+                'validation' => 'required_unless:userIsDeceased,' . $idWhenUserIsDeceased,
                 'validation_msg' => "The first name of the deceased is required.",
                 'required_type' => 'required_unless'
             ],
@@ -74,7 +77,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'names')->first()->id,
                 'html_id' => 'deceasedLastName',
                 'label' => 'Deceased Last Name',
-                'validation' => 'required_unless:userIsDeceased,2',
+                'validation' => 'required_unless:userIsDeceased,' . $idWhenUserIsDeceased,
                 'validation_msg' => "The last name of the deceased is required.",
                 'required_type' => 'required_unless'
             ],
@@ -92,9 +95,9 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'dates')->first()->id,
                 'html_id' => 'dateDeath',
                 'label' => 'Date of passing away',
-                'validation' => 'required|date:m/d/Y',
+                'validation' => 'required_unless:userIsDeceased,' . $idWhenUserIsDeceased . '|date:m/d/Y',
                 'validation_msg' => "Date of passing away is required.",
-                'required_type' => 'required'
+                'required_type' => 'required_unless'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)

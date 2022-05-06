@@ -219,6 +219,10 @@ to get the required mail connection information.
 Go to <https://lastmileoftheway.com/webmail> to get the SMTP port number. These connection details
 can be added to the `.env` file.
 
+### Generating PDFs
+
+- <https://github.com/barryvdh/laravel-dompdf>
+
 ### Bootstrap 5
 
 You'll need to include Bootstrap 5 in `app.scss` and `app.js` so that the CSS and JS is included
@@ -319,6 +323,7 @@ the Windows host file system.
 
 ### Remaining
 
+- Actually send the email with a PDF containing the summary, attached obituary, and additional questions
 - Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
 - Make it so that people can be added or taken away dynamically for reflections.
 - Make sure all links work

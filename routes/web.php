@@ -52,6 +52,9 @@ Route::get('/mailable/test', function() {
 Route::controller(SubmissionController::class)->group(function () {
     Route::post('/guide/reset/all', 'hardReset');
     Route::get('/guide/{guidecategory}', 'implicitLoad');
+    Route::get('/guide/{guidecategory}/{guidequestion}/preview', 'implicitLoad');
+    Route::get('/guide/{guidecategory}/{guidequestion}/pdf', 'implicitLoad');
+    Route::get('/guide/{guidecategory}/{guidequestion}/pdf/preview', 'implicitLoad');
     Route::get('/guide/{guidecategory}/{guidequestion}', 'implicitLoad');
     Route::post('/guide/{guidecategory}', 'advance');
     Route::post('/guide/{guidecategory}/{guidequestion}', 'advance');

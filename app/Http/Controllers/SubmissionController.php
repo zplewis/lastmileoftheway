@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -214,23 +215,42 @@ class SubmissionController extends Controller
         // Get a collection of all incomplete questions; this will be useful for the Summary page
         $incompleteQuestions = $this->incompleteQuestions($allQuestions);
 
+        $isPreview = $request->is('*/preview');
+        $isPdf = $request->is('*/pdf*');
+
+        // Here is all data that is to be returned with the view
+        $data = [
+            'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
+            'categories' => $allCategories,
+            'currentServiceType' => $serviceType,
+            'currentCategory' => $category,
+            'currentQuestion' => $question,
+            'currentQuestionFields' => $question->guideQuestionFields()->get(),
+            'nextCategory' => $nextCategory,
+            'nextQuestion' => $nextQuestion,
+            'nextQuestionUri' => $nextQuestionUri,
+            'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
+            'incompleteQuestions' => $incompleteQuestions,
+            // Removes the header, footer, navigation, and other extra elements on the page
+            'isPreview' => $isPreview || $isPdf,
+            'submissionComplete' => $serviceType !== null && count($incompleteQuestions) === 0
+        ];
+
+        // Show a PDF in the browser if requested for the current guide question
+        // This is most helpful for the summary
+        if ($isPdf && !$isPreview) {
+            Log::debug(__FUNCTION__ . '(); requesting PDF for /guide/' . $category->uri . '/' . $question->uri . '...');
+            PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'defaultFont' => 'sans-serif']);
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('guide', $data);
+            // To stream the PDF data is to show the PDF in the browser
+            return $pdf->stream();
+        }
+
         // The values included here will be available across all blade templates for /guide pages.
+        // If $isPreview is true, then only the HTML for the guide question is visible
         return view(
             'guide',
-            [
-                'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
-                'categories' => $allCategories,
-                'currentServiceType' => $serviceType,
-                'currentCategory' => $category,
-                'currentQuestion' => $question,
-                'currentQuestionFields' => $question->guideQuestionFields()->get(),
-                'nextCategory' => $nextCategory,
-                'nextQuestion' => $nextQuestion,
-                'nextQuestionUri' => $nextQuestionUri,
-                'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
-                'incompleteQuestions' => $incompleteQuestions,
-                'submissionComplete' => $serviceType !== null && count($incompleteQuestions) === 0
-            ]
+            $data
         );
     }
 
@@ -430,19 +450,6 @@ class SubmissionController extends Controller
         }
 
         return collect($incomplete);
-    }
-
-    private function validateSubmission(
-        \Illuminate\Database\Eloquent\Collection $questions,
-        \App\Models\ServiceType $serviceType = NULL
-    ) {
-        // 0. If no service type is selected, then return false
-        if ($serviceType === null) {
-            Log::debug(__FUNCTION__ . '(); submission validation failed due to no service type selected.');
-            return false;
-        }
-
-        return count($this->incompleteQuestions($questions)) === 0;
     }
 
     /**

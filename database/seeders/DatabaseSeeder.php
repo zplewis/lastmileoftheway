@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
             SongTypeSeeder::class,
             SongSeeder::class,
             ServiceTypeSeeder::class,
+            UserTypeSeeder::class,
             GuideCategorySeeder::class,
             GuideQuestionSeeder::class,
             GuideQuestionFieldSeeder::class,
             ApptTypeSeeder::class,
             GuideQuestionServiceTypeSeeder::class,
             SermonTypeSeeder::class,
-            UserTypeSeeder::class,
         ]);
     }
 }

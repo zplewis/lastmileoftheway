@@ -1,47 +1,15 @@
+
+
 @extends('guide.container')
 
 @section('guide.content')
 
 @include('guide.next-steps.incomplete-warning')
 
-@php
-    // $categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get();
-    // $categoryIds = $categories->pluck('id');
-    // $selectAServiceQuestion = \App\Models\GuideQuestion::where('uri', 'selected-service')->first();
-    // $selectAServiceCategory = \App\Models\GuideCategory::where('id', $selectAServiceQuestion->guide_category_id)->first();
-@endphp
-
-@foreach ($categories =  \App\Models\GuideCategory::whereIn('uri', ['demographics', 'service-type', 'personalize-service'])->get() as $category)
-
-<h3>{{ strcasecmp($category->uri, 'personalize-service') === 0 ? 'Personalized Order of Service' : $category->title }}</h3>
-
-<ul class="list-group">
-
-    <!-- loop through questions for demographic and personalize-service categories, -->
-    @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByServiceType($currentServiceType)->whereIn('guide_category_id', $category->id) as $question)
-    @php
-        $questionCategoryUri = $categories->where('id', $question->guide_category_id)->first()->uri;
-        $isIncomplete = $incompleteQuestions->where('guide_category_id', $question->guide_category_id)->where('id', $question->id)->first() !== null;
-    @endphp
-    <li class="list-group-item">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1 {{ $isIncomplete ? 'text-danger' : '' }}">{{ $question->title }}</h5>
-            <a class="btn btn-primary" title="Edit" href="/guide/{{ $questionCategoryUri }}/{{ $question->uri }}">Edit</a>
-        </div>
-        <div class="mb-1"> <!-- beginning of question content -->
-            @includeIf(
-                'summary.' . $questionCategoryUri . '.' . $question->uri,
-                [
-                    'isUserIsDeceased' => $isUserIsDeceased,
-                    'question' => $question
-                ]
-            )
-        </div> <!-- end of question content -->
-      </li>
-    @endforeach
-
-  </ul>
-
-@endforeach
+@if (request()->is('*/pdf*'))
+    @include('guide.next-steps.summary-pdf')
+@else
+@include('guide.next-steps.summary-details')
+@endif
 
 @endsection
