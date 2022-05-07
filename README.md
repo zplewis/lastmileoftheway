@@ -323,6 +323,11 @@ the Windows host file system.
 
 ### Remaining
 
+- Validation for Opening Hymn not working properly
+    - Make sure that validation is working properly for all three musical selections
+- Validation for reflections is not working properly
+    - If reflections are going to be included, then at least 1 person must be specified; it may
+      have worked because actual values are specified
 - PDF changes
     - Add Last Mile of the Way text with logo at the top
     - Add <h1>Order of Service</h1> with <p>for First Name Last Name</p> under the logo and text

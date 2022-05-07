@@ -12,6 +12,7 @@ class SubmissionController extends Controller
 {
 
     const SERVICE_TYPE_PREFIX = 'service-type-';
+    public const NUM_REFLECTIONS_PERSONS = 'num_reflections_persons';
 
     /**
      * If a service type is specified by the user, get the associated ServiceType object.
@@ -110,6 +111,9 @@ class SubmissionController extends Controller
         session()->flush();
 
         Log::debug(__FUNCTION__ . '(); cleared all session data.');
+
+        // Reset the number of reflections to the minimum
+        session()->put(self::NUM_REFLECTIONS_PERSONS, env('MIN_NUM_REFLECTIONS_PERSONS', 2));
 
         // If we are clearing all of the session data, there is no need to restore anything
         if ($resetAll) {
@@ -340,6 +344,10 @@ class SubmissionController extends Controller
             Log::debug(__FUNCTION__ . '(); advancing to page ' . $nextQuestionUri);
         }
 
+        // If the user requested an increase in the number of people to provide reflections, then
+        // increase the number
+        $this->increaseReflectionsPersons($request, $question);
+
         // If the next question is the summary, then set a session variable
         $this->markSubmissionComplete($nextCategory, $nextQuestion);
 
@@ -350,6 +358,41 @@ class SubmissionController extends Controller
         self::putAllInputToSession($request);
 
         return redirect($nextQuestionUri)->withInput();
+    }
+
+    /**
+     * Increase the number of persons that can give reflections by 1.
+     */
+    private function increaseReflectionsPersons(
+        Request $request,
+        \App\Models\GuideQuestion $question
+    ) {
+        // Stop here if the question is not the reflections question
+        if (strcasecmp($question->uri, 'reflections') !== 0) {
+            Log::debug(__FUNCTION__ . '(); this is not the reflections question, stopping...');
+            return;
+        }
+
+        // Check and make sure there are not more than the maximum number of reflections
+        $numReflections = intval(session(self::NUM_REFLECTIONS_PERSONS));
+        $maxReflections = intval(env('MAX_NUM_REFLECTIONS_PERSONS'));
+
+        if ($numReflections >= $maxReflections) {
+            session()->put(self::NUM_REFLECTIONS_PERSONS, $maxReflections);
+            Log::debug(__FUNCTION__ . '(); already at the maximum number of persons, stopping...');
+            return;
+        }
+
+        // Stop here if the user did not request an increase in reflections
+        if (!$request->has('increaseReflections')) {
+            Log::debug(__FUNCTION__ . '(); request did not include the increaseReflections hidden input, stopping...');
+            return;
+        }
+
+        // Increase the number of reflections by 1
+        session()->put(self::NUM_REFLECTIONS_PERSONS, $numReflections + 1);
+        Log::debug(__FUNCTION__ . '(); number of reflections persons increased to ' .
+        session(self::NUM_REFLECTIONS_PERSONS));
     }
 
     /**

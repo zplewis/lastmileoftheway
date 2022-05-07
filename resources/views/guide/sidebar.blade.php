@@ -14,7 +14,7 @@
 
         @endphp
         <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded {{ $isCurrentSection ? '' : 'collapsed' }}"
+            <button class="btn btn-toggle align-items-center rounded text-start {{ $isCurrentSection ? '' : 'collapsed' }}"
             data-bs-toggle="collapse" data-bs-target="#{{ $sidebarCategory->uri }}-collapse"
             aria-expanded="{{ $isCurrentSection ? 'true' : 'false' }}">
               {{ $sidebarCategory->title }} {{ isset($currentServiceType) && strcasecmp($sidebarCategory->uri, 'personalize-service') === 0 ? '(' . $currentServiceType->title . ')' : '' }}

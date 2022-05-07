@@ -16,4 +16,4 @@
     <p>Scripture: {{ session($htmlId . 'Custom') }}</p>
 @endif
 
-@include('summary.required', ['htmlId' => $htmlId . 'Reader', 'desc' => 'Scripture reader:', 'defaultValue' => 'Undecided'])
+@include('summary.required', ['htmlId' => $htmlId . 'Reader', 'desc' => 'Who will read this scripture?', 'defaultValue' => 'Undecided'])

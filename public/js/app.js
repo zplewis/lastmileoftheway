@@ -5524,6 +5524,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         guideForm.submit();
       }
     });
+  } // Handle increasing the number of reflections persons by 1
+
+
+  var increaseReflectionsBtn = document.getElementById('increaseReflectionsBtn');
+
+  if (increaseReflectionsBtn) {
+    increaseReflectionsBtn.addEventListener('click', function () {
+      // Add a hidden input to indicate that the number of reflections should be increased
+      var questionContentDiv = document.querySelector('div.question-content');
+
+      if (questionContentDiv) {
+        var hiddenInput = document.createElement("input");
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'increaseReflections');
+        hiddenInput.setAttribute('id', 'increaseReflections');
+        hiddenInput.setAttribute('value', 1);
+        questionContentDiv.appendChild(hiddenInput);
+      } // Then submit and refresh the page in a way that the reflection question appears again
+      // with the new reflections person (if not max allowed already)
+
+
+      submitAndRefresh();
+    });
   }
 
   var guideResetForm = document.getElementById('guide-reset-form');
@@ -5532,7 +5555,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     guideResetForm.addEventListener('submit', function (event) {
       // prevent form submission
       event.preventDefault();
-      var submit = confirm('This action will immediately clear your current progress customizing a service and you will start again from the beginning. Is that OK?');
+      var submit = confirm('This action will immediately clear your current progress personalizing a service and you will start again from the beginning. Is that OK?');
 
       if (submit) {
         event.target.submit();

@@ -59,9 +59,6 @@
         take their loved ones the last mile of the way.</p>
     </div>
     <div class="overflow-hidden" style="max-height: 30vh;">
-      <div class="container px-5">
-        <img src="{{ url('images/man-with-questions.jpeg') }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Man with questions photo" width="700" height="500" loading="lazy">
-      </div>
     </div>
   </div>
 @endsection

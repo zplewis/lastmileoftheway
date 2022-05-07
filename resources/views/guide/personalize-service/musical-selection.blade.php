@@ -14,6 +14,12 @@
     $songMinisterPlaceholder = $currentServiceType !== null && strcasecmp($currentServiceType->title, 'graveside') === 0 ? 'RMBC Soloist' : 'RMBC Music Ministry';
 @endphp
 
+{{-- hasMusicalSelection1: NOT required
+    songMinister1: required_unless:hasMusicalSelection1,null
+    songType1: NOT required (although you cannot select a song without this)
+    song1: required if: hasMusicalSelection1 === yes && songCustom1 === null
+    songCustom1: required if: hasMusicalSelection1 === yes && song1 === null --}}
+
 <div class="col-12">
 
     {{-- This select menu lists the song types --}}
@@ -21,7 +27,7 @@
 
 </div>
 
-<div class="col-12">
+<div class="col-12 mb-3">
     {{-- This select menu lists the song types --}}
     @include(
     'guide.select',

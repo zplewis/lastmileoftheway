@@ -283,16 +283,16 @@ class GuideQuestionSeeder extends Seeder
                 modify that part of the service.',
                 'advance_no_save_btn_text' => null
             ],
-            [
-                'guide_category_id' => $nextStepsId,
-                'title' => 'Additional Questions',
-                'uri' => 'questions',
-                'optional' => NULL,
-                'optional_html_id' => NULL,
-                'item_order' => 2,
-                'description' => 'Here are some more questions to ask your pastor or funeral home.',
-                'advance_no_save_btn_text' => null
-            ],
+            // [
+            //     'guide_category_id' => $nextStepsId,
+            //     'title' => 'Additional Questions',
+            //     'uri' => 'questions',
+            //     'optional' => NULL,
+            //     'optional_html_id' => NULL,
+            //     'item_order' => 2,
+            //     'description' => 'Here are some more questions to ask your pastor or funeral home.',
+            //     'advance_no_save_btn_text' => null
+            // ],
             [
                 'guide_category_id' => $nextStepsId,
                 'title' => 'Send Service via Email',

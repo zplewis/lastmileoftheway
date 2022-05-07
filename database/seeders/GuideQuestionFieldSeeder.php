@@ -69,7 +69,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'html_id' => 'deceasedFirstName',
                 'label' => 'Deceased First Name',
                 'validation' => 'required_unless:userIsDeceased,' . $idWhenUserIsDeceased,
-                'validation_msg' => "The first name of the deceased is required.",
+                'validation_msg' => "The first name of the deceased is required if you are planning a service for someone else.",
                 'required_type' => 'required_unless'
             ],
             [
@@ -78,7 +78,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'html_id' => 'deceasedLastName',
                 'label' => 'Deceased Last Name',
                 'validation' => 'required_unless:userIsDeceased,' . $idWhenUserIsDeceased,
-                'validation_msg' => "The last name of the deceased is required.",
+                'validation_msg' => "The last name of the deceased is required if you are planning a service for someone else.",
                 'required_type' => 'required_unless'
             ],
             [
@@ -122,7 +122,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'call-to-worship')->first()->id,
                 'html_id' => 'callToWorshipMinister',
                 'label' => 'Officiating Minister',
-                'validation' => 'required_unless:hasCallToWorship,no',
+                'validation' => 'required_unless:hasCallToWorship,null',
                 'validation_msg' => "Please enter the minister in charge of this part of the service.",
                 'required_type' => 'required_unless'
             ],
@@ -149,33 +149,42 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'musical-selection-1')->first()->id,
                 'html_id' => 'songMinister1',
                 'label' => 'Who is rendering the music?',
-                'validation' => 'required_unless:hasMusicalSelection1,no',
+                'validation' => 'exclude_unless:hasMusicalSelection1,yes|required',
                 'validation_msg' => "The person or group responsible for rendering the music is required.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-1')->first()->id,
                 'html_id' => 'songType1',
                 'label' => 'Select a song type',
-                'validation' => 'required_unless:songCustom1,null',
+                'validation' => 'exclude_unless:hasMusicalSelection1,yes|required_if:songCustom1,null',
                 'validation_msg' => "Please select a song type.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-1')->first()->id,
                 'html_id' => 'song1',
                 'label' => 'Select a song',
-                'validation' => 'required_unless:songCustom1,null',
+                'validation' => 'exclude_unless:hasMusicalSelection1,yes|required_if:songCustom1,null',
                 'validation_msg' => "Please select a song.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'musical-selection-1')->first()->id,
+                'html_id' => 'songCustom1',
+                'label' => 'Select a song',
+                'validation' => 'exclude_unless:hasMusicalSelection1,yes|required_if:song1,null',
+                'validation_msg' => "Please enter a song or select one above.",
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-2')->first()->id,
                 'html_id' => 'hasMusicalSelection2',
-                'label' => 'Include musical selection #2 in this service',
+                'label' => 'Include an opening hymn in this service',
                 'validation' => 'required',
                 'validation_msg' => "Please choose whether you want to include this as part of the this service or not.",
                 'required_type' => 'required'
@@ -185,33 +194,42 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'musical-selection-2')->first()->id,
                 'html_id' => 'songMinister2',
                 'label' => 'Who is rendering the music?',
-                'validation' => 'required_unless:hasMusicalSelection2,no',
+                'validation' => 'exclude_unless:hasMusicalSelection2,yes|required',
                 'validation_msg' => "The person or group responsible for rendering the music is required.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-2')->first()->id,
                 'html_id' => 'songType2',
                 'label' => 'Select a song type',
-                'validation' => 'required_unless:songCustom2,null',
+                'validation' => 'exclude_unless:hasMusicalSelection2,yes|required_if:songCustom2,null',
                 'validation_msg' => "Please select a song type.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-2')->first()->id,
                 'html_id' => 'song2',
                 'label' => 'Select a song',
-                'validation' => 'required_unless:songCustom2,null',
+                'validation' => 'exclude_unless:hasMusicalSelection2,yes|required_if:songCustom2,null',
                 'validation_msg' => "Please select a song.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'musical-selection-2')->first()->id,
+                'html_id' => 'songCustom2',
+                'label' => 'Select a song',
+                'validation' => 'exclude_unless:hasMusicalSelection2,yes|required_if:song2,null',
+                'validation_msg' => "Please enter a song or select one above.",
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-3')->first()->id,
                 'html_id' => 'hasMusicalSelection3',
-                'label' => 'Include musical selection #3 in this service',
+                'label' => 'Include an opening hymn in this service',
                 'validation' => 'required',
                 'validation_msg' => "Please choose whether you want to include this as part of the this service or not.",
                 'required_type' => 'required'
@@ -221,33 +239,42 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'musical-selection-3')->first()->id,
                 'html_id' => 'songMinister3',
                 'label' => 'Who is rendering the music?',
-                'validation' => 'required_unless:hasMusicalSelection3,no',
+                'validation' => 'exclude_unless:hasMusicalSelection3,yes|required',
                 'validation_msg' => "The person or group responsible for rendering the music is required.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-3')->first()->id,
                 'html_id' => 'songType3',
                 'label' => 'Select a song type',
-                'validation' => 'required_unless:songCustom3,null',
+                'validation' => 'exclude_unless:hasMusicalSelection3,yes|required_if:songCustom3,null',
                 'validation_msg' => "Please select a song type.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'musical-selection-3')->first()->id,
                 'html_id' => 'song3',
                 'label' => 'Select a song',
-                'validation' => 'required_unless:songCustom3,null',
+                'validation' => 'exclude_unless:hasMusicalSelection3,yes|required_if:songCustom3,null',
                 'validation_msg' => "Please select a song.",
-                'required_type' => 'required_unless'
+                'required_type' => 'required_if'
+            ],
+            [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
+                ->where('uri', 'musical-selection-3')->first()->id,
+                'html_id' => 'songCustom3',
+                'label' => 'Select a song',
+                'validation' => 'exclude_unless:hasMusicalSelection3,yes|required_if:song3,null',
+                'validation_msg' => "Please enter a song or select one above.",
+                'required_type' => 'required_if'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'old-testament')->first()->id,
                 'html_id' => 'oldTestamentReadingReader',
-                'label' => 'Scripture reader',
+                'label' => 'Who will read the scripture?',
                 'validation' => 'required',
                 'validation_msg' => "Please specify who will read the scripture.",
                 'required_type' => 'required'
@@ -274,7 +301,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'new-testament')->first()->id,
                 'html_id' => 'newTestamentReadingReader',
-                'label' => 'Scripture reader',
+                'label' => 'Who will read the scripture?',
                 'validation' => 'required',
                 'validation_msg' => "Please specify who will read the scripture.",
                 'required_type' => 'required'
@@ -311,7 +338,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'prayer-of-comfort')->first()->id,
                 'html_id' => 'prayerOfComfortPerson',
                 'label' => 'Prayer of Comfort',
-                'validation' => 'required_unless:hasPrayerOfComfort,no',
+                'validation' => 'required_unless:hasPrayerOfComfort,null',
                 'validation_msg' => "Please enter the minister in charge of this part of the service.",
                 'required_type' => 'required_unless'
             ],
@@ -329,7 +356,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'reflections')->first()->id,
                 'html_id' => 'reflectionsPerson1',
                 'label' => 'Person #1',
-                'validation' => 'required_unless:hasReflections,no',
+                'validation' => 'required_unless:hasReflections,null',
                 'validation_msg' => "Please enter at least one person that you would like to give reflections.",
                 'required_type' => 'required_unless'
             ],
@@ -356,7 +383,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'acknowledgements')->first()->id,
                 'html_id' => 'acknowledgementsPerson',
                 'label' => 'Designated person',
-                'validation' => 'required_unless:hasAcknowledgements,no',
+                'validation' => 'required_unless:hasAcknowledgements,null',
                 'validation_msg' => "Please enter at least one person that you would like to handle acknowledgements.",
                 'required_type' => 'required_unless'
             ],
@@ -374,7 +401,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'eulogy')->first()->id,
                 'html_id' => 'eulogyMinister',
                 'label' => 'Sermon Minister',
-                'validation' => 'required_unless:hasEulogy,no',
+                'validation' => 'required_unless:hasEulogy,null',
                 'validation_msg' => "Please enter at least one person that you would like to handle the eulogy or words of comfort.",
                 'required_type' => 'required_unless'
             ],
@@ -383,7 +410,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'eulogy')->first()->id,
                 'html_id' => 'eulogyType',
                 'label' => 'Select a Sermon / Eulogy type',
-                'validation' => 'required_unless:hasEulogy,no',
+                'validation' => 'required_unless:hasEulogy,null',
                 'validation_msg' => "Please select whether the minister should provide a eulogy or words of comfort for the deceased.",
                 'required_type' => 'required_unless'
             ],
@@ -428,7 +455,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'burial')->first()->id,
                 'html_id' => 'isBurialAfterService',
                 'label' => 'Burial is immediately following the service?',
-                'validation' => 'required_unless:hasBurial,no',
+                'validation' => 'required_unless:hasBurial,null',
                 'validation_msg' => "Please choose whether you want the burial to occur immediately after service.",
                 'required_type' => 'required_unless'
             ],
