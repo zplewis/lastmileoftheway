@@ -37,7 +37,7 @@
 </div>
 
 <div class="col-12">
-    @include('guide.field', ['id' => $inputId . 'Reader', 'inputType' => 'text', 'labelText' => 'Who will read this scripture?', 'placeholder' => 'Reader'])
+    @include('guide.field', ['id' => $inputId . 'Reader', 'inputType' => 'text', 'labelText' => 'Who will read this scripture?', 'placeholder' => null])
 </div>
 
 @endsection

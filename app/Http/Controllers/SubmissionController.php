@@ -327,12 +327,6 @@ class SubmissionController extends Controller
         // Get the URI from the next category and question
         $nextQuestionUri = $nextQuestion ? '/guide/' . $nextCategory->uri . '/' . $nextQuestion->uri : null;
 
-        // Now that we figured out the next possible question, now attempt to validate the page
-        Log::debug(__FUNCTION__ . '(); about to validate the page...');
-        // Validate and store the form submission; if validation fails, then an exception is thrown
-        // and the code never progresses past this point
-        $validated = $this->validatePage($request, $question);
-
         Log::debug(__FUNCTION__ . '(); validation succeeded.');
 
         // If the next-page input is nothing, then stay on the current page
@@ -347,6 +341,12 @@ class SubmissionController extends Controller
         // If the user requested an increase in the number of people to provide reflections, then
         // increase the number
         $this->increaseReflectionsPersons($request, $question);
+
+         // Now that we figured out the next possible question, now attempt to validate the page
+         Log::debug(__FUNCTION__ . '(); about to validate the page...');
+         // Validate and store the form submission; if validation fails, then an exception is thrown
+         // and the code never progresses past this point
+         $validated = $this->validatePage($request, $question);
 
         // If the next question is the summary, then set a session variable
         $this->markSubmissionComplete($nextCategory, $nextQuestion);

@@ -123,7 +123,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'html_id' => 'callToWorshipMinister',
                 'label' => 'Officiating Minister',
                 'validation' => 'required_unless:hasCallToWorship,null',
-                'validation_msg' => "Please enter the minister in charge of this part of the service.",
+                'validation_msg' => "Please enter the minister responsible for this part of the service.",
                 'required_type' => 'required_unless'
             ],
             [
@@ -132,7 +132,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'html_id' => 'invocationMinister',
                 'label' => 'Invocation',
                 'validation' => 'required',
-                'validation_msg' => "Please enter the minister in charge of this part of the service.",
+                'validation_msg' => "Please enter the minister responsible for this part of the service.",
                 'required_type' => 'required'
             ],
             [
@@ -339,7 +339,7 @@ class GuideQuestionFieldSeeder extends Seeder
                 'html_id' => 'prayerOfComfortPerson',
                 'label' => 'Prayer of Comfort',
                 'validation' => 'required_unless:hasPrayerOfComfort,null',
-                'validation_msg' => "Please enter the minister in charge of this part of the service.",
+                'validation_msg' => "Please enter the minister responsible for this part of the service.",
                 'required_type' => 'required_unless'
             ],
             [
