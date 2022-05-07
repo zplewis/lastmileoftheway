@@ -2,7 +2,7 @@
 
 <h3>{{ strcasecmp($category->uri, 'personalize-service') === 0 ? 'Personalized Order of Service' : $category->title }}</h3>
 
-<ul class="list-group">
+<ul class="list-group mb-4">
 
     <!-- loop through questions for demographic and personalize-service categories, -->
     @foreach (\App\Http\Controllers\SubmissionController::getQuestionsByServiceType($currentServiceType)->whereIn('guide_category_id', $category->id) as $question)

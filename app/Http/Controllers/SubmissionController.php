@@ -217,7 +217,7 @@ class SubmissionController extends Controller
         }
 
         // Get a collection of all incomplete questions; this will be useful for the Summary page
-        $incompleteQuestions = $this->incompleteQuestions($allQuestions);
+        $incompleteQuestions = $this->incompleteQuestions($allQuestions, $question);
 
         $isPreview = $request->is('*/preview');
         $isPdf = $request->is('*/pdf*');
@@ -259,8 +259,9 @@ class SubmissionController extends Controller
     }
 
     /**
-     * If the user selected a service and made it to the summary, add an item to the session
-     * that shows this submission is complete.
+     * If the user selected a service and the next question is the summary page,
+     * add an item to the session that shows this submission is complete. Note
+     * that validation may still be needed at this point, but hopefully not much.
      */
     private function markSubmissionComplete(
         \App\Models\GuideCategory $category,
@@ -269,7 +270,7 @@ class SubmissionController extends Controller
         // Do nothing if the next question is not the summary
         if (strcasecmp($category->uri, 'next-steps') !== 0 ||
         $question->guide_category_id !== $category->id ||
-        $question->item_order !== 1) {
+        strcasecmp($question->uri, 'summary') !== 0) {
             return;
         }
 
@@ -450,7 +451,7 @@ class SubmissionController extends Controller
      */
     private function incompleteQuestions(
         \Illuminate\Database\Eloquent\Collection $questions,
-        \App\Models\ServiceType $serviceType = NULL
+        \App\Models\GuideQuestion $currentQuestion
     ) {
         $incomplete = [];
 
@@ -461,6 +462,13 @@ class SubmissionController extends Controller
         foreach ($questions as $question) {
 
             Log::debug(__FUNCTION__ . '(); question title: ' . $question->title);
+
+            // Stop if we are about to validate the current guide question. The array of questions are
+            // in order and it is inaccurate to validate future questions
+            if ($question->id === $currentQuestion->id) {
+                Log::debug(__FUNCTION__ . '(); stopping after evaluating the current question: ' . $question->uri);
+                break;
+            }
 
             // 1. Get the validation rules for the current question.
             // https://laravel.com/docs/9.x/collections#method-mapwithkeys
@@ -485,7 +493,8 @@ class SubmissionController extends Controller
 
                 if (!session()->has($validation->html_id) || !$value) {
                     Log::debug(__FUNCTION__ . '(); submission validation - required value for ' .
-                    'question ' . $question->title . ' missing: ' . $validation->label);
+                    'question ' . $question->title . ' missing: ' . $validation->label .
+                    '; missing required html_id: ' . $validation->html_id);
                     $incomplete[] = $question;
                     break;
                 }

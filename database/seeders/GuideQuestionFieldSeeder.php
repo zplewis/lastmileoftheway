@@ -374,16 +374,16 @@ class GuideQuestionFieldSeeder extends Seeder
                 ->where('uri', 'acknowledgements')->first()->id,
                 'html_id' => 'obituaryReading',
                 'label' => 'Include a reading of the obituary',
-                'validation' => 'required',
+                'validation' => 'exclude_unless:hasAcknowledgements,yes|required_unless:hasAcknowledgements,null',
                 'validation_msg' => "Please choose whether you want to include this as part of the this service or not.",
-                'required_type' => 'required'
+                'required_type' => 'required_unless'
             ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'acknowledgements')->first()->id,
                 'html_id' => 'acknowledgementsPerson',
                 'label' => 'Designated person',
-                'validation' => 'required_unless:hasAcknowledgements,null',
+                'validation' => 'exclude_unless:hasAcknowledgements,yes|required_unless:hasAcknowledgements,null',
                 'validation_msg' => "Please enter at least one person that you would like to handle acknowledgements.",
                 'required_type' => 'required_unless'
             ],
