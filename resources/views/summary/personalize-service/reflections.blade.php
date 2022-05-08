@@ -4,8 +4,8 @@
 
 <p>People to give reflections:</p>
 <ul>
-@foreach (range(1, env('MAX_NUM_REFLECTIONS_PERSONS', 5)) as $index)
-    @continue(!session('reflectionsPerson' . $index))
+@foreach (range(1, session(\App\Http\Controllers\SubmissionController::NUM_REFLECTIONS_PERSONS, 2)) as $index)
+    @continue(!session('reflectionsPerson' . $index) || trim(session('reflectionsPerson' . $index)) === '')
 
     <li>{{ session('reflectionsPerson' . $index) }}</li>
 @endforeach

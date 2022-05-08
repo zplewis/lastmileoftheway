@@ -8,7 +8,14 @@
         @php
             $songModel = \App\Models\Song::find(session('song' . ($index ?? '1')));
         @endphp
-        <p>Song: <a href="{{ $songModel->youtube_url }} target="_blank">{{ $songModel->artist . ' - ' . $songModel->name }}</a></p>
+        <p>Song:
+            <a href="{{ $songModel->youtube_url }}" target="_blank">
+            @if($songModel->artist) {{ $songModel->artist . ' - ' }} @endif
+            {{ $songModel->name }}
+            </a>
+        </p>
+    @else
+        <p>Song: {{ session('songCustom' . ($index ?? '1')) }}</p>
     @endif
 
     @include('summary.required', ['htmlId' => 'songMinister' . ($index ?? '1'), 'desc' => 'Who is rendering the music?', 'defaultValue' => 'Undecided'])

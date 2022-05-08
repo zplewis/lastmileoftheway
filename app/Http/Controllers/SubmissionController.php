@@ -565,6 +565,99 @@ class SubmissionController extends Controller
 
     public function setServiceExample(Request $request, \App\Models\ServiceType $serviceType) {
         // 1. Set the service type based on the specified service type.
+        $this->setSelectedServiceType($serviceType->title);
 
+        $bibleVersion = \App\Models\BibleVersions::where('acronymn', 'NRSV')->first();
+        $testament = \App\Models\Testament::where('name', 'new')->first();
+        $scriptures = \App\Models\Scriptures::whereHas('bible_versions', function ($query) use ($bibleVersion) {
+            $query->where('id', $bibleVersion->id);
+        })
+        ->whereHas('bible_book.testament', function ($query) use ($testament) {
+            $query->where('name', $testament->name);
+        })->orderBy('title')->get();
+
+        $fields = [
+            'userFirstName' => 'patrick',
+            'userLastName' => 'lewis',
+            'userEmail' => 'tap52384@gmail.com',
+            'userIsDeceased' => \App\Models\UserType::where('title', 'like', '%self%')->first()->id,
+            'deceasedPreferredName' => 'cadillacpat',
+            'deceasedFirstName' => 'someother',
+            'deceasedLastName' => 'name',
+
+            'dateBirth' => '1984-05-23',
+            'dateDeath' => '2090-01-01',
+            'dateService' => '2090-01-02',
+
+            'serviceLocation' => 'Some church',
+            'viewingLocation' => 'Some viewing location',
+
+            'hasProcessional' => 'no',
+            'hasCallToWorship' => 'yes',
+            'callToWorshipMinister' => 'Pastor Thomas R. Farrow, Jr.',
+
+            'invocationMinister' => 'Some minister for the invocation',
+
+            'hasMusicalSelection1' => 'yes',
+            'songType1' => \App\Models\SongType::where('name', 'Solo')->first()->id,
+            'song1' => \App\Models\Song::find(30)->first()->id,
+            'songMinister1' => 'Julia',
+
+            'oldTestamentReadingCustom' => 'Psalm 23',
+            'oldTestamentReadingReader' => 'A minister of my choosing',
+
+            'newTestamentReading' => $scriptures->first()->id,
+            'newTestamentReadingReader' => 'Haven\'t decided yet',
+
+            'hasPrayerOfComfort' => 'yes',
+            'prayerOfComfortPerson' => 'Some minister will handle this prayer',
+
+            // What happens when you include both?
+            'hasMusicalSelection2' => 'yes',
+            'songType2' => \App\Models\SongType::where('name', 'Selection')->first()->id,
+            'song2' => \App\Models\Song::where('name', 'Total Praise')->first()->id,
+            'songCustom2' => 'Some custom song also specified',
+            'songMinister2' => 'Brie',
+
+            'hasReflections' => 'yes',
+            self::NUM_REFLECTIONS_PERSONS => '5',
+            'reflectionsPerson1' => 'a person 1',
+            'reflectionsPerson2' => 'a person 2',
+            'reflectionsPerson3' => null,
+            'reflectionsPerson4' => 'a person 4',
+            'reflectionsPerson5' => 'a person 5',
+
+            'hasAcknowledgements' => 'yes',
+            'obituaryReading' => 'yes',
+            'acknowledgementsPerson' => 'a cousin could do this',
+
+            // This should be omitted
+            'hasMusicalSelection3' => 'no',
+            'songCustom3' => 'The Blessing',
+
+            'hasEulogy' => 'yes',
+            'eulogyMinister' => 'Pastor Thomas R. Farrow, Jr.',
+            'eulogyType' => \App\Models\SermonType::where('title', 'Eulogy')->first()->id,
+
+            'hasMorticiansBrief' => 'yes',
+
+            'hasRecessional' => 'yes',
+
+            'hasCommittal' => 'yes',
+
+            // If the burial is not immediately after service, perhaps a time needs to be provided?
+            'hasBurial' => 'yes',
+            'isBurialIsAfterService' => 'no',
+            'burialLocation' => 'At the church, I guess',
+
+            // If a service has a committal and benediction, it wouldn't have this too
+            'hasBenediction' => 'yes',
+        ];
+
+        foreach ($fields as $key => $value) {
+            session()->put($key, $value);
+        }
+
+        return redirect('/guide/getting-started');
     }
 }

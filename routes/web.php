@@ -50,7 +50,9 @@ Route::get('/mailable/test', function() {
 
 // This worked due to explicit binding, since implicit binding didn't seem to do it.
 Route::controller(SubmissionController::class)->group(function () {
+    Route::get('/guide', 'setServiceTypeByUrl');
     Route::post('/guide/reset/all', 'hardReset');
+    Route::get('/guide/examples/{serviceType}', 'setServiceExample');
     Route::get('/guide/{guidecategory}', 'implicitLoad');
     Route::get('/guide/{guidecategory}/{guidequestion}/preview', 'implicitLoad');
     Route::get('/guide/{guidecategory}/{guidequestion}/pdf', 'implicitLoad');
@@ -58,8 +60,6 @@ Route::controller(SubmissionController::class)->group(function () {
     Route::get('/guide/{guidecategory}/{guidequestion}', 'implicitLoad');
     Route::post('/guide/{guidecategory}', 'advance');
     Route::post('/guide/{guidecategory}/{guidequestion}', 'advance');
-    Route::get('/guide', 'setServiceTypeByUrl');
-    Route::get('/guide/examples/{serviceType}', 'setServiceExample');
 });
 
 
