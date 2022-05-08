@@ -57,6 +57,9 @@
                                 class="btn btn-success">
                                 {{ $currentQuestion->advance_no_save_btn_text }}
                             </a>
+                            <a href="/guide/next-steps/summary/pdf" title="View Summary PDF" class="btn btn-info">
+                                Preview Order of Service as PDF
+                            </a>
                         @endif
                     </div> <!-- /.col-12 -->
                 @endif

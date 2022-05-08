@@ -34,6 +34,20 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    private static function setSelectedServiceType(string $serviceType = null) {
+        if (!$serviceType) {
+            return;
+        }
+
+        $model = \App\Models\ServiceType::where('title', ucwords($serviceType))->first();
+
+        if (!$model) {
+            return;
+        }
+
+        session()->put('service-type-selection', 'service-type-' . strtolower($model->title));
+    }
+
     /**
      * Returns a Collection object of GuideQuestion objects filtered by service type, if any.
      */
@@ -464,7 +478,7 @@ class SubmissionController extends Controller
             Log::debug(__FUNCTION__ . '(); question title: ' . $question->title);
 
             // Stop if we are about to validate the current guide question. The array of questions are
-            // in order and it is inaccurate to validate future questions
+            // in order and it is inaccurate to validate the current and future questions
             if ($question->id === $currentQuestion->id) {
                 Log::debug(__FUNCTION__ . '(); stopping after evaluating the current question: ' . $question->uri);
                 break;
@@ -547,5 +561,10 @@ class SubmissionController extends Controller
         );
 
         return $request->validate($validationRules, $customMessages);
+    }
+
+    public function setServiceExample(Request $request, \App\Models\ServiceType $serviceType) {
+        // 1. Set the service type based on the specified service type.
+
     }
 }

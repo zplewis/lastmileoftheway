@@ -59,6 +59,7 @@ Route::controller(SubmissionController::class)->group(function () {
     Route::post('/guide/{guidecategory}', 'advance');
     Route::post('/guide/{guidecategory}/{guidequestion}', 'advance');
     Route::get('/guide', 'setServiceTypeByUrl');
+    Route::get('/guide/examples/{serviceType}', 'setServiceExample');
 });
 
 

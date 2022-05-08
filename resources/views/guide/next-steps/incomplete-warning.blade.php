@@ -2,7 +2,7 @@
 @if (!$submissionComplete)
     <div class="alert alert-danger" role="alert">
         @if(!request()->is('guide/next-steps/summary'))
-            Your order of service is incomplete. Please <a href="/guide/summary">click here</a>
+            Your order of service is incomplete. Please <a href="/guide/next-steps/summary">click here</a>
             to review your selections.
         @elseif ($currentServiceType === null)
             Your order of service is incomplete. Please <a href="/guide/service-type">click here</a>

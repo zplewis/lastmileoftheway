@@ -11,6 +11,8 @@ class GuideQuestion extends Model
 
     /**
      * Get the route key for the model.
+     * This setting determines what column is associated with the URL path "guidecategory".
+     * That is configured in RouteServiceProvider.php
      *
      * @return string
      */

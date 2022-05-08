@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::model('guidequestion', \App\Models\GuideQuestion::class);
 
+        Route::model('servicetype', \App\Models\ServiceType::class);
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
