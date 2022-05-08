@@ -100,6 +100,15 @@ class GuideQuestionFieldSeeder extends Seeder
                 'required_type' => 'required_unless'
             ],
             [
+                'guide_question_id' => GuideQuestion::where('guide_category_id', $demographicsId)
+                ->where('uri', 'dates')->first()->id,
+                'html_id' => 'dateService',
+                'label' => 'Desired service date and time (MM/DD/YYYY)',
+                'validation' => 'date:m/d/YTH:i',
+                'validation_msg' => "Desired service date must have the format MM/DD/YYYY HH:MM AM.",
+                'required_type' => null
+            ],
+            [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $personalizeServiceId)
                 ->where('uri', 'processional')->first()->id,
                 'html_id' => 'hasProcessional',

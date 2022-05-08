@@ -10,7 +10,7 @@
         @endphp
         <p>Song:
             <a href="{{ $songModel->youtube_url }}" target="_blank">
-            @if($songModel->artist) {{ $songModel->artist . ' - ' }} @endif
+            @if($songModel->artist) {{ $songModel->artist . ' - ' }}@endif
             {{ $songModel->name }}
             </a>
         </p>

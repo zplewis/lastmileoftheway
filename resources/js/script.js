@@ -245,6 +245,30 @@
         toggleQuestionContent();
     }
 
+    const dateService = document.getElementById('dateService');
+    const questionContentDiv = document.querySelector('div.question-content');
+
+    if (dateService) {
+        // Check and see if datetime-local is supported. Otherwise, change the type to date
+        // and add a new
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
+        var testInput = document.createElement('input');
+        var value = "2017-06-01T08:30";
+        testInput.setAttribute('type', 'datetime-local');
+        testInput.setAttribute('value', value);
+
+        if (testInput.value !== value && questionContentDiv) {
+            console.log('input[type="datetime-local"] is not supported by this browser. Showing replacements...');
+
+           // hide the dateService element
+           dateService.classList.add('d-none');
+
+           // show the hidden date and time elements
+           document.querySelector('#dateServiceDate').classList.remove('d-none');
+           document.querySelector('#dateServiceTime').classList.remove('d-none');
+        }
+    }
+
 
 // confirms whether the user is sure if they want to complete the given action
 } )( window.utilities = window.utilities || {},

@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 class SubmissionController extends Controller
@@ -309,6 +310,81 @@ class SubmissionController extends Controller
     }
 
     /**
+     *
+     */
+    private function handleDates(Request $request, \App\Models\GuideQuestion $question) {
+
+    }
+
+    /**
+     * Default to the preferred name of the deceased as the full name if one is not specified.
+     */
+    private function handlePreferredName(Request $request, \App\Models\GuideQuestion $question) {
+        // Stop here if this is not the names question
+        if (strcasecmp($question->uri, 'names') !== 0) {
+            return;
+        }
+
+        // Set the user preferred name, which could be useful later
+        $request->merge(
+            [
+                'userFullName' => $request->input('userFirstName') . ' ' . $request->input('userLastName')
+            ]
+        );
+
+        // Is the user the deceased? If so, then fill in their first and last name as the deceased
+        $isUserIsDeceased = strcasecmp(
+            \App\Models\UserType::where('title', 'like', '%self%')->first()->id,
+            $request->input('userIsDeceased', old('userIsDeceased'))
+        ) === 0;
+
+        // Add the user's first and last name as the deceased first and last name
+        if ($isUserIsDeceased === true) {
+            $request->merge(
+                [
+                    'deceasedFirstName' => $request->input('userFirstName'),
+                    'deceasedLastName' => $request->input('userLastName')
+                ]
+            );
+        }
+
+        // No need to add the preferred name if one is provided
+        if ($request->has('deceasedPreferredName') && !empty($request->input('deceasedPreferredName'))) {
+            return;
+        }
+
+        // Determine the preferred name based on whether the deceased is the user or not
+        $preferredName = $request->input('deceasedFirstName') . ' ' . $request->input('deceasedLastName');
+
+        if ($isUserIsDeceased === true) {
+            $preferredName = $request->input('userFirstName') . ' ' . $request->input('userLastName');
+        }
+
+        $preferredName = trim($preferredName);
+
+        if (empty($preferredName)) {
+            $preferredName = null;
+        }
+
+        $request->merge(['deceasedPreferredName' => $preferredName]);
+    }
+
+    private function sendEmail(Request $request, \App\Models\GuideQuestion $question) {
+        // Do nothing if the question is not send-email
+        if (strcasecmp($question->uri, 'send-email') !== 0) {
+            return;
+        }
+
+        // Add attachment if user uploaded one
+
+        // Add PDF of order of service to the email
+
+        // Send the email
+        // Mail::to('tap52384@gmail.com')
+        // ->send(new \App\Mail\SubmissionSent($orderOfServicePdf = ));
+    }
+
+    /**
      * Replacement for store() that advances the guide forward or stays on the same page as needed.
      */
     public function advance(Request $request, \App\Models\GuideCategory $category, \App\Models\GuideQuestion $question = NULL) {
@@ -352,11 +428,14 @@ class SubmissionController extends Controller
         // increase the number
         $this->increaseReflectionsPersons($request, $question);
 
-         // Now that we figured out the next possible question, now attempt to validate the page
-         Log::debug(__FUNCTION__ . '(); about to validate the page...');
-         // Validate and store the form submission; if validation fails, then an exception is thrown
-         // and the code never progresses past this point
-         $validated = $this->validatePage($request, $question);
+        // Add a preferred name if one is not provided
+        $this->handlePreferredName($request, $question);
+
+        // Now that we figured out the next possible question, now attempt to validate the page
+        Log::debug(__FUNCTION__ . '(); about to validate the page...');
+        // Validate and store the form submission; if validation fails, then an exception is thrown
+        // and the code never progresses past this point
+        $validated = $this->validatePage($request, $question);
 
         // If the next question is the summary, then set a session variable
         $this->markSubmissionComplete($nextCategory, $nextQuestion);
@@ -579,13 +658,13 @@ class SubmissionController extends Controller
             'userLastName' => 'lewis',
             'userEmail' => 'tap52384@gmail.com',
             'userIsDeceased' => \App\Models\UserType::where('title', 'like', '%self%')->first()->id,
-            'deceasedPreferredName' => 'cadillacpat',
-            'deceasedFirstName' => 'someother',
-            'deceasedLastName' => 'name',
+            // 'deceasedPreferredName' => 'cadillacpat',
+            // 'deceasedFirstName' => 'someother',
+            // 'deceasedLastName' => 'name',
 
             'dateBirth' => '1984-05-23',
             'dateDeath' => '2090-01-01',
-            'dateService' => '2090-01-02',
+            'dateService' => '2090-01-02T10:00',
 
             'serviceLocation' => 'Some church',
             'viewingLocation' => 'Some viewing location',

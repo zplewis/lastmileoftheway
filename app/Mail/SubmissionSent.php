@@ -11,14 +11,19 @@ class SubmissionSent extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $orderOfServicePdf;
+
+    private $userAttachment;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($orderOfServicePdf = null, $userAttachment = null)
     {
-        //
+        $this->orderOfServicePdf = $orderOfServicePdf;
+        $this->userAttachment = $userAttachment;
     }
 
     /**
@@ -28,6 +33,10 @@ class SubmissionSent extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.submissionsent');
+        return $this->view('emails.submissionsent')
+                    ->attachData($this->orderOfServicePdf, 'order-of-service.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
+        ;
     }
 }
