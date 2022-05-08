@@ -54,10 +54,10 @@
                         {{-- Show a button that allows you to continue without saving in case you don't want to repeat the action again --}}
                         @if ($currentQuestion->advance_no_save_btn_text && $submissionComplete === true)
                             <a href="{{ $nextQuestionUri }}" title="{{ $currentQuestion->advance_no_save_btn_text }}"
-                                class="btn btn-success">
+                                class="btn btn-primary">
                                 {{ $currentQuestion->advance_no_save_btn_text }}
                             </a>
-                            <a href="/guide/next-steps/summary/pdf" title="View Summary PDF" class="btn btn-info">
+                            <a href="/guide/next-steps/summary/pdf" title="View Summary PDF" class="btn btn-primary" target="_blank">
                                 Preview Order of Service as PDF
                             </a>
                         @endif

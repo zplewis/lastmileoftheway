@@ -34,6 +34,9 @@ class SubmissionController extends Controller
         return \App\Models\ServiceType::where('title', $title)->first();
     }
 
+    /**
+     * Sets the session service type from the name of a service (funeral, graveside, memorial).
+     */
     private static function setSelectedServiceType(string $serviceType = null) {
         if (!$serviceType) {
             return;
@@ -75,15 +78,7 @@ class SubmissionController extends Controller
     {
         // If a service is passed to /guide and it is a valid service type, then
         // go ahead and set the service type
-        if ($request->has('service')) {
-            $serviceType = \App\Models\ServiceType::where('title', ucwords($request->input('service')))->first();
-
-            if ($serviceType !== null) {
-                // Save the service type to the session
-                $request->merge([self::SERVICE_TYPE_PREFIX . 'selection' => self::SERVICE_TYPE_PREFIX . strtolower($serviceType->title)]);
-                self::putAllInputToSession($request);
-            }
-        }
+        $this->setSelectedServiceType($request->input('service'));
 
         return redirect('/guide/getting-started');
     }
@@ -563,6 +558,9 @@ class SubmissionController extends Controller
         return $request->validate($validationRules, $customMessages);
     }
 
+    /**
+     * Quickly creates an order of service for testing purposes.
+     */
     public function setServiceExample(Request $request, \App\Models\ServiceType $serviceType) {
         // 1. Set the service type based on the specified service type.
         $this->setSelectedServiceType($serviceType->title);
