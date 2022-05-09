@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
 
-        @if (request()->is('*/pdf*'))
+        @if (request()->is('*/pdf*') || (isset($isPdf) && $isPdf === true))
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         @else
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

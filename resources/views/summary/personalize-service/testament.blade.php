@@ -5,7 +5,7 @@
 @if (!session($htmlId) && !session( $htmlId . 'Custom'))
     <p class="text-danger">No scripture reading has been chosen.</p>
 @elseif ($scripture = \App\Models\Scriptures::find(session($htmlId)))
-    @if (request()->is('*/pdf*'))
+    @if (request()->is('*/pdf*') || $isPdf)
         <p>{{ $scripture->verses ?? '' }}</p>
         <figcaption class="blockquote-footer">
             <span class="scripture-location">{{ $scripture->location ?? '' }}</span>

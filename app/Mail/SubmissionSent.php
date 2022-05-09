@@ -17,7 +17,8 @@ class SubmissionSent extends Mailable
 
     /**
      * Create a new message instance.
-     *
+     * @param $orderOfServicePdf
+     * @param $userAttachment
      * @return void
      */
     public function __construct($orderOfServicePdf = null, $userAttachment = null)
@@ -33,10 +34,12 @@ class SubmissionSent extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.submissionsent')
+        $build = $this->view('emails.submissionsent')
+                    ->subject('Order of Service - ' . session('deceasedPreferredName'))
                     ->attachData($this->orderOfServicePdf, 'order-of-service.pdf', [
-                        'mime' => 'application/pdf',
-                    ]);
-        ;
+            'mime' => 'application/pdf',
+        ]);
+
+        return $build;
     }
 }

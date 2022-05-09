@@ -513,42 +513,42 @@ class GuideQuestionFieldSeeder extends Seeder
                 'validation_msg' => null,
                 'required_type' => 'required'
             ],
-            [
-                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
-                ->where('uri', 'send-email')->first()->id,
-                'html_id' => 'recipientEmail2',
-                'label' => 'Email address #2',
-                'validation' => 'email',
-                'validation_msg' => null,
-                'required_type' => null
-            ],
-            [
-                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
-                ->where('uri', 'send-email')->first()->id,
-                'html_id' => 'recipientEmail3',
-                'label' => 'Email address #3',
-                'validation' => 'email',
-                'validation_msg' => null,
-                'required_type' => null
-            ],
-            [
-                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
-                ->where('uri', 'send-email')->first()->id,
-                'html_id' => 'recipientEmail4',
-                'label' => 'Email address #4',
-                'validation' => 'email',
-                'validation_msg' => null,
-                'required_type' => null
-            ],
-            [
-                'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
-                ->where('uri', 'send-email')->first()->id,
-                'html_id' => 'recipientEmail5',
-                'label' => 'Email address #5',
-                'validation' => 'email',
-                'validation_msg' => null,
-                'required_type' => null
-            ],
+            // [
+            //     'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+            //     ->where('uri', 'send-email')->first()->id,
+            //     'html_id' => 'recipientEmail2',
+            //     'label' => 'Email address #2',
+            //     'validation' => 'sometimes|email',
+            //     'validation_msg' => null,
+            //     'required_type' => null
+            // ],
+            // [
+            //     'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+            //     ->where('uri', 'send-email')->first()->id,
+            //     'html_id' => 'recipientEmail3',
+            //     'label' => 'Email address #3',
+            //     'validation' => 'email',
+            //     'validation_msg' => null,
+            //     'required_type' => null
+            // ],
+            // [
+            //     'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+            //     ->where('uri', 'send-email')->first()->id,
+            //     'html_id' => 'recipientEmail4',
+            //     'label' => 'Email address #4',
+            //     'validation' => 'email',
+            //     'validation_msg' => null,
+            //     'required_type' => null
+            // ],
+            // [
+            //     'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
+            //     ->where('uri', 'send-email')->first()->id,
+            //     'html_id' => 'recipientEmail5',
+            //     'label' => 'Email address #5',
+            //     'validation' => 'email',
+            //     'validation_msg' => null,
+            //     'required_type' => null
+            // ],
             [
                 'guide_question_id' => GuideQuestion::where('guide_category_id', $nextStepsId)
                 ->where('uri', 'send-email')->first()->id,

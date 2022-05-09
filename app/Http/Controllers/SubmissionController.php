@@ -191,6 +191,49 @@ class SubmissionController extends Controller
     }
 
     /**
+     * Retrieve all data necessary for /guide Blade templates.
+     * @param $allQuestions Get all questions based on current selected service type (if any, get all questions)
+     */
+    private function getData(
+        Request $request,
+        \Illuminate\Database\Eloquent\Collection $allQuestions,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question
+    ) {
+
+        // Get current selected service type
+        $serviceType = self::getSelectedServiceType();
+
+        // Get a collection of all incomplete questions; this will be useful for the Summary page
+        $incompleteQuestions = $this->incompleteQuestions($allQuestions, $question);
+
+        $data = [
+            'allQuestions' => $allQuestions,
+            'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
+            'categories' => \App\Models\GuideCategory::orderBy('item_order')->get(),
+            'currentCategory' => $category,
+            'currentServiceType' => $serviceType,
+            'currentQuestion' => $question,
+            'currentQuestionFields' => $question->guideQuestionFields()->get(),
+            'incompleteQuestions' => $incompleteQuestions,
+            'isPdf' => $request->is('*/pdf*'),
+            // Removes the header, footer, navigation, and other extra elements on the page
+            'isPreview' => $request->is('*/preview') || $request->is('*/pdf*'),
+            'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
+            'nextQuestion' => $this->getNextGuideQuestion2($allQuestions, $category, $question, $serviceType),
+            'submissionComplete' => $serviceType !== null && count($incompleteQuestions) === 0
+        ];
+
+        // The category of the next question
+        $data['nextCategory'] = $data['nextQuestion'] ? $data['nextQuestion']->guideCategory()->first() : null;
+
+        // Get the URI from the next category and question
+        $data['nextQuestionUri'] = $data['nextQuestion'] ? '/guide/' . $data['nextCategory']->uri . '/' . $data['nextQuestion']->uri : null;
+
+        return $data;
+    }
+
+    /**
      * This function fixes issues with load():
      * Explicit model loading now removes the need to loop to create routes for the guide
      * Detecting the next question is done more reasonably given a sorted list of all questions.
@@ -233,31 +276,19 @@ class SubmissionController extends Controller
         $isPdf = $request->is('*/pdf*');
 
         // Here is all data that is to be returned with the view
-        $data = [
-            'bible_version' => \App\Models\BibleVersions::where('acronymn', 'NRSV')->first(),
-            'categories' => $allCategories,
-            'currentServiceType' => $serviceType,
-            'currentCategory' => $category,
-            'currentQuestion' => $question,
-            'currentQuestionFields' => $question->guideQuestionFields()->get(),
-            'nextCategory' => $nextCategory,
-            'nextQuestion' => $nextQuestion,
-            'nextQuestionUri' => $nextQuestionUri,
-            'isUserIsDeceased' => strcasecmp(\App\Models\UserType::where('title', 'like', '%self%')->first()->id, old('userIsDeceased', session('userIsDeceased'))) === 0,
-            'incompleteQuestions' => $incompleteQuestions,
-            // Removes the header, footer, navigation, and other extra elements on the page
-            'isPreview' => $isPreview || $isPdf,
-            'submissionComplete' => $serviceType !== null && count($incompleteQuestions) === 0
-        ];
+        $data = $this->getData(
+            $request,
+            $allQuestions,
+            $category,
+            $question
+        );
 
         // Show a PDF in the browser if requested for the current guide question
         // This is most helpful for the summary
         if ($isPdf && !$isPreview) {
             Log::debug(__FUNCTION__ . '(); requesting PDF for /guide/' . $category->uri . '/' . $question->uri . '...');
-            PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'defaultFont' => 'sans-serif']);
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('guide', $data);
             // To stream the PDF data is to show the PDF in the browser
-            return $pdf->stream();
+            return $this->getPdfStream($data);
         }
 
         // The values included here will be available across all blade templates for /guide pages.
@@ -369,19 +400,94 @@ class SubmissionController extends Controller
         $request->merge(['deceasedPreferredName' => $preferredName]);
     }
 
-    private function sendEmail(Request $request, \App\Models\GuideQuestion $question) {
+    /**
+     * Uses DomPDF to return a PDF stream that can be used to display a PDF in the browser.
+     */
+    private function getPdfStream(array $data = [])
+    {
+        PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'defaultFont' => 'sans-serif']);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('guide', $data);
+        // To stream the PDF data is to show the PDF in the browser
+        return $pdf->output();
+    }
+
+    /**
+     * @return boolean If true, advance normally. If false, then stay on the current page and try again.
+     */
+    private function sendEmail(
+        Request $request,
+        \Illuminate\Database\Eloquent\Collection $allQuestions,
+        \App\Models\GuideCategory $category,
+        \App\Models\GuideQuestion $question
+    ) {
         // Do nothing if the question is not send-email
         if (strcasecmp($question->uri, 'send-email') !== 0) {
-            return;
+            Log::debug(__FUNCTION__ . '(); not on appropriate page send-email; no email sent.');
+            return true;
         }
 
-        // Add attachment if user uploaded one
+        Log::debug(__FUNCTION__ . '(); about to attempt to send an email...');
 
-        // Add PDF of order of service to the email
+        // Do nothing if there are no email addresses; since this is done after validation,
+        // this should almost never happen.
+        $recipients = [];
+        foreach (range(1, env('MAX_NUM_EMAIL_RECIPIENTS', 5)) as $index) {
+            $input = 'recipientEmail' . $index;
+            if ($request->has($input) && !empty(trim($request->input($input)))) {
+                $recipients[] = $request->input($input);
+            }
+        }
+
+        if (empty($recipients)) {
+            Log::debug(__FUNCTION__ . '(); no email recipients specified');
+            return false;
+        }
+
+        // Get all data necessary to generate the PDF
+        $summaryQuestion = \App\Models\GuideQuestion::where('uri', 'summary')->first();
+        $summaryCategory = $summaryQuestion->guideCategory()->first();
+
+        $data = $this->getData(
+            $request,
+            $allQuestions,
+            $summaryCategory,
+            $summaryQuestion
+        );
+
+        // This is needed so that the header of the page is omitted
+        // $data['isPreview'] = true;
+        $data['isPdf'] = true;
+
+        // Create the PDF for the order of service
+        $orderOfServicePdf = $this->getPdfStream($data);
+
+        // Get attachment if user uploaded one
+        $uploadedFile = null;
+        if ($request->input('obituaryFile')) {
+            $uploadedFile = $request->file('user-document');
+        }
+
+        // Create the mailable needed to be sent with the email
+        $mailable = new \App\Mail\SubmissionSent($orderOfServicePdf, $uploadedFile);
 
         // Send the email
-        // Mail::to('tap52384@gmail.com')
-        // ->send(new \App\Mail\SubmissionSent($orderOfServicePdf = ));
+        // $result = Mail::send($mailable, [], function($message) use ($recipients) {
+
+        //     $adminEmails = explode(',', env('ADMIN_EMAILS'));
+
+        //     $message->to($recipients)->bcc($adminEmails)->subject('Order of Service - ' . session('deceasedPreferredName'));
+        // });
+
+        // Illuminate\Mail\SentMessage is returned
+        $result = Mail::to($recipients)
+        ->bcc(explode(',', env('ADMIN_EMAILS')))
+        ->send($mailable);
+
+        // Log::debug(__FUNCTION__ . '(); send email results: ' . $result);
+
+        // TODO: Add result to the session so that we can verify whether the email was sent
+        // successfully or not
+        return !empty($result);
     }
 
     /**
@@ -442,6 +548,14 @@ class SubmissionController extends Controller
 
         // If the current question is the very first one, then clear everything except the service type
         $this->clearAllSessionData($request, $category, $question, $serviceType);
+
+        // If we are on the page for sending an email, then do so if requested
+        $this->sendEmail(
+            $request,
+            $allQuestions,
+            $category,
+            $question
+        );
 
         // Save all data to the session
         self::putAllInputToSession($request);
@@ -554,7 +668,7 @@ class SubmissionController extends Controller
             // Stop if we are about to validate the current guide question. The array of questions are
             // in order and it is inaccurate to validate the current and future questions
             if ($question->id === $currentQuestion->id) {
-                Log::debug(__FUNCTION__ . '(); stopping after evaluating the current question: ' . $question->uri);
+                Log::debug(__FUNCTION__ . '(); stopping before evaluating the current question: ' . $question->uri);
                 break;
             }
 

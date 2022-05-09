@@ -6,7 +6,7 @@
 
 @include('guide.next-steps.incomplete-warning')
 
-@if (request()->is('*/pdf*'))
+@if (request()->is('*/pdf*') || $isPdf)
     @include('guide.next-steps.summary-pdf')
 @else
 @include('guide.next-steps.summary-details')

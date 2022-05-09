@@ -1,6 +1,6 @@
 <div class="col-12 col-md-9">
     <div class="row">
-        @if (!request()->is('*/pdf*'))
+        @if (!request()->is('*/pdf*') && !$isPdf)
             <h2 class="mb-3">{!! $currentQuestion->title !!}</h2>
             @if ($currentQuestion->description)
                 <p class="lead">{!! $currentQuestion->description !!}</p>
