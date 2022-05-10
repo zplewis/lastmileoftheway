@@ -37,8 +37,8 @@
                     @yield('guide.content')
                 </div> <!-- /.question-content -->
 
-                {{-- Do not show any buttons at the bottom if in Blade template preview mode --}}
-                @if(!isset($isPreview) || !$isPreview)
+                {{-- Do not show any buttons at the bottom if in Blade template preview or PDF modes --}}
+                @if(!$isPdf && !$isPreview)
                     <div class="col-12">
                         <!-- Add code here so that Next if there is a "next page" specified,
                         otherwise, use Submit for the button text. -->

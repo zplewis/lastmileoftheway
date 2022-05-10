@@ -9,9 +9,7 @@
             $songModel = \App\Models\Song::find(session('song' . ($index ?? '1')));
         @endphp
         <p>Song:
-            <a href="{{ $songModel->youtube_url }}" target="_blank">
-            @if($songModel->artist) {{ $songModel->artist . ' - ' }}@endif
-            {{ $songModel->name }}
+            <a href="{{ $songModel->youtube_url }}" target="_blank">@if($songModel->artist){{ $songModel->artist . ' - ' }}@endif{{ $songModel->name }}
             </a>
         </p>
     @else

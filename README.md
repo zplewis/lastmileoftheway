@@ -320,9 +320,6 @@ the Windows host file system.
 - On `/guide/getting-started`, detect whether the user previously entered information and warn them that
   continuing will clear all previously saved information. If they click OK, then clear all data from
   the session.
-
-### Remaining
-
 - Validation for Opening Hymn not working properly
     - Make sure that validation is working properly for all three musical selections
 - Validation for reflections is not working properly
@@ -332,32 +329,40 @@ the Windows host file system.
     - Add Last Mile of the Way text with logo at the top
     - Add <h1>Order of Service</h1> with <p>for First Name Last Name</p> under the logo and text
     - Make the Last Mile of the Way text at the top a link to the site
-- Make it so that users can have up to 5 users to provide reflections
-  - Add a button that increases the number of reflections persons to a maximum of 5 (max is set via `.env`)
-  - Make sure the summary also shows the number of reflections people selected
+- Make it so that users can have up to 10 users to provide reflections
+  - Add a button that increases the number of reflections persons to a maximum of 10 (max is set via `.env`)
+  - Make sure the summary also shows the reflections people selected
   - Allow increasing the reflections people even if there are empty persons fields
-- Actually send the email with a PDF containing the summary, attached obituary, and additional questions
-- Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
-- Make it so that people can be added or taken away dynamically for reflections.
-- Make sure all links work
 - Add summary page
-- Handle when invalid guide URLs are provided
-  - a 404 | Not Found page is displayed currently
-  - Redirect to the category page instead of 404 for guide links
-- True server side form validation
-- Complete summary page
 - All optional switch fields should be required! toggle to off sets the value to "No"
 - Can you require a field unless two fields have values. like in the case of a song?
   - If you include the opening hymn, but do not select a song, , then custom song is required
   - Or, you could have both song values (select, custom) required_unless!
 - Finish input validation for all required fields (input, select)
-- Finish adding input validation values to the database
-- Add ability to upload a file and send the summary via email on the same page
-- Add validation to make sure that the upload bio file is an accepted type
-- Add validation for all five email address inputs
 - Summary: With no service type selected, make sure the user made a choice whether to include all optional parts of the service
 - Summary: make sure an old testament reading is selected or a custom one provided
 - Summary: make sure a new testament reading is selected or a custome one provided
+- Finish adding input validation values to the database
+- Make it so that people can be added or taken away dynamically for reflections.
+- True server side form validation
+- Complete summary page
+
+### Remaining
+
+- Actually send the email with a PDF containing the summary, attached obituary, and additional questions
+- Make sure to document all features used on this site that may not be immediately obvious, like explicit model binding for routes
+
+- Make sure all links work
+
+- Handle when invalid guide URLs are provided
+  - a 404 | Not Found page is displayed currently
+  - Redirect to the category page instead of 404 for guide links
+
+- Add ability to upload a file and send the summary via email on the same page
+- Add validation to make sure that the upload bio file is an accepted type
+- Add validation for all five email address inputs
+
+- Add Google Maps address validation to all location fields (maybe phase 2)
 
 - Definition for liturgy in glossary?
 - Should invocation minister be required?

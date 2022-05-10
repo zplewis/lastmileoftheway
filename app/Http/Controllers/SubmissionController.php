@@ -341,17 +341,21 @@ class SubmissionController extends Controller
     }
 
     /**
-     *
+     * If the input type datetime-local is not supported, then read from the hidden inputs
+     * date and time for a given field. Not implemented yet.
      */
     private function handleDates(Request $request, \App\Models\GuideQuestion $question) {
-
+        if (empty(session('dateServiceCarbon'))) {
+            session()->put('dateServiceCarbon', \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', session('dateService')));
+        }
     }
 
     /**
      * Default to the preferred name of the deceased as the full name if one is not specified.
      */
     private function handlePreferredName(Request $request, \App\Models\GuideQuestion $question) {
-        // Stop here if this is not the names question
+
+        // This will only work properly during the names question, which makes sen
         if (strcasecmp($question->uri, 'names') !== 0) {
             return;
         }
@@ -359,7 +363,7 @@ class SubmissionController extends Controller
         // Set the user preferred name, which could be useful later
         $request->merge(
             [
-                'userFullName' => $request->input('userFirstName') . ' ' . $request->input('userLastName')
+                'userFullName' => trim($request->input('userFirstName') . ' ' . $request->input('userLastName'))
             ]
         );
 
@@ -551,6 +555,9 @@ class SubmissionController extends Controller
         // Validate and store the form submission; if validation fails, then an exception is thrown
         // and the code never progresses past this point
         $validated = $this->validatePage($request, $question);
+
+        // Add the validated date to the session as a Carbon object
+        $this->handleDates($request, $question);
 
         // If the next question is the summary, then set a session variable
         $this->markSubmissionComplete($nextCategory, $nextQuestion);
@@ -781,7 +788,7 @@ class SubmissionController extends Controller
             'userLastName' => 'lewis',
             'userEmail' => 'tap52384@gmail.com',
             'userIsDeceased' => \App\Models\UserType::where('title', 'like', '%self%')->first()->id,
-            // 'deceasedPreferredName' => 'cadillacpat',
+            'deceasedPreferredName' => 'cadillacpat',
             // 'deceasedFirstName' => 'someother',
             // 'deceasedLastName' => 'name',
 

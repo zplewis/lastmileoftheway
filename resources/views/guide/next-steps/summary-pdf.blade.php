@@ -1,11 +1,12 @@
-{{-- First page of the PDF  --}}
-<div style="text-align: center; font-family: sans-serif">
+{{-- First page of the PDF, vertically aligned  --}}
+<div style="text-align: center; font-family: sans-serif; margin-top: 150px">
     <img src="{{ request()->is('*/preview') ? asset('images/leaf-logo-1.png') : public_path('images/leaf-logo-1.png') }}" class="header-leaf-logo" alt="Last Mile of the Way logo"
         style="width: 500px" />
     <h1>Order of Service for {{ ucwords(session('deceasedPreferredName')) }}</h1>
-    @if (!empty(session('dateService')))
+    @if (!empty(session('dateServiceCarbon')))
+        <h2>{{ session('dateServiceCarbon')->format('l, F jS, Y') }}</h2>
+    @else
         <h2>{{ session('dateService') }}</h2>
-        {{-- <h2>{{ \Carbon\Carbon::createFromFormat('YYYY-MM-DD', session('dateService'))->format('l, F jS, Y') }}</h2> --}}
     @endif
     <h3>prepared by {{ ucwords(session('userFullName')) }} using Last Mile of the Way</h3>
     <p>

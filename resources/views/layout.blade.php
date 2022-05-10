@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
 
-        @if (request()->is('*/pdf*') || (isset($isPdf) && $isPdf === true))
+        @if (request()->is('*/pdf*') || (isset($isPdf) && $isPdf === true) || (isset($isPreview) && $isPreview === true))
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         @else
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,7 @@
 
     <body>
 
-        @if (!isset($isPreview) || !$isPreview)
+        @if ((!isset($isPreview)) || (!$isPreview && !$isPdf))
             @include('svgs')
 
             @include('nav')
@@ -45,7 +45,8 @@
             @yield('content')
         </main>
 
-        @if (!isset($isPreview) || !$isPreview)
+        {{-- @if (!isset($isPreview) || !$isPreview) --}}
+        @if ((!isset($isPreview)) || (!$isPreview && !$isPdf))
             @include('footer')
 
             {{-- https://laravel-mix.com/docs/6.0/versioning --}}
