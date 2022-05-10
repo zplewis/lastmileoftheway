@@ -400,15 +400,24 @@ class SubmissionController extends Controller
         $request->merge(['deceasedPreferredName' => $preferredName]);
     }
 
+    private function pdfSetup(array $data = []) {
+        PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'defaultFont' => 'sans-serif']);
+        return \Barryvdh\DomPDF\Facade\Pdf::loadView('guide', $data);
+    }
+
+    private function getPdfAsString(array $data = []) {
+
+        // To stream the PDF data is to show the PDF in the browser
+        return $this->pdfSetup($data)->output();
+    }
+
     /**
      * Uses DomPDF to return a PDF stream that can be used to display a PDF in the browser.
      */
     private function getPdfStream(array $data = [])
     {
-        PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true, 'defaultFont' => 'sans-serif']);
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('guide', $data);
         // To stream the PDF data is to show the PDF in the browser
-        return $pdf->output();
+        return $this->pdfSetup($data)->stream();
     }
 
     /**
@@ -459,7 +468,7 @@ class SubmissionController extends Controller
         $data['isPdf'] = true;
 
         // Create the PDF for the order of service
-        $orderOfServicePdf = $this->getPdfStream($data);
+        $orderOfServicePdf = $this->getPdfAsString($data);
 
         // Get attachment if user uploaded one
         $uploadedFile = null;
